@@ -2342,6 +2342,37 @@ paths:
           "$ref": "#/definitions/fmUpdateEmployeeScopeRequest"
       tags:
       - UserService
+  "/v1/user/list_by_employees":
+    get:
+      summary: |-
+        get user list according to employee id for changing roles/scopes
+        Authorization scope of `` is required
+      operationId: UserService_GetUserListByEmployeeIds
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmGetUserListResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: id of organization.
+        in: query
+        required: false
+        type: string
+      - name: employee_ids
+        description: employeee ids.
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      tags:
+      - UserService
   "/v1/user/role":
     post:
       summary: |-
@@ -2431,29 +2462,6 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmUpsertScopeRequest"
-      tags:
-      - UserService
-  "/v1/users":
-    get:
-      summary: |-
-        get user list for changing roles/scopes
-        Authorization scope of `` is required
-      operationId: UserService_GetUserList
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmGetUserListResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: organization_id
-        description: id of organization.
-        in: query
-        required: false
-        type: string
       tags:
       - UserService
 definitions:
@@ -5890,21 +5898,12 @@ definitions:
   fmUserData:
     type: object
     properties:
-      id:
+      user_id:
         type: string
         title: id of user
       employee_id:
         type: string
-        title: employee_id of user for the requested organization
-      first_name:
-        type: string
-        title: first name of user
-      last_name:
-        type: string
-        title: last name of user
-      email:
-        type: string
-        title: email of user
+        title: id of employee
       roles:
         type: array
         items:
