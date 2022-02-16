@@ -2499,9 +2499,9 @@ definitions:
       post_code:
         type: string
         title: post_code
-      country:
+      county:
         type: string
-        title: country
+        title: county
       town:
         type: string
         title: town
