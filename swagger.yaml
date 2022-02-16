@@ -2502,6 +2502,9 @@ definitions:
       country:
         type: string
         title: country
+      town:
+        type: string
+        title: town
     title: Address details
   EmployeeListAttachmentResponseEmployeeAttachmentPayload:
     type: object
@@ -2737,6 +2740,9 @@ definitions:
       employee_id:
         type: string
         title: unique id of the employee
+      title:
+        type: string
+        title: 'title of employee : eg: Mr, Mrs, Miss'
       first_name:
         type: string
         title: first name of the employee
@@ -3772,6 +3778,9 @@ definitions:
   fmCreateEmployeeRequest:
     type: object
     properties:
+      title:
+        type: string
+        title: 'title of employee, EG: Mr, Mrs, Miss'
       first_name:
         type: string
         title: First Name of the employee
@@ -4274,6 +4283,25 @@ definitions:
         type: string
         title: adaptation_for_interview
     title: CriminalConviction employee information
+  fmDbsDetails:
+    type: object
+    properties:
+      dbs_number:
+        type: string
+        title: DBS number
+      dbs_start_date:
+        type: string
+        format: date-time
+        title: DBS start date
+      dbs_review_date:
+        type: string
+        format: date-time
+        title: DBS next review date
+      dbs_expiry_date:
+        type: string
+        format: date-time
+        title: DBS expiry date
+    title: Dbs details of employee
   fmEducationEmployeeInformation:
     type: object
     properties:
@@ -4404,6 +4432,9 @@ definitions:
       official:
         "$ref": "#/definitions/fmOfficialEmployeeInformationForListing"
         title: official information of the employee
+      hm_revenue_details:
+        "$ref": "#/definitions/fmHmRevenueDetails"
+        title: HM revenue information
     title: Employee information for list, detail endpoints
   fmEmployeeInformationForUpsert:
     type: object
@@ -4414,6 +4445,9 @@ definitions:
       official:
         "$ref": "#/definitions/fmOfficialEmployeeInformationForUpsert"
         title: official information of the employee
+      hm_revenue_details:
+        "$ref": "#/definitions/fmHmRevenueDetails"
+        title: HM revenue information
     title: Employee information for upsert(create/update) endpoints
   fmEmployeeLeaverResponse:
     type: object
@@ -4530,6 +4564,15 @@ definitions:
         type: string
         title: can the person be able to contact
     title: history of employment of employee information
+  fmFaqData:
+    type: object
+    properties:
+      key:
+        type: string
+        title: key
+      value:
+        type: string
+        title: value
   fmFeedbackResponse:
     type: object
     properties:
@@ -4570,6 +4613,9 @@ definitions:
       area:
         type: string
         title: Area of the employee
+      profile_picture:
+        type: string
+        title: profile picture
     title: General employee information
   fmGetClientEmployeeIdsByEmployeeResponse:
     type: object
@@ -4665,6 +4711,31 @@ definitions:
         items:
           "$ref": "#/definitions/fmUserData"
         title: list of users with their roles and scopes
+  fmHmRevenueDetails:
+    type: object
+    properties:
+      full_name:
+        type: string
+        title: declaration full name
+      declaration_date:
+        type: string
+        title: declaration date
+      gender:
+        type: string
+        title: gender
+      employment_statement:
+        type: string
+        title: employement statement
+      student_loan_faq:
+        type: array
+        items:
+          "$ref": "#/definitions/fmFaqData"
+        title: student loan questions
+      postgraduate_loan_faq:
+        type: array
+        items:
+          "$ref": "#/definitions/fmFaqData"
+        title: post graduate loan question
   fmHolidayResponse:
     type: object
     properties:
@@ -4772,6 +4843,15 @@ definitions:
         type: string
       yearly:
         type: string
+  fmLicenseDetails:
+    type: object
+    properties:
+      is_valid_license:
+        type: boolean
+        title: is_valid_license yes/no
+      license_number:
+        type: string
+        title: if valid , license no
   fmListCheckResponse:
     type: object
     properties:
@@ -5180,21 +5260,9 @@ definitions:
         type: string
         format: date-time
         title: Work permit expiry date of the employee
-      dbs_number:
-        type: string
-        title: DBS number
-      dbs_start_date:
-        type: string
-        format: date-time
-        title: DBS start date
-      dbs_review_date:
-        type: string
-        format: date-time
-        title: DBS next review date
-      dbs_expiry_date:
-        type: string
-        format: date-time
-        title: DBS expiry date
+      dbs_details:
+        "$ref": "#/definitions/fmDbsDetails"
+        title: dbs details of employee
       payment_type:
         type: string
         title: Payment type
@@ -5213,17 +5281,25 @@ definitions:
       training_type:
         type: string
         title: type of training to be given to employee
+      training_date_time:
+        type: string
+        format: date-time
+        title: Training date/time
       comment:
         type: string
         title: comments if any
-      is_valid_licence:
-        type: boolean
-        title: is_valid_licence yes/no
+      licence_details:
+        "$ref": "#/definitions/fmLicenseDetails"
+        title: license details
       hourly_rate:
         "$ref": "#/definitions/fmHourlyRateInfo"
       interviewer:
         type: string
         title: interviewer is also from among the active employee  list
+      interviewing_date_time:
+        type: string
+        format: date-time
+        title: Interview date/time
     title: |-
       Official employee information used by list, detail endpoint
       an extra employee_code field is added here from
@@ -5235,21 +5311,8 @@ definitions:
         type: string
         format: date-time
         title: Work permit expiry date of the employee
-      dbs_number:
-        type: string
-        title: DBS number
-      dbs_start_date:
-        type: string
-        format: date-time
-        title: DBS start date
-      dbs_review_date:
-        type: string
-        format: date-time
-        title: DBS next review date
-      dbs_expiry_date:
-        type: string
-        format: date-time
-        title: DBS expiry date
+      dbs_details:
+        "$ref": "#/definitions/fmDbsDetails"
       is_tupe:
         type: boolean
         title: Is tupe
@@ -5270,17 +5333,28 @@ definitions:
       interviewer:
         type: string
         title: interviewer is also from among the active employee  list
+      interviewing_date_time:
+        type: string
+        format: date-time
+        title: Interview date/time
       training_type:
         type: string
         title: type of training to be given to employee
+      training_date_time:
+        type: string
+        format: date-time
+        title: Training date/time
       comment:
         type: string
         title: comments if any
-      is_valid_licence:
-        type: boolean
-        title: is_valid_licence yes/no
+      licence_details:
+        "$ref": "#/definitions/fmLicenseDetails"
+        title: license details
       hourly_rate:
         "$ref": "#/definitions/fmHourlyRateInfo"
+      employment_start_date:
+        type: string
+        title: employement start date
     title: Official employee information used by create, update endpoints
   fmPeriodicBudget:
     type: object
@@ -5573,6 +5647,9 @@ definitions:
   fmUpdateEmployeeRequest:
     type: object
     properties:
+      title:
+        type: string
+        title: 'title of employee : Eg: Mr, Mrs, Miss'
       employee_id:
         type: string
         title: employee Id of the employee to update
