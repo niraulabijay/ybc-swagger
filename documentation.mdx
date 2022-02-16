@@ -1,0 +1,5447 @@
+# Protocol Documentation
+<a name="top"></a>
+
+## Table of Contents
+
+- [check_service.proto](#check_service.proto)
+    - [CheckInOutRequest](#fm.CheckInOutRequest)
+    - [CreateCheckRequest](#fm.CreateCheckRequest)
+    - [CreateCheckResponse](#fm.CreateCheckResponse)
+    - [ListCheckRequest](#fm.ListCheckRequest)
+    - [ListCheckResponse](#fm.ListCheckResponse)
+    - [ListCheckResponse.CheckResponse](#fm.ListCheckResponse.CheckResponse)
+  
+    - [CheckService](#fm.CheckService)
+  
+- [client_employee_service.proto](#client_employee_service.proto)
+    - [AssignClientEmployeeShiftRequest](#fm.AssignClientEmployeeShiftRequest)
+    - [AssignClientEmployeeShiftResponse](#fm.AssignClientEmployeeShiftResponse)
+    - [AssignContractedHoursRequest](#fm.AssignContractedHoursRequest)
+    - [AssignContractedHoursResponse](#fm.AssignContractedHoursResponse)
+    - [AssignTargetTasksRequest](#fm.AssignTargetTasksRequest)
+    - [AssignTargetTasksRequest.WeeklyTargetTasksEntry](#fm.AssignTargetTasksRequest.WeeklyTargetTasksEntry)
+    - [AssignTargetTasksResponse](#fm.AssignTargetTasksResponse)
+    - [ContractedDayHours](#fm.ContractedDayHours)
+    - [CreateClientEmployeeRequest](#fm.CreateClientEmployeeRequest)
+    - [CreateClientEmployeeResponse](#fm.CreateClientEmployeeResponse)
+    - [CreateEmployeeTrainingRequest](#fm.CreateEmployeeTrainingRequest)
+    - [CreateEmployeeTrainingResponse](#fm.CreateEmployeeTrainingResponse)
+    - [CreateFeedbackRequest](#fm.CreateFeedbackRequest)
+    - [CreateFeedbackResponse](#fm.CreateFeedbackResponse)
+    - [CreateTransferRequest](#fm.CreateTransferRequest)
+    - [CreateTransferResponse](#fm.CreateTransferResponse)
+    - [DaywiseTargetTasks](#fm.DaywiseTargetTasks)
+    - [FeedbackResponse](#fm.FeedbackResponse)
+    - [GetClientEmployeeIdsByEmployeeRequest](#fm.GetClientEmployeeIdsByEmployeeRequest)
+    - [GetClientEmployeeIdsByEmployeeResponse](#fm.GetClientEmployeeIdsByEmployeeResponse)
+    - [GetClientIdsByEmployeeRequest](#fm.GetClientIdsByEmployeeRequest)
+    - [GetClientIdsByEmployeeResponse](#fm.GetClientIdsByEmployeeResponse)
+    - [GetContractedHoursRequest](#fm.GetContractedHoursRequest)
+    - [GetContractedHoursResponse](#fm.GetContractedHoursResponse)
+    - [GetEmployeeTrainingRequest](#fm.GetEmployeeTrainingRequest)
+    - [GetEmployeeTrainingResponse](#fm.GetEmployeeTrainingResponse)
+    - [GetEmployeeTrainingResponse.EmployeeTrainingResponse](#fm.GetEmployeeTrainingResponse.EmployeeTrainingResponse)
+    - [GetTargetTasksRequest](#fm.GetTargetTasksRequest)
+    - [GetTargetTasksResponse](#fm.GetTargetTasksResponse)
+    - [GetTargetTasksResponse.WeeklyTargetTasksEntry](#fm.GetTargetTasksResponse.WeeklyTargetTasksEntry)
+    - [ListClientEmployeeRequest](#fm.ListClientEmployeeRequest)
+    - [ListClientEmployeeResponse](#fm.ListClientEmployeeResponse)
+    - [ListClientEmployeeResponse.ClientEmployeeResponse](#fm.ListClientEmployeeResponse.ClientEmployeeResponse)
+    - [ListFeedbackRequest](#fm.ListFeedbackRequest)
+    - [ListFeedbackResponse](#fm.ListFeedbackResponse)
+    - [ListTransferRequest](#fm.ListTransferRequest)
+    - [ListTransferResponse](#fm.ListTransferResponse)
+    - [ShiftContractedDayHours](#fm.ShiftContractedDayHours)
+    - [TransferResponse](#fm.TransferResponse)
+  
+    - [ClientEmployeeService](#fm.ClientEmployeeService)
+  
+- [client_service.proto](#client_service.proto)
+    - [Area](#fm.Area)
+    - [BasicDetails](#fm.BasicDetails)
+    - [Budget](#fm.Budget)
+    - [ClientAddAttachmentRequest](#fm.ClientAddAttachmentRequest)
+    - [ClientAddAttachmentResponse](#fm.ClientAddAttachmentResponse)
+    - [ClientChangeStatusRequest](#fm.ClientChangeStatusRequest)
+    - [ClientChangeStatusResponse](#fm.ClientChangeStatusResponse)
+    - [ClientDate](#fm.ClientDate)
+    - [ClientDetail](#fm.ClientDetail)
+    - [ClientDetailRequest](#fm.ClientDetailRequest)
+    - [ClientDetailResponse](#fm.ClientDetailResponse)
+    - [ClientListAttachmentRequest](#fm.ClientListAttachmentRequest)
+    - [ClientListAttachmentResponse](#fm.ClientListAttachmentResponse)
+    - [ClientListAttachmentResponse.ClientAttachmentPayload](#fm.ClientListAttachmentResponse.ClientAttachmentPayload)
+    - [ContactPerson](#fm.ContactPerson)
+    - [ContractedHours](#fm.ContractedHours)
+    - [CreateClientDate](#fm.CreateClientDate)
+    - [CreateClientDetail](#fm.CreateClientDetail)
+    - [CreateClientMobilizationRequest](#fm.CreateClientMobilizationRequest)
+    - [CreateClientMobilizationResponse](#fm.CreateClientMobilizationResponse)
+    - [CreateClientRequest](#fm.CreateClientRequest)
+    - [CreateClientResponse](#fm.CreateClientResponse)
+    - [Invoice](#fm.Invoice)
+    - [LabourBudget](#fm.LabourBudget)
+    - [ListClientMobilizationRequest](#fm.ListClientMobilizationRequest)
+    - [ListClientMobilizationResponse](#fm.ListClientMobilizationResponse)
+    - [ListClientMobilizationResponse.ClientMobilizationResponse](#fm.ListClientMobilizationResponse.ClientMobilizationResponse)
+    - [ListClientRequest](#fm.ListClientRequest)
+    - [ListClientRequest.SearchParam](#fm.ListClientRequest.SearchParam)
+    - [ListClientResponse](#fm.ListClientResponse)
+    - [ListClientResponse.ClientResponse](#fm.ListClientResponse.ClientResponse)
+    - [MobilizationPrincipal](#fm.MobilizationPrincipal)
+    - [PeriodicBudget](#fm.PeriodicBudget)
+    - [PeriodicBudget.PBudget](#fm.PeriodicBudget.PBudget)
+    - [Region](#fm.Region)
+    - [Sector](#fm.Sector)
+    - [StoreBudget](#fm.StoreBudget)
+    - [UpdateClientMobilizationRequest](#fm.UpdateClientMobilizationRequest)
+    - [UpdateClientMobilizationResponse](#fm.UpdateClientMobilizationResponse)
+    - [UpdateClientRequest](#fm.UpdateClientRequest)
+    - [UpdateClientResponse](#fm.UpdateClientResponse)
+  
+    - [ClientService](#fm.ClientService)
+  
+- [department_service.proto](#department_service.proto)
+    - [CreateDepartmentRequest](#fm.CreateDepartmentRequest)
+    - [CreateDepartmentResponse](#fm.CreateDepartmentResponse)
+    - [ListDepartmentRequest](#fm.ListDepartmentRequest)
+    - [ListDepartmentResponse](#fm.ListDepartmentResponse)
+    - [ListDepartmentResponse.DepartmentResponse](#fm.ListDepartmentResponse.DepartmentResponse)
+  
+    - [DepartmentService](#fm.DepartmentService)
+  
+- [designation_service.proto](#designation_service.proto)
+    - [CreateDesignationRequest](#fm.CreateDesignationRequest)
+    - [CreateDesignationResponse](#fm.CreateDesignationResponse)
+    - [ListDesignationRequest](#fm.ListDesignationRequest)
+    - [ListDesignationResponse](#fm.ListDesignationResponse)
+    - [ListDesignationResponse.DesignationResponse](#fm.ListDesignationResponse.DesignationResponse)
+  
+    - [DesignationService](#fm.DesignationService)
+  
+- [employee_cover_service.proto](#employee_cover_service.proto)
+    - [CoverResponse](#fm.CoverResponse)
+    - [ListCoverRequest](#fm.ListCoverRequest)
+    - [ListCoverResponse](#fm.ListCoverResponse)
+  
+    - [EmployeeCoverService](#fm.EmployeeCoverService)
+  
+- [employee_holiday_service.proto](#employee_holiday_service.proto)
+    - [CreateHolidayRequest](#fm.CreateHolidayRequest)
+    - [CreateHolidayResponse](#fm.CreateHolidayResponse)
+    - [HolidayResponse](#fm.HolidayResponse)
+    - [ListHolidayRequest](#fm.ListHolidayRequest)
+    - [ListHolidayResponse](#fm.ListHolidayResponse)
+  
+    - [EmployeeHolidayService](#fm.EmployeeHolidayService)
+  
+- [employee_leaver_service.proto](#employee_leaver_service.proto)
+    - [EmployeeLeaverResponse](#fm.EmployeeLeaverResponse)
+    - [ListEmployeeLeaverRequest](#fm.ListEmployeeLeaverRequest)
+    - [ListEmployeeLeaverResponse](#fm.ListEmployeeLeaverResponse)
+  
+    - [EmployeeLeaverService](#fm.EmployeeLeaverService)
+  
+- [employee_service.proto](#employee_service.proto)
+    - [ConfidentialEmployeeDetails](#fm.ConfidentialEmployeeDetails)
+    - [ConfidentialEmployeeInfo](#fm.ConfidentialEmployeeInfo)
+    - [CreateEmployeeRequest](#fm.CreateEmployeeRequest)
+    - [CreateEmployeeResponse](#fm.CreateEmployeeResponse)
+    - [CriminalConvictionEmployeeInfo](#fm.CriminalConvictionEmployeeInfo)
+    - [DbsDetails](#fm.DbsDetails)
+    - [EducationEmployeeInformation](#fm.EducationEmployeeInformation)
+    - [EmployeeAddAttachmentRequest](#fm.EmployeeAddAttachmentRequest)
+    - [EmployeeAddAttachmentResponse](#fm.EmployeeAddAttachmentResponse)
+    - [EmployeeDeleteAttachmentRequest](#fm.EmployeeDeleteAttachmentRequest)
+    - [EmployeeDeleteAttachmentResponse](#fm.EmployeeDeleteAttachmentResponse)
+    - [EmployeeDetailRequest](#fm.EmployeeDetailRequest)
+    - [EmployeeDetailResponse](#fm.EmployeeDetailResponse)
+    - [EmployeeInformationForListing](#fm.EmployeeInformationForListing)
+    - [EmployeeInformationForUpsert](#fm.EmployeeInformationForUpsert)
+    - [EmployeeListAttachmentRequest](#fm.EmployeeListAttachmentRequest)
+    - [EmployeeListAttachmentResponse](#fm.EmployeeListAttachmentResponse)
+    - [EmployeeListAttachmentResponse.EmployeeAttachmentPayload](#fm.EmployeeListAttachmentResponse.EmployeeAttachmentPayload)
+    - [EmploymentHistoryInfo](#fm.EmploymentHistoryInfo)
+    - [FaqData](#fm.FaqData)
+    - [GeneralEmployeeInformation](#fm.GeneralEmployeeInformation)
+    - [HmRevenueDetails](#fm.HmRevenueDetails)
+    - [HourlyRateInfo](#fm.HourlyRateInfo)
+    - [LicenseDetails](#fm.LicenseDetails)
+    - [ListEmployeeRequest](#fm.ListEmployeeRequest)
+    - [ListEmployeeRequest.SearchParam](#fm.ListEmployeeRequest.SearchParam)
+    - [ListEmployeeResponse](#fm.ListEmployeeResponse)
+    - [ListEmployeeResponse.EmployeeResponse](#fm.ListEmployeeResponse.EmployeeResponse)
+    - [NextOfKeenEmployeeInfo](#fm.NextOfKeenEmployeeInfo)
+    - [OfficialEmployeeInformationForListing](#fm.OfficialEmployeeInformationForListing)
+    - [OfficialEmployeeInformationForUpsert](#fm.OfficialEmployeeInformationForUpsert)
+    - [ReferenceEmployeeInfo](#fm.ReferenceEmployeeInfo)
+    - [TrainingEmployeeInfo](#fm.TrainingEmployeeInfo)
+    - [UpdateEmployeeRequest](#fm.UpdateEmployeeRequest)
+    - [UpdateEmployeeResponse](#fm.UpdateEmployeeResponse)
+    - [UpdateEmployeeStatusRequest](#fm.UpdateEmployeeStatusRequest)
+    - [UpdateEmployeeStatusResponse](#fm.UpdateEmployeeStatusResponse)
+  
+    - [EmployeeService](#fm.EmployeeService)
+  
+- [employee_sick_service.proto](#employee_sick_service.proto)
+    - [CreateEmployeeSickRequest](#fm.CreateEmployeeSickRequest)
+    - [CreateEmployeeSickResponse](#fm.CreateEmployeeSickResponse)
+    - [EmployeeSickResponse](#fm.EmployeeSickResponse)
+    - [ListEmployeeSickRequest](#fm.ListEmployeeSickRequest)
+    - [ListEmployeeSickResponse](#fm.ListEmployeeSickResponse)
+    - [SickPeriod](#fm.SickPeriod)
+    - [UpdateEmployeeSickRequest](#fm.UpdateEmployeeSickRequest)
+    - [UpdateEmployeeSickResponse](#fm.UpdateEmployeeSickResponse)
+  
+    - [EmployeeSickService](#fm.EmployeeSickService)
+  
+- [inventory_service.proto](#inventory_service.proto)
+    - [CreateInventoryCategoryRequest](#fm.CreateInventoryCategoryRequest)
+    - [CreateInventoryCategoryResponse](#fm.CreateInventoryCategoryResponse)
+    - [CreateInventoryItemRequest](#fm.CreateInventoryItemRequest)
+    - [CreateInventoryItemResponse](#fm.CreateInventoryItemResponse)
+    - [ListInventoryCategoryRequest](#fm.ListInventoryCategoryRequest)
+    - [ListInventoryCategoryResponse](#fm.ListInventoryCategoryResponse)
+    - [ListInventoryCategoryResponse.InventoryCategory](#fm.ListInventoryCategoryResponse.InventoryCategory)
+    - [ListInventoryItemRequest](#fm.ListInventoryItemRequest)
+    - [ListInventoryItemResponse](#fm.ListInventoryItemResponse)
+    - [ListInventoryItemResponse.InventoryItem](#fm.ListInventoryItemResponse.InventoryItem)
+  
+    - [InventoryService](#fm.InventoryService)
+  
+- [issue_service.proto](#issue_service.proto)
+    - [CreateIssueRequest](#fm.CreateIssueRequest)
+    - [CreateIssueResponse](#fm.CreateIssueResponse)
+    - [IssueResponse](#fm.IssueResponse)
+    - [ListIssuesRequest](#fm.ListIssuesRequest)
+    - [ListIssuesResponse](#fm.ListIssuesResponse)
+    - [UpdateIssueRequest](#fm.UpdateIssueRequest)
+    - [UpdateIssueResponse](#fm.UpdateIssueResponse)
+  
+    - [IssueService](#fm.IssueService)
+  
+- [job_type_service.proto](#job_type_service.proto)
+    - [CreateJobTypeRequest](#fm.CreateJobTypeRequest)
+    - [CreateJobTypeResponse](#fm.CreateJobTypeResponse)
+    - [ListJobTypeRequest](#fm.ListJobTypeRequest)
+    - [ListJobTypeResponse](#fm.ListJobTypeResponse)
+    - [ListJobTypeResponse.JobTypeResponse](#fm.ListJobTypeResponse.JobTypeResponse)
+  
+    - [JobTypeService](#fm.JobTypeService)
+  
+- [login_service.proto](#login_service.proto)
+    - [AssociateWithEmployeeRequest](#fm.AssociateWithEmployeeRequest)
+    - [CreateUserRequest](#fm.CreateUserRequest)
+    - [CreateUserResponse](#fm.CreateUserResponse)
+    - [GetAvailableRoleRequest](#fm.GetAvailableRoleRequest)
+    - [GetAvailableScopeRequest](#fm.GetAvailableScopeRequest)
+    - [GetUserListRequest](#fm.GetUserListRequest)
+    - [GetUserListResponse](#fm.GetUserListResponse)
+    - [LoginRequest](#fm.LoginRequest)
+    - [LoginResponse](#fm.LoginResponse)
+    - [LogoutRequest](#fm.LogoutRequest)
+    - [LogoutResponse](#fm.LogoutResponse)
+    - [RefreshRequest](#fm.RefreshRequest)
+    - [RoleResponse](#fm.RoleResponse)
+    - [ScopeResponse](#fm.ScopeResponse)
+    - [UpdateEmployeeScopeRequest](#fm.UpdateEmployeeScopeRequest)
+    - [UpsertRoleRequest](#fm.UpsertRoleRequest)
+    - [UpsertScopeRequest](#fm.UpsertScopeRequest)
+    - [UserData](#fm.UserData)
+    - [UserRole](#fm.UserRole)
+    - [UserScope](#fm.UserScope)
+    - [UserScopeGroup](#fm.UserScopeGroup)
+  
+    - [JWTTokenService](#fm.JWTTokenService)
+    - [UserService](#fm.UserService)
+  
+- [meeting_service.proto](#meeting_service.proto)
+    - [Agenda](#fm.Agenda)
+    - [AgendaUpdateDetail](#fm.AgendaUpdateDetail)
+    - [CreateMeetingRequest](#fm.CreateMeetingRequest)
+    - [CreateMeetingResponse](#fm.CreateMeetingResponse)
+    - [ListMeetingRequest](#fm.ListMeetingRequest)
+    - [ListMeetingResponse](#fm.ListMeetingResponse)
+    - [ListMeetingResponse.MeetingResponse](#fm.ListMeetingResponse.MeetingResponse)
+    - [UpdateMeetingRequest](#fm.UpdateMeetingRequest)
+    - [UpdateMeetingResponse](#fm.UpdateMeetingResponse)
+  
+    - [MeetingService](#fm.MeetingService)
+  
+- [note_service.proto](#note_service.proto)
+    - [CreateNoteRequest](#fm.CreateNoteRequest)
+    - [CreateNoteResponse](#fm.CreateNoteResponse)
+    - [ListNotesRequest](#fm.ListNotesRequest)
+    - [ListNotesResponse](#fm.ListNotesResponse)
+    - [NoteResponse](#fm.NoteResponse)
+    - [UpdateNoteRequest](#fm.UpdateNoteRequest)
+    - [UpdateNoteResponse](#fm.UpdateNoteResponse)
+  
+    - [NoteService](#fm.NoteService)
+  
+- [organization_service.proto](#organization_service.proto)
+    - [CreateOrganizationRequest](#fm.CreateOrganizationRequest)
+    - [CreateOrganizationResponse](#fm.CreateOrganizationResponse)
+    - [ListOrganizationRequest](#fm.ListOrganizationRequest)
+    - [ListOrganizationResponse](#fm.ListOrganizationResponse)
+    - [ListOrganizationResponse.OrganizationResponse](#fm.ListOrganizationResponse.OrganizationResponse)
+  
+    - [OrganizationService](#fm.OrganizationService)
+  
+- [service.proto](#service.proto)
+    - [BankAccountDetails](#fm.BankAccountDetails)
+    - [ContactDetail](#fm.ContactDetail)
+    - [ContactDetail.Address](#fm.ContactDetail.Address)
+    - [ListRequestFilter](#fm.ListRequestFilter)
+    - [ListResponseMetadata](#fm.ListResponseMetadata)
+  
+- [task_service.proto](#task_service.proto)
+    - [ChangeTimesheetCorrectionStatusRequest](#fm.ChangeTimesheetCorrectionStatusRequest)
+    - [ChangeTimesheetCorrectionStatusResponse](#fm.ChangeTimesheetCorrectionStatusResponse)
+    - [CheckinTaskRequest](#fm.CheckinTaskRequest)
+    - [CheckoutTaskRequest](#fm.CheckoutTaskRequest)
+    - [CreateTaskRequest](#fm.CreateTaskRequest)
+    - [CreateTaskResponse](#fm.CreateTaskResponse)
+    - [ListCorrectionRequest](#fm.ListCorrectionRequest)
+    - [ListCorrectionResponse](#fm.ListCorrectionResponse)
+    - [ListCorrectionResponse.CorrectionResponse](#fm.ListCorrectionResponse.CorrectionResponse)
+    - [ListPeriodicTaskRequest](#fm.ListPeriodicTaskRequest)
+    - [ListPeriodicTaskResponse](#fm.ListPeriodicTaskResponse)
+    - [ListTaskByClientRequest](#fm.ListTaskByClientRequest)
+    - [ListTaskByClientResponse](#fm.ListTaskByClientResponse)
+    - [ListTaskByClientResponse.TaskByClientResponse](#fm.ListTaskByClientResponse.TaskByClientResponse)
+    - [ListTaskByEmployeeRequest](#fm.ListTaskByEmployeeRequest)
+    - [ListTaskByEmployeeResponse](#fm.ListTaskByEmployeeResponse)
+    - [ListTaskByMobileEmployeesRequest](#fm.ListTaskByMobileEmployeesRequest)
+    - [ListTaskByMobileEmployeesResponse](#fm.ListTaskByMobileEmployeesResponse)
+    - [ListTaskByVariationClientsRequest](#fm.ListTaskByVariationClientsRequest)
+    - [ListTaskByVariationClientsResponse](#fm.ListTaskByVariationClientsResponse)
+    - [ListTaskRequest](#fm.ListTaskRequest)
+    - [ListTaskResponse](#fm.ListTaskResponse)
+    - [ListTaskResponse.TaskResponse](#fm.ListTaskResponse.TaskResponse)
+    - [TaskByEmployeeResponse](#fm.TaskByEmployeeResponse)
+    - [TimesheetResponse](#fm.TimesheetResponse)
+    - [UpdateTaskByClientRequest](#fm.UpdateTaskByClientRequest)
+    - [UpdateTaskByClientRequest.UpdateTaskByClient](#fm.UpdateTaskByClientRequest.UpdateTaskByClient)
+    - [UpdateTaskByClientResponse](#fm.UpdateTaskByClientResponse)
+    - [UpdateTaskByEmployeeRequest](#fm.UpdateTaskByEmployeeRequest)
+    - [UpdateTaskByEmployeeRequest.UpdateTaskByEmployee](#fm.UpdateTaskByEmployeeRequest.UpdateTaskByEmployee)
+    - [UpdateTaskByEmployeeResponse](#fm.UpdateTaskByEmployeeResponse)
+    - [UpdateTaskRequest](#fm.UpdateTaskRequest)
+    - [UpdateTaskResponse](#fm.UpdateTaskResponse)
+  
+    - [TaskService](#fm.TaskService)
+  
+- [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="check_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## check_service.proto
+
+
+
+<a name="fm.CheckInOutRequest"></a>
+
+### CheckInOutRequest
+Request for checking in to opening_check and checking out to closing_check
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| check_id | [string](#string) |  | check in or out to particular check item with check_id |
+
+
+
+
+
+
+<a name="fm.CreateCheckRequest"></a>
+
+### CreateCheckRequest
+Request to create check
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title of the check |
+| instruction | [string](#string) |  | detail instruction of the opening_check |
+| employee_id | [string](#string) |  | employee the opening_check is assigned to |
+| check_type | [string](#string) |  | check_type = opening for opening check and check_type = closing for closing check |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check must start by at least this time. Start time is combination of appointment date and time |
+| organization_id | [string](#string) |  | organization id |
+
+
+
+
+
+
+<a name="fm.CreateCheckResponse"></a>
+
+### CreateCheckResponse
+Response from create check
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| check_id | [string](#string) |  | unique id of the check |
+
+
+
+
+
+
+<a name="fm.ListCheckRequest"></a>
+
+### ListCheckRequest
+Request for fetching list of checks
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter for list check request |
+| organization_id | [string](#string) |  | filter for selected organization check request |
+
+
+
+
+
+
+<a name="fm.ListCheckResponse"></a>
+
+### ListCheckResponse
+Response for list of check request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListCheckResponse.CheckResponse](#fm.ListCheckResponse.CheckResponse) | repeated | list of checks |
+
+
+
+
+
+
+<a name="fm.ListCheckResponse.CheckResponse"></a>
+
+### ListCheckResponse.CheckResponse
+Check definition
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| check_id | [string](#string) |  | unique identifier for the check |
+| title | [string](#string) |  | title of the check |
+| instruction | [string](#string) |  | detail instruction of the check |
+| employee_id | [string](#string) |  | employee the check is assigned to |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check must start by at least this time. Start time is combination of appointment date and time |
+| check_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | checked in time for check_type=opening or checked out time for check_type=closing |
+| check_type | [string](#string) |  | check_type = opening for opening check and check_type = closing for closing check |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time generated by system at the instance the opening_check was created |
+| organization_id | [string](#string) |  | organization id of the check |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.CheckService"></a>
+
+### CheckService
+service to manage check list which should be checked before starting task and
+checked after task
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateCheckRequest](#fm.CreateCheckRequest) | [CreateCheckResponse](#fm.CreateCheckResponse) | Create a new check. Authorization scope of `fm.check.create` is required. |
+| CheckInOut | [CheckInOutRequest](#fm.CheckInOutRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Check can be used to check in a staff to a opening_check and check out to a closing check Authorization scope of `fm.check.in` and `fm.check.out` is required. |
+| List | [ListCheckRequest](#fm.ListCheckRequest) | [ListCheckResponse](#fm.ListCheckResponse) | List returns the list of check visible to the authroized user in descending date order. Authorization scope of `fm.check.list` is required. |
+
+ 
+
+
+
+<a name="client_employee_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## client_employee_service.proto
+
+
+
+<a name="fm.AssignClientEmployeeShiftRequest"></a>
+
+### AssignClientEmployeeShiftRequest
+Request for client-employee shift assignment
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique id of client employee relation |
+| shift | [string](#string) |  | shift of the employee for the client |
+| shift_time | [string](#string) |  | shift time of the employee for the client |
+| organization_id | [string](#string) |  | organization id of the client employee relation |
+
+
+
+
+
+
+<a name="fm.AssignClientEmployeeShiftResponse"></a>
+
+### AssignClientEmployeeShiftResponse
+Response for client-employee shift assignment
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique id of client employee relation |
+
+
+
+
+
+
+<a name="fm.AssignContractedHoursRequest"></a>
+
+### AssignContractedHoursRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | organization id of the client employee relation |
+| shift | [string](#string) |  | shift of the employee for the client |
+| shift_time | [string](#string) |  | shift time of the employee for the client |
+| break_time | [string](#string) |  | break time |
+| is_paid_break | [bool](#bool) |  | is break paid |
+| wd_rate | [float](#float) |  | week days rate |
+| we_rate | [float](#float) |  | weekend days rate |
+| currency | [string](#string) |  | rate currency |
+| contracted_day_hours | [ContractedDayHours](#fm.ContractedDayHours) | repeated | contracted hours for the day of the week |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
+| client_employee_id | [string](#string) |  | unique id of client employee relation |
+
+
+
+
+
+
+<a name="fm.AssignContractedHoursResponse"></a>
+
+### AssignContractedHoursResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique id of client employee relation |
+
+
+
+
+
+
+<a name="fm.AssignTargetTasksRequest"></a>
+
+### AssignTargetTasksRequest
+Request for assigning target tasks to an employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique identifier for the client employee relation |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | start date for target tasks |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | end date for target tasks |
+| weekly_target_tasks | [AssignTargetTasksRequest.WeeklyTargetTasksEntry](#fm.AssignTargetTasksRequest.WeeklyTargetTasksEntry) | repeated | The target tasks for the 7 days |
+
+
+
+
+
+
+<a name="fm.AssignTargetTasksRequest.WeeklyTargetTasksEntry"></a>
+
+### AssignTargetTasksRequest.WeeklyTargetTasksEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [int64](#int64) |  |  |
+
+
+
+
+
+
+<a name="fm.AssignTargetTasksResponse"></a>
+
+### AssignTargetTasksResponse
+Response for assigning target tasks to an employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique identifier for the client employee relation |
+
+
+
+
+
+
+<a name="fm.ContractedDayHours"></a>
+
+### ContractedDayHours
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| day | [string](#string) |  | day of the week |
+| hours | [float](#float) |  | contracted hours for the day |
+
+
+
+
+
+
+<a name="fm.CreateClientEmployeeRequest"></a>
+
+### CreateClientEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | client the employee is assigned to |
+| employee_id | [string](#string) |  | employee the client is assigned to |
+| designation_id | [string](#string) |  | designation of employee in the client |
+| organization_id | [string](#string) |  | organization id of the client employee relation |
+| wd_rate | [float](#float) |  | week days rate |
+| we_rate | [float](#float) |  | weekend days rate |
+| currency | [string](#string) |  | rate currency |
+| shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | multiple shift for employee in a single client |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
+
+
+
+
+
+
+<a name="fm.CreateClientEmployeeResponse"></a>
+
+### CreateClientEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.CreateEmployeeTrainingRequest"></a>
+
+### CreateEmployeeTrainingRequest
+Request to create employee training
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| trainee_id | [string](#string) |  | Unique id of trainee employee |
+| trainer_id | [string](#string) |  | Unique id of trainer employee |
+| training_subject | [string](#string) |  | Subject of the training |
+| training_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date of the training |
+| attachment_file | [string](#string) |  | Attachment file regarding training |
+| client_id | [string](#string) |  | Unique id for the client |
+| organization_id | [string](#string) |  | organization id of the employee working for client |
+
+
+
+
+
+
+<a name="fm.CreateEmployeeTrainingResponse"></a>
+
+### CreateEmployeeTrainingResponse
+Response for creating employee training
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_training_id | [string](#string) |  | Unique id of the training for employee |
+
+
+
+
+
+
+<a name="fm.CreateFeedbackRequest"></a>
+
+### CreateFeedbackRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of employee |
+| client_id | [string](#string) |  | unique id of client who is providing feedback |
+| sector | [string](#string) |  | sector of employee |
+| department_id | [string](#string) |  | unique id of department |
+| rating | [string](#string) |  | provided rating |
+| feedback_comments | [string](#string) |  | provided feedback comments |
+| organization_id | [string](#string) |  | organization id |
+
+
+
+
+
+
+<a name="fm.CreateFeedbackResponse"></a>
+
+### CreateFeedbackResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_id | [string](#string) |  | unique id of feedback |
+
+
+
+
+
+
+<a name="fm.CreateTransferRequest"></a>
+
+### CreateTransferRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of employee to transfer |
+| department_id | [string](#string) |  | new department id |
+| from_client_id | [string](#string) |  | unique id of client from which employee is transfered |
+| to_client_id | [string](#string) |  | unique id of client to which employee is transfered |
+| transfer_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | effective date of transfer |
+| transfer_reason | [string](#string) |  | reason of employee transfer |
+| sector | [string](#string) |  | new sector |
+| organization_id | [string](#string) |  | organization id |
+
+
+
+
+
+
+<a name="fm.CreateTransferResponse"></a>
+
+### CreateTransferResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| transfer_id | [string](#string) |  | unique id of employee transfer |
+
+
+
+
+
+
+<a name="fm.DaywiseTargetTasks"></a>
+
+### DaywiseTargetTasks
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| day | [string](#string) |  | day of the week |
+| num_tasks | [int64](#int64) |  | number of target tasks for the day |
+
+
+
+
+
+
+<a name="fm.FeedbackResponse"></a>
+
+### FeedbackResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of employee |
+| client_id | [string](#string) |  | unique id of client who is providing feedback |
+| sector | [string](#string) |  | sector of employee |
+| department_id | [string](#string) |  | unique id of department |
+| rating | [string](#string) |  | provided rating |
+| feedback_comments | [string](#string) |  | provided feedback comments |
+| organization_id | [string](#string) |  | organization id |
+| feedback_id | [string](#string) |  | unique id of feedback |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | transfer data creation time |
+
+
+
+
+
+
+<a name="fm.GetClientEmployeeIdsByEmployeeRequest"></a>
+
+### GetClientEmployeeIdsByEmployeeRequest
+Request to get client_employee_ids using employee_id
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | Employee id |
+
+
+
+
+
+
+<a name="fm.GetClientEmployeeIdsByEmployeeResponse"></a>
+
+### GetClientEmployeeIdsByEmployeeResponse
+Response containing list of client_employee_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) | repeated | Array of client_employee_ids |
+
+
+
+
+
+
+<a name="fm.GetClientIdsByEmployeeRequest"></a>
+
+### GetClientIdsByEmployeeRequest
+Request to get client_ids using employee_id
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | Employee id |
+
+
+
+
+
+
+<a name="fm.GetClientIdsByEmployeeResponse"></a>
+
+### GetClientIdsByEmployeeResponse
+Response containing list of client_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_ids | [string](#string) | repeated | Array of client_employee_ids |
+
+
+
+
+
+
+<a name="fm.GetContractedHoursRequest"></a>
+
+### GetContractedHoursRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique id of client employee relation |
+| organization_id | [string](#string) |  | organization id of the client employee relation |
+
+
+
+
+
+
+<a name="fm.GetContractedHoursResponse"></a>
+
+### GetContractedHoursResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique id of client employee relation |
+| wd_rate | [float](#float) |  | shift of the employee for the client string shift = 2; // shift time of the employee for the client string shift_time = 3; // break time string break_time = 4; // is break paid bool is_paid_break = 5; week days rate |
+| we_rate | [float](#float) |  | weekend days rate |
+| currency | [string](#string) |  | rate currency |
+| shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | contracted hours for the day of the week |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
+
+
+
+
+
+
+<a name="fm.GetEmployeeTrainingRequest"></a>
+
+### GetEmployeeTrainingRequest
+Request to get employee trainings
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | Unique id of client with the training |
+| organization_id | [string](#string) |  | organization id of the employee working for client |
+| trainee_id | [string](#string) |  | Unique id of trainee employee |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+
+
+
+
+
+
+<a name="fm.GetEmployeeTrainingResponse"></a>
+
+### GetEmployeeTrainingResponse
+Response for get employee trainings
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [GetEmployeeTrainingResponse.EmployeeTrainingResponse](#fm.GetEmployeeTrainingResponse.EmployeeTrainingResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.GetEmployeeTrainingResponse.EmployeeTrainingResponse"></a>
+
+### GetEmployeeTrainingResponse.EmployeeTrainingResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| trainee_id | [string](#string) |  | Unique id of trainee employee |
+| trainer_id | [string](#string) |  | Unique id of trainer employee |
+| training_subject | [string](#string) |  | Subject of the training |
+| training_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date of the training |
+| attachment_file | [string](#string) |  | Attachment file regarding training |
+| client_id | [string](#string) |  | Unique id for the client |
+| organization_id | [string](#string) |  | organization id of the employee working for client |
+| employee_training_id | [string](#string) |  | Unique id of the training for employee |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date of training creation |
+
+
+
+
+
+
+<a name="fm.GetTargetTasksRequest"></a>
+
+### GetTargetTasksRequest
+Request for getting target tasks of an employee for a client
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique identifier for the client employee relation |
+
+
+
+
+
+
+<a name="fm.GetTargetTasksResponse"></a>
+
+### GetTargetTasksResponse
+Response for getting target task of an employee for a client
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | unique identifier for the client employee relation |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | start date for target tasks |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | end date for target tasks |
+| weekly_target_tasks | [GetTargetTasksResponse.WeeklyTargetTasksEntry](#fm.GetTargetTasksResponse.WeeklyTargetTasksEntry) | repeated | The target tasks for the 7 days |
+
+
+
+
+
+
+<a name="fm.GetTargetTasksResponse.WeeklyTargetTasksEntry"></a>
+
+### GetTargetTasksResponse.WeeklyTargetTasksEntry
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| value | [int64](#int64) |  |  |
+
+
+
+
+
+
+<a name="fm.ListClientEmployeeRequest"></a>
+
+### ListClientEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListClientEmployeeResponse"></a>
+
+### ListClientEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListClientEmployeeResponse.ClientEmployeeResponse](#fm.ListClientEmployeeResponse.ClientEmployeeResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListClientEmployeeResponse.ClientEmployeeResponse"></a>
+
+### ListClientEmployeeResponse.ClientEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  |  |
+| client_id | [string](#string) |  | client the employee is assigned to |
+| designation_id | [string](#string) |  | designation of employee in the client |
+| employee_id | [string](#string) |  | employee the client is assigned to |
+| organization_id | [string](#string) |  | organization id of the client-employee link |
+| shift | [string](#string) |  | shift of the employee for the client |
+
+
+
+
+
+
+<a name="fm.ListFeedbackRequest"></a>
+
+### ListFeedbackRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| organization_id | [string](#string) |  | organization id |
+| client_id | [string](#string) |  | unique id of client who is providing feedback |
+| employee_id | [string](#string) |  | unique id of employee |
+
+
+
+
+
+
+<a name="fm.ListFeedbackResponse"></a>
+
+### ListFeedbackResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [FeedbackResponse](#fm.FeedbackResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListTransferRequest"></a>
+
+### ListTransferRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| employee_id | [string](#string) |  |  |
+| client_id | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListTransferResponse"></a>
+
+### ListTransferResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [TransferResponse](#fm.TransferResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ShiftContractedDayHours"></a>
+
+### ShiftContractedDayHours
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| shift | [string](#string) |  | shift of the employee for the client |
+| shift_start_time | [string](#string) |  | shift start time of the employee for the client |
+| shift_end_time | [string](#string) |  | shift end time of the employee for the client |
+| break_time | [string](#string) |  | break time |
+| is_paid_break | [bool](#bool) |  | is break paid |
+| weeks | [int32](#int32) |  | total weeks for shift |
+| contracted_day_hours | [ContractedDayHours](#fm.ContractedDayHours) | repeated | contracted hours for the day of the week |
+
+
+
+
+
+
+<a name="fm.TransferResponse"></a>
+
+### TransferResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of employee to transfer |
+| department_id | [string](#string) |  | new department id |
+| from_client_id | [string](#string) |  | unique id of client from which employee is transfered |
+| to_client_id | [string](#string) |  | unique id of client to which employee is transfered |
+| transfer_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | effective date of transfer |
+| transfer_reason | [string](#string) |  | reason of employee transfer |
+| sector | [string](#string) |  | new sector |
+| transfer_id | [string](#string) |  | unique id of employee transfer |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | transfer data creation time |
+| organization_id | [string](#string) |  | organization id |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.ClientEmployeeService"></a>
+
+### ClientEmployeeService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateClientEmployeeRequest](#fm.CreateClientEmployeeRequest) | [CreateClientEmployeeResponse](#fm.CreateClientEmployeeResponse) | Create a new client employee relation(many to many). this helps to assign employee to the client. Authorization scope of `fm.client-employee.create` is required. |
+| List | [ListClientEmployeeRequest](#fm.ListClientEmployeeRequest) | [ListClientEmployeeResponse](#fm.ListClientEmployeeResponse) | List the employees assigned in the clients Authorization scope of `fm.client-employee.list` is required. |
+| AssignShift | [AssignClientEmployeeShiftRequest](#fm.AssignClientEmployeeShiftRequest) | [AssignClientEmployeeShiftResponse](#fm.AssignClientEmployeeShiftResponse) | Assign shift to the employee for the client Authorization scope of `fm.client-employee.assign-shift` is required. |
+| AssignContractedHours | [AssignContractedHoursRequest](#fm.AssignContractedHoursRequest) | [AssignContractedHoursResponse](#fm.AssignContractedHoursResponse) | Assign contracted hours to the employee for the client Authorization scope of `fm.client-employee.assign-contracted-hours` is required. |
+| GetContractedHours | [GetContractedHoursRequest](#fm.GetContractedHoursRequest) | [GetContractedHoursResponse](#fm.GetContractedHoursResponse) | Get contracted hours of the employee for the client Authorization scope of `fm.client-employee.get-contracted-hours` is required. |
+| AssignTargetTasks | [AssignTargetTasksRequest](#fm.AssignTargetTasksRequest) | [AssignTargetTasksResponse](#fm.AssignTargetTasksResponse) | Assign target tasks for each day of the week in a fixed interval of time for an employee for a client Authorization scope of `fm.client-employee.assign-target-tasks` is required. |
+| GetTargetTasks | [GetTargetTasksRequest](#fm.GetTargetTasksRequest) | [GetTargetTasksResponse](#fm.GetTargetTasksResponse) | Get the assigned target tasks of an employee for a client Authorization scope of `fm.client-employee.get-target-tasks` is required. |
+| GetClientEmployeeIdsByEmployeeId | [GetClientEmployeeIdsByEmployeeRequest](#fm.GetClientEmployeeIdsByEmployeeRequest) | [GetClientEmployeeIdsByEmployeeResponse](#fm.GetClientEmployeeIdsByEmployeeResponse) | Get client_employee_ids by employee_id Authorization scope of `fm.client-employee.get-client-employee-ids-by-employee-id` is required. |
+| GetClientIdsByEmployeeId | [GetClientIdsByEmployeeRequest](#fm.GetClientIdsByEmployeeRequest) | [GetClientIdsByEmployeeResponse](#fm.GetClientIdsByEmployeeResponse) | Get client_ids by employee_id Authorization scope of `fm.client-employee.get-client-ids-by-employee-id` is required. |
+| CreateEmployeeTraining | [CreateEmployeeTrainingRequest](#fm.CreateEmployeeTrainingRequest) | [CreateEmployeeTrainingResponse](#fm.CreateEmployeeTrainingResponse) | Create training for employee of client Authorization scope of `fm.client-employee.create-employee-training` is required |
+| GetEmployeeTraining | [GetEmployeeTrainingRequest](#fm.GetEmployeeTrainingRequest) | [GetEmployeeTrainingResponse](#fm.GetEmployeeTrainingResponse) | Get employee trainings Authorization scope of `fm.client-employee.get-employee-trainings` is required. |
+| CreateTransfer | [CreateTransferRequest](#fm.CreateTransferRequest) | [CreateTransferResponse](#fm.CreateTransferResponse) | Create a new transfer. Authorization scope of `fm.client-employee.transfer.create` is required. |
+| ListTransfer | [ListTransferRequest](#fm.ListTransferRequest) | [ListTransferResponse](#fm.ListTransferResponse) | List transfers. Authorization scope of `fm.client-employee.transfer.list` is required. |
+| CreateFeedback | [CreateFeedbackRequest](#fm.CreateFeedbackRequest) | [CreateFeedbackResponse](#fm.CreateFeedbackResponse) | Create a new feedback. Authorization scope of `fm.client-employee.feedback.create` is required. |
+| ListFeedback | [ListFeedbackRequest](#fm.ListFeedbackRequest) | [ListFeedbackResponse](#fm.ListFeedbackResponse) | List feedbacks. Authorization scope of `fm.client-employee.feedback.list` is required. |
+
+ 
+
+
+
+<a name="client_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## client_service.proto
+
+
+
+<a name="fm.Area"></a>
+
+### Area
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| total_area | [string](#string) |  |  |
+| area | [string](#string) |  |  |
+| area_manager | [string](#string) |  | Area manager employee_id |
+
+
+
+
+
+
+<a name="fm.BasicDetails"></a>
+
+### BasicDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  |  |
+| name | [string](#string) |  |  |
+| phone | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.Budget"></a>
+
+### Budget
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| labour_budget | [LabourBudget](#fm.LabourBudget) |  |  |
+| store_budget | [StoreBudget](#fm.StoreBudget) |  |  |
+| periodic_budget | [PeriodicBudget](#fm.PeriodicBudget) |  |  |
+
+
+
+
+
+
+<a name="fm.ClientAddAttachmentRequest"></a>
+
+### ClientAddAttachmentRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client |
+| attachment_path | [string](#string) |  | path of attachment |
+| attachment_type | [string](#string) |  | type of attachment |
+| uploaded_by | [string](#string) |  | uploaded by |
+
+
+
+
+
+
+<a name="fm.ClientAddAttachmentResponse"></a>
+
+### ClientAddAttachmentResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| attachment_id | [string](#string) |  | unique identifier of the newly created attachment record |
+
+
+
+
+
+
+<a name="fm.ClientChangeStatusRequest"></a>
+
+### ClientChangeStatusRequest
+Request for changing status of client
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client |
+| status | [string](#string) |  | status to change to |
+
+
+
+
+
+
+<a name="fm.ClientChangeStatusResponse"></a>
+
+### ClientChangeStatusResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client |
+
+
+
+
+
+
+<a name="fm.ClientDate"></a>
+
+### ClientDate
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Start of the contract with the client |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | End of the contract with the client |
+| effective_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| last_review_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| renew_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date in which client contract is expected to be renewed next time |
+
+
+
+
+
+
+<a name="fm.ClientDetail"></a>
+
+### ClientDetail
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area | [Area](#fm.Area) |  | Area |
+| sector | [string](#string) |  |  |
+| reason_for_costing | [string](#string) |  |  |
+| date | [ClientDate](#fm.ClientDate) |  |  |
+| contracted_day_hours | [ContractedHours](#fm.ContractedHours) | repeated | Contracted hours |
+| status | [string](#string) |  | This field is only used in list and detail API Other APIs will ignore this field |
+| site_supervisor | [ContactPerson](#fm.ContactPerson) |  | Site supervisor aka client supervisor |
+| region | [Region](#fm.Region) |  | Region |
+| budget | [Budget](#fm.Budget) |  | Budgets |
+| client_code | [int64](#int64) |  | client code |
+| invoice | [Invoice](#fm.Invoice) | repeated | Invoice |
+
+
+
+
+
+
+<a name="fm.ClientDetailRequest"></a>
+
+### ClientDetailRequest
+Request for client detail
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | Client Id of the client |
+
+
+
+
+
+
+<a name="fm.ClientDetailResponse"></a>
+
+### ClientDetailResponse
+Response for client detail
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client |
+| organization_id | [string](#string) |  | organization id the client belongs to |
+| name | [string](#string) |  | unique name of the client |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact detail of the client |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the client was created at |
+| client_detail | [ClientDetail](#fm.ClientDetail) |  | information details of the client |
+| confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential contact person details of the client. Backend saves to ClientContactPersonService |
+| bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details of the client |
+| contact_people | [ContactPerson](#fm.ContactPerson) | repeated | List of contact perople details of the client. Backend saves to ClientContactPersonService |
+
+
+
+
+
+
+<a name="fm.ClientListAttachmentRequest"></a>
+
+### ClientListAttachmentRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client |
+| attachment_type | [string](#string) |  | type of attachment to list |
+
+
+
+
+
+
+<a name="fm.ClientListAttachmentResponse"></a>
+
+### ClientListAttachmentResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client |
+| attachments | [ClientListAttachmentResponse.ClientAttachmentPayload](#fm.ClientListAttachmentResponse.ClientAttachmentPayload) | repeated | list of attachments |
+
+
+
+
+
+
+<a name="fm.ClientListAttachmentResponse.ClientAttachmentPayload"></a>
+
+### ClientListAttachmentResponse.ClientAttachmentPayload
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| attachment_id | [string](#string) |  | unique identifier of the newly created attachment record |
+| attachment_path | [string](#string) |  | attachment path |
+| attachment_type | [string](#string) |  | attachment type |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | created at timestamp |
+| uploaded_by | [string](#string) |  | uploaded by |
+
+
+
+
+
+
+<a name="fm.ContactPerson"></a>
+
+### ContactPerson
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| designation | [string](#string) |  |  |
+| email | [string](#string) |  |  |
+| phone | [string](#string) |  |  |
+| mobile | [string](#string) |  |  |
+| position | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ContractedHours"></a>
+
+### ContractedHours
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| job_type_id | [string](#string) |  | NOTE: even though this is not used currently, we will not be removing this field because it might be added again soon |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Start time of shifts in the client |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | End time of shifts in the client |
+| shift_name | [string](#string) |  | Some name for the shift like morning, evening |
+| daywise_hours | [ContractedDayHours](#fm.ContractedDayHours) | repeated | Hourly shifts daywise in the contract |
+
+
+
+
+
+
+<a name="fm.CreateClientDate"></a>
+
+### CreateClientDate
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Start of the contract with the client |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | End of the contract with the client |
+| effective_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  |  |
+| renew_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date in which client contract is expected to be renewed next time |
+
+
+
+
+
+
+<a name="fm.CreateClientDetail"></a>
+
+### CreateClientDetail
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area | [Area](#fm.Area) |  | Area |
+| sector | [string](#string) |  |  |
+| reason_for_costing | [string](#string) |  |  |
+| date | [CreateClientDate](#fm.CreateClientDate) |  |  |
+| contracted_day_hours | [ContractedHours](#fm.ContractedHours) | repeated | Contracted hours |
+| site_supervisor | [ContactPerson](#fm.ContactPerson) |  | Site supervisor aka client supervisor |
+| region | [Region](#fm.Region) |  | Region |
+| budget | [Budget](#fm.Budget) |  | Budgets |
+| invoice | [Invoice](#fm.Invoice) | repeated | Invoice |
+
+
+
+
+
+
+<a name="fm.CreateClientMobilizationRequest"></a>
+
+### CreateClientMobilizationRequest
+Request to create client mobilization
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | client id for the mobilization |
+| category | [string](#string) |  | category of mobilization |
+| subject | [string](#string) |  | subject of mobilization |
+| message | [string](#string) |  | message for the mobilization |
+| by | [MobilizationPrincipal](#fm.MobilizationPrincipal) |  | mobilization by |
+| to | [MobilizationPrincipal](#fm.MobilizationPrincipal) |  | mobilization to |
+| date_of_mobilization | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | mobilization date |
+
+
+
+
+
+
+<a name="fm.CreateClientMobilizationResponse"></a>
+
+### CreateClientMobilizationResponse
+Response for client mobilization creation
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_mobilization_id | [string](#string) |  | unique id of the mobilization |
+
+
+
+
+
+
+<a name="fm.CreateClientRequest"></a>
+
+### CreateClientRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization this client belongs to |
+| name | [string](#string) |  | unique name of the client |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact details of the client |
+| client_detail | [CreateClientDetail](#fm.CreateClientDetail) |  | information details of the client |
+| contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Contact people details of the client. Backend saves to ClientContactPersonService |
+| bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details |
+| confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential Contact Person detail of the client |
+| client_code | [int64](#int64) |  | unique code of client within the organization |
+
+
+
+
+
+
+<a name="fm.CreateClientResponse"></a>
+
+### CreateClientResponse
+Response for create client requests
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.Invoice"></a>
+
+### Invoice
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| invoice_type | [string](#string) |  |  |
+| monthly | [string](#string) |  |  |
+| yearly | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.LabourBudget"></a>
+
+### LabourBudget
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| daily | [string](#string) |  |  |
+| weekly | [string](#string) |  |  |
+| monthly | [string](#string) |  |  |
+| yearly | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListClientMobilizationRequest"></a>
+
+### ListClientMobilizationRequest
+Request to get list of client mobilization
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | client id of the requested mobilization |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+
+
+
+
+
+
+<a name="fm.ListClientMobilizationResponse"></a>
+
+### ListClientMobilizationResponse
+Response for list of client mobilization
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListClientMobilizationResponse.ClientMobilizationResponse](#fm.ListClientMobilizationResponse.ClientMobilizationResponse) | repeated |  |
+| metadata | [ListResponseMetadata](#fm.ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm.ListClientMobilizationResponse.ClientMobilizationResponse"></a>
+
+### ListClientMobilizationResponse.ClientMobilizationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | client id for the mobilization |
+| category | [string](#string) |  | category of mobilization |
+| subject | [string](#string) |  | subject of mobilization |
+| message | [string](#string) |  | message for the mobilization |
+| by | [MobilizationPrincipal](#fm.MobilizationPrincipal) |  | mobilization by |
+| to | [MobilizationPrincipal](#fm.MobilizationPrincipal) |  | mobilization to |
+| date_of_mobilization | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | mobilization date |
+| client_mobilization_id | [string](#string) |  | unique id of the client mobilization |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of mobilization creation |
+
+
+
+
+
+
+<a name="fm.ListClientRequest"></a>
+
+### ListClientRequest
+Request for list client
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for client-list |
+| organization_id | [string](#string) |  | fetch clients for this organization_id |
+| client_ids | [string](#string) |  | list of client ids to fetch by |
+| status | [string](#string) |  | status to fetch clients by |
+| search | [ListClientRequest.SearchParam](#fm.ListClientRequest.SearchParam) |  | paramters to search clients |
+
+
+
+
+
+
+<a name="fm.ListClientRequest.SearchParam"></a>
+
+### ListClientRequest.SearchParam
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | name of client |
+| client_code | [int64](#int64) |  | unique client code |
+| area | [string](#string) |  | area of client |
+| region | [string](#string) |  | region of client |
+
+
+
+
+
+
+<a name="fm.ListClientResponse"></a>
+
+### ListClientResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListClientResponse.ClientResponse](#fm.ListClientResponse.ClientResponse) | repeated | list of clients |
+| metadata | [ListResponseMetadata](#fm.ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm.ListClientResponse.ClientResponse"></a>
+
+### ListClientResponse.ClientResponse
+individual client response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client |
+| organization_id | [string](#string) |  | organization id the client belongs to |
+| client_code | [int64](#int64) |  | client code |
+| name | [string](#string) |  | unique name of the client |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact details of the client |
+| client_detail | [ClientDetail](#fm.ClientDetail) |  | information details of the client |
+| contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Contact Person details of the client. Backend saves to ClientContactPersonService |
+| bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details of the client |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the client was created at |
+| confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential Contact Person detail of the client |
+
+
+
+
+
+
+<a name="fm.MobilizationPrincipal"></a>
+
+### MobilizationPrincipal
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [string](#string) |  | type of user |
+| id | [string](#string) |  | unique id of the user |
+| name | [string](#string) |  | name of the user |
+
+
+
+
+
+
+<a name="fm.PeriodicBudget"></a>
+
+### PeriodicBudget
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| frequency | [string](#string) |  |  |
+| totalBudget | [float](#float) |  |  |
+| totalHours | [float](#float) |  |  |
+| budgets | [PeriodicBudget.PBudget](#fm.PeriodicBudget.PBudget) | repeated |  |
+
+
+
+
+
+
+<a name="fm.PeriodicBudget.PBudget"></a>
+
+### PeriodicBudget.PBudget
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  |  |
+| hours | [float](#float) |  |  |
+| amount | [float](#float) |  |  |
+
+
+
+
+
+
+<a name="fm.Region"></a>
+
+### Region
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region | [string](#string) |  |  |
+| region_manager | [string](#string) |  | Region manager employee_id |
+
+
+
+
+
+
+<a name="fm.Sector"></a>
+
+### Sector
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sector_id | [string](#string) |  |  |
+| sector_name | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.StoreBudget"></a>
+
+### StoreBudget
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| monthly | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.UpdateClientMobilizationRequest"></a>
+
+### UpdateClientMobilizationRequest
+Request to update client mobilization
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | client id for the mobilization |
+| category | [string](#string) |  | category of mobilization |
+| subject | [string](#string) |  | subject of mobilization |
+| message | [string](#string) |  | message for the mobilization |
+| by | [MobilizationPrincipal](#fm.MobilizationPrincipal) |  | mobilization by |
+| to | [MobilizationPrincipal](#fm.MobilizationPrincipal) |  | mobilization to |
+| date_of_mobilization | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | mobilization date |
+| client_mobilization_id | [string](#string) |  | unique id of the client mobilization |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of mobilization creation |
+
+
+
+
+
+
+<a name="fm.UpdateClientMobilizationResponse"></a>
+
+### UpdateClientMobilizationResponse
+Response for update client mobilization
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_mobilization_id | [string](#string) |  | unique id of the updated client mobilization |
+
+
+
+
+
+
+<a name="fm.UpdateClientRequest"></a>
+
+### UpdateClientRequest
+request to update client by client id
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | client Id of the client to update |
+| name | [string](#string) |  | full name of the client |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact details of the client |
+| client_detail | [ClientDetail](#fm.ClientDetail) |  | information details of the client |
+| contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Contact Person details of the client. Backend saves to ClientContactPersonService |
+| bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details of the client |
+| confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential Contact Person detail of the client |
+| client_code | [int64](#int64) |  | unique code of client within the organization |
+
+
+
+
+
+
+<a name="fm.UpdateClientResponse"></a>
+
+### UpdateClientResponse
+response for UpdateClientRequest
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | client Id of the updated client |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.ClientService"></a>
+
+### ClientService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateClientRequest](#fm.CreateClientRequest) | [CreateClientResponse](#fm.CreateClientResponse) | Create a new client. Authorization scope of `fm.client.create` is required. |
+| List | [ListClientRequest](#fm.ListClientRequest) | [ListClientResponse](#fm.ListClientResponse) | List returns the list of client visible to the authorized user in descending order. Scope of `fm.client.list` is required. |
+| Update | [UpdateClientRequest](#fm.UpdateClientRequest) | [UpdateClientResponse](#fm.UpdateClientResponse) | Update an existing client. Authorization scope of `fm.client.update` is required. |
+| Detail | [ClientDetailRequest](#fm.ClientDetailRequest) | [ClientDetailResponse](#fm.ClientDetailResponse) | Details of client. Scope of `fm.client.detail` is required. |
+| ChangeStatus | [ClientChangeStatusRequest](#fm.ClientChangeStatusRequest) | [ClientChangeStatusResponse](#fm.ClientChangeStatusResponse) | Change status of a client. Scope of `fm.client.status-change` is required. |
+| AddAttachment | [ClientAddAttachmentRequest](#fm.ClientAddAttachmentRequest) | [ClientAddAttachmentResponse](#fm.ClientAddAttachmentResponse) | Adds attachment for a client. Scope of `fm.client.add-attachment` is required. |
+| ListAttachment | [ClientListAttachmentRequest](#fm.ClientListAttachmentRequest) | [ClientListAttachmentResponse](#fm.ClientListAttachmentResponse) | Lists attachment for a client. Scope of `fm.client.list-attachment` is required. |
+| CreateClientMobilization | [CreateClientMobilizationRequest](#fm.CreateClientMobilizationRequest) | [CreateClientMobilizationResponse](#fm.CreateClientMobilizationResponse) | Create a new client mobilization Authorization scope of `fm.client.create-client-mobilization` is required |
+| ListClientMobilization | [ListClientMobilizationRequest](#fm.ListClientMobilizationRequest) | [ListClientMobilizationResponse](#fm.ListClientMobilizationResponse) | List client mobilization Authorization scope of `fm.client.get-client-mobilization` is required |
+| UpdateClientMobilization | [UpdateClientMobilizationRequest](#fm.UpdateClientMobilizationRequest) | [UpdateClientMobilizationResponse](#fm.UpdateClientMobilizationResponse) | Update client mobilization Authorization scope of `fm.client.update-client-mobilization` is required |
+
+ 
+
+
+
+<a name="department_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## department_service.proto
+
+
+
+<a name="fm.CreateDepartmentRequest"></a>
+
+### CreateDepartmentRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.CreateDepartmentResponse"></a>
+
+### CreateDepartmentResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| department_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListDepartmentRequest"></a>
+
+### ListDepartmentRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListDepartmentResponse"></a>
+
+### ListDepartmentResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListDepartmentResponse.DepartmentResponse](#fm.ListDepartmentResponse.DepartmentResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListDepartmentResponse.DepartmentResponse"></a>
+
+### ListDepartmentResponse.DepartmentResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| department_id | [string](#string) |  |  |
+| title | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.DepartmentService"></a>
+
+### DepartmentService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateDepartmentRequest](#fm.CreateDepartmentRequest) | [CreateDepartmentResponse](#fm.CreateDepartmentResponse) | Create a new department. Authorization scope of `fm.department.create` is required |
+| List | [ListDepartmentRequest](#fm.ListDepartmentRequest) | [ListDepartmentResponse](#fm.ListDepartmentResponse) | List returns the list of department visible to the authroized user in ascending order of department title |
+
+ 
+
+
+
+<a name="designation_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## designation_service.proto
+
+
+
+<a name="fm.CreateDesignationRequest"></a>
+
+### CreateDesignationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | job title. eg, manager, supervisor, cleaner |
+| department_id | [string](#string) |  | this gives information about the department under which the designation falls |
+| description | [string](#string) |  | admin can add brief details about the designation, if required |
+| organization_id | [string](#string) |  | designation is at organization level and also it is used for authentication |
+
+
+
+
+
+
+<a name="fm.CreateDesignationResponse"></a>
+
+### CreateDesignationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| designation_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListDesignationRequest"></a>
+
+### ListDesignationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListDesignationResponse"></a>
+
+### ListDesignationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListDesignationResponse.DesignationResponse](#fm.ListDesignationResponse.DesignationResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListDesignationResponse.DesignationResponse"></a>
+
+### ListDesignationResponse.DesignationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| designation_id | [string](#string) |  |  |
+| title | [string](#string) |  |  |
+| department_id | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.DesignationService"></a>
+
+### DesignationService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateDesignationRequest](#fm.CreateDesignationRequest) | [CreateDesignationResponse](#fm.CreateDesignationResponse) | required |
+| List | [ListDesignationRequest](#fm.ListDesignationRequest) | [ListDesignationResponse](#fm.ListDesignationResponse) | List returns the list of designation visible to the authroized user in descending |
+
+ 
+
+
+
+<a name="employee_cover_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## employee_cover_service.proto
+
+
+
+<a name="fm.CoverResponse"></a>
+
+### CoverResponse
+Single cover Payload
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | Employee id of employee who has requested a leave/holiday |
+| leave_from_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Leave from date |
+| leave_to_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Leave upto date |
+| covered_by_employee_id | [string](#string) |  | The employee who will be covering the absentee employee |
+| client_id | [string](#string) |  | Client at which the employee is taking a lave |
+| status | [string](#string) |  | Status of the holiday request |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The timestamp at which holiday record was created |
+| organization_id | [string](#string) |  | Organization id of the employee |
+| leave_id | [string](#string) |  | leave id |
+| leave_type | [string](#string) |  | leave type |
+
+
+
+
+
+
+<a name="fm.ListCoverRequest"></a>
+
+### ListCoverRequest
+Request for employee cover list
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter params for list |
+| organization_id | [string](#string) |  | fetch employees this organization_id belongs to |
+| employee_d | [string](#string) |  | fetch cover for employee id |
+
+
+
+
+
+
+<a name="fm.ListCoverResponse"></a>
+
+### ListCoverResponse
+Response for Cover list
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [CoverResponse](#fm.CoverResponse) | repeated | list of Covers |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.EmployeeCoverService"></a>
+
+### EmployeeCoverService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| ListEmployeeCover | [ListCoverRequest](#fm.ListCoverRequest) | [ListCoverResponse](#fm.ListCoverResponse) |  |
+
+ 
+
+
+
+<a name="employee_holiday_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## employee_holiday_service.proto
+
+
+
+<a name="fm.CreateHolidayRequest"></a>
+
+### CreateHolidayRequest
+Request for creating a holiday for an employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | Employee id of employee who has requested a leave/holiday |
+| leave_from_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Leave from date |
+| leave_to_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Leave upto date |
+| covered_by_employee_id | [string](#string) |  | The employee who will be covering the absentee employee |
+| client_id | [string](#string) |  | Client at which the employee is taking a lave |
+| organization_id | [string](#string) |  | Organization id of the employee |
+
+
+
+
+
+
+<a name="fm.CreateHolidayResponse"></a>
+
+### CreateHolidayResponse
+Response for holiday creation success
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| holiday_id | [string](#string) |  | holiday id |
+
+
+
+
+
+
+<a name="fm.HolidayResponse"></a>
+
+### HolidayResponse
+Single Holiday Payload
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | Employee id of employee who has requested a leave/holiday |
+| leave_from_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Leave from date |
+| leave_to_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Leave upto date |
+| covered_by_employee_id | [string](#string) |  | The employee who will be covering the absentee employee |
+| client_id | [string](#string) |  | Client at which the employee is taking a lave |
+| status | [string](#string) |  | Status of the holiday request |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The timestamp at which holiday record was created |
+| organization_id | [string](#string) |  | Organization id of the employee |
+| holiday_id | [string](#string) |  | Holiday Id |
+
+
+
+
+
+
+<a name="fm.ListHolidayRequest"></a>
+
+### ListHolidayRequest
+Request for holiday list
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter params for list |
+| organization_id | [string](#string) |  | fetch employees this organization_id belongs to |
+
+
+
+
+
+
+<a name="fm.ListHolidayResponse"></a>
+
+### ListHolidayResponse
+Response for holiday list
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| holidays | [HolidayResponse](#fm.HolidayResponse) | repeated | list of holidays |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.EmployeeHolidayService"></a>
+
+### EmployeeHolidayService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateHolidayRequest](#fm.CreateHolidayRequest) | [CreateHolidayResponse](#fm.CreateHolidayResponse) | Creates holiday for an employee. Authentication scope of `fm.employee.holiday.create` is required. |
+| List | [ListHolidayRequest](#fm.ListHolidayRequest) | [ListHolidayResponse](#fm.ListHolidayResponse) | List returns the list of employee holidays visible to the authroized user in descending order or created date. Authorization scope of `fm.employee.holiday.list` is required. |
+
+ 
+
+
+
+<a name="employee_leaver_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## employee_leaver_service.proto
+
+
+
+<a name="fm.EmployeeLeaverResponse"></a>
+
+### EmployeeLeaverResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| leave_id | [string](#string) |  | unique id of the leave |
+| client_id | [string](#string) |  | fetch leaver employees this client_id belongs to |
+| employee_id | [string](#string) |  | unique id of employee |
+| organization_id | [string](#string) |  | fetch leaver employees this organization_id belongs to |
+| leave_from_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Leave from date |
+| leave_to_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Leave upto date |
+| status | [string](#string) |  | Status of the leave request |
+| leave_type | [string](#string) |  | leave type |
+| leave_reason | [string](#string) |  | leave reason |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | The timestamp at which leave record was created |
+
+
+
+
+
+
+<a name="fm.ListEmployeeLeaverRequest"></a>
+
+### ListEmployeeLeaverRequest
+Request for listing leavers
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | fetch leaver employees this client_id belongs to |
+| employee_id | [string](#string) |  | unique id of employee |
+| organization_id | [string](#string) |  | fetch leaver employees this organization_id belongs to |
+
+
+
+
+
+
+<a name="fm.ListEmployeeLeaverResponse"></a>
+
+### ListEmployeeLeaverResponse
+Response for listing leavers
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [EmployeeLeaverResponse](#fm.EmployeeLeaverResponse) | repeated | list of leaver employees |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.EmployeeLeaverService"></a>
+
+### EmployeeLeaverService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| ListEmployeeLeaver | [ListEmployeeLeaverRequest](#fm.ListEmployeeLeaverRequest) | [ListEmployeeLeaverResponse](#fm.ListEmployeeLeaverResponse) | List employees that are leaving or left Authentication scope of `fm.employee.leaver.list` is required |
+
+ 
+
+
+
+<a name="employee_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## employee_service.proto
+
+
+
+<a name="fm.ConfidentialEmployeeDetails"></a>
+
+### ConfidentialEmployeeDetails
+General Confidential Employee Details
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| dob | [string](#string) |  | date of birth |
+| national_insurance_number | [string](#string) |  | National insurance number |
+| tax_code | [string](#string) |  | Tax code |
+
+
+
+
+
+
+<a name="fm.ConfidentialEmployeeInfo"></a>
+
+### ConfidentialEmployeeInfo
+Confidential Employee information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_details | [ConfidentialEmployeeDetails](#fm.ConfidentialEmployeeDetails) |  | Employee details |
+| bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank details |
+
+
+
+
+
+
+<a name="fm.CreateEmployeeRequest"></a>
+
+### CreateEmployeeRequest
+request to create new employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title of employee, EG: Mr, Mrs, Miss |
+| first_name | [string](#string) |  | First Name of the employee |
+| middle_name | [string](#string) |  | Middle name of the employee |
+| last_name | [string](#string) |  | Last name of the employee |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact details of the employee |
+| organization_id | [string](#string) |  | organization the employee belongs to |
+| employee_code | [int64](#int64) |  | unique employee code for organization |
+| employee_info | [EmployeeInformationForUpsert](#fm.EmployeeInformationForUpsert) |  | Employee information |
+| confidential_employee_info | [ConfidentialEmployeeInfo](#fm.ConfidentialEmployeeInfo) |  | Confidential Information about the employee |
+| training_info | [TrainingEmployeeInfo](#fm.TrainingEmployeeInfo) | repeated | trainig Information filled by the organization |
+| history_info | [EmploymentHistoryInfo](#fm.EmploymentHistoryInfo) | repeated | employment history Information filled by the organization |
+| reference_employee_info | [ReferenceEmployeeInfo](#fm.ReferenceEmployeeInfo) | repeated | Reference Information about the employee |
+| criminal_conv_emp_info | [CriminalConvictionEmployeeInfo](#fm.CriminalConvictionEmployeeInfo) | repeated | Criminal Conviction Information about the employee |
+| next_of_keen_employee_info | [NextOfKeenEmployeeInfo](#fm.NextOfKeenEmployeeInfo) |  | Next of kee Information about the employee |
+| education_employee_info | [EducationEmployeeInformation](#fm.EducationEmployeeInformation) | repeated | education Information about the employee |
+
+
+
+
+
+
+<a name="fm.CreateEmployeeResponse"></a>
+
+### CreateEmployeeResponse
+response returned when reating employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of the employee |
+
+
+
+
+
+
+<a name="fm.CriminalConvictionEmployeeInfo"></a>
+
+### CriminalConvictionEmployeeInfo
+CriminalConviction employee information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| is_subject_to_conditions | [bool](#bool) |  | yes or no |
+| details | [string](#string) |  | details |
+| signature | [string](#string) |  | signature file upload |
+| have_prior_medical_condition | [bool](#bool) |  | have_prior_medical_condition of criminal conviction or not |
+| condition_details | [string](#string) |  | prior_medical_condition details |
+| is_disable | [bool](#bool) |  | is_disable |
+| disable_details | [string](#string) |  | disablity details |
+| adaptation_for_interview | [string](#string) |  | adaptation_for_interview |
+
+
+
+
+
+
+<a name="fm.DbsDetails"></a>
+
+### DbsDetails
+Dbs details of employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| dbs_number | [string](#string) |  | DBS number |
+| dbs_start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | DBS start date |
+| dbs_review_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | DBS next review date |
+| dbs_expiry_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | DBS expiry date |
+
+
+
+
+
+
+<a name="fm.EducationEmployeeInformation"></a>
+
+### EducationEmployeeInformation
+education information of emp
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| place_of_edu | [string](#string) |  | place of education of the employee |
+| study_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | education started date |
+| qualification | [string](#string) |  | qualificatioin ofemp |
+| date_obtained | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | education graduated date |
+
+
+
+
+
+
+<a name="fm.EmployeeAddAttachmentRequest"></a>
+
+### EmployeeAddAttachmentRequest
+Request payload to add attachment to an employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique identifier of the employee |
+| attachment_path | [string](#string) |  | path of attachment |
+| attachment_type | [string](#string) |  | type of attachment |
+| uploaded_by | [string](#string) |  | uploaded by |
+
+
+
+
+
+
+<a name="fm.EmployeeAddAttachmentResponse"></a>
+
+### EmployeeAddAttachmentResponse
+Success response payload after adding attachment to an employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| attachment_id | [string](#string) |  | unique identifier of the newly created attachment record |
+
+
+
+
+
+
+<a name="fm.EmployeeDeleteAttachmentRequest"></a>
+
+### EmployeeDeleteAttachmentRequest
+Request payload for deleting attachment of an employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| attachment_id | [string](#string) |  | unique identifier for an attachment |
+| employee_id | [string](#string) |  | unique identifier for an employee |
+
+
+
+
+
+
+<a name="fm.EmployeeDeleteAttachmentResponse"></a>
+
+### EmployeeDeleteAttachmentResponse
+Success response after deleting an attachment of an employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| attachment_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.EmployeeDetailRequest"></a>
+
+### EmployeeDetailRequest
+Request for employee detail
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | employee Id of the employee |
+
+
+
+
+
+
+<a name="fm.EmployeeDetailResponse"></a>
+
+### EmployeeDetailResponse
+Response for employee detail
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique identifier of the employee |
+| first_name | [string](#string) |  | first name of the employee |
+| middle_name | [string](#string) |  | middle name of the employee |
+| last_name | [string](#string) |  | last name of the employee |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact detail of the employee |
+| organization_id | [string](#string) |  | organization id the employee belongs to |
+| created_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the employee was created at |
+| activated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Activated date |
+| employee_info | [EmployeeInformationForListing](#fm.EmployeeInformationForListing) |  | Employee information |
+| confidential_employee_info | [ConfidentialEmployeeInfo](#fm.ConfidentialEmployeeInfo) |  | Confidential Information about the employee |
+| training_info | [TrainingEmployeeInfo](#fm.TrainingEmployeeInfo) | repeated | trainig Information filled by the organization |
+| history_info | [EmploymentHistoryInfo](#fm.EmploymentHistoryInfo) | repeated | employment history Information filled by the organization |
+| reference_employee_info | [ReferenceEmployeeInfo](#fm.ReferenceEmployeeInfo) | repeated | Reference Information about the employee |
+| criminal_conv_emp_info | [CriminalConvictionEmployeeInfo](#fm.CriminalConvictionEmployeeInfo) | repeated | Criminal Conviction Information about the employee |
+| next_of_keen_employee_info | [NextOfKeenEmployeeInfo](#fm.NextOfKeenEmployeeInfo) |  | Next of kee Information about the employee |
+| education_employee_info | [EducationEmployeeInformation](#fm.EducationEmployeeInformation) | repeated | education Information about the employee |
+
+
+
+
+
+
+<a name="fm.EmployeeInformationForListing"></a>
+
+### EmployeeInformationForListing
+Employee information for list, detail endpoints
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| general | [GeneralEmployeeInformation](#fm.GeneralEmployeeInformation) |  | general information of the employee |
+| official | [OfficialEmployeeInformationForListing](#fm.OfficialEmployeeInformationForListing) |  | official information of the employee |
+| hm_revenue_details | [HmRevenueDetails](#fm.HmRevenueDetails) |  | HM revenue information |
+
+
+
+
+
+
+<a name="fm.EmployeeInformationForUpsert"></a>
+
+### EmployeeInformationForUpsert
+Employee information for upsert(create/update) endpoints
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| general | [GeneralEmployeeInformation](#fm.GeneralEmployeeInformation) |  | general information of the employee |
+| official | [OfficialEmployeeInformationForUpsert](#fm.OfficialEmployeeInformationForUpsert) |  | official information of the employee |
+| hm_revenue_details | [HmRevenueDetails](#fm.HmRevenueDetails) |  | HM revenue information |
+
+
+
+
+
+
+<a name="fm.EmployeeListAttachmentRequest"></a>
+
+### EmployeeListAttachmentRequest
+Request payload to list attachments for an employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique identifier of the employee |
+| attachment_type | [string](#string) |  | type of attachment to list |
+
+
+
+
+
+
+<a name="fm.EmployeeListAttachmentResponse"></a>
+
+### EmployeeListAttachmentResponse
+Response payload for attachment list request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique identifier of the employee |
+| attachments | [EmployeeListAttachmentResponse.EmployeeAttachmentPayload](#fm.EmployeeListAttachmentResponse.EmployeeAttachmentPayload) | repeated | list of attachments |
+
+
+
+
+
+
+<a name="fm.EmployeeListAttachmentResponse.EmployeeAttachmentPayload"></a>
+
+### EmployeeListAttachmentResponse.EmployeeAttachmentPayload
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| attachment_id | [string](#string) |  | unique identifier of the newly created attachment record |
+| attachment_path | [string](#string) |  | attachment path |
+| attachment_type | [string](#string) |  | attachment type |
+| uploaded_by | [string](#string) |  | uploaded by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | created at timestamp |
+
+
+
+
+
+
+<a name="fm.EmploymentHistoryInfo"></a>
+
+### EmploymentHistoryInfo
+history of employment of employee information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| recent_employer | [string](#string) |  | recent employer name |
+| position | [string](#string) |  | position at previous job |
+| contact_name | [string](#string) |  | contact name at recent employment post |
+| contact_person_number | [string](#string) |  | contact person phone number at recent employment post |
+| contact_person_email | [string](#string) |  | contact person email at recent employment post |
+| is_able_to_contact | [string](#string) |  | can the person be able to contact |
+
+
+
+
+
+
+<a name="fm.FaqData"></a>
+
+### FaqData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  | key |
+| value | [string](#string) |  | value |
+
+
+
+
+
+
+<a name="fm.GeneralEmployeeInformation"></a>
+
+### GeneralEmployeeInformation
+General employee information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region | [string](#string) |  | Region of the employee |
+| area | [string](#string) |  | Area of the employee |
+| profile_picture | [string](#string) |  | profile picture |
+
+
+
+
+
+
+<a name="fm.HmRevenueDetails"></a>
+
+### HmRevenueDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| full_name | [string](#string) |  | declaration full name |
+| declaration_date | [string](#string) |  | declaration date |
+| gender | [string](#string) |  | gender |
+| employment_statement | [string](#string) |  | employement statement |
+| student_loan_faq | [FaqData](#fm.FaqData) | repeated | student loan questions |
+| postgraduate_loan_faq | [FaqData](#fm.FaqData) | repeated | post graduate loan question |
+
+
+
+
+
+
+<a name="fm.HourlyRateInfo"></a>
+
+### HourlyRateInfo
+Hourly rate of Employee information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| weekdays_rate | [string](#string) |  | weekdays_rate details |
+| weekend_rate | [string](#string) |  | weekend_rate details |
+| overtime_rate | [string](#string) |  | overtime_rate details |
+
+
+
+
+
+
+<a name="fm.LicenseDetails"></a>
+
+### LicenseDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| is_valid_license | [bool](#bool) |  | is_valid_license yes/no |
+| license_number | [string](#string) |  | if valid , license no |
+
+
+
+
+
+
+<a name="fm.ListEmployeeRequest"></a>
+
+### ListEmployeeRequest
+request for fetching list of requests
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter params for list |
+| organization_id | [string](#string) |  | fetch employees this organization_id belongs to |
+| status | [string](#string) |  | fetch employees of this status |
+| search | [ListEmployeeRequest.SearchParam](#fm.ListEmployeeRequest.SearchParam) |  | paramters to search clients |
+
+
+
+
+
+
+<a name="fm.ListEmployeeRequest.SearchParam"></a>
+
+### ListEmployeeRequest.SearchParam
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | name of client |
+| employee_code | [int64](#int64) |  | unique client code |
+| area | [string](#string) |  | area of client |
+| region | [string](#string) |  | region of client |
+
+
+
+
+
+
+<a name="fm.ListEmployeeResponse"></a>
+
+### ListEmployeeResponse
+response for fetching list of employees
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListEmployeeResponse.EmployeeResponse](#fm.ListEmployeeResponse.EmployeeResponse) | repeated | list of employees |
+
+
+
+
+
+
+<a name="fm.ListEmployeeResponse.EmployeeResponse"></a>
+
+### ListEmployeeResponse.EmployeeResponse
+individual employee record
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of the employee |
+| title | [string](#string) |  | title of employee : eg: Mr, Mrs, Miss |
+| first_name | [string](#string) |  | first name of the employee |
+| middle_name | [string](#string) |  | middle_name of the employee |
+| last_name | [string](#string) |  | last name of the employee |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact details of the employee |
+| organization_id | [string](#string) |  | organization the employee belongs to |
+| created_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the employee was created |
+| employee_info | [EmployeeInformationForListing](#fm.EmployeeInformationForListing) |  | Employee information |
+| confidential_employee_info | [ConfidentialEmployeeInfo](#fm.ConfidentialEmployeeInfo) |  | Confidential employee information |
+| status | [string](#string) |  | Employee status |
+| training_info | [TrainingEmployeeInfo](#fm.TrainingEmployeeInfo) | repeated | trainig Information filled by the organization |
+| history_info | [EmploymentHistoryInfo](#fm.EmploymentHistoryInfo) | repeated | employment history Information filled by the organization |
+| reference_employee_info | [ReferenceEmployeeInfo](#fm.ReferenceEmployeeInfo) | repeated | Reference Information about the employee |
+| criminal_conv_emp_info | [CriminalConvictionEmployeeInfo](#fm.CriminalConvictionEmployeeInfo) | repeated | Criminal Conviction Information about the employee |
+| next_of_keen_employee_info | [NextOfKeenEmployeeInfo](#fm.NextOfKeenEmployeeInfo) |  | Next of kee Information about the employee |
+| education_employee_info | [EducationEmployeeInformation](#fm.EducationEmployeeInformation) | repeated | education Information about the employee |
+
+
+
+
+
+
+<a name="fm.NextOfKeenEmployeeInfo"></a>
+
+### NextOfKeenEmployeeInfo
+Next of Keen employee information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | name of next of keen |
+| relation | [string](#string) |  | relation |
+| address | [string](#string) |  | address |
+| postcode | [string](#string) |  | postcode |
+| contact_number | [string](#string) |  | contact_number |
+| mobile_number | [string](#string) |  | mobile_number |
+| email | [string](#string) |  | email details |
+| date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date |
+| signature | [string](#string) |  | signature file upload |
+
+
+
+
+
+
+<a name="fm.OfficialEmployeeInformationForListing"></a>
+
+### OfficialEmployeeInformationForListing
+Official employee information used by list, detail endpoint
+an extra employee_code field is added here from
+OfficialEmployeeInformationForUpsert
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_code | [int64](#int64) |  | Employee code within the organization |
+| work_permit_expiry_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Work permit expiry date of the employee |
+| dbs_details | [DbsDetails](#fm.DbsDetails) |  | dbs details of employee |
+| payment_type | [string](#string) |  | Payment type |
+| department_id | [string](#string) |  | Department ID |
+| cv_attachment | [string](#string) |  | CV path |
+| employee_type | [string](#string) |  | Employee type |
+| is_tupe | [bool](#bool) |  | Is tupe |
+| training_type | [string](#string) |  | type of training to be given to employee |
+| training_date_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Training date/time |
+| comment | [string](#string) |  | comments if any |
+| licence_details | [LicenseDetails](#fm.LicenseDetails) |  | license details |
+| hourly_rate | [HourlyRateInfo](#fm.HourlyRateInfo) |  |  |
+| interviewer | [string](#string) |  | interviewer is also from among the active employee list |
+| interviewing_date_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Interview date/time |
+
+
+
+
+
+
+<a name="fm.OfficialEmployeeInformationForUpsert"></a>
+
+### OfficialEmployeeInformationForUpsert
+Official employee information used by create, update endpoints
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| work_permit_expiry_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Work permit expiry date of the employee |
+| dbs_details | [DbsDetails](#fm.DbsDetails) |  |  |
+| is_tupe | [bool](#bool) |  | Is tupe |
+| payment_type | [string](#string) |  | Payment type |
+| department_id | [string](#string) |  | Department ID |
+| cv_attachment | [string](#string) |  | CV path |
+| employee_type | [string](#string) |  | type of contract the employee have with the org: dropdown value - permanent, temporary and zero hour |
+| interviewer | [string](#string) |  | interviewer is also from among the active employee list |
+| interviewing_date_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Interview date/time |
+| training_type | [string](#string) |  | type of training to be given to employee |
+| training_date_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Training date/time |
+| comment | [string](#string) |  | comments if any |
+| licence_details | [LicenseDetails](#fm.LicenseDetails) |  | license details |
+| hourly_rate | [HourlyRateInfo](#fm.HourlyRateInfo) |  |  |
+| employment_start_date | [string](#string) |  | employement start date |
+
+
+
+
+
+
+<a name="fm.ReferenceEmployeeInfo"></a>
+
+### ReferenceEmployeeInfo
+Reference employee information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | name of reference person |
+| relation | [string](#string) |  | relation to reference person |
+| address | [string](#string) |  | address of reference person |
+| postcode | [string](#string) |  | postcode of reference person |
+| contact_number | [string](#string) |  | contact number of reference person |
+| email | [string](#string) |  | email of reference person |
+
+
+
+
+
+
+<a name="fm.TrainingEmployeeInfo"></a>
+
+### TrainingEmployeeInfo
+Training employee information
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| skill | [string](#string) |  | skill title |
+| details | [string](#string) |  | details of the skills |
+
+
+
+
+
+
+<a name="fm.UpdateEmployeeRequest"></a>
+
+### UpdateEmployeeRequest
+request to update employee by employee id
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title of employee : Eg: Mr, Mrs, Miss |
+| employee_id | [string](#string) |  | employee Id of the employee to update |
+| first_name | [string](#string) |  | first name of the employee |
+| middle_name | [string](#string) |  | middle name of the employee |
+| last_name | [string](#string) |  | last name of the employee |
+| employee_code | [int64](#int64) |  | unique employee code for organization |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact details of the employee |
+| employee_info | [EmployeeInformationForUpsert](#fm.EmployeeInformationForUpsert) |  | Employee information |
+| confidential_employee_info | [ConfidentialEmployeeInfo](#fm.ConfidentialEmployeeInfo) |  | Confidential Information about the employee |
+| training_info | [TrainingEmployeeInfo](#fm.TrainingEmployeeInfo) | repeated | trainig Information filled by the organization |
+| history_info | [EmploymentHistoryInfo](#fm.EmploymentHistoryInfo) | repeated | employment history Information filled by the organization |
+| reference_employee_info | [ReferenceEmployeeInfo](#fm.ReferenceEmployeeInfo) | repeated | Reference Information about the employee |
+| criminal_conv_emp_info | [CriminalConvictionEmployeeInfo](#fm.CriminalConvictionEmployeeInfo) | repeated | Criminal Conviction Information about the employee |
+| next_of_keen_employee_info | [NextOfKeenEmployeeInfo](#fm.NextOfKeenEmployeeInfo) |  | Next of kee Information about the employee |
+| education_employee_info | [EducationEmployeeInformation](#fm.EducationEmployeeInformation) | repeated | education Information about the employee |
+
+
+
+
+
+
+<a name="fm.UpdateEmployeeResponse"></a>
+
+### UpdateEmployeeResponse
+response for UpdateEmployeeRequest
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | employee Id of the updated employee |
+
+
+
+
+
+
+<a name="fm.UpdateEmployeeStatusRequest"></a>
+
+### UpdateEmployeeStatusRequest
+Request to update employee status
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique identifier of the employee to update status of |
+| status | [string](#string) |  | new status |
+
+
+
+
+
+
+<a name="fm.UpdateEmployeeStatusResponse"></a>
+
+### UpdateEmployeeStatusResponse
+Response when updating an employee status
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique identifier of employee |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.EmployeeService"></a>
+
+### EmployeeService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateEmployeeRequest](#fm.CreateEmployeeRequest) | [CreateEmployeeResponse](#fm.CreateEmployeeResponse) | Create a new employee. Authorization scope of `fm.employee.create` is required. |
+| List | [ListEmployeeRequest](#fm.ListEmployeeRequest) | [ListEmployeeResponse](#fm.ListEmployeeResponse) | List returns the list of employee visible to the authroized user in descending order. Authorization scope of `fm.employee.list` is required. |
+| Update | [UpdateEmployeeRequest](#fm.UpdateEmployeeRequest) | [UpdateEmployeeResponse](#fm.UpdateEmployeeResponse) | Update an existing employee. Authorization scope of `fm.employee.update` is required. |
+| Detail | [EmployeeDetailRequest](#fm.EmployeeDetailRequest) | [EmployeeDetailResponse](#fm.EmployeeDetailResponse) | Details of employee. Scope of `fm.employee.detail` is required. |
+| UpdateStatus | [UpdateEmployeeStatusRequest](#fm.UpdateEmployeeStatusRequest) | [UpdateEmployeeStatusResponse](#fm.UpdateEmployeeStatusResponse) | Update an employee status Authorization scope of `fm.employee.update-status` is required. |
+| AddAttachment | [EmployeeAddAttachmentRequest](#fm.EmployeeAddAttachmentRequest) | [EmployeeAddAttachmentResponse](#fm.EmployeeAddAttachmentResponse) | Adds attachment for an employee. Scope of `fm.employee.add-attachment` is required. |
+| ListAttachment | [EmployeeListAttachmentRequest](#fm.EmployeeListAttachmentRequest) | [EmployeeListAttachmentResponse](#fm.EmployeeListAttachmentResponse) | Lists attachment for an employee. Scope of `fm.employee.list-attachment` is required. |
+| DeleteAttachment | [EmployeeDeleteAttachmentRequest](#fm.EmployeeDeleteAttachmentRequest) | [EmployeeDeleteAttachmentResponse](#fm.EmployeeDeleteAttachmentResponse) | Soft deletes an attachment for an employee. Scope of `fm.employee.delete-attachment` is required. |
+
+ 
+
+
+
+<a name="employee_sick_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## employee_sick_service.proto
+
+
+
+<a name="fm.CreateEmployeeSickRequest"></a>
+
+### CreateEmployeeSickRequest
+Request for creating sick of employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique Id of client for which employee is working for |
+| employee_id | [string](#string) |  | unique Id of employee |
+| sick_period | [SickPeriod](#fm.SickPeriod) |  | period of requested sick |
+| covered_by_employee_id | [string](#string) |  | covered by employee id |
+| payment | [string](#string) |  | is sick leave paid or unpaid |
+| comment | [string](#string) |  | comment reason for leave |
+| organization_id | [string](#string) |  | unique Id of organization for which employee is working for |
+| sick_entitlement | [string](#string) |  | total number of sick days in a year |
+| remaining_sick_entitlement | [string](#string) |  | remaining sick entitlement |
+
+
+
+
+
+
+<a name="fm.CreateEmployeeSickResponse"></a>
+
+### CreateEmployeeSickResponse
+Response fro sick creation success
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_sick_id | [string](#string) |  | unique id of employee sick |
+
+
+
+
+
+
+<a name="fm.EmployeeSickResponse"></a>
+
+### EmployeeSickResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_sick_id | [string](#string) |  | unique id of employee sick |
+| client_id | [string](#string) |  | unique Id of client for which employee is working for |
+| employee_id | [string](#string) |  | unique Id of employee |
+| sick_period | [SickPeriod](#fm.SickPeriod) |  | period of requested sick |
+| covered_by_employee_id | [string](#string) |  | covered by employee id |
+| payment | [string](#string) |  | is sick leave paid or unpaid |
+| comment | [string](#string) |  | comment reason for leave |
+| status | [string](#string) |  | status of request |
+| sick_entitlement | [string](#string) |  | total number of sick days in a year |
+| remaining_sick_entitlement | [string](#string) |  | remaining sick entitlement |
+| prev_sick_period | [SickPeriod](#fm.SickPeriod) | repeated | previous sick requested period |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | created at |
+| organization_id | [string](#string) |  | unique Id of organization for which employee is working for |
+
+
+
+
+
+
+<a name="fm.ListEmployeeSickRequest"></a>
+
+### ListEmployeeSickRequest
+Request for holiday list
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter params for list |
+| client_id | [string](#string) |  | fetch employees this client_id belongs to |
+| organization_id | [string](#string) |  | fetch employees this organization_id belongs to |
+
+
+
+
+
+
+<a name="fm.ListEmployeeSickResponse"></a>
+
+### ListEmployeeSickResponse
+Response for creating sick of employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [EmployeeSickResponse](#fm.EmployeeSickResponse) | repeated | list of employee sick |
+
+
+
+
+
+
+<a name="fm.SickPeriod"></a>
+
+### SickPeriod
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| from_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | sick requested from date |
+| to_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | sick requested till date |
+
+
+
+
+
+
+<a name="fm.UpdateEmployeeSickRequest"></a>
+
+### UpdateEmployeeSickRequest
+Request for updating sick of employee
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_sick_id | [string](#string) |  | unique id of employee sick |
+| status | [string](#string) |  | status of request |
+| sick_period | [SickPeriod](#fm.SickPeriod) |  | period of requested sick |
+| covered_by_employee_id | [string](#string) |  | covered by employee id |
+| payment | [string](#string) |  | is sick leave paid or unpaid |
+| comment | [string](#string) |  | comment reason for leave |
+| organization_id | [string](#string) |  | unique Id of organization for which employee is working for |
+| sick_entitlement | [string](#string) |  | total number of sick days in a year |
+| remaining_sick_entitlement | [string](#string) |  | remaining sick entitlement |
+
+
+
+
+
+
+<a name="fm.UpdateEmployeeSickResponse"></a>
+
+### UpdateEmployeeSickResponse
+Response fro sick update success
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_sick_id | [string](#string) |  | unique id of employee sick |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.EmployeeSickService"></a>
+
+### EmployeeSickService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| CreateEmployeeSick | [CreateEmployeeSickRequest](#fm.CreateEmployeeSickRequest) | [CreateEmployeeSickResponse](#fm.CreateEmployeeSickResponse) | Create employee sick Authentication scope of `fm.employee.sick.create` is required |
+| ListEmployeeSick | [ListEmployeeSickRequest](#fm.ListEmployeeSickRequest) | [ListEmployeeSickResponse](#fm.ListEmployeeSickResponse) | list employee sick Authentication scope of `fm.employee.sick.list` is required |
+| UpdateEmployeeSick | [UpdateEmployeeSickRequest](#fm.UpdateEmployeeSickRequest) | [UpdateEmployeeSickResponse](#fm.UpdateEmployeeSickResponse) | update employee sick Authentication scope of `fm.employee.sick.update` is required |
+
+ 
+
+
+
+<a name="inventory_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## inventory_service.proto
+
+
+
+<a name="fm.CreateInventoryCategoryRequest"></a>
+
+### CreateInventoryCategoryRequest
+Request to create a new inventory item category
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | Organization id for the category |
+| category_name | [string](#string) |  | Category name |
+| category_detail | [string](#string) |  | Category detail |
+| parent_category_id | [string](#string) |  | Parent category id |
+| status | [string](#string) |  | Status |
+
+
+
+
+
+
+<a name="fm.CreateInventoryCategoryResponse"></a>
+
+### CreateInventoryCategoryResponse
+Response for successful creation of a inventory category
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| inventory_category_id | [string](#string) |  | Inventory category id |
+
+
+
+
+
+
+<a name="fm.CreateInventoryItemRequest"></a>
+
+### CreateInventoryItemRequest
+Request to create inventory item
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | Organization id for the item |
+| item_name | [string](#string) |  | Item name |
+| category_id | [string](#string) |  | Item Category |
+| supplier_id | [string](#string) |  | Supplier id |
+| unit_price | [float](#float) |  | Unit price |
+| item_code | [string](#string) |  | Item code |
+| comment | [string](#string) |  | Comment on the item |
+
+
+
+
+
+
+<a name="fm.CreateInventoryItemResponse"></a>
+
+### CreateInventoryItemResponse
+Response after successfull creation of inventory item
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| inventory_item_id | [string](#string) |  | Inventory item id |
+
+
+
+
+
+
+<a name="fm.ListInventoryCategoryRequest"></a>
+
+### ListInventoryCategoryRequest
+Request to list inventory category list
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | Organization id |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter for list check request |
+| inventory_category_ids | [string](#string) |  | list of inventory category ids to fetch by |
+
+
+
+
+
+
+<a name="fm.ListInventoryCategoryResponse"></a>
+
+### ListInventoryCategoryResponse
+Response for listing inventory categories
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListInventoryCategoryResponse.InventoryCategory](#fm.ListInventoryCategoryResponse.InventoryCategory) | repeated | Output list for inventory categories |
+| metadata | [ListResponseMetadata](#fm.ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm.ListInventoryCategoryResponse.InventoryCategory"></a>
+
+### ListInventoryCategoryResponse.InventoryCategory
+Single Inventory category
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | Organization id |
+| category_name | [string](#string) |  | Inventory category name |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Created At |
+| category_detail | [string](#string) |  | Category detail |
+| parent_category_id | [string](#string) |  | Parent category |
+| status | [string](#string) |  | Status |
+
+
+
+
+
+
+<a name="fm.ListInventoryItemRequest"></a>
+
+### ListInventoryItemRequest
+Request to list inventory items
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter for list check request |
+| organization_id | [string](#string) |  | filter for selected organization check request |
+| inventory_item_ids | [string](#string) |  | list of item ids to fetch by |
+
+
+
+
+
+
+<a name="fm.ListInventoryItemResponse"></a>
+
+### ListInventoryItemResponse
+Response of item list
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListInventoryItemResponse.InventoryItem](#fm.ListInventoryItemResponse.InventoryItem) | repeated | Output list |
+| metadata | [ListResponseMetadata](#fm.ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm.ListInventoryItemResponse.InventoryItem"></a>
+
+### ListInventoryItemResponse.InventoryItem
+Single inventory item
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | Organization id for the item |
+| item_name | [string](#string) |  | Item name |
+| category_id | [string](#string) |  | Item Category |
+| category_name | [string](#string) |  | Category name |
+| supplier_id | [string](#string) |  | Supplier id |
+| unit_price | [float](#float) |  | Unit price |
+| item_code | [string](#string) |  | Item code |
+| comment | [string](#string) |  | Comment on the item |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Created at |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.InventoryService"></a>
+
+### InventoryService
+service to manage inventory available in an organization
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| CreateInventoryItem | [CreateInventoryItemRequest](#fm.CreateInventoryItemRequest) | [CreateInventoryItemResponse](#fm.CreateInventoryItemResponse) | Create a new inventory item. Authorization scope of `fm.inventory.create` is required. |
+| ListInventoryItem | [ListInventoryItemRequest](#fm.ListInventoryItemRequest) | [ListInventoryItemResponse](#fm.ListInventoryItemResponse) | Returns the list of inventory items in ascending order of name. Authorization scope of `fm.inventory.list` is required. |
+| CreateInventoryCategory | [CreateInventoryCategoryRequest](#fm.CreateInventoryCategoryRequest) | [CreateInventoryCategoryResponse](#fm.CreateInventoryCategoryResponse) | Create a new inventory category. Authorization scope of `fm.inventory.category.create` is required. |
+| ListInventoryCategory | [ListInventoryCategoryRequest](#fm.ListInventoryCategoryRequest) | [ListInventoryCategoryResponse](#fm.ListInventoryCategoryResponse) | Returns the list of inventory item categories in ascending order of name. Authorization scope of `fm.inventory.category.list` is required. |
+
+ 
+
+
+
+<a name="issue_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## issue_service.proto
+
+
+
+<a name="fm.CreateIssueRequest"></a>
+
+### CreateIssueRequest
+Create issue request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| raised_by | [string](#string) |  | id of the user raising the issue |
+| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
+| details | [string](#string) |  | details of the isssue |
+| deadline | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | deadline of solving the issue |
+| organization_id | [string](#string) |  | unique id of the organization |
+| department_id | [string](#string) |  | unique id of the department |
+
+
+
+
+
+
+<a name="fm.CreateIssueResponse"></a>
+
+### CreateIssueResponse
+Create issue response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| issue_id | [string](#string) |  | unique id of the issue |
+
+
+
+
+
+
+<a name="fm.IssueResponse"></a>
+
+### IssueResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| raised_by | [string](#string) |  | id of the user raising the issue |
+| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
+| details | [string](#string) |  | details of the isssue |
+| deadline | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | deadline of solving the issue |
+| organization_id | [string](#string) |  | unique id of the organization |
+| department_id | [string](#string) |  | unique id of the department |
+| status | [string](#string) |  | status of the issue |
+| resolved_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | resolved date |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of issue creation |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of issue updated |
+| issue_id | [string](#string) |  | unique id of the issue |
+
+
+
+
+
+
+<a name="fm.ListIssuesRequest"></a>
+
+### ListIssuesRequest
+List issues request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| raised_by | [string](#string) |  | id of the user raising the issue |
+| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
+| status | [string](#string) |  | status of the issue |
+| organization_id | [string](#string) |  | unique id of the organization |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter params for list |
+
+
+
+
+
+
+<a name="fm.ListIssuesResponse"></a>
+
+### ListIssuesResponse
+List issues response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [IssueResponse](#fm.IssueResponse) | repeated | list of issues |
+| metadata | [ListResponseMetadata](#fm.ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm.UpdateIssueRequest"></a>
+
+### UpdateIssueRequest
+Update issue request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| raised_by | [string](#string) |  | id of the user raising the issue |
+| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
+| details | [string](#string) |  | details of the isssue |
+| deadline | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | deadline of solving the issue |
+| organization_id | [string](#string) |  | unique id of the organization |
+| department_id | [string](#string) |  | unique id of the department |
+| status | [string](#string) |  | status of the issue |
+| resolved_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | resolved date |
+| issue_id | [string](#string) |  | unique id of the issue |
+
+
+
+
+
+
+<a name="fm.UpdateIssueResponse"></a>
+
+### UpdateIssueResponse
+Update issue response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| issue_id | [string](#string) |  | unique id of the issue |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.IssueService"></a>
+
+### IssueService
+service to manage issues
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| CreateIssue | [CreateIssueRequest](#fm.CreateIssueRequest) | [CreateIssueResponse](#fm.CreateIssueResponse) | Create a new issue. Authorization scope of `fm.issue.create` is required. |
+| ListIssues | [ListIssuesRequest](#fm.ListIssuesRequest) | [ListIssuesResponse](#fm.ListIssuesResponse) | List returns the list of all issues visible to the authroized user in descending date order. Authorization scope of `fm.issue.list` is required. |
+| UpdateIssue | [UpdateIssueRequest](#fm.UpdateIssueRequest) | [UpdateIssueResponse](#fm.UpdateIssueResponse) | Update an existing issue. Authorization scope of `fm.issue.update` is required. |
+
+ 
+
+
+
+<a name="job_type_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## job_type_service.proto
+
+
+
+<a name="fm.CreateJobTypeRequest"></a>
+
+### CreateJobTypeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.CreateJobTypeResponse"></a>
+
+### CreateJobTypeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| job_type_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListJobTypeRequest"></a>
+
+### ListJobTypeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListJobTypeResponse"></a>
+
+### ListJobTypeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListJobTypeResponse.JobTypeResponse](#fm.ListJobTypeResponse.JobTypeResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListJobTypeResponse.JobTypeResponse"></a>
+
+### ListJobTypeResponse.JobTypeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| job_type_id | [string](#string) |  |  |
+| title | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.JobTypeService"></a>
+
+### JobTypeService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateJobTypeRequest](#fm.CreateJobTypeRequest) | [CreateJobTypeResponse](#fm.CreateJobTypeResponse) | Create a new job type. Authorization scope of `fm.job-type.create` is required |
+| List | [ListJobTypeRequest](#fm.ListJobTypeRequest) | [ListJobTypeResponse](#fm.ListJobTypeResponse) | List returns the list of job type visible to the authorized user in ascending order of job type title |
+
+ 
+
+
+
+<a name="login_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## login_service.proto
+
+
+
+<a name="fm.AssociateWithEmployeeRequest"></a>
+
+### AssociateWithEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | id the employee to associate |
+| user_id | [string](#string) |  | user_id to associate |
+| roles | [string](#string) | repeated | roles for this association |
+| scopes | [string](#string) | repeated | scopes for this association |
+| organization_id | [string](#string) |  | id of organization |
+
+
+
+
+
+
+<a name="fm.CreateUserRequest"></a>
+
+### CreateUserRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| username | [string](#string) |  | username of the user |
+| password | [string](#string) |  | this password is never stored in the server. the hash is calculated and stored in the pwd store |
+| name | [string](#string) |  | Name of the user |
+
+
+
+
+
+
+<a name="fm.CreateUserResponse"></a>
+
+### CreateUserResponse
+response for create user requests
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | id of the created user |
+
+
+
+
+
+
+<a name="fm.GetAvailableRoleRequest"></a>
+
+### GetAvailableRoleRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of organization |
+
+
+
+
+
+
+<a name="fm.GetAvailableScopeRequest"></a>
+
+### GetAvailableScopeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of organization |
+
+
+
+
+
+
+<a name="fm.GetUserListRequest"></a>
+
+### GetUserListRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of organization |
+| employee_ids | [string](#string) | repeated | employeee ids |
+
+
+
+
+
+
+<a name="fm.GetUserListResponse"></a>
+
+### GetUserListResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| users | [UserData](#fm.UserData) | repeated | list of users with their roles and scopes |
+
+
+
+
+
+
+<a name="fm.LoginRequest"></a>
+
+### LoginRequest
+Request for login
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| username | [string](#string) |  | username of user |
+| password | [string](#string) |  | password of user |
+
+
+
+
+
+
+<a name="fm.LoginResponse"></a>
+
+### LoginResponse
+Response for login
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| access_token | [string](#string) |  | access token |
+| refresh_token | [string](#string) |  | refresh token |
+
+
+
+
+
+
+<a name="fm.LogoutRequest"></a>
+
+### LogoutRequest
+Request for logout
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| refresh_token | [string](#string) |  | authentication token for logout requests |
+
+
+
+
+
+
+<a name="fm.LogoutResponse"></a>
+
+### LogoutResponse
+Response for logout
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| message | [string](#string) |  | action result |
+
+
+
+
+
+
+<a name="fm.RefreshRequest"></a>
+
+### RefreshRequest
+Request for refresh
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| refresh_token | [string](#string) |  | authetication token for refresh requests |
+
+
+
+
+
+
+<a name="fm.RoleResponse"></a>
+
+### RoleResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| roles | [UserRole](#fm.UserRole) | repeated | available roles |
+
+
+
+
+
+
+<a name="fm.ScopeResponse"></a>
+
+### ScopeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| scope_groups | [UserScopeGroup](#fm.UserScopeGroup) | repeated | available scopes |
+
+
+
+
+
+
+<a name="fm.UpdateEmployeeScopeRequest"></a>
+
+### UpdateEmployeeScopeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | id the employee |
+| user_id | [string](#string) |  | user_id |
+| roles | [string](#string) | repeated | roles for this association |
+| scopes | [string](#string) | repeated | scopes for this association |
+| organization_id | [string](#string) |  | id of organization |
+
+
+
+
+
+
+<a name="fm.UpsertRoleRequest"></a>
+
+### UpsertRoleRequest
+Request for updating roles
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| role | [string](#string) |  | role to update - this must be unique |
+| scopes | [string](#string) | repeated | scopes included in the role |
+| organization_id | [string](#string) |  | id of organization |
+
+
+
+
+
+
+<a name="fm.UpsertScopeRequest"></a>
+
+### UpsertScopeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of organization |
+| title | [string](#string) |  | title of scope group |
+| scopes | [UserScope](#fm.UserScope) | repeated | scopes in the group |
+
+
+
+
+
+
+<a name="fm.UserData"></a>
+
+### UserData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | id of user |
+| employee_id | [string](#string) |  | id of employee |
+| roles | [string](#string) | repeated | roles of user |
+| scopes | [string](#string) | repeated | scopes of user |
+
+
+
+
+
+
+<a name="fm.UserRole"></a>
+
+### UserRole
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| role | [string](#string) |  | name of role |
+| scopes | [string](#string) | repeated | scopes for the given role |
+
+
+
+
+
+
+<a name="fm.UserScope"></a>
+
+### UserScope
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| alias | [string](#string) |  | alias of scope (readable for user) |
+| scope | [string](#string) |  | name of scope (defined by dev) |
+| description | [string](#string) |  | description of scope |
+
+
+
+
+
+
+<a name="fm.UserScopeGroup"></a>
+
+### UserScopeGroup
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | title of group |
+| scopes | [UserScope](#fm.UserScope) | repeated | scopes in the group |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.JWTTokenService"></a>
+
+### JWTTokenService
+Genereates jwt tokens
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Login | [LoginRequest](#fm.LoginRequest) | [LoginResponse](#fm.LoginResponse) | authenticates user and returns tokens |
+| Refresh | [RefreshRequest](#fm.RefreshRequest) | [LoginResponse](#fm.LoginResponse) | refresh an existing token and return new tokens |
+| Logout | [LogoutRequest](#fm.LogoutRequest) | [LogoutResponse](#fm.LogoutResponse) | logout the user and invalidate refresh token |
+
+
+<a name="fm.UserService"></a>
+
+### UserService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateUserRequest](#fm.CreateUserRequest) | [CreateUserResponse](#fm.CreateUserResponse) | Create a new user. Authorization scope of `fm.user.create` is required. |
+| UpsertScope | [UpsertScopeRequest](#fm.UpsertScopeRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Insert or update a scope group. Authorization scope of `` is required. |
+| AssociateWithEmployee | [AssociateWithEmployeeRequest](#fm.AssociateWithEmployeeRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | associates login with an employee record. Authorization scope of `fm.user.associate` is required. |
+| UpdateEmployeeScope | [UpdateEmployeeScopeRequest](#fm.UpdateEmployeeScopeRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | update scopes of user Authorization scope of `` is required. |
+| GetAvailableRoles | [GetAvailableRoleRequest](#fm.GetAvailableRoleRequest) | [RoleResponse](#fm.RoleResponse) | get roles Authorization scope of `` is required. |
+| GetAvailableScopes | [GetAvailableScopeRequest](#fm.GetAvailableScopeRequest) | [ScopeResponse](#fm.ScopeResponse) | get all scopes Authorization scope of `` is required |
+| UpsertRole | [UpsertRoleRequest](#fm.UpsertRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | insert or update role scopes. Authorization scope of `fm.role.create` and &#34;fm.role.update&#34; is required. |
+| GetUserListByEmployeeIds | [GetUserListRequest](#fm.GetUserListRequest) | [GetUserListResponse](#fm.GetUserListResponse) | get user list according to employee id for changing roles/scopes Authorization scope of `` is required |
+
+ 
+
+
+
+<a name="meeting_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## meeting_service.proto
+
+
+
+<a name="fm.Agenda"></a>
+
+### Agenda
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title of agenda |
+| description | [string](#string) |  | description of agenda |
+| proposed_by | [string](#string) |  | id of the employee that proposed the agenda |
+| estimated_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | estimated time to discuss the agenda |
+
+
+
+
+
+
+<a name="fm.AgendaUpdateDetail"></a>
+
+### AgendaUpdateDetail
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agenda_id | [string](#string) |  | id of agenda for update |
+| agenda | [string](#string) |  | title of agenda |
+| description | [string](#string) |  | description of agenda |
+
+
+
+
+
+
+<a name="fm.CreateMeetingRequest"></a>
+
+### CreateMeetingRequest
+Meeting creation request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization this meeting belongs to |
+| meeting_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of the meeting |
+| estimated_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | estimated time of the meeting |
+| department_id | [string](#string) |  | id of department of generated meeting |
+| raised_by | [string](#string) |  | id of employee owho raised the meeting |
+| attendee_ids | [string](#string) | repeated | ids of employees who attend the meetings |
+| agendas | [Agenda](#fm.Agenda) | repeated | information of agenda of the meetong |
+| client_id | [string](#string) |  | required if meeting is for client else it is optional |
+| title | [string](#string) |  | title of the meeting |
+
+
+
+
+
+
+<a name="fm.CreateMeetingResponse"></a>
+
+### CreateMeetingResponse
+Response for create meeting requests
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListMeetingRequest"></a>
+
+### ListMeetingRequest
+Request for list meeting
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+| organization_id | [string](#string) |  | fetch meetings for this organization_id |
+| meeting_ids | [string](#string) |  | list of meeting ids to fetch by |
+| status | [string](#string) |  | filter option of status (inprogress, cancel, completed) |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | start date to filter meeting by |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | end date to filter meeting by |
+
+
+
+
+
+
+<a name="fm.ListMeetingResponse"></a>
+
+### ListMeetingResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListMeetingResponse.MeetingResponse](#fm.ListMeetingResponse.MeetingResponse) | repeated | list of meetings |
+| metadata | [ListResponseMetadata](#fm.ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm.ListMeetingResponse.MeetingResponse"></a>
+
+### ListMeetingResponse.MeetingResponse
+individual meeting response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | unique identifier of the meeting |
+| meeting_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of the meeting |
+| estimated_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | duration time of the meeting |
+| title | [string](#string) |  | title of the meeting |
+| raised_by | [string](#string) |  | employee_id of employee who raised the meeting |
+| attendee_ids | [string](#string) | repeated | attendees of meeting |
+| department_id | [string](#string) |  | department id of the meeting |
+| organization_id | [string](#string) |  | organization id of the meeting |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | timestamp at which the meeting was created |
+
+
+
+
+
+
+<a name="fm.UpdateMeetingRequest"></a>
+
+### UpdateMeetingRequest
+request to update meeting by meeting_id
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | meeting Id of the meeting to update |
+| meeting_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of the meeting |
+| estimated_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | estimated time of the meeting |
+| department_id | [string](#string) |  | id of department of generated meeting |
+| raised_by | [string](#string) |  | id of employee who raised the meeting |
+| attendee_ids | [string](#string) | repeated | names of employees who attend the meetings |
+| agenda_detail | [AgendaUpdateDetail](#fm.AgendaUpdateDetail) | repeated | information of agenda of the meetong |
+
+
+
+
+
+
+<a name="fm.UpdateMeetingResponse"></a>
+
+### UpdateMeetingResponse
+response for UpdateMeetingRequest
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | meeting Id of the updated meeting |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.MeetingService"></a>
+
+### MeetingService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateMeetingRequest](#fm.CreateMeetingRequest) | [CreateMeetingResponse](#fm.CreateMeetingResponse) | Create a new meeting. Authorization scope of `fm.meeting.create` is required. |
+| List | [ListMeetingRequest](#fm.ListMeetingRequest) | [ListMeetingResponse](#fm.ListMeetingResponse) | List returns the list of meeting visible to the authorized user in descending order. Scope of `fm.meeting.list` is required. |
+| Update | [UpdateMeetingRequest](#fm.UpdateMeetingRequest) | [UpdateMeetingResponse](#fm.UpdateMeetingResponse) | Update an existing meeting. Authorization scope of `fm.meeting.update` is required. |
+
+ 
+
+
+
+<a name="note_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## note_service.proto
+
+
+
+<a name="fm.CreateNoteRequest"></a>
+
+### CreateNoteRequest
+Create note request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization this note belongs to |
+| created_by | [string](#string) |  | id of the note creater |
+| for | [string](#string) | repeated | notes for |
+| notes | [string](#string) |  | notes detail |
+| note_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | note date |
+
+
+
+
+
+
+<a name="fm.CreateNoteResponse"></a>
+
+### CreateNoteResponse
+Create note response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| note_id | [string](#string) |  | unique id of the created note |
+
+
+
+
+
+
+<a name="fm.ListNotesRequest"></a>
+
+### ListNotesRequest
+List notes request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| created_by | [string](#string) |  | id of the note creator |
+| for | [string](#string) |  | id for whom notes are created |
+| organization_id | [string](#string) |  | unique id of the organization |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter params for list |
+
+
+
+
+
+
+<a name="fm.ListNotesResponse"></a>
+
+### ListNotesResponse
+List Notes response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [NoteResponse](#fm.NoteResponse) | repeated | list of Notes |
+| metadata | [ListResponseMetadata](#fm.ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm.NoteResponse"></a>
+
+### NoteResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization this note belongs to |
+| created_by | [string](#string) |  | id of the note creater |
+| for | [string](#string) | repeated | notes for |
+| notes | [string](#string) |  | notes detail |
+| note_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | note date |
+| note_id | [string](#string) |  | unique id of note to be updated |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of note creation |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of note updated |
+
+
+
+
+
+
+<a name="fm.UpdateNoteRequest"></a>
+
+### UpdateNoteRequest
+Update note request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization this note belongs to |
+| created_by | [string](#string) |  | id of the note creater |
+| for | [string](#string) | repeated | notes for |
+| notes | [string](#string) |  | notes detail |
+| note_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | note date |
+| note_id | [string](#string) |  | unique id of note to be updated |
+
+
+
+
+
+
+<a name="fm.UpdateNoteResponse"></a>
+
+### UpdateNoteResponse
+Update note response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| note_id | [string](#string) |  | unique id of the updated note |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.NoteService"></a>
+
+### NoteService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateNoteRequest](#fm.CreateNoteRequest) | [CreateNoteResponse](#fm.CreateNoteResponse) | Create a new note. Authorization scope of `fm.note.create` is required. |
+| List | [ListNotesRequest](#fm.ListNotesRequest) | [ListNotesResponse](#fm.ListNotesResponse) | Returns list of notes. Authorization scope of `fm.note.list` is required. |
+| Update | [UpdateNoteRequest](#fm.UpdateNoteRequest) | [UpdateNoteResponse](#fm.UpdateNoteResponse) | Update an existing note. Authorization scope of `fm.note.update` is required. |
+
+ 
+
+
+
+<a name="organization_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## organization_service.proto
+
+
+
+<a name="fm.CreateOrganizationRequest"></a>
+
+### CreateOrganizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| name | [string](#string) |  | name of the organization |
+| contact_details | [ContactDetail](#fm.ContactDetail) |  | contact details of the organization |
+
+
+
+
+
+
+<a name="fm.CreateOrganizationResponse"></a>
+
+### CreateOrganizationResponse
+response when creating new organization
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of the organization |
+
+
+
+
+
+
+<a name="fm.ListOrganizationRequest"></a>
+
+### ListOrganizationRequest
+request for fetching list of organizations
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | params for filtering list request |
+
+
+
+
+
+
+<a name="fm.ListOrganizationResponse"></a>
+
+### ListOrganizationResponse
+response for fetching list of organization
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListOrganizationResponse.OrganizationResponse](#fm.ListOrganizationResponse.OrganizationResponse) | repeated | list of organizations |
+
+
+
+
+
+
+<a name="fm.ListOrganizationResponse.OrganizationResponse"></a>
+
+### ListOrganizationResponse.OrganizationResponse
+inividual organization response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| name | [string](#string) |  | name of organization |
+| contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact details of the organization |
+| created_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the organization is created at |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.OrganizationService"></a>
+
+### OrganizationService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateOrganizationRequest](#fm.CreateOrganizationRequest) | [CreateOrganizationResponse](#fm.CreateOrganizationResponse) | Create a new organization. |
+| List | [ListOrganizationRequest](#fm.ListOrganizationRequest) | [ListOrganizationResponse](#fm.ListOrganizationResponse) | List returns the list of organization visible to the authroized user in descending order. |
+
+ 
+
+
+
+<a name="service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## service.proto
+
+
+
+<a name="fm.BankAccountDetails"></a>
+
+### BankAccountDetails
+Bank accounts details collection
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bank_name | [string](#string) |  | Name of the bank |
+| branch_name | [string](#string) |  | Branch name |
+| account_number | [string](#string) |  | Account number |
+| s_code | [string](#string) |  | some code |
+| account_holder_name | [string](#string) |  | account holder name |
+
+
+
+
+
+
+<a name="fm.ContactDetail"></a>
+
+### ContactDetail
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| email | [string](#string) |  | email address |
+| phone | [string](#string) |  | phone number |
+| address | [ContactDetail.Address](#fm.ContactDetail.Address) |  | address |
+| mobile | [string](#string) |  | Mobile phone number |
+| website | [string](#string) |  | website of the contact |
+| contact_no | [string](#string) |  | contact number NOTE: creating and not deleting older fields for backward compatibility |
+
+
+
+
+
+
+<a name="fm.ContactDetail.Address"></a>
+
+### ContactDetail.Address
+Address details
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| address1 | [string](#string) |  | address_line 1 |
+| address2 | [string](#string) |  | address line 2 |
+| city | [string](#string) |  | city |
+| post_code | [string](#string) |  | post_code |
+| country | [string](#string) |  | country |
+| town | [string](#string) |  | town |
+
+
+
+
+
+
+<a name="fm.ListRequestFilter"></a>
+
+### ListRequestFilter
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| limit | [int32](#int32) |  |  |
+| page | [int32](#int32) |  |  |
+
+
+
+
+
+
+<a name="fm.ListResponseMetadata"></a>
+
+### ListResponseMetadata
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| total_rows | [int32](#int32) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+ 
+
+
+
+<a name="task_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## task_service.proto
+
+
+
+<a name="fm.ChangeTimesheetCorrectionStatusRequest"></a>
+
+### ChangeTimesheetCorrectionStatusRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timesheet_correction_id | [string](#string) |  | timesheet correction id |
+| status | [string](#string) |  | Status to change to either `PENDING`, `APPROVED`, `REJECTED` |
+
+
+
+
+
+
+<a name="fm.ChangeTimesheetCorrectionStatusResponse"></a>
+
+### ChangeTimesheetCorrectionStatusResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| timesheet_correction_id | [string](#string) |  | timesheet correcetion id |
+
+
+
+
+
+
+<a name="fm.CheckinTaskRequest"></a>
+
+### CheckinTaskRequest
+Request for checking in to task
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.CheckoutTaskRequest"></a>
+
+### CheckoutTaskRequest
+Request for checking out from task
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | id of the task to checkout |
+
+
+
+
+
+
+<a name="fm.CreateTaskRequest"></a>
+
+### CreateTaskRequest
+Request to create task
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title (name) of the task |
+| description | [string](#string) |  | description of the task |
+| client_id | [string](#string) |  | client the task is associated with. Optional |
+| employee_id | [string](#string) |  | employee the task is assigned to |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
+| estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
+| organization_id | [string](#string) |  | the organization of the employee |
+| is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
+
+
+
+
+
+
+<a name="fm.CreateTaskResponse"></a>
+
+### CreateTaskResponse
+Response from create task
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of the task |
+
+
+
+
+
+
+<a name="fm.ListCorrectionRequest"></a>
+
+### ListCorrectionRequest
+Request for list corrections of timesheet
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the correction report starts from this date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the Correction report upto this date |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+| organization_id | [string](#string) |  | fetch periodic timesheet for this organization_id |
+
+
+
+
+
+
+<a name="fm.ListCorrectionResponse"></a>
+
+### ListCorrectionResponse
+list of correction queried by user
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListCorrectionResponse.CorrectionResponse](#fm.ListCorrectionResponse.CorrectionResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListCorrectionResponse.CorrectionResponse"></a>
+
+### ListCorrectionResponse.CorrectionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tasks | [TimesheetResponse](#fm.TimesheetResponse) |  | list of timesheet data |
+| correction_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | correction time of the task report |
+| status | [string](#string) |  | approved or suspended |
+| corrected_by | [string](#string) |  | name of the person who correctes timesheet |
+| approved_by | [string](#string) |  | name of the person whho approves this correction |
+
+
+
+
+
+
+<a name="fm.ListPeriodicTaskRequest"></a>
+
+### ListPeriodicTaskRequest
+Request for list periodic timesheet
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the periodic timesheet report starts from this date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the periodic timesheet report upto this date |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+| organization_id | [string](#string) |  | fetch periodic timesheet for this organization_id |
+| type | [string](#string) |  | non required filed the type of periodic tasks. eg: one-off, accomodation, regular, window |
+
+
+
+
+
+
+<a name="fm.ListPeriodicTaskResponse"></a>
+
+### ListPeriodicTaskResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tasks | [TimesheetResponse](#fm.TimesheetResponse) | repeated | list of periodic tasks queried by user |
+
+
+
+
+
+
+<a name="fm.ListTaskByClientRequest"></a>
+
+### ListTaskByClientRequest
+Request for list daily client timesheet
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the client timesheet report starts from this date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the client timesheet report upto this date |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+| client_id | [string](#string) |  | fetch timesheet for this client_id |
+
+
+
+
+
+
+<a name="fm.ListTaskByClientResponse"></a>
+
+### ListTaskByClientResponse
+list of tasks by client_id queried by user
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tasks | [ListTaskByClientResponse.TaskByClientResponse](#fm.ListTaskByClientResponse.TaskByClientResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListTaskByClientResponse.TaskByClientResponse"></a>
+
+### ListTaskByClientResponse.TaskByClientResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique identifier of the employee involved with the client |
+| task_id | [string](#string) |  | unique identifier of the task completed by employee on the client in particular date |
+| check_in_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check in time of the task on the particular date |
+| check_out_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check out time of the task on the particular date |
+| title | [string](#string) |  | task title |
+
+
+
+
+
+
+<a name="fm.ListTaskByEmployeeRequest"></a>
+
+### ListTaskByEmployeeRequest
+Request for list employee timesheet
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the client timesheet report starts from this date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the client timesheet report upto this date |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+| employee_id | [string](#string) |  | fetch timesheet for this employee_id |
+
+
+
+
+
+
+<a name="fm.ListTaskByEmployeeResponse"></a>
+
+### ListTaskByEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tasks | [TaskByEmployeeResponse](#fm.TaskByEmployeeResponse) | repeated | list of tasks by employee_id queried by user |
+
+
+
+
+
+
+<a name="fm.ListTaskByMobileEmployeesRequest"></a>
+
+### ListTaskByMobileEmployeesRequest
+Request for list mobile employee timesheet
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the client timesheet report starts from this date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the client timesheet report upto this date |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+| organization_id | [string](#string) |  | fetch mobile employee timesheet for this organization_id |
+
+
+
+
+
+
+<a name="fm.ListTaskByMobileEmployeesResponse"></a>
+
+### ListTaskByMobileEmployeesResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tasks | [TaskByEmployeeResponse](#fm.TaskByEmployeeResponse) | repeated | list of mobile tasks by employee_id queried by user |
+
+
+
+
+
+
+<a name="fm.ListTaskByVariationClientsRequest"></a>
+
+### ListTaskByVariationClientsRequest
+Request for list variation client timesheet
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the client timesheet report starts from this date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | the client timesheet report upto this date |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter options for list |
+| organization_id | [string](#string) |  | fetch mobile employee timesheet for this organization_id |
+
+
+
+
+
+
+<a name="fm.ListTaskByVariationClientsResponse"></a>
+
+### ListTaskByVariationClientsResponse
+list of variation tasks by client_id queried by user
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tasks | [TaskByEmployeeResponse](#fm.TaskByEmployeeResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListTaskRequest"></a>
+
+### ListTaskRequest
+Request for fetching list of tasks
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter for list task request |
+| organization_id | [string](#string) |  | organization of employee the task is assigned to |
+
+
+
+
+
+
+<a name="fm.ListTaskResponse"></a>
+
+### ListTaskResponse
+Response for list of task request
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListTaskResponse.TaskResponse](#fm.ListTaskResponse.TaskResponse) | repeated | list of tasks |
+
+
+
+
+
+
+<a name="fm.ListTaskResponse.TaskResponse"></a>
+
+### ListTaskResponse.TaskResponse
+Task definition
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique identifier for the task |
+| title | [string](#string) |  | title (name) of the task |
+| description | [string](#string) |  | description of the task |
+| client_id | [string](#string) |  | client the task is associated with. Optional |
+| employee_id | [string](#string) |  | employee the task is assigned to |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
+| estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
+| actual_in | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked in |
+| actual_out | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked out |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time generated by system at the instance the task was created |
+| organization_id | [string](#string) |  | organization id of the employee |
+| is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
+| correction | [google.protobuf.Duration](#google.protobuf.Duration) |  | correction duration of the task |
+
+
+
+
+
+
+<a name="fm.TaskByEmployeeResponse"></a>
+
+### TaskByEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client on which employee was involved |
+| task_id | [string](#string) |  | unique identifier of the task completed by employee on the client in particular date |
+| check_in_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check in time of the task on the particular date |
+| check_out_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check out time of the task on the particular date |
+| title | [string](#string) |  | task title |
+| employee_id | [string](#string) |  | employee id of the employee for which the task was assigned to |
+
+
+
+
+
+
+<a name="fm.TimesheetResponse"></a>
+
+### TimesheetResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique identifier of the client on which employee was involved |
+| employee_id | [string](#string) |  | unique identifier of the employee who was involved with the task |
+| task_id | [string](#string) |  | unique identifier of the task completed by employee on the client in particular date |
+| type | [string](#string) |  | the type of periodic tasks. eg: one-off, accomodation, regular, window |
+| check_in_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check in time of the task on the particular date |
+| check_out_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check out time of the task on the particular date |
+
+
+
+
+
+
+<a name="fm.UpdateTaskByClientRequest"></a>
+
+### UpdateTaskByClientRequest
+Request for update client timesheet
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | fetch timesheet for this client_id |
+| tasks | [UpdateTaskByClientRequest.UpdateTaskByClient](#fm.UpdateTaskByClientRequest.UpdateTaskByClient) | repeated | task list |
+
+
+
+
+
+
+<a name="fm.UpdateTaskByClientRequest.UpdateTaskByClient"></a>
+
+### UpdateTaskByClientRequest.UpdateTaskByClient
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of the task |
+| check_in_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked in |
+| check_out_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked out |
+| contracted_hours | [google.protobuf.Duration](#google.protobuf.Duration) |  | contracted hours of the employee with the client |
+
+
+
+
+
+
+<a name="fm.UpdateTaskByClientResponse"></a>
+
+### UpdateTaskByClientResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique id of the client |
+
+
+
+
+
+
+<a name="fm.UpdateTaskByEmployeeRequest"></a>
+
+### UpdateTaskByEmployeeRequest
+Request for update employee timesheet
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | fetch timesheet for this employee_id |
+| tasks | [UpdateTaskByEmployeeRequest.UpdateTaskByEmployee](#fm.UpdateTaskByEmployeeRequest.UpdateTaskByEmployee) | repeated |  |
+
+
+
+
+
+
+<a name="fm.UpdateTaskByEmployeeRequest.UpdateTaskByEmployee"></a>
+
+### UpdateTaskByEmployeeRequest.UpdateTaskByEmployee
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of the task |
+| check_in_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked in |
+| check_out_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked out |
+| contracted_hours | [google.protobuf.Duration](#google.protobuf.Duration) |  | contracted hours of the employee with the client |
+
+
+
+
+
+
+<a name="fm.UpdateTaskByEmployeeResponse"></a>
+
+### UpdateTaskByEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of the employee |
+
+
+
+
+
+
+<a name="fm.UpdateTaskRequest"></a>
+
+### UpdateTaskRequest
+Request to update task
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of the task |
+| title | [string](#string) |  | title (name) of the task |
+| description | [string](#string) |  | description of the task |
+| client_id | [string](#string) |  | client the task is associated with |
+| employee_id | [string](#string) |  | employee the task is assigned to |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
+| estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
+| organization_id | [string](#string) |  | the organization of the employee |
+| is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
+
+
+
+
+
+
+<a name="fm.UpdateTaskResponse"></a>
+
+### UpdateTaskResponse
+Response from update task
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of the task |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.TaskService"></a>
+
+### TaskService
+service to manage tasks
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateTaskRequest](#fm.CreateTaskRequest) | [CreateTaskResponse](#fm.CreateTaskResponse) | Create a new task. Authorization scope of `fm.task.create` is required. |
+| Checkin | [CheckinTaskRequest](#fm.CheckinTaskRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checkin can be used to check in a staff to a task. Authorization scope of `fm.task.checkin` is required. |
+| Checkout | [CheckoutTaskRequest](#fm.CheckoutTaskRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checkout can be used to check-out a staff from an existing checked-in task. Authorization scope of `fm.task.checkout` is required. |
+| List | [ListTaskRequest](#fm.ListTaskRequest) | [ListTaskResponse](#fm.ListTaskResponse) | List returns the list of all tasks visible to the authroized user in descending date order. Authorization scope of `fm.task.list` is required. |
+| Update | [UpdateTaskRequest](#fm.UpdateTaskRequest) | [UpdateTaskResponse](#fm.UpdateTaskResponse) | Update an existing task. Authorization scope of `fm.task.update` is required. |
+| ListByClient | [ListTaskByClientRequest](#fm.ListTaskByClientRequest) | [ListTaskByClientResponse](#fm.ListTaskByClientResponse) | List returns the list of task by client visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-client` is required. |
+| ListByEmployee | [ListTaskByEmployeeRequest](#fm.ListTaskByEmployeeRequest) | [ListTaskByEmployeeResponse](#fm.ListTaskByEmployeeResponse) | List returns the list of task by employee visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-employee` is required. |
+| UpdateByEmployee | [UpdateTaskByEmployeeRequest](#fm.UpdateTaskByEmployeeRequest) | [UpdateTaskByEmployeeResponse](#fm.UpdateTaskByEmployeeResponse) | Update an existing task by employee_id Authorization scope of `fm.task.update-by-client` is required. |
+| UpdateByClient | [UpdateTaskByClientRequest](#fm.UpdateTaskByClientRequest) | [UpdateTaskByClientResponse](#fm.UpdateTaskByClientResponse) | Update an existing task by client_id Authorization scope of `fm.task.update-by-client` is required. |
+| ListByMobileEmployees | [ListTaskByMobileEmployeesRequest](#fm.ListTaskByMobileEmployeesRequest) | [ListTaskByMobileEmployeesResponse](#fm.ListTaskByMobileEmployeesResponse) | List returns the list of task by mobile employees visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-mobile-employees` is required. |
+| ListByVariationClients | [ListTaskByVariationClientsRequest](#fm.ListTaskByVariationClientsRequest) | [ListTaskByVariationClientsResponse](#fm.ListTaskByVariationClientsResponse) | List returns the list of task by variation clients visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-variation-clients` is required. |
+| ListPeriodic | [ListPeriodicTaskRequest](#fm.ListPeriodicTaskRequest) | [ListPeriodicTaskResponse](#fm.ListPeriodicTaskResponse) | List returns the list of periodic task clients visible to the authroized user in descending date order. Authorization scope of `fm.task.periodic` is required. |
+| ListCorrection | [ListCorrectionRequest](#fm.ListCorrectionRequest) | [ListCorrectionResponse](#fm.ListCorrectionResponse) | List returns the list of corections visible to the authroized user in descending date order. Authorization scope of `fm.task.correction` is required. |
+| ChangeTimesheetCorrectionStatus | [ChangeTimesheetCorrectionStatusRequest](#fm.ChangeTimesheetCorrectionStatusRequest) | [ChangeTimesheetCorrectionStatusResponse](#fm.ChangeTimesheetCorrectionStatusResponse) | Change timesheet correction request status |
+
+ 
+
+
+
+## Scalar Value Types
+
+| .proto Type | Notes | C++ | Java | Python | Go | C# | PHP | Ruby |
+| ----------- | ----- | --- | ---- | ------ | -- | -- | --- | ---- |
+| <a name="double" /> double |  | double | double | float | float64 | double | float | Float |
+| <a name="float" /> float |  | float | float | float | float32 | float | float | Float |
+| <a name="int32" /> int32 | Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint32 instead. | int32 | int | int | int32 | int | integer | Bignum or Fixnum (as required) |
+| <a name="int64" /> int64 | Uses variable-length encoding. Inefficient for encoding negative numbers – if your field is likely to have negative values, use sint64 instead. | int64 | long | int/long | int64 | long | integer/string | Bignum |
+| <a name="uint32" /> uint32 | Uses variable-length encoding. | uint32 | int | int/long | uint32 | uint | integer | Bignum or Fixnum (as required) |
+| <a name="uint64" /> uint64 | Uses variable-length encoding. | uint64 | long | int/long | uint64 | ulong | integer/string | Bignum or Fixnum (as required) |
+| <a name="sint32" /> sint32 | Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int32s. | int32 | int | int | int32 | int | integer | Bignum or Fixnum (as required) |
+| <a name="sint64" /> sint64 | Uses variable-length encoding. Signed int value. These more efficiently encode negative numbers than regular int64s. | int64 | long | int/long | int64 | long | integer/string | Bignum |
+| <a name="fixed32" /> fixed32 | Always four bytes. More efficient than uint32 if values are often greater than 2^28. | uint32 | int | int | uint32 | uint | integer | Bignum or Fixnum (as required) |
+| <a name="fixed64" /> fixed64 | Always eight bytes. More efficient than uint64 if values are often greater than 2^56. | uint64 | long | int/long | uint64 | ulong | integer/string | Bignum |
+| <a name="sfixed32" /> sfixed32 | Always four bytes. | int32 | int | int | int32 | int | integer | Bignum or Fixnum (as required) |
+| <a name="sfixed64" /> sfixed64 | Always eight bytes. | int64 | long | int/long | int64 | long | integer/string | Bignum |
+| <a name="bool" /> bool |  | bool | boolean | boolean | bool | bool | boolean | TrueClass/FalseClass |
+| <a name="string" /> string | A string must always contain UTF-8 encoded or 7-bit ASCII text. | string | String | str/unicode | string | string | string | String (UTF-8) |
+| <a name="bytes" /> bytes | May contain any arbitrary sequence of bytes. | string | ByteString | str | []byte | ByteString | string | String (ASCII-8BIT) |
+
