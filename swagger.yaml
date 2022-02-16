@@ -4365,6 +4365,9 @@ definitions:
       employee_id:
         type: string
         title: unique identifier of the employee
+      title:
+        type: string
+        title: title of employee
       first_name:
         type: string
         title: first name of the employee
@@ -4720,6 +4723,9 @@ definitions:
       declaration_date:
         type: string
         title: declaration date
+      employment_start_date:
+        type: string
+        title: employement start date
       gender:
         type: string
         title: gender
@@ -5352,9 +5358,6 @@ definitions:
         title: license details
       hourly_rate:
         "$ref": "#/definitions/fmHourlyRateInfo"
-      employment_start_date:
-        type: string
-        title: employement start date
     title: Official employee information used by create, update endpoints
   fmPeriodicBudget:
     type: object
