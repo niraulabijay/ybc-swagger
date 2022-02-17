@@ -298,6 +298,35 @@ paths:
         type: string
       tags:
       - ClientEmployeeService
+  "/v1/client-employee/get-employees-by-client":
+    get:
+      summary: |-
+        Get employees by Client_id
+        Authorization scope of `fm.client-employee.get-employee-ids-by-client-id`
+        is required.
+      operationId: ClientEmployeeService_GetEmployeeIdsByClientId
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmGetEmployeeIdsByClientIdResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: organization id.
+        in: query
+        required: false
+        type: string
+      - name: client_id
+        description: Id of client.
+        in: query
+        required: false
+        type: string
+      tags:
+      - ClientEmployeeService
   "/v1/client-employee/get-ids-by-employee/{employee_id}":
     get:
       summary: |-
@@ -2528,6 +2557,15 @@ definitions:
         type: string
         format: date-time
         title: created at timestamp
+  GetEmployeeIdsByClientIdResponseEmployeeListData:
+    type: object
+    properties:
+      client_employee_id:
+        type: string
+        title: 'client-employee id : unique id of client employee relation'
+      employee_id:
+        type: string
+        title: id of employee
   GetEmployeeTrainingResponseEmployeeTrainingResponse:
     type: object
     properties:
@@ -4683,6 +4721,15 @@ definitions:
         type: string
         format: date-time
         title: contract end date
+  fmGetEmployeeIdsByClientIdResponse:
+    type: object
+    properties:
+      employee_list:
+        type: array
+        items:
+          "$ref": "#/definitions/GetEmployeeIdsByClientIdResponseEmployeeListData"
+        title: List of employees
+    title: Response containing employee_ids
   fmGetEmployeeTrainingResponse:
     type: object
     properties:
