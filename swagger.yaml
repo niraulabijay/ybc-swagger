@@ -2518,6 +2518,9 @@ definitions:
       attachment_type:
         type: string
         title: attachment type
+      attachment_name:
+        type: string
+        title: name of attachment
       uploaded_by:
         type: string
         title: uploaded by
@@ -4332,6 +4335,9 @@ definitions:
       attachment_type:
         type: string
         title: type of attachment
+      attachment_name:
+        type: string
+        title: name of attachment
       uploaded_by:
         type: string
         title: uploaded by
