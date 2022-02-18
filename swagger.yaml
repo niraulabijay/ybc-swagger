@@ -1,13 +1,69 @@
 ---
 swagger: '2.0'
 info:
-  title: check_service.proto
+  title: area_region_service.proto
   version: version not set
 consumes:
 - application/json
 produces:
 - application/json
 paths:
+  "/v1/area":
+    post:
+      summary: |-
+        Create a new Area. Authorization scope of `fm.area.create` is
+        required
+      operationId: AreaService_Create
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateAreaResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateAreaRequest"
+      tags:
+      - AreaService
+  "/v1/areas":
+    get:
+      summary: |-
+        List returns the list of Area
+        ascending order of Area title
+        Authorization scope of `fm.area.list` is required
+      operationId: AreaService_List
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListAreaResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: filter.limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: filter.page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: organization_id
+        in: query
+        required: false
+        type: string
+      tags:
+      - AreaService
   "/v1/check":
     post:
       summary: |-
@@ -1835,6 +1891,62 @@ paths:
           "$ref": "#/definitions/fmRefreshRequest"
       tags:
       - JWTTokenService
+  "/v1/region":
+    post:
+      summary: |-
+        Create a new Area. Authorization scope of `fm.region.create` is
+        required
+      operationId: RegionService_Create
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateRegionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateRegionRequest"
+      tags:
+      - RegionService
+  "/v1/regions":
+    get:
+      summary: |-
+        List returns the list of Area
+        ascending order of Area title
+        Authorization scope of `fm.region.list` is required
+      operationId: RegionService_List
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListRegionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: filter.limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: filter.page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: organization_id
+        in: query
+        required: false
+        type: string
+      tags:
+      - RegionService
   "/v1/task":
     post:
       summary: |-
@@ -2598,6 +2710,15 @@ definitions:
         type: string
         format: date-time
         title: Date of training creation
+  ListAreaResponseAreaResponse:
+    type: object
+    properties:
+      area_id:
+        type: string
+      title:
+        type: string
+      organization_id:
+        type: string
   ListCheckResponseCheckResponse:
     type: object
     properties:
@@ -2958,6 +3079,15 @@ definitions:
         format: date-time
         title: time the organization is created at
     title: inividual organization response
+  ListRegionResponseRegionResponse:
+    type: object
+    properties:
+      region_id:
+        type: string
+      title:
+        type: string
+      organization_id:
+        type: string
   ListTaskByClientResponseTaskByClientResponse:
     type: object
     properties:
@@ -3140,18 +3270,6 @@ definitions:
       organization_id:
         type: string
         title: organization id of the client employee relation
-      shift:
-        type: string
-        title: shift of the employee for the client
-      shift_time:
-        type: string
-        title: shift time of the employee for the client
-      break_time:
-        type: string
-        title: break time
-      is_paid_break:
-        type: boolean
-        title: is break paid
       wd_rate:
         type: number
         format: float
@@ -3163,11 +3281,11 @@ definitions:
       currency:
         type: string
         title: rate currency
-      contracted_day_hours:
+      shift_contracted_day_hours:
         type: array
         items:
-          "$ref": "#/definitions/fmContractedDayHours"
-        title: contracted hours for the day of the week
+          "$ref": "#/definitions/fmShiftContractedDayHours"
+        title: multiple shift for employee in a single client
       start_date:
         type: string
         format: date-time
@@ -3179,6 +3297,14 @@ definitions:
       client_employee_id:
         type: string
         title: unique id of client employee relation
+      holidays:
+        type: integer
+        format: int32
+        title: total holidays
+      sick:
+        type: integer
+        format: int32
+        title: total sick leaves
   fmAssignContractedHoursResponse:
     type: object
     properties:
@@ -3580,6 +3706,18 @@ definitions:
         type: string
         title: leave type
     title: Single cover Payload
+  fmCreateAreaRequest:
+    type: object
+    properties:
+      title:
+        type: string
+      organization_id:
+        type: string
+  fmCreateAreaResponse:
+    type: object
+    properties:
+      area_id:
+        type: string
   fmCreateCheckRequest:
     type: object
     properties:
@@ -3694,6 +3832,14 @@ definitions:
         items:
           "$ref": "#/definitions/fmShiftContractedDayHours"
         title: multiple shift for employee in a single client
+      holidays:
+        type: integer
+        format: int32
+        title: total holidays
+      sick:
+        type: integer
+        format: int32
+        title: total sick leaves
       start_date:
         type: string
         format: date-time
@@ -4203,6 +4349,18 @@ definitions:
         type: string
         title: unique id of the organization
     title: response when creating new organization
+  fmCreateRegionRequest:
+    type: object
+    properties:
+      title:
+        type: string
+      organization_id:
+        type: string
+  fmCreateRegionResponse:
+    type: object
+    properties:
+      region_id:
+        type: string
   fmCreateTaskRequest:
     type: object
     properties:
@@ -4691,16 +4849,7 @@ definitions:
       wd_rate:
         type: number
         format: float
-        title: |-
-          // shift of the employee for the client
-          string shift = 2;
-          // shift time of the employee for the client
-          string shift_time = 3;
-          // break time
-          string break_time = 4;
-          // is break paid
-          bool is_paid_break = 5;
-          week days rate
+        title: week days rate
       we_rate:
         type: number
         format: float
@@ -4713,6 +4862,14 @@ definitions:
         items:
           "$ref": "#/definitions/fmShiftContractedDayHours"
         title: contracted hours for the day of the week
+      holidays:
+        type: integer
+        format: int32
+        title: total holidays
+      sick:
+        type: integer
+        format: int32
+        title: total sick leaves
       start_date:
         type: string
         format: date-time
@@ -4911,6 +5068,13 @@ definitions:
       license_number:
         type: string
         title: if valid , license no
+  fmListAreaResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          "$ref": "#/definitions/ListAreaResponseAreaResponse"
   fmListCheckResponse:
     type: object
     properties:
@@ -5137,6 +5301,13 @@ definitions:
         items:
           "$ref": "#/definitions/fmTimesheetResponse"
         title: list of periodic tasks  queried by user
+  fmListRegionResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          "$ref": "#/definitions/ListRegionResponseRegionResponse"
   fmListRequestFilter:
     type: object
     properties:
