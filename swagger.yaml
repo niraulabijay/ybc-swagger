@@ -13,7 +13,7 @@ paths:
       summary: |-
         Create a new Area. Authorization scope of `fm.area.create` is
         required
-      operationId: AreaService_Create
+      operationId: AreaRegionService_CreateArea
       responses:
         '200':
           description: A successful response.
@@ -30,14 +30,14 @@ paths:
         schema:
           "$ref": "#/definitions/fmCreateAreaRequest"
       tags:
-      - AreaService
+      - AreaRegionService
   "/v1/areas":
     get:
       summary: |-
         List returns the list of Area
         ascending order of Area title
         Authorization scope of `fm.area.list` is required
-      operationId: AreaService_List
+      operationId: AreaRegionService_ListArea
       responses:
         '200':
           description: A successful response.
@@ -63,7 +63,7 @@ paths:
         required: false
         type: string
       tags:
-      - AreaService
+      - AreaRegionService
   "/v1/check":
     post:
       summary: |-
@@ -263,6 +263,64 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmAssignContractedHoursRequest"
+      tags:
+      - ClientEmployeeService
+  "/v1/client-employee/contracted-hours-by-client":
+    get:
+      summary: |-
+        Get contracted hours of the multiple employees of a signle client(by id)
+        Authorization scope of `fm.client-employee.get-contracted-hours-by-client` is
+        required.
+      operationId: ClientEmployeeService_GetContractedHoursByClient
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmGetContractedHoursByClientResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: client_id
+        description: unique id of client.
+        in: query
+        required: false
+        type: string
+      - name: organization_id
+        description: organization id of the client employee relation.
+        in: query
+        required: false
+        type: string
+      tags:
+      - ClientEmployeeService
+  "/v1/client-employee/contracted-hours-by-employee":
+    get:
+      summary: |-
+        Get contracted hours of a employees for his/her multiplr clients
+        Authorization scope of `fm.client-employee.get-contracted-hours-by-employee` is
+        required.
+      operationId: ClientEmployeeService_GetContractedHoursByEmployee
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmGetContractedHoursByEmployeeResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: employee_id
+        description: unique id of employee.
+        in: query
+        required: false
+        type: string
+      - name: organization_id
+        description: organization id of the client employee relation.
+        in: query
+        required: false
+        type: string
       tags:
       - ClientEmployeeService
   "/v1/client-employee/feedback":
@@ -1894,9 +1952,9 @@ paths:
   "/v1/region":
     post:
       summary: |-
-        Create a new Area. Authorization scope of `fm.region.create` is
+        Create a new Region. Authorization scope of `fm.region.create` is
         required
-      operationId: RegionService_Create
+      operationId: AreaRegionService_CreateRegion
       responses:
         '200':
           description: A successful response.
@@ -1913,14 +1971,14 @@ paths:
         schema:
           "$ref": "#/definitions/fmCreateRegionRequest"
       tags:
-      - RegionService
+      - AreaRegionService
   "/v1/regions":
     get:
       summary: |-
-        List returns the list of Area
-        ascending order of Area title
+        List returns the list of regions
+        ascending order of region title
         Authorization scope of `fm.region.list` is required
-      operationId: RegionService_List
+      operationId: AreaRegionService_ListRegion
       responses:
         '200':
           description: A successful response.
@@ -1945,8 +2003,12 @@ paths:
         in: query
         required: false
         type: string
+      - name: area_id
+        in: query
+        required: false
+        type: string
       tags:
-      - RegionService
+      - AreaRegionService
   "/v1/task":
     post:
       summary: |-
@@ -3087,6 +3149,8 @@ definitions:
       title:
         type: string
       organization_id:
+        type: string
+      area_id:
         type: string
   ListTaskByClientResponseTaskByClientResponse:
     type: object
@@ -4354,6 +4418,8 @@ definitions:
     properties:
       title:
         type: string
+      area_id:
+        type: string
       organization_id:
         type: string
   fmCreateRegionResponse:
@@ -4840,6 +4906,20 @@ definitions:
           type: string
         title: Array of client_employee_ids
     title: Response containing list of client_ids
+  fmGetContractedHoursByClientResponse:
+    type: object
+    properties:
+      employees_contracted_hours:
+        type: array
+        items:
+          "$ref": "#/definitions/fmGetContractedHoursResponse"
+  fmGetContractedHoursByEmployeeResponse:
+    type: object
+    properties:
+      clients_contracted_hours:
+        type: array
+        items:
+          "$ref": "#/definitions/fmGetContractedHoursResponse"
   fmGetContractedHoursResponse:
     type: object
     properties:
