@@ -4926,6 +4926,12 @@ definitions:
       client_employee_id:
         type: string
         title: unique id of client employee relation
+      client_id:
+        type: string
+        title: unique id of client
+      employee_id:
+        type: string
+        title: unique id of employee
       wd_rate:
         type: number
         format: float
