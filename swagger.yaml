@@ -3568,9 +3568,13 @@ definitions:
         title: |-
           This field is only used in list and detail API
           Other APIs will ignore this field
-      site_supervisor:
-        "$ref": "#/definitions/fmContactPerson"
+      site_supervisor_id:
+        type: string
         title: Site supervisor aka client supervisor
+      site_supervisor_email:
+        type: string
+      site_supervisor_phone:
+        type: string
       region:
         "$ref": "#/definitions/fmRegion"
         title: Region
@@ -3851,9 +3855,13 @@ definitions:
         items:
           "$ref": "#/definitions/fmContractedHours"
         title: Contracted hours
-      site_supervisor:
-        "$ref": "#/definitions/fmContactPerson"
+      site_supervisor_id:
+        type: string
         title: Site supervisor aka client supervisor
+      site_supervisor_email:
+        type: string
+      site_supervisor_phone:
+        type: string
       region:
         "$ref": "#/definitions/fmRegion"
         title: Region
