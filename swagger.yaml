@@ -8,62 +8,6 @@ consumes:
 produces:
 - application/json
 paths:
-  "/v1/area":
-    post:
-      summary: |-
-        Create a new Area. Authorization scope of `fm.area.create` is
-        required
-      operationId: AreaRegionService_CreateArea
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmCreateAreaResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmCreateAreaRequest"
-      tags:
-      - AreaRegionService
-  "/v1/areas":
-    get:
-      summary: |-
-        List returns the list of Area
-        ascending order of Area title
-        Authorization scope of `fm.area.list` is required
-      operationId: AreaRegionService_ListArea
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmListAreaResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: filter.limit
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: filter.page
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: organization_id
-        in: query
-        required: false
-        type: string
-      tags:
-      - AreaRegionService
   "/v1/check":
     post:
       summary: |-
@@ -973,6 +917,122 @@ paths:
           "$ref": "#/definitions/fmCreateDepartmentRequest"
       tags:
       - DepartmentService
+  "/v1/department/area":
+    post:
+      summary: |-
+        Create a new Area. Authorization scope of `fm.area.create` is
+        required
+      operationId: AreaRegionService_CreateArea
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateAreaResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateAreaRequest"
+      tags:
+      - AreaRegionService
+  "/v1/department/areas":
+    get:
+      summary: |-
+        List returns the list of Area
+        ascending order of Area title
+        Authorization scope of `fm.area.list` is required
+      operationId: AreaRegionService_ListArea
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListAreaResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: filter.limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: filter.page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: organization_id
+        in: query
+        required: false
+        type: string
+      tags:
+      - AreaRegionService
+  "/v1/department/region":
+    post:
+      summary: |-
+        Create a new Region. Authorization scope of `fm.region.create` is
+        required
+      operationId: AreaRegionService_CreateRegion
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateRegionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateRegionRequest"
+      tags:
+      - AreaRegionService
+  "/v1/department/regions":
+    get:
+      summary: |-
+        List returns the list of regions
+        ascending order of region title
+        Authorization scope of `fm.region.list` is required
+      operationId: AreaRegionService_ListRegion
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListRegionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: filter.limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: filter.page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: organization_id
+        in: query
+        required: false
+        type: string
+      - name: area_id
+        in: query
+        required: false
+        type: string
+      tags:
+      - AreaRegionService
   "/v1/departments":
     get:
       summary: |-
@@ -1949,66 +2009,6 @@ paths:
           "$ref": "#/definitions/fmRefreshRequest"
       tags:
       - JWTTokenService
-  "/v1/region":
-    post:
-      summary: |-
-        Create a new Region. Authorization scope of `fm.region.create` is
-        required
-      operationId: AreaRegionService_CreateRegion
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmCreateRegionResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmCreateRegionRequest"
-      tags:
-      - AreaRegionService
-  "/v1/regions":
-    get:
-      summary: |-
-        List returns the list of regions
-        ascending order of region title
-        Authorization scope of `fm.region.list` is required
-      operationId: AreaRegionService_ListRegion
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmListRegionResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: filter.limit
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: filter.page
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: organization_id
-        in: query
-        required: false
-        type: string
-      - name: area_id
-        in: query
-        required: false
-        type: string
-      tags:
-      - AreaRegionService
   "/v1/task":
     post:
       summary: |-
