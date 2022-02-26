@@ -3453,6 +3453,9 @@ definitions:
         "$ref": "#/definitions/fmStoreBudget"
       periodic_budget:
         "$ref": "#/definitions/fmPeriodicBudget"
+      hourly_rate:
+        type: number
+        format: float
   fmChangeTimesheetCorrectionStatusRequest:
     type: object
     properties:
@@ -3590,6 +3593,10 @@ definitions:
         items:
           "$ref": "#/definitions/fmInvoice"
         title: Invoice
+      yearly_working_weeks:
+        type: integer
+        format: int32
+        title: Working weeks in a year
   fmClientDetailResponse:
     type: object
     properties:
@@ -3873,6 +3880,10 @@ definitions:
         items:
           "$ref": "#/definitions/fmInvoice"
         title: Invoice
+      yearly_working_weeks:
+        type: integer
+        format: int32
+        title: Working weeks in a year
   fmCreateClientEmployeeRequest:
     type: object
     properties:
