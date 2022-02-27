@@ -1851,6 +1851,156 @@ paths:
           "$ref": "#/definitions/fmCreateMeetingRequest"
       tags:
       - MeetingService
+    patch:
+      summary: |-
+        Update an existing meeting.
+        Authorization scope of `fm.meeting.update` is required.
+      operationId: MeetingService_Update
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateMeetingResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateMeetingRequest"
+      tags:
+      - MeetingService
+  "/v1/meeting/add-attendees":
+    post:
+      summary: |-
+        Add Attendees to existing meetings.
+        Authorization scope of `fm.meeting.update` is required.
+      operationId: MeetingService_AddAttendees
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmAddAttendeesRequest"
+      tags:
+      - MeetingService
+  "/v1/meeting/agenda/decision":
+    post:
+      summary: Add decision of an agenda
+      operationId: MeetingService_AddAgendaDecision
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertAgendaDecisionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmAddAgendaDecisionRequest"
+      tags:
+      - MeetingService
+  "/v1/meeting/agenda/view":
+    delete:
+      summary: Delete views of a given agenda in a meeting.
+      operationId: MeetingService_DeleteAgendaView
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteAgendaViewRequest"
+      tags:
+      - MeetingService
+    post:
+      summary: Add views to a given agenda in a meeting.
+      operationId: MeetingService_AddAgendaView
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertAgendaViewResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmAddAgendaViewRequest"
+      tags:
+      - MeetingService
+    patch:
+      summary: Edit views of a given agenda in a meeting.
+      operationId: MeetingService_EditAgendaView
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertAgendaViewResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmEditAgendaViewRequest"
+      tags:
+      - MeetingService
+  "/v1/meeting/{meeting_id}":
+    get:
+      summary: |-
+        Detail returns the detail of meeting along with its agendas, views and decisiosns
+        Attendees/Creator of meeting can view the details.
+      operationId: MeetingService_Detail
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmDetailMeetingResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: meeting_id
+        description: meeting Id of the meeting to view
+        in: path
+        required: true
+        type: string
+      tags:
+      - MeetingService
   "/v1/note":
     post:
       summary: |-
@@ -3123,6 +3273,9 @@ definitions:
         type: string
         format: date-time
         title: timestamp at which the meeting was created
+      location:
+        type: string
+        title: location of meeting
     title: individual meeting response
   ListOrganizationResponseOrganizationResponse:
     type: object
@@ -3268,6 +3421,45 @@ definitions:
       contracted_hours:
         type: string
         title: contracted hours of the employee with the client
+  fmAddAgendaDecisionRequest:
+    type: object
+    properties:
+      agenda_id:
+        type: string
+        title: id of agenda
+      decision:
+        type: string
+        title: string decision of agenda
+      action_by:
+        type: string
+        title: action to be taken by
+      meeting_date:
+        type: string
+        format: date-time
+        title: deadline for action to be taken
+  fmAddAgendaViewRequest:
+    type: object
+    properties:
+      agend_id:
+        type: string
+        title: id of agenda
+      proposed_by:
+        type: string
+        title: 'view proposed by : employee_id'
+      description:
+        type: string
+        title: details
+  fmAddAttendeesRequest:
+    type: object
+    properties:
+      meeting_id:
+        type: string
+        title: id of meeting
+      invitee_ids:
+        type: array
+        items:
+          type: string
+        title: employee ids of additional attendees
   fmAgenda:
     type: object
     properties:
@@ -3283,6 +3475,59 @@ definitions:
       estimated_time:
         type: string
         title: estimated time to discuss the agenda
+  fmAgendaDecision:
+    type: object
+    properties:
+      id:
+        type: string
+        title: id of agenda decisions
+      agenda_id:
+        type: string
+        title: agenda it belongs to
+      decision:
+        type: string
+        title: decision details
+      action_by:
+        type: string
+        title: 'view proposed by : employee_id'
+      deadline:
+        type: string
+        title: deadline to take action
+    title: details of decisions within an agenda
+  fmAgendaDetail:
+    type: object
+    properties:
+      title:
+        type: string
+        title: title of agenda
+      description:
+        type: string
+        title: description of agenda
+      proposed_by:
+        type: string
+        title: id of the employee that proposed the agenda
+      estimated_time:
+        type: string
+        title: estimated time to discuss the agenda
+      start_time:
+        type: string
+        format: date-time
+        title: start time of agenda
+      end_time:
+        type: string
+        format: date-time
+        title: end time of agenda
+      agenda_views:
+        type: array
+        items:
+          "$ref": "#/definitions/fmAgendaView"
+        title: views of agenda
+      agenda_decisions:
+        type: array
+        items:
+          "$ref": "#/definitions/fmAgendaDecision"
+        title: decisions of agenda
+    title: Agenda details with complete info on views/decisions
   fmAgendaUpdateDetail:
     type: object
     properties:
@@ -3295,6 +3540,22 @@ definitions:
       description:
         type: string
         title: description of agenda
+  fmAgendaView:
+    type: object
+    properties:
+      id:
+        type: string
+        title: id of agenda view
+      agenda_id:
+        type: string
+        title: agenda it belongs to
+      proposed_by:
+        type: string
+        title: 'view proposed by : employee_id'
+      description:
+        type: string
+        title: details
+    title: details of Views within an agenda
   fmArea:
     type: object
     properties:
@@ -4380,6 +4641,9 @@ definitions:
       title:
         type: string
         title: title of the meeting
+      location:
+        type: string
+        title: location of meeting
     title: Meeting creation request
   fmCreateMeetingResponse:
     type: object
@@ -4586,6 +4850,69 @@ definitions:
         format: date-time
         title: DBS expiry date
     title: Dbs details of employee
+  fmDeleteAgendaViewRequest:
+    type: object
+    properties:
+      agend_id:
+        type: string
+        title: id of agenda
+      description:
+        type: string
+        title: details
+  fmDetailMeetingResponse:
+    type: object
+    properties:
+      meeting_id:
+        type: string
+        title: unique identifier of the meeting
+      meeting_date:
+        type: string
+        format: date-time
+        title: date of the meeting
+      estimated_time:
+        type: string
+        title: duration time of the meeting
+      title:
+        type: string
+        title: title of the meeting
+      raised_by:
+        type: string
+        title: employee_id of employee who raised the meeting
+      attendee_ids:
+        type: array
+        items:
+          type: string
+        title: attendees of  meeting
+      department_id:
+        type: string
+        title: department id of the meeting
+      organization_id:
+        type: string
+        title: organization id of the meeting
+      created_at:
+        type: string
+        format: date-time
+        title: timestamp at which the meeting was created
+      location:
+        type: string
+        title: location of meeting
+      status:
+        type: string
+        title: status of meeting
+      agenda_details:
+        type: array
+        items:
+          "$ref": "#/definitions/fmAgendaDetail"
+        title: agendas of meeting along with views/decisions
+  fmEditAgendaViewRequest:
+    type: object
+    properties:
+      agend_id:
+        type: string
+        title: id of agenda
+      description:
+        type: string
+        title: details
   fmEducationEmployeeInformation:
     type: object
     properties:
@@ -6160,6 +6487,39 @@ definitions:
         type: string
         title: unique id of the issue
     title: Update issue response
+  fmUpdateMeetingRequest:
+    type: object
+    properties:
+      meeting_id:
+        type: string
+        title: meeting Id of the meeting to update
+      meeting_date:
+        type: string
+        format: date-time
+        title: date of the meeting
+      estimated_time:
+        type: string
+        title: estimated time of the meeting
+      department_id:
+        type: string
+        title: id of department of generated meeting
+      raised_by:
+        type: string
+        title: id of employee who raised the meeting
+      attendee_ids:
+        type: array
+        items:
+          type: string
+        title: names of employees who attend the  meetings
+      agenda_detail:
+        type: array
+        items:
+          "$ref": "#/definitions/fmAgendaUpdateDetail"
+        title: information of agenda of the meetong
+      location:
+        type: string
+        title: location of meeting
+    title: request to update meeting by meeting_id
   fmUpdateMeetingResponse:
     type: object
     properties:
@@ -6275,6 +6635,18 @@ definitions:
         type: string
         title: unique id of the task
     title: Response from update task
+  fmUpsertAgendaDecisionResponse:
+    type: object
+    properties:
+      agenda_decision_id:
+        type: string
+        title: id of decision
+  fmUpsertAgendaViewResponse:
+    type: object
+    properties:
+      agenda_view_id:
+        type: string
+        title: id of agenda view
   fmUpsertRoleRequest:
     type: object
     properties:
