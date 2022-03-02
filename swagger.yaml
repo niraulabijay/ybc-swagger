@@ -665,6 +665,29 @@ paths:
           "$ref": "#/definitions/fmClientChangeStatusRequest"
       tags:
       - ClientService
+  "/v1/client/set-head-office":
+    post:
+      summary: |-
+        set a single head office from clients.
+        Scope of `fm.client.set-headoffice` is required.
+      operationId: ClientService_SetHeadOffice
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmClientSetHeadOfficeResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmClientSetHeadOfficeRequest"
+      tags:
+      - ClientService
   "/v1/client/{client_id}":
     get:
       summary: |-
@@ -3064,6 +3087,9 @@ definitions:
         items:
           "$ref": "#/definitions/fmContactPerson"
         title: Confidential Contact Person detail of the client
+      is_head_office:
+        type: boolean
+        title: 'Boolean: shows wether client is head office or not'
     title: individual client response
   ListCorrectionResponseCorrectionResponse:
     type: object
@@ -3424,6 +3450,9 @@ definitions:
   fmAddAgendaDecisionRequest:
     type: object
     properties:
+      meeting_id:
+        type: string
+        title: id of meeting
       agenda_id:
         type: string
         title: id of agenda
@@ -3440,6 +3469,9 @@ definitions:
   fmAddAgendaViewRequest:
     type: object
     properties:
+      meeting_id:
+        type: string
+        title: id of meeting
       agend_id:
         type: string
         title: id of agenda
@@ -3492,11 +3524,15 @@ definitions:
         title: 'view proposed by : employee_id'
       deadline:
         type: string
+        format: date-time
         title: deadline to take action
     title: details of decisions within an agenda
   fmAgendaDetail:
     type: object
     properties:
+      id:
+        type: string
+        title: id of agenda
       title:
         type: string
         title: title of agenda
@@ -3555,6 +3591,17 @@ definitions:
       description:
         type: string
         title: details
+      created_at:
+        type: string
+        format: date-time
+        title: created date
+      deleted_at:
+        type: string
+        format: date-time
+        title: deleted date - to check incase of update/delete
+      parent_id:
+        type: string
+        title: parent_id - to check delete history
     title: details of Views within an agenda
   fmArea:
     type: object
@@ -3630,6 +3677,17 @@ definitions:
         type: integer
         format: int32
         title: total sick leaves
+      is_head_office:
+        type: boolean
+        title: is employee from head office
+      allow_all_clients:
+        type: boolean
+        title: allow access to all client
+      allowed_client_ids:
+        type: array
+        items:
+          type: string
+        title: list of allowed clients
   fmAssignContractedHoursResponse:
     type: object
     properties:
@@ -3897,6 +3955,9 @@ definitions:
         title: |-
           List of contact perople details of the client. Backend saves to
           ClientContactPersonService
+      is_head_office:
+        type: boolean
+        title: 'Boolean: shows wether client is head office or not'
     title: Response for client detail
   fmClientListAttachmentResponse:
     type: object
@@ -3909,6 +3970,21 @@ definitions:
         items:
           "$ref": "#/definitions/ClientListAttachmentResponseClientAttachmentPayload"
         title: list of attachments
+  fmClientSetHeadOfficeRequest:
+    type: object
+    properties:
+      organization_id:
+        type: string
+        title: organization id
+      head_office_client_id:
+        type: string
+        title: id of client which is to be set to head offfice
+  fmClientSetHeadOfficeResponse:
+    type: object
+    properties:
+      head_office_client_id:
+        type: string
+        title: id of client which is to be set to head offfice
   fmConfidentialEmployeeDetails:
     type: object
     properties:
@@ -4192,6 +4268,17 @@ definitions:
         type: string
         format: date-time
         title: contract end date
+      is_head_office:
+        type: boolean
+        title: is employee from head office
+      allow_all_clients:
+        type: boolean
+        title: allow access to all client
+      allowed_client_ids:
+        type: array
+        items:
+          type: string
+        title: list of allowed clients
   fmCreateClientEmployeeResponse:
     type: object
     properties:
@@ -4853,6 +4940,9 @@ definitions:
   fmDeleteAgendaViewRequest:
     type: object
     properties:
+      meeting_id:
+        type: string
+        title: id of meeting
       agend_id:
         type: string
         title: id of agenda
@@ -4907,6 +4997,12 @@ definitions:
   fmEditAgendaViewRequest:
     type: object
     properties:
+      agenda_view_id:
+        type: string
+        title: id of agenda-view
+      meeting_id:
+        type: string
+        title: id of meeting
       agend_id:
         type: string
         title: id of agenda
@@ -5310,6 +5406,17 @@ definitions:
         type: string
         format: date-time
         title: contract end date
+      is_head_office:
+        type: boolean
+        title: is employee from head office
+      allow_all_clients:
+        type: boolean
+        title: allow access to all client
+      allowed_client_ids:
+        type: array
+        items:
+          type: string
+        title: list of allowed clients
   fmGetEmployeeIdsByClientIdResponse:
     type: object
     properties:
