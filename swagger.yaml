@@ -2950,10 +2950,21 @@ definitions:
     properties:
       area_id:
         type: string
+        title: id of area
+      region_id:
+        type: string
+        title: region that area belongs to
       title:
         type: string
+        title: title of area
       organization_id:
         type: string
+        title: organization id
+      area_managers:
+        type: array
+        items:
+          type: string
+        title: list of area managers in that region
   ListCheckResponseCheckResponse:
     type: object
     properties:
@@ -3329,8 +3340,10 @@ definitions:
         type: string
       organization_id:
         type: string
-      area_id:
-        type: string
+      region_managers:
+        type: array
+        items:
+          type: string
   ListTaskByClientResponseTaskByClientResponse:
     type: object
     properties:
@@ -4121,8 +4134,18 @@ definitions:
     properties:
       title:
         type: string
+        title: title of area
       organization_id:
         type: string
+        title: organization for the area
+      region_id:
+        type: string
+        title: region that area belongs to
+      area_managers:
+        type: array
+        items:
+          type: string
+        title: ids of area managers(employee-ids)
   fmCreateAreaResponse:
     type: object
     properties:
@@ -4786,10 +4809,12 @@ definitions:
     properties:
       title:
         type: string
-      area_id:
-        type: string
       organization_id:
         type: string
+      region_managers:
+        type: array
+        items:
+          type: string
   fmCreateRegionResponse:
     type: object
     properties:
