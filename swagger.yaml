@@ -6880,9 +6880,6 @@ definitions:
       estimate_time:
         type: string
         title: the estimated time period to complete the task
-      organization_id:
-        type: string
-        title: the organization of the employee
       is_variation:
         type: boolean
         title: flag to confirm if the task is variation or not
