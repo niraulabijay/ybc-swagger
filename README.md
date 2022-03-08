@@ -1,3 +1,6 @@
+#Swagger Url: https://niraulabijay.github.io/ybc-swagger/
+
+
 # File Upload Endpoints:
 
 
