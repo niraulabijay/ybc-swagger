@@ -2793,6 +2793,28 @@ paths:
           "$ref": "#/definitions/fmUpdateEmployeeScopeRequest"
       tags:
       - UserService
+  "/v1/user/auto-create":
+    post:
+      summary: "create user with no password and email is sent with password link
+        \nAuthorization scope of `fm.user.associate` is required."
+      operationId: UserService_CreateUserOnEmployeeCreate
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateUserOnEmployeeCreateResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateUserOnEmployeeCreateRequest"
+      tags:
+      - UserService
   "/v1/user/list_by_employees":
     get:
       summary: |-
@@ -2822,6 +2844,27 @@ paths:
         items:
           type: string
         collectionFormat: multi
+      tags:
+      - UserService
+  "/v1/user/reset-password":
+    post:
+      summary: update password using token from email
+      operationId: UserService_ResetPassword
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmResetPasswordResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmResetPasswordRequest"
       tags:
       - UserService
   "/v1/user/role":
@@ -5020,6 +5063,24 @@ definitions:
       transfer_id:
         type: string
         title: unique id of employee transfer
+  fmCreateUserOnEmployeeCreateRequest:
+    type: object
+    properties:
+      organization_id:
+        type: string
+        title: id of organization
+      email:
+        type: string
+        title: email of user
+      name:
+        type: string
+        title: name of user
+  fmCreateUserOnEmployeeCreateResponse:
+    type: object
+    properties:
+      user_id:
+        type: string
+        title: id of user
   fmCreateUserRequest:
     type: object
     properties:
@@ -6329,6 +6390,24 @@ definitions:
       region_manager:
         type: string
         title: Region manager employee_id
+  fmResetPasswordRequest:
+    type: object
+    properties:
+      email:
+        type: string
+        title: email of user
+      token:
+        type: string
+        title: token for reset
+      password:
+        type: string
+        title: new password of user
+  fmResetPasswordResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        title: action report
   fmRoleResponse:
     type: object
     properties:
