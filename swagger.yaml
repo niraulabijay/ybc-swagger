@@ -6863,6 +6863,11 @@ definitions:
       location:
         type: string
         title: location of meeting
+      deleted_agenda_ids:
+        type: array
+        items:
+          type: string
+        title: deleted_agenda_ids
     title: request to update meeting by meeting_id
   fmUpdateMeetingResponse:
     type: object
