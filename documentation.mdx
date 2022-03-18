@@ -3,6 +3,20 @@
 
 ## Table of Contents
 
+- [area_region_service.proto](#area_region_service.proto)
+    - [CreateAreaRequest](#fm.CreateAreaRequest)
+    - [CreateAreaResponse](#fm.CreateAreaResponse)
+    - [CreateRegionRequest](#fm.CreateRegionRequest)
+    - [CreateRegionResponse](#fm.CreateRegionResponse)
+    - [ListAreaRequest](#fm.ListAreaRequest)
+    - [ListAreaResponse](#fm.ListAreaResponse)
+    - [ListAreaResponse.AreaResponse](#fm.ListAreaResponse.AreaResponse)
+    - [ListRegionRequest](#fm.ListRegionRequest)
+    - [ListRegionResponse](#fm.ListRegionResponse)
+    - [ListRegionResponse.RegionResponse](#fm.ListRegionResponse.RegionResponse)
+  
+    - [AreaRegionService](#fm.AreaRegionService)
+  
 - [check_service.proto](#check_service.proto)
     - [CheckInOutRequest](#fm.CheckInOutRequest)
     - [CreateCheckRequest](#fm.CreateCheckRequest)
@@ -36,8 +50,15 @@
     - [GetClientEmployeeIdsByEmployeeResponse](#fm.GetClientEmployeeIdsByEmployeeResponse)
     - [GetClientIdsByEmployeeRequest](#fm.GetClientIdsByEmployeeRequest)
     - [GetClientIdsByEmployeeResponse](#fm.GetClientIdsByEmployeeResponse)
+    - [GetContractedHoursByClientRequest](#fm.GetContractedHoursByClientRequest)
+    - [GetContractedHoursByClientResponse](#fm.GetContractedHoursByClientResponse)
+    - [GetContractedHoursByEmployeeRequest](#fm.GetContractedHoursByEmployeeRequest)
+    - [GetContractedHoursByEmployeeResponse](#fm.GetContractedHoursByEmployeeResponse)
     - [GetContractedHoursRequest](#fm.GetContractedHoursRequest)
     - [GetContractedHoursResponse](#fm.GetContractedHoursResponse)
+    - [GetEmployeeIdsByClientIdRequest](#fm.GetEmployeeIdsByClientIdRequest)
+    - [GetEmployeeIdsByClientIdResponse](#fm.GetEmployeeIdsByClientIdResponse)
+    - [GetEmployeeIdsByClientIdResponse.EmployeeListData](#fm.GetEmployeeIdsByClientIdResponse.EmployeeListData)
     - [GetEmployeeTrainingRequest](#fm.GetEmployeeTrainingRequest)
     - [GetEmployeeTrainingResponse](#fm.GetEmployeeTrainingResponse)
     - [GetEmployeeTrainingResponse.EmployeeTrainingResponse](#fm.GetEmployeeTrainingResponse.EmployeeTrainingResponse)
@@ -71,6 +92,8 @@
     - [ClientListAttachmentRequest](#fm.ClientListAttachmentRequest)
     - [ClientListAttachmentResponse](#fm.ClientListAttachmentResponse)
     - [ClientListAttachmentResponse.ClientAttachmentPayload](#fm.ClientListAttachmentResponse.ClientAttachmentPayload)
+    - [ClientSetHeadOfficeRequest](#fm.ClientSetHeadOfficeRequest)
+    - [ClientSetHeadOfficeResponse](#fm.ClientSetHeadOfficeResponse)
     - [ContactPerson](#fm.ContactPerson)
     - [ContractedHours](#fm.ContractedHours)
     - [CreateClientDate](#fm.CreateClientDate)
@@ -231,6 +254,8 @@
   
 - [login_service.proto](#login_service.proto)
     - [AssociateWithEmployeeRequest](#fm.AssociateWithEmployeeRequest)
+    - [CreateUserOnEmployeeCreateRequest](#fm.CreateUserOnEmployeeCreateRequest)
+    - [CreateUserOnEmployeeCreateResponse](#fm.CreateUserOnEmployeeCreateResponse)
     - [CreateUserRequest](#fm.CreateUserRequest)
     - [CreateUserResponse](#fm.CreateUserResponse)
     - [GetAvailableRoleRequest](#fm.GetAvailableRoleRequest)
@@ -242,6 +267,8 @@
     - [LogoutRequest](#fm.LogoutRequest)
     - [LogoutResponse](#fm.LogoutResponse)
     - [RefreshRequest](#fm.RefreshRequest)
+    - [ResetPasswordRequest](#fm.ResetPasswordRequest)
+    - [ResetPasswordResponse](#fm.ResetPasswordResponse)
     - [RoleResponse](#fm.RoleResponse)
     - [ScopeResponse](#fm.ScopeResponse)
     - [UpdateEmployeeScopeRequest](#fm.UpdateEmployeeScopeRequest)
@@ -256,15 +283,29 @@
     - [UserService](#fm.UserService)
   
 - [meeting_service.proto](#meeting_service.proto)
+    - [AddAgendaDecisionRequest](#fm.AddAgendaDecisionRequest)
+    - [AddAgendaViewRequest](#fm.AddAgendaViewRequest)
+    - [AddAttendeesRequest](#fm.AddAttendeesRequest)
     - [Agenda](#fm.Agenda)
+    - [AgendaDecision](#fm.AgendaDecision)
+    - [AgendaDetail](#fm.AgendaDetail)
+    - [AgendaTimerRequest](#fm.AgendaTimerRequest)
+    - [AgendaTimerResponse](#fm.AgendaTimerResponse)
     - [AgendaUpdateDetail](#fm.AgendaUpdateDetail)
+    - [AgendaView](#fm.AgendaView)
     - [CreateMeetingRequest](#fm.CreateMeetingRequest)
     - [CreateMeetingResponse](#fm.CreateMeetingResponse)
+    - [DeleteAgendaViewRequest](#fm.DeleteAgendaViewRequest)
+    - [DetailMeetingRequest](#fm.DetailMeetingRequest)
+    - [DetailMeetingResponse](#fm.DetailMeetingResponse)
+    - [EditAgendaViewRequest](#fm.EditAgendaViewRequest)
     - [ListMeetingRequest](#fm.ListMeetingRequest)
     - [ListMeetingResponse](#fm.ListMeetingResponse)
     - [ListMeetingResponse.MeetingResponse](#fm.ListMeetingResponse.MeetingResponse)
     - [UpdateMeetingRequest](#fm.UpdateMeetingRequest)
     - [UpdateMeetingResponse](#fm.UpdateMeetingResponse)
+    - [UpsertAgendaDecisionResponse](#fm.UpsertAgendaDecisionResponse)
+    - [UpsertAgendaViewResponse](#fm.UpsertAgendaViewResponse)
   
     - [MeetingService](#fm.MeetingService)
   
@@ -287,6 +328,15 @@
     - [ListOrganizationResponse.OrganizationResponse](#fm.ListOrganizationResponse.OrganizationResponse)
   
     - [OrganizationService](#fm.OrganizationService)
+  
+- [sector_service.proto](#sector_service.proto)
+    - [CreateSectorRequest](#fm.CreateSectorRequest)
+    - [CreateSectorResponse](#fm.CreateSectorResponse)
+    - [ListSectorRequest](#fm.ListSectorRequest)
+    - [ListSectorResponse](#fm.ListSectorResponse)
+    - [ListSectorResponse.SectorResponse](#fm.ListSectorResponse.SectorResponse)
+  
+    - [SectorService](#fm.SectorService)
   
 - [service.proto](#service.proto)
     - [BankAccountDetails](#fm.BankAccountDetails)
@@ -319,6 +369,9 @@
     - [ListTaskRequest](#fm.ListTaskRequest)
     - [ListTaskResponse](#fm.ListTaskResponse)
     - [ListTaskResponse.TaskResponse](#fm.ListTaskResponse.TaskResponse)
+    - [RecurrenceDetails](#fm.RecurrenceDetails)
+    - [RecurrenceTypeDetails](#fm.RecurrenceTypeDetails)
+    - [RecurrenceTypeDetails.MonthlyWeekDetails](#fm.RecurrenceTypeDetails.MonthlyWeekDetails)
     - [TaskByEmployeeResponse](#fm.TaskByEmployeeResponse)
     - [TimesheetResponse](#fm.TimesheetResponse)
     - [UpdateTaskByClientRequest](#fm.UpdateTaskByClientRequest)
@@ -329,10 +382,205 @@
     - [UpdateTaskByEmployeeResponse](#fm.UpdateTaskByEmployeeResponse)
     - [UpdateTaskRequest](#fm.UpdateTaskRequest)
     - [UpdateTaskResponse](#fm.UpdateTaskResponse)
+    - [UpsertRecurrence](#fm.UpsertRecurrence)
   
     - [TaskService](#fm.TaskService)
   
 - [Scalar Value Types](#scalar-value-types)
+
+
+
+<a name="area_region_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## area_region_service.proto
+
+
+
+<a name="fm.CreateAreaRequest"></a>
+
+### CreateAreaRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title of area |
+| organization_id | [string](#string) |  | organization for the area |
+| region_id | [string](#string) |  | region that area belongs to |
+| area_managers | [string](#string) | repeated | ids of area managers(employee-ids) |
+
+
+
+
+
+
+<a name="fm.CreateAreaResponse"></a>
+
+### CreateAreaResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.CreateRegionRequest"></a>
+
+### CreateRegionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+| region_managers | [string](#string) | repeated |  |
+
+
+
+
+
+
+<a name="fm.CreateRegionResponse"></a>
+
+### CreateRegionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListAreaRequest"></a>
+
+### ListAreaRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListAreaResponse"></a>
+
+### ListAreaResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListAreaResponse.AreaResponse](#fm.ListAreaResponse.AreaResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListAreaResponse.AreaResponse"></a>
+
+### ListAreaResponse.AreaResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area_id | [string](#string) |  | id of area |
+| region_id | [string](#string) |  | region that area belongs to |
+| title | [string](#string) |  | title of area |
+| organization_id | [string](#string) |  | organization id |
+| area_managers | [string](#string) | repeated | list of area managers in that region |
+
+
+
+
+
+
+<a name="fm.ListRegionRequest"></a>
+
+### ListRegionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| organization_id | [string](#string) |  |  |
+| area_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListRegionResponse"></a>
+
+### ListRegionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListRegionResponse.RegionResponse](#fm.ListRegionResponse.RegionResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListRegionResponse.RegionResponse"></a>
+
+### ListRegionResponse.RegionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region_id | [string](#string) |  |  |
+| title | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+| region_managers | [string](#string) | repeated |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.AreaRegionService"></a>
+
+### AreaRegionService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| CreateArea | [CreateAreaRequest](#fm.CreateAreaRequest) | [CreateAreaResponse](#fm.CreateAreaResponse) | Create a new Area. Authorization scope of `fm.area.create` is required |
+| ListArea | [ListAreaRequest](#fm.ListAreaRequest) | [ListAreaResponse](#fm.ListAreaResponse) | List returns the list of Area ascending order of Area title Authorization scope of `fm.area.list` is required |
+| CreateRegion | [CreateRegionRequest](#fm.CreateRegionRequest) | [CreateRegionResponse](#fm.CreateRegionResponse) | Create a new Region. Authorization scope of `fm.region.create` is required |
+| ListRegion | [ListRegionRequest](#fm.ListRegionRequest) | [ListRegionResponse](#fm.ListRegionResponse) | List returns the list of regions ascending order of region title Authorization scope of `fm.region.list` is required |
+
+ 
 
 
 
@@ -518,17 +766,18 @@ Response for client-employee shift assignment
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | organization_id | [string](#string) |  | organization id of the client employee relation |
-| shift | [string](#string) |  | shift of the employee for the client |
-| shift_time | [string](#string) |  | shift time of the employee for the client |
-| break_time | [string](#string) |  | break time |
-| is_paid_break | [bool](#bool) |  | is break paid |
 | wd_rate | [float](#float) |  | week days rate |
 | we_rate | [float](#float) |  | weekend days rate |
 | currency | [string](#string) |  | rate currency |
-| contracted_day_hours | [ContractedDayHours](#fm.ContractedDayHours) | repeated | contracted hours for the day of the week |
+| shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | multiple shift for employee in a single client |
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
 | client_employee_id | [string](#string) |  | unique id of client employee relation |
+| holidays | [int32](#int32) |  | total holidays |
+| sick | [int32](#int32) |  | total sick leaves |
+| is_head_office | [bool](#bool) |  | is employee from head office |
+| allow_all_clients | [bool](#bool) |  | allow access to all client |
+| allowed_client_ids | [string](#string) | repeated | list of allowed clients |
 
 
 
@@ -631,8 +880,13 @@ Response for assigning target tasks to an employee
 | we_rate | [float](#float) |  | weekend days rate |
 | currency | [string](#string) |  | rate currency |
 | shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | multiple shift for employee in a single client |
+| holidays | [int32](#int32) |  | total holidays |
+| sick | [int32](#int32) |  | total sick leaves |
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
+| is_head_office | [bool](#bool) |  | is employee from head office |
+| allow_all_clients | [bool](#bool) |  | allow access to all client |
+| allowed_client_ids | [string](#string) | repeated | list of allowed clients |
 
 
 
@@ -862,6 +1116,68 @@ Response containing list of client_ids
 
 
 
+<a name="fm.GetContractedHoursByClientRequest"></a>
+
+### GetContractedHoursByClientRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique id of client |
+| organization_id | [string](#string) |  | organization id of the client employee relation |
+
+
+
+
+
+
+<a name="fm.GetContractedHoursByClientResponse"></a>
+
+### GetContractedHoursByClientResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employees_contracted_hours | [GetContractedHoursResponse](#fm.GetContractedHoursResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.GetContractedHoursByEmployeeRequest"></a>
+
+### GetContractedHoursByEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of employee |
+| organization_id | [string](#string) |  | organization id of the client employee relation |
+
+
+
+
+
+
+<a name="fm.GetContractedHoursByEmployeeResponse"></a>
+
+### GetContractedHoursByEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| clients_contracted_hours | [GetContractedHoursResponse](#fm.GetContractedHoursResponse) | repeated |  |
+
+
+
+
+
+
 <a name="fm.GetContractedHoursRequest"></a>
 
 ### GetContractedHoursRequest
@@ -887,12 +1203,66 @@ Response containing list of client_ids
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | client_employee_id | [string](#string) |  | unique id of client employee relation |
-| wd_rate | [float](#float) |  | shift of the employee for the client string shift = 2; // shift time of the employee for the client string shift_time = 3; // break time string break_time = 4; // is break paid bool is_paid_break = 5; week days rate |
+| client_id | [string](#string) |  | unique id of client |
+| employee_id | [string](#string) |  | unique id of employee |
+| wd_rate | [float](#float) |  | week days rate |
 | we_rate | [float](#float) |  | weekend days rate |
 | currency | [string](#string) |  | rate currency |
 | shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | contracted hours for the day of the week |
+| holidays | [int32](#int32) |  | total holidays |
+| sick | [int32](#int32) |  | total sick leaves |
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
+| is_head_office | [bool](#bool) |  | is employee from head office |
+| allow_all_clients | [bool](#bool) |  | allow access to all client |
+| allowed_client_ids | [string](#string) | repeated | list of allowed clients |
+
+
+
+
+
+
+<a name="fm.GetEmployeeIdsByClientIdRequest"></a>
+
+### GetEmployeeIdsByClientIdRequest
+request to get employee_ids using client_id
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | organization id |
+| client_id | [string](#string) |  | Id of client |
+
+
+
+
+
+
+<a name="fm.GetEmployeeIdsByClientIdResponse"></a>
+
+### GetEmployeeIdsByClientIdResponse
+Response containing employee_ids
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_list | [GetEmployeeIdsByClientIdResponse.EmployeeListData](#fm.GetEmployeeIdsByClientIdResponse.EmployeeListData) | repeated | List of employees |
+
+
+
+
+
+
+<a name="fm.GetEmployeeIdsByClientIdResponse.EmployeeListData"></a>
+
+### GetEmployeeIdsByClientIdResponse.EmployeeListData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_employee_id | [string](#string) |  | client-employee id : unique id of client employee relation |
+| employee_id | [string](#string) |  | id of employee |
 
 
 
@@ -1184,10 +1554,13 @@ Response for getting target task of an employee for a client
 | AssignShift | [AssignClientEmployeeShiftRequest](#fm.AssignClientEmployeeShiftRequest) | [AssignClientEmployeeShiftResponse](#fm.AssignClientEmployeeShiftResponse) | Assign shift to the employee for the client Authorization scope of `fm.client-employee.assign-shift` is required. |
 | AssignContractedHours | [AssignContractedHoursRequest](#fm.AssignContractedHoursRequest) | [AssignContractedHoursResponse](#fm.AssignContractedHoursResponse) | Assign contracted hours to the employee for the client Authorization scope of `fm.client-employee.assign-contracted-hours` is required. |
 | GetContractedHours | [GetContractedHoursRequest](#fm.GetContractedHoursRequest) | [GetContractedHoursResponse](#fm.GetContractedHoursResponse) | Get contracted hours of the employee for the client Authorization scope of `fm.client-employee.get-contracted-hours` is required. |
+| GetContractedHoursByClient | [GetContractedHoursByClientRequest](#fm.GetContractedHoursByClientRequest) | [GetContractedHoursByClientResponse](#fm.GetContractedHoursByClientResponse) | Get contracted hours of the multiple employees of a signle client(by id) Authorization scope of `fm.client-employee.get-contracted-hours-by-client` is required. |
+| GetContractedHoursByEmployee | [GetContractedHoursByEmployeeRequest](#fm.GetContractedHoursByEmployeeRequest) | [GetContractedHoursByEmployeeResponse](#fm.GetContractedHoursByEmployeeResponse) | Get contracted hours of a employees for his/her multiplr clients Authorization scope of `fm.client-employee.get-contracted-hours-by-employee` is required. |
 | AssignTargetTasks | [AssignTargetTasksRequest](#fm.AssignTargetTasksRequest) | [AssignTargetTasksResponse](#fm.AssignTargetTasksResponse) | Assign target tasks for each day of the week in a fixed interval of time for an employee for a client Authorization scope of `fm.client-employee.assign-target-tasks` is required. |
 | GetTargetTasks | [GetTargetTasksRequest](#fm.GetTargetTasksRequest) | [GetTargetTasksResponse](#fm.GetTargetTasksResponse) | Get the assigned target tasks of an employee for a client Authorization scope of `fm.client-employee.get-target-tasks` is required. |
 | GetClientEmployeeIdsByEmployeeId | [GetClientEmployeeIdsByEmployeeRequest](#fm.GetClientEmployeeIdsByEmployeeRequest) | [GetClientEmployeeIdsByEmployeeResponse](#fm.GetClientEmployeeIdsByEmployeeResponse) | Get client_employee_ids by employee_id Authorization scope of `fm.client-employee.get-client-employee-ids-by-employee-id` is required. |
 | GetClientIdsByEmployeeId | [GetClientIdsByEmployeeRequest](#fm.GetClientIdsByEmployeeRequest) | [GetClientIdsByEmployeeResponse](#fm.GetClientIdsByEmployeeResponse) | Get client_ids by employee_id Authorization scope of `fm.client-employee.get-client-ids-by-employee-id` is required. |
+| GetEmployeeIdsByClientId | [GetEmployeeIdsByClientIdRequest](#fm.GetEmployeeIdsByClientIdRequest) | [GetEmployeeIdsByClientIdResponse](#fm.GetEmployeeIdsByClientIdResponse) | Get employees by Client_id Authorization scope of `fm.client-employee.get-employee-ids-by-client-id` is required. |
 | CreateEmployeeTraining | [CreateEmployeeTrainingRequest](#fm.CreateEmployeeTrainingRequest) | [CreateEmployeeTrainingResponse](#fm.CreateEmployeeTrainingResponse) | Create training for employee of client Authorization scope of `fm.client-employee.create-employee-training` is required |
 | GetEmployeeTraining | [GetEmployeeTrainingRequest](#fm.GetEmployeeTrainingRequest) | [GetEmployeeTrainingResponse](#fm.GetEmployeeTrainingResponse) | Get employee trainings Authorization scope of `fm.client-employee.get-employee-trainings` is required. |
 | CreateTransfer | [CreateTransferRequest](#fm.CreateTransferRequest) | [CreateTransferResponse](#fm.CreateTransferResponse) | Create a new transfer. Authorization scope of `fm.client-employee.transfer.create` is required. |
@@ -1251,6 +1624,7 @@ Response for getting target task of an employee for a client
 | labour_budget | [LabourBudget](#fm.LabourBudget) |  |  |
 | store_budget | [StoreBudget](#fm.StoreBudget) |  |  |
 | periodic_budget | [PeriodicBudget](#fm.PeriodicBudget) |  |  |
+| hourly_rate | [float](#float) |  |  |
 
 
 
@@ -1354,11 +1728,14 @@ Request for changing status of client
 | date | [ClientDate](#fm.ClientDate) |  |  |
 | contracted_day_hours | [ContractedHours](#fm.ContractedHours) | repeated | Contracted hours |
 | status | [string](#string) |  | This field is only used in list and detail API Other APIs will ignore this field |
-| site_supervisor | [ContactPerson](#fm.ContactPerson) |  | Site supervisor aka client supervisor |
+| site_supervisor_id | [string](#string) |  | Site supervisor aka client supervisor |
+| site_supervisor_email | [string](#string) |  |  |
+| site_supervisor_phone | [string](#string) |  |  |
 | region | [Region](#fm.Region) |  | Region |
 | budget | [Budget](#fm.Budget) |  | Budgets |
 | client_code | [int64](#int64) |  | client code |
 | invoice | [Invoice](#fm.Invoice) | repeated | Invoice |
+| yearly_working_weeks | [int32](#int32) |  | Working weeks in a year |
 
 
 
@@ -1397,6 +1774,7 @@ Response for client detail
 | confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential contact person details of the client. Backend saves to ClientContactPersonService |
 | bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details of the client |
 | contact_people | [ContactPerson](#fm.ContactPerson) | repeated | List of contact perople details of the client. Backend saves to ClientContactPersonService |
+| is_head_office | [bool](#bool) |  | Boolean: shows wether client is head office or not |
 
 
 
@@ -1448,6 +1826,37 @@ Response for client detail
 | attachment_type | [string](#string) |  | attachment type |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | created at timestamp |
 | uploaded_by | [string](#string) |  | uploaded by |
+
+
+
+
+
+
+<a name="fm.ClientSetHeadOfficeRequest"></a>
+
+### ClientSetHeadOfficeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | organization id |
+| head_office_client_id | [string](#string) |  | id of client which is to be set to head offfice |
+
+
+
+
+
+
+<a name="fm.ClientSetHeadOfficeResponse"></a>
+
+### ClientSetHeadOfficeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| head_office_client_id | [string](#string) |  | id of client which is to be set to head offfice |
 
 
 
@@ -1524,10 +1933,13 @@ Response for client detail
 | reason_for_costing | [string](#string) |  |  |
 | date | [CreateClientDate](#fm.CreateClientDate) |  |  |
 | contracted_day_hours | [ContractedHours](#fm.ContractedHours) | repeated | Contracted hours |
-| site_supervisor | [ContactPerson](#fm.ContactPerson) |  | Site supervisor aka client supervisor |
+| site_supervisor_id | [string](#string) |  | Site supervisor aka client supervisor |
+| site_supervisor_email | [string](#string) |  |  |
+| site_supervisor_phone | [string](#string) |  |  |
 | region | [Region](#fm.Region) |  | Region |
 | budget | [Budget](#fm.Budget) |  | Budgets |
 | invoice | [Invoice](#fm.Invoice) | repeated | Invoice |
+| yearly_working_weeks | [int32](#int32) |  | Working weeks in a year |
 
 
 
@@ -1768,6 +2180,7 @@ individual client response
 | bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details of the client |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the client was created at |
 | confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential Contact Person detail of the client |
+| is_head_office | [bool](#bool) |  | Boolean: shows wether client is head office or not |
 
 
 
@@ -1966,6 +2379,7 @@ response for UpdateClientRequest
 | Update | [UpdateClientRequest](#fm.UpdateClientRequest) | [UpdateClientResponse](#fm.UpdateClientResponse) | Update an existing client. Authorization scope of `fm.client.update` is required. |
 | Detail | [ClientDetailRequest](#fm.ClientDetailRequest) | [ClientDetailResponse](#fm.ClientDetailResponse) | Details of client. Scope of `fm.client.detail` is required. |
 | ChangeStatus | [ClientChangeStatusRequest](#fm.ClientChangeStatusRequest) | [ClientChangeStatusResponse](#fm.ClientChangeStatusResponse) | Change status of a client. Scope of `fm.client.status-change` is required. |
+| SetHeadOffice | [ClientSetHeadOfficeRequest](#fm.ClientSetHeadOfficeRequest) | [ClientSetHeadOfficeResponse](#fm.ClientSetHeadOfficeResponse) | set a single head office from clients. Scope of `fm.client.set-headoffice` is required. |
 | AddAttachment | [ClientAddAttachmentRequest](#fm.ClientAddAttachmentRequest) | [ClientAddAttachmentResponse](#fm.ClientAddAttachmentResponse) | Adds attachment for a client. Scope of `fm.client.add-attachment` is required. |
 | ListAttachment | [ClientListAttachmentRequest](#fm.ClientListAttachmentRequest) | [ClientListAttachmentResponse](#fm.ClientListAttachmentResponse) | Lists attachment for a client. Scope of `fm.client.list-attachment` is required. |
 | CreateClientMobilization | [CreateClientMobilizationRequest](#fm.CreateClientMobilizationRequest) | [CreateClientMobilizationResponse](#fm.CreateClientMobilizationResponse) | Create a new client mobilization Authorization scope of `fm.client.create-client-mobilization` is required |
@@ -2627,6 +3041,7 @@ Request payload to add attachment to an employee
 | employee_id | [string](#string) |  | unique identifier of the employee |
 | attachment_path | [string](#string) |  | path of attachment |
 | attachment_type | [string](#string) |  | type of attachment |
+| attachment_name | [string](#string) |  | name of attachment |
 | uploaded_by | [string](#string) |  | uploaded by |
 
 
@@ -2704,6 +3119,7 @@ Response for employee detail
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | employee_id | [string](#string) |  | unique identifier of the employee |
+| title | [string](#string) |  | title of employee |
 | first_name | [string](#string) |  | first name of the employee |
 | middle_name | [string](#string) |  | middle name of the employee |
 | last_name | [string](#string) |  | last name of the employee |
@@ -2802,6 +3218,7 @@ Response payload for attachment list request
 | attachment_id | [string](#string) |  | unique identifier of the newly created attachment record |
 | attachment_path | [string](#string) |  | attachment path |
 | attachment_type | [string](#string) |  | attachment type |
+| attachment_name | [string](#string) |  | name of attachment |
 | uploaded_by | [string](#string) |  | uploaded by |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | created at timestamp |
 
@@ -2873,6 +3290,7 @@ General employee information
 | ----- | ---- | ----- | ----------- |
 | full_name | [string](#string) |  | declaration full name |
 | declaration_date | [string](#string) |  | declaration date |
+| employment_start_date | [string](#string) |  | employement start date |
 | gender | [string](#string) |  | gender |
 | employment_statement | [string](#string) |  | employement statement |
 | student_loan_faq | [FaqData](#fm.FaqData) | repeated | student loan questions |
@@ -3074,7 +3492,6 @@ Official employee information used by create, update endpoints
 | comment | [string](#string) |  | comments if any |
 | licence_details | [LicenseDetails](#fm.LicenseDetails) |  | license details |
 | hourly_rate | [HourlyRateInfo](#fm.HourlyRateInfo) |  |  |
-| employment_start_date | [string](#string) |  | employement start date |
 
 
 
@@ -3898,6 +4315,38 @@ service to manage issues
 
 
 
+<a name="fm.CreateUserOnEmployeeCreateRequest"></a>
+
+### CreateUserOnEmployeeCreateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of organization |
+| email | [string](#string) |  | email of user |
+| name | [string](#string) |  | name of user |
+
+
+
+
+
+
+<a name="fm.CreateUserOnEmployeeCreateResponse"></a>
+
+### CreateUserOnEmployeeCreateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | id of user |
+
+
+
+
+
+
 <a name="fm.CreateUserRequest"></a>
 
 ### CreateUserRequest
@@ -4062,6 +4511,38 @@ Request for refresh
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | refresh_token | [string](#string) |  | authetication token for refresh requests |
+
+
+
+
+
+
+<a name="fm.ResetPasswordRequest"></a>
+
+### ResetPasswordRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| email | [string](#string) |  | email of user |
+| token | [string](#string) |  | token for reset |
+| password | [string](#string) |  | new password of user |
+
+
+
+
+
+
+<a name="fm.ResetPasswordResponse"></a>
+
+### ResetPasswordResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| success | [bool](#bool) |  | action report |
 
 
 
@@ -4244,6 +4725,7 @@ Genereates jwt tokens
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | Create | [CreateUserRequest](#fm.CreateUserRequest) | [CreateUserResponse](#fm.CreateUserResponse) | Create a new user. Authorization scope of `fm.user.create` is required. |
+| CreateUserOnEmployeeCreate | [CreateUserOnEmployeeCreateRequest](#fm.CreateUserOnEmployeeCreateRequest) | [CreateUserOnEmployeeCreateResponse](#fm.CreateUserOnEmployeeCreateResponse) | create user with no password and email is sent with password link Authorization scope of `fm.user.associate` is required. |
 | UpsertScope | [UpsertScopeRequest](#fm.UpsertScopeRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Insert or update a scope group. Authorization scope of `` is required. |
 | AssociateWithEmployee | [AssociateWithEmployeeRequest](#fm.AssociateWithEmployeeRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | associates login with an employee record. Authorization scope of `fm.user.associate` is required. |
 | UpdateEmployeeScope | [UpdateEmployeeScopeRequest](#fm.UpdateEmployeeScopeRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | update scopes of user Authorization scope of `` is required. |
@@ -4251,6 +4733,7 @@ Genereates jwt tokens
 | GetAvailableScopes | [GetAvailableScopeRequest](#fm.GetAvailableScopeRequest) | [ScopeResponse](#fm.ScopeResponse) | get all scopes Authorization scope of `` is required |
 | UpsertRole | [UpsertRoleRequest](#fm.UpsertRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | insert or update role scopes. Authorization scope of `fm.role.create` and &#34;fm.role.update&#34; is required. |
 | GetUserListByEmployeeIds | [GetUserListRequest](#fm.GetUserListRequest) | [GetUserListResponse](#fm.GetUserListResponse) | get user list according to employee id for changing roles/scopes Authorization scope of `` is required |
+| ResetPassword | [ResetPasswordRequest](#fm.ResetPasswordRequest) | [ResetPasswordResponse](#fm.ResetPasswordResponse) | update password using token from email |
 
  
 
@@ -4260,6 +4743,59 @@ Genereates jwt tokens
 <p align="right"><a href="#top">Top</a></p>
 
 ## meeting_service.proto
+
+
+
+<a name="fm.AddAgendaDecisionRequest"></a>
+
+### AddAgendaDecisionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of meeting |
+| agenda_id | [string](#string) |  | id of agenda |
+| decision | [string](#string) |  | string decision of agenda |
+| action_by | [string](#string) |  | action to be taken by |
+| deadline_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | deadline for action to be taken |
+
+
+
+
+
+
+<a name="fm.AddAgendaViewRequest"></a>
+
+### AddAgendaViewRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of meeting |
+| agenda_id | [string](#string) |  | id of agenda |
+| proposed_by | [string](#string) |  | view proposed by : employee_id |
+| description | [string](#string) |  | details |
+
+
+
+
+
+
+<a name="fm.AddAttendeesRequest"></a>
+
+### AddAttendeesRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of meeting |
+| invitee_ids | [string](#string) | repeated | employee ids of additional attendees |
+
+
+
 
 
 
@@ -4281,6 +4817,81 @@ Genereates jwt tokens
 
 
 
+<a name="fm.AgendaDecision"></a>
+
+### AgendaDecision
+details of decisions within an agenda
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | id of agenda decisions |
+| agenda_id | [string](#string) |  | agenda it belongs to |
+| decision | [string](#string) |  | decision details |
+| action_by | [string](#string) |  | view proposed by : employee_id |
+| deadline | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | deadline to take action |
+
+
+
+
+
+
+<a name="fm.AgendaDetail"></a>
+
+### AgendaDetail
+Agenda details with complete info on views/decisions
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | id of agenda |
+| title | [string](#string) |  | title of agenda |
+| description | [string](#string) |  | description of agenda |
+| proposed_by | [string](#string) |  | id of the employee that proposed the agenda |
+| estimated_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | estimated time to discuss the agenda |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | start time of agenda |
+| end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | end time of agenda |
+| agenda_views | [AgendaView](#fm.AgendaView) | repeated | views of agenda |
+| agenda_decisions | [AgendaDecision](#fm.AgendaDecision) | repeated | decisions of agenda |
+
+
+
+
+
+
+<a name="fm.AgendaTimerRequest"></a>
+
+### AgendaTimerRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of meeting |
+| agenda_id | [string](#string) |  | id of agenda |
+| action | [string](#string) |  | timer - action : Allowed values [&#34;START&#34;,&#34;STOP&#34;] |
+| action_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | action time |
+
+
+
+
+
+
+<a name="fm.AgendaTimerResponse"></a>
+
+### AgendaTimerResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agenda_id | [string](#string) |  | agenda id |
+
+
+
+
+
+
 <a name="fm.AgendaUpdateDetail"></a>
 
 ### AgendaUpdateDetail
@@ -4290,8 +4901,30 @@ Genereates jwt tokens
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | agenda_id | [string](#string) |  | id of agenda for update |
-| agenda | [string](#string) |  | title of agenda |
+| title | [string](#string) |  | title of agenda |
 | description | [string](#string) |  | description of agenda |
+| proposed_by | [string](#string) |  | id of the employee that proposed the agenda |
+| estimated_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | estimated time to discuss the agenda |
+
+
+
+
+
+
+<a name="fm.AgendaView"></a>
+
+### AgendaView
+details of Views within an agenda
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | id of agenda view |
+| agenda_id | [string](#string) |  | agenda it belongs to |
+| proposed_by | [string](#string) |  | view proposed by : employee_id |
+| description | [string](#string) |  | details |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | created date |
+| delete_history | [string](#string) | repeated | delete history |
 
 
 
@@ -4315,6 +4948,7 @@ Meeting creation request
 | agendas | [Agenda](#fm.Agenda) | repeated | information of agenda of the meetong |
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
 | title | [string](#string) |  | title of the meeting |
+| location | [string](#string) |  | location of meeting |
 
 
 
@@ -4330,6 +4964,81 @@ Response for create meeting requests
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | meeting_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.DeleteAgendaViewRequest"></a>
+
+### DeleteAgendaViewRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of meeting |
+| agenda_view_id | [string](#string) |  | id of agenda |
+
+
+
+
+
+
+<a name="fm.DetailMeetingRequest"></a>
+
+### DetailMeetingRequest
+request to get details of meeting by meeting_id
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | meeting Id of the meeting to view |
+
+
+
+
+
+
+<a name="fm.DetailMeetingResponse"></a>
+
+### DetailMeetingResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | unique identifier of the meeting |
+| meeting_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of the meeting |
+| estimated_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | duration time of the meeting |
+| title | [string](#string) |  | title of the meeting |
+| raised_by | [string](#string) |  | employee_id of employee who raised the meeting |
+| attendee_ids | [string](#string) | repeated | attendees of meeting |
+| department_id | [string](#string) |  | department id of the meeting |
+| organization_id | [string](#string) |  | organization id of the meeting |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | timestamp at which the meeting was created |
+| location | [string](#string) |  | location of meeting |
+| status | [string](#string) |  | status of meeting |
+| agenda_details | [AgendaDetail](#fm.AgendaDetail) | repeated | agendas of meeting along with views/decisions |
+
+
+
+
+
+
+<a name="fm.EditAgendaViewRequest"></a>
+
+### EditAgendaViewRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agenda_view_id | [string](#string) |  | id of agenda-view |
+| meeting_id | [string](#string) |  | id of meeting |
+| agenda_id | [string](#string) |  | id of agenda |
+| description | [string](#string) |  | details |
 
 
 
@@ -4389,6 +5098,7 @@ individual meeting response
 | department_id | [string](#string) |  | department id of the meeting |
 | organization_id | [string](#string) |  | organization id of the meeting |
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | timestamp at which the meeting was created |
+| location | [string](#string) |  | location of meeting |
 
 
 
@@ -4406,10 +5116,13 @@ request to update meeting by meeting_id
 | meeting_id | [string](#string) |  | meeting Id of the meeting to update |
 | meeting_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date of the meeting |
 | estimated_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | estimated time of the meeting |
+| title | [string](#string) |  | title of meeting |
 | department_id | [string](#string) |  | id of department of generated meeting |
 | raised_by | [string](#string) |  | id of employee who raised the meeting |
 | attendee_ids | [string](#string) | repeated | names of employees who attend the meetings |
 | agenda_detail | [AgendaUpdateDetail](#fm.AgendaUpdateDetail) | repeated | information of agenda of the meetong |
+| location | [string](#string) |  | location of meeting |
+| deleted_agenda_ids | [string](#string) | repeated | deleted_agenda_ids |
 
 
 
@@ -4425,6 +5138,36 @@ response for UpdateMeetingRequest
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | meeting_id | [string](#string) |  | meeting Id of the updated meeting |
+
+
+
+
+
+
+<a name="fm.UpsertAgendaDecisionResponse"></a>
+
+### UpsertAgendaDecisionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agenda_decision_id | [string](#string) |  | id of decision |
+
+
+
+
+
+
+<a name="fm.UpsertAgendaViewResponse"></a>
+
+### UpsertAgendaViewResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agenda_view_id | [string](#string) |  | id of agenda view |
 
 
 
@@ -4446,7 +5189,14 @@ response for UpdateMeetingRequest
 | ----------- | ------------ | ------------- | ------------|
 | Create | [CreateMeetingRequest](#fm.CreateMeetingRequest) | [CreateMeetingResponse](#fm.CreateMeetingResponse) | Create a new meeting. Authorization scope of `fm.meeting.create` is required. |
 | List | [ListMeetingRequest](#fm.ListMeetingRequest) | [ListMeetingResponse](#fm.ListMeetingResponse) | List returns the list of meeting visible to the authorized user in descending order. Scope of `fm.meeting.list` is required. |
+| Detail | [DetailMeetingRequest](#fm.DetailMeetingRequest) | [DetailMeetingResponse](#fm.DetailMeetingResponse) | Detail returns the detail of meeting along with its agendas, views and decisiosns Attendees/Creator of meeting can view the details. |
 | Update | [UpdateMeetingRequest](#fm.UpdateMeetingRequest) | [UpdateMeetingResponse](#fm.UpdateMeetingResponse) | Update an existing meeting. Authorization scope of `fm.meeting.update` is required. |
+| AddAttendees | [AddAttendeesRequest](#fm.AddAttendeesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Add Attendees to existing meetings. Authorization scope of `fm.meeting.update` is required. |
+| AddAgendaView | [AddAgendaViewRequest](#fm.AddAgendaViewRequest) | [UpsertAgendaViewResponse](#fm.UpsertAgendaViewResponse) | Add views to a given agenda in a meeting. |
+| EditAgendaView | [EditAgendaViewRequest](#fm.EditAgendaViewRequest) | [UpsertAgendaViewResponse](#fm.UpsertAgendaViewResponse) | Edit views of a given agenda in a meeting. |
+| DeleteAgendaView | [DeleteAgendaViewRequest](#fm.DeleteAgendaViewRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete views of a given agenda in a meeting. |
+| AddAgendaDecision | [AddAgendaDecisionRequest](#fm.AddAgendaDecisionRequest) | [UpsertAgendaDecisionResponse](#fm.UpsertAgendaDecisionResponse) | Add decision of an agenda |
+| AgendaTimerUpdate | [AgendaTimerRequest](#fm.AgendaTimerRequest) | [AgendaTimerResponse](#fm.AgendaTimerResponse) | start/stop agenda of meeting |
 
  
 
@@ -4711,6 +5461,114 @@ inividual organization response
 
 
 
+<a name="sector_service.proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## sector_service.proto
+
+
+
+<a name="fm.CreateSectorRequest"></a>
+
+### CreateSectorRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.CreateSectorResponse"></a>
+
+### CreateSectorResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sector_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListSectorRequest"></a>
+
+### ListSectorRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.ListSectorResponse"></a>
+
+### ListSectorResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListSectorResponse.SectorResponse](#fm.ListSectorResponse.SectorResponse) | repeated |  |
+
+
+
+
+
+
+<a name="fm.ListSectorResponse.SectorResponse"></a>
+
+### ListSectorResponse.SectorResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sector_id | [string](#string) |  |  |
+| title | [string](#string) |  |  |
+| description | [string](#string) |  |  |
+| organization_id | [string](#string) |  |  |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm.SectorService"></a>
+
+### SectorService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| Create | [CreateSectorRequest](#fm.CreateSectorRequest) | [CreateSectorResponse](#fm.CreateSectorResponse) | Create a new department. Authorization scope of `fm.department.create` is required |
+| List | [ListSectorRequest](#fm.ListSectorRequest) | [ListSectorResponse](#fm.ListSectorResponse) | List returns the list of department visible to the authroized user in ascending order of department title |
+
+ 
+
+
+
 <a name="service.proto"></a>
 <p align="right"><a href="#top">Top</a></p>
 
@@ -4769,7 +5627,7 @@ Address details
 | address2 | [string](#string) |  | address line 2 |
 | city | [string](#string) |  | city |
 | post_code | [string](#string) |  | post_code |
-| country | [string](#string) |  | country |
+| county | [string](#string) |  | county |
 | town | [string](#string) |  | town |
 
 
@@ -4901,6 +5759,8 @@ Request to create task
 | estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
 | organization_id | [string](#string) |  | the organization of the employee |
 | is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
+| is_reccurence | [bool](#bool) |  | wether task is recurrence |
+| recurrence | [UpsertRecurrence](#fm.UpsertRecurrence) |  | details of recurrence |
 
 
 
@@ -5211,6 +6071,64 @@ Task definition
 | organization_id | [string](#string) |  | organization id of the employee |
 | is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
 | correction | [google.protobuf.Duration](#google.protobuf.Duration) |  | correction duration of the task |
+| is_reccurence | [bool](#bool) |  | wether task is recurrence |
+| recurrence | [UpsertRecurrence](#fm.UpsertRecurrence) |  | details of recurrence |
+
+
+
+
+
+
+<a name="fm.RecurrenceDetails"></a>
+
+### RecurrenceDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| is_reccurence | [bool](#bool) |  | wether task is recurrence |
+| type | [string](#string) |  | type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK, YEARLY] |
+| type_details | [RecurrenceTypeDetails](#fm.RecurrenceTypeDetails) |  | type details; |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date from which recurrence starts |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date until which recurrence is created |
+| status | [bool](#bool) |  | status : by default set to true |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | created_date |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | updated_date |
+
+
+
+
+
+
+<a name="fm.RecurrenceTypeDetails"></a>
+
+### RecurrenceTypeDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| dates | [google.protobuf.Timestamp](#google.protobuf.Timestamp) | repeated | multiple dates : For CUSTOM type |
+| week_days | [string](#string) | repeated | multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY |
+| day_of_month | [int32](#int32) |  | day of the month: for MONTHLY_DATE or YEARLY |
+| monthly_week_details | [RecurrenceTypeDetails.MonthlyWeekDetails](#fm.RecurrenceTypeDetails.MonthlyWeekDetails) | repeated | Monthly week details |
+
+
+
+
+
+
+<a name="fm.RecurrenceTypeDetails.MonthlyWeekDetails"></a>
+
+### RecurrenceTypeDetails.MonthlyWeekDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| week_no | [string](#string) |  | week no : allowed FIRST, SECOND, THIRD, FOURTH, FIFTH, LAST |
+| week_days | [string](#string) | repeated | multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY |
 
 
 
@@ -5366,12 +6284,11 @@ Request to update task
 | task_id | [string](#string) |  | unique id of the task |
 | title | [string](#string) |  | title (name) of the task |
 | description | [string](#string) |  | description of the task |
-| client_id | [string](#string) |  | client the task is associated with |
-| employee_id | [string](#string) |  | employee the task is assigned to |
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
 | estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
-| organization_id | [string](#string) |  | the organization of the employee |
 | is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
+| is_reccurence | [bool](#bool) |  | wether task is recurrence |
+| recurrence | [UpsertRecurrence](#fm.UpsertRecurrence) |  | details of recurrence |
 
 
 
@@ -5387,6 +6304,24 @@ Response from update task
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | task_id | [string](#string) |  | unique id of the task |
+
+
+
+
+
+
+<a name="fm.UpsertRecurrence"></a>
+
+### UpsertRecurrence
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [string](#string) |  | type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK, YEARLY] |
+| type_details | [RecurrenceTypeDetails](#fm.RecurrenceTypeDetails) |  | type details; |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date from which recurrence starts |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date until which recurrence is created |
 
 
 
