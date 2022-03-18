@@ -1928,7 +1928,7 @@ paths:
           "$ref": "#/definitions/fmCreateMeetingRequest"
       tags:
       - MeetingService
-    patch:
+    put:
       summary: |-
         Update an existing meeting.
         Authorization scope of `fm.meeting.update` is required.
@@ -2016,26 +2016,6 @@ paths:
       tags:
       - MeetingService
   "/v1/meeting/agenda/view":
-    delete:
-      summary: Delete views of a given agenda in a meeting.
-      operationId: MeetingService_DeleteAgendaView
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            properties: {}
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmDeleteAgendaViewRequest"
-      tags:
-      - MeetingService
     post:
       summary: Add views to a given agenda in a meeting.
       operationId: MeetingService_AddAgendaView
@@ -2056,7 +2036,7 @@ paths:
           "$ref": "#/definitions/fmAddAgendaViewRequest"
       tags:
       - MeetingService
-    patch:
+    put:
       summary: Edit views of a given agenda in a meeting.
       operationId: MeetingService_EditAgendaView
       responses:
@@ -2074,6 +2054,27 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmEditAgendaViewRequest"
+      tags:
+      - MeetingService
+  "/v1/meeting/agenda/view-delete":
+    post:
+      summary: Delete views of a given agenda in a meeting.
+      operationId: MeetingService_DeleteAgendaView
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteAgendaViewRequest"
       tags:
       - MeetingService
   "/v1/meeting/{meeting_id}":
@@ -3543,6 +3544,12 @@ definitions:
       correction:
         type: string
         title: correction duration of the task
+      is_reccurence:
+        type: boolean
+        title: wether task is recurrence
+      recurrence:
+        "$ref": "#/definitions/fmUpsertRecurrence"
+        title: details of recurrence
     title: Task definition
   PeriodicBudgetPBudget:
     type: object
@@ -3555,6 +3562,17 @@ definitions:
       amount:
         type: number
         format: float
+  RecurrenceTypeDetailsMonthlyWeekDetails:
+    type: object
+    properties:
+      week_no:
+        type: string
+        title: 'week no : allowed FIRST, SECOND, THIRD, FOURTH, FIFTH, LAST'
+      week_days:
+        type: array
+        items:
+          type: string
+        title: 'multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY'
   UpdateTaskByClientRequestUpdateTaskByClient:
     type: object
     properties:
@@ -5021,6 +5039,12 @@ definitions:
       is_variation:
         type: boolean
         title: flag to confirm if the task is variation or not
+      is_reccurence:
+        type: boolean
+        title: wether task is recurrence
+      recurrence:
+        "$ref": "#/definitions/fmUpsertRecurrence"
+        title: details of recurrence
     title: Request to create task
   fmCreateTaskResponse:
     type: object
@@ -6353,6 +6377,29 @@ definitions:
         type: array
         items:
           "$ref": "#/definitions/PeriodicBudgetPBudget"
+  fmRecurrenceTypeDetails:
+    type: object
+    properties:
+      dates:
+        type: array
+        items:
+          type: string
+          format: date-time
+        title: 'multiple dates : For CUSTOM type'
+      week_days:
+        type: array
+        items:
+          type: string
+        title: 'multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY'
+      day_of_month:
+        type: integer
+        format: int32
+        title: 'day of the month: for MONTHLY_DATE or YEARLY'
+      monthly_week_details:
+        type: array
+        items:
+          "$ref": "#/definitions/RecurrenceTypeDetailsMonthlyWeekDetails"
+        title: Monthly week details
   fmReferenceEmployeeInfo:
     type: object
     properties:
@@ -6967,6 +7014,12 @@ definitions:
       is_variation:
         type: boolean
         title: flag to confirm if the task is variation or not
+      is_reccurence:
+        type: boolean
+        title: wether task is recurrence
+      recurrence:
+        "$ref": "#/definitions/fmUpsertRecurrence"
+        title: details of recurrence
     title: Request to update task
   fmUpdateTaskResponse:
     type: object
@@ -6987,6 +7040,24 @@ definitions:
       agenda_view_id:
         type: string
         title: id of agenda view
+  fmUpsertRecurrence:
+    type: object
+    properties:
+      type:
+        type: string
+        title: 'type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK,
+          YEARLY]'
+      type_details:
+        "$ref": "#/definitions/fmRecurrenceTypeDetails"
+        title: type details;
+      start_date:
+        type: string
+        format: date-time
+        title: Date from which recurrence starts
+      end_date:
+        type: string
+        format: date-time
+        title: Date until which recurrence is created
   fmUpsertRoleRequest:
     type: object
     properties:
