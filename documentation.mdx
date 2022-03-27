@@ -6088,6 +6088,7 @@ Task definition
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | id of task recurrence |
 | type | [string](#string) |  | type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK, YEARLY] |
 | type_details | [RecurrenceTypeDetails](#fm.RecurrenceTypeDetails) |  | type details; |
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date from which recurrence starts |
@@ -6112,6 +6113,7 @@ Task definition
 | dates | [google.protobuf.Timestamp](#google.protobuf.Timestamp) | repeated | multiple dates : For CUSTOM type |
 | week_days | [string](#string) | repeated | multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY |
 | day_of_month | [int32](#int32) |  | day of the month: for MONTHLY_DATE or YEARLY |
+| name_of_month | [string](#string) |  | string name of month : for YEARLY |
 | monthly_week_details | [RecurrenceTypeDetails.MonthlyWeekDetails](#fm.RecurrenceTypeDetails.MonthlyWeekDetails) | repeated | Monthly week details |
 
 
