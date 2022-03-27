@@ -3548,8 +3548,11 @@ definitions:
         type: boolean
         title: wether task is recurrence
       recurrence:
-        "$ref": "#/definitions/fmUpsertRecurrence"
+        "$ref": "#/definitions/fmRecurrenceDetails"
         title: details of recurrence
+      recurrence_parent_task:
+        type: string
+        title: Id of task from which current task was generated
     title: Task definition
   PeriodicBudgetPBudget:
     type: object
@@ -6377,6 +6380,38 @@ definitions:
         type: array
         items:
           "$ref": "#/definitions/PeriodicBudgetPBudget"
+  fmRecurrenceDetails:
+    type: object
+    properties:
+      id:
+        type: string
+        title: id of task recurrence
+      type:
+        type: string
+        title: 'type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK,
+          YEARLY]'
+      type_details:
+        "$ref": "#/definitions/fmRecurrenceTypeDetails"
+        title: type details;
+      start_date:
+        type: string
+        format: date-time
+        title: Date from which recurrence starts
+      end_date:
+        type: string
+        format: date-time
+        title: Date until which recurrence is created
+      status:
+        type: boolean
+        title: 'status : by default set to true'
+      created_at:
+        type: string
+        format: date-time
+        title: created_date
+      updated_at:
+        type: string
+        format: date-time
+        title: updated_date
   fmRecurrenceTypeDetails:
     type: object
     properties:
@@ -6395,6 +6430,9 @@ definitions:
         type: integer
         format: int32
         title: 'day of the month: for MONTHLY_DATE or YEARLY'
+      name_of_month:
+        type: string
+        title: 'string name of month : for YEARLY'
       monthly_week_details:
         type: array
         items:
