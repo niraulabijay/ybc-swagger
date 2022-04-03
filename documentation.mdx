@@ -374,6 +374,8 @@
     - [RecurrenceTypeDetails.MonthlyWeekDetails](#fm.RecurrenceTypeDetails.MonthlyWeekDetails)
     - [TaskByEmployeeResponse](#fm.TaskByEmployeeResponse)
     - [TimesheetResponse](#fm.TimesheetResponse)
+    - [UpdateRecurrenceRequest](#fm.UpdateRecurrenceRequest)
+    - [UpdateRecurrenceResponse](#fm.UpdateRecurrenceResponse)
     - [UpdateTaskByClientRequest](#fm.UpdateTaskByClientRequest)
     - [UpdateTaskByClientRequest.UpdateTaskByClient](#fm.UpdateTaskByClientRequest.UpdateTaskByClient)
     - [UpdateTaskByClientResponse](#fm.UpdateTaskByClientResponse)
@@ -6029,6 +6031,9 @@ Request for fetching list of tasks
 | ----- | ---- | ----- | ----------- |
 | filter | [ListRequestFilter](#fm.ListRequestFilter) |  | filter for list task request |
 | organization_id | [string](#string) |  | organization of employee the task is assigned to |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | For task filter based on task start time (optional) |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | For task filter based on task start time (optional) |
+| employee_id | [string](#string) |  | id of employee (optional) |
 
 
 
@@ -6177,6 +6182,38 @@ Task definition
 
 
 
+<a name="fm.UpdateRecurrenceRequest"></a>
+
+### UpdateRecurrenceRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | id of task |
+| is_reccurence | [bool](#bool) |  | is recurrence |
+| recurrence | [UpsertRecurrence](#fm.UpsertRecurrence) |  | details of recurrence |
+
+
+
+
+
+
+<a name="fm.UpdateRecurrenceResponse"></a>
+
+### UpdateRecurrenceResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of the task |
+
+
+
+
+
+
 <a name="fm.UpdateTaskByClientRequest"></a>
 
 ### UpdateTaskByClientRequest
@@ -6289,8 +6326,6 @@ Request to update task
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
 | estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
 | is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
-| is_reccurence | [bool](#bool) |  | wether task is recurrence |
-| recurrence | [UpsertRecurrence](#fm.UpsertRecurrence) |  | details of recurrence |
 
 
 
@@ -6348,6 +6383,7 @@ service to manage tasks
 | Checkout | [CheckoutTaskRequest](#fm.CheckoutTaskRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checkout can be used to check-out a staff from an existing checked-in task. Authorization scope of `fm.task.checkout` is required. |
 | List | [ListTaskRequest](#fm.ListTaskRequest) | [ListTaskResponse](#fm.ListTaskResponse) | List returns the list of all tasks visible to the authroized user in descending date order. Authorization scope of `fm.task.list` is required. |
 | Update | [UpdateTaskRequest](#fm.UpdateTaskRequest) | [UpdateTaskResponse](#fm.UpdateTaskResponse) | Update an existing task. Authorization scope of `fm.task.update` is required. |
+| UpdateRecurrence | [UpdateRecurrenceRequest](#fm.UpdateRecurrenceRequest) | [UpdateRecurrenceResponse](#fm.UpdateRecurrenceResponse) | Update task recurrence. Authorization scope of `fm.task.update` is required. |
 | ListByClient | [ListTaskByClientRequest](#fm.ListTaskByClientRequest) | [ListTaskByClientResponse](#fm.ListTaskByClientResponse) | List returns the list of task by client visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-client` is required. |
 | ListByEmployee | [ListTaskByEmployeeRequest](#fm.ListTaskByEmployeeRequest) | [ListTaskByEmployeeResponse](#fm.ListTaskByEmployeeResponse) | List returns the list of task by employee visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-employee` is required. |
 | UpdateByEmployee | [UpdateTaskByEmployeeRequest](#fm.UpdateTaskByEmployeeRequest) | [UpdateTaskByEmployeeResponse](#fm.UpdateTaskByEmployeeResponse) | Update an existing task by employee_id Authorization scope of `fm.task.update-by-client` is required. |
