@@ -2349,6 +2349,29 @@ paths:
           "$ref": "#/definitions/fmCheckoutTaskRequest"
       tags:
       - TaskService
+  "/v1/task/recurrence":
+    put:
+      summary: |-
+        Update task recurrence.
+        Authorization scope of `fm.task.update` is required.
+      operationId: TaskService_UpdateRecurrence
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateRecurrenceResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateRecurrenceRequest"
+      tags:
+      - TaskService
   "/v1/task/update-by-client":
     put:
       summary: |-
@@ -2423,6 +2446,23 @@ paths:
         format: int32
       - name: organization_id
         description: organization of employee the task is assigned to.
+        in: query
+        required: false
+        type: string
+      - name: start_date
+        description: For task filter based on task start time (optional).
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: end_date
+        description: For task filter based on task start time (optional).
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: employee_id
+        description: id of employee (optional).
         in: query
         required: false
         type: string
@@ -6993,6 +7033,24 @@ definitions:
         type: string
         title: unique id of the updated note
     title: Update note response
+  fmUpdateRecurrenceRequest:
+    type: object
+    properties:
+      task_id:
+        type: string
+        title: id of task
+      is_reccurence:
+        type: boolean
+        title: is recurrence
+      recurrence:
+        "$ref": "#/definitions/fmUpsertRecurrence"
+        title: details of recurrence
+  fmUpdateRecurrenceResponse:
+    type: object
+    properties:
+      task_id:
+        type: string
+        title: unique id of the task
   fmUpdateTaskByClientRequest:
     type: object
     properties:
@@ -7052,12 +7110,6 @@ definitions:
       is_variation:
         type: boolean
         title: flag to confirm if the task is variation or not
-      is_reccurence:
-        type: boolean
-        title: wether task is recurrence
-      recurrence:
-        "$ref": "#/definitions/fmUpsertRecurrence"
-        title: details of recurrence
     title: Request to update task
   fmUpdateTaskResponse:
     type: object
