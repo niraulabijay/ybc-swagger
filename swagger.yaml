@@ -904,7 +904,6 @@ paths:
         in: query
         required: false
         type: string
-        format: int64
       - name: search.area
         description: area of client.
         in: query
@@ -1414,7 +1413,6 @@ paths:
         in: query
         required: false
         type: string
-        format: int64
       - name: search.area
         description: area of client.
         in: query
@@ -2879,6 +2877,53 @@ paths:
           "$ref": "#/definitions/fmCreateUserOnEmployeeCreateRequest"
       tags:
       - UserService
+  "/v1/user/forgot-password":
+    post:
+      summary: forgot password endpoint
+      operationId: UserService_ForgotPassword
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmForgotPasswordResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmForgotPasswordRequest"
+      tags:
+      - UserService
+  "/v1/user/list__by_role":
+    get:
+      summary: get list of users from role name
+      operationId: UserService_GetUserListFromRole
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmGetUserListFromRoleResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: id of organization.
+        in: query
+        required: false
+        type: string
+      - name: role
+        description: name of role.
+        in: query
+        required: false
+        type: string
+      tags:
+      - UserService
   "/v1/user/list_by_employees":
     get:
       summary: |-
@@ -3250,7 +3295,6 @@ definitions:
         title: organization id the client belongs to
       client_code:
         type: string
-        format: int64
         title: client code
       name:
         type: string
@@ -3283,6 +3327,9 @@ definitions:
       is_head_office:
         type: boolean
         title: 'Boolean: shows wether client is head office or not'
+      profile_image:
+        type: string
+        title: profile image of client
     title: individual client response
   ListCorrectionResponseCorrectionResponse:
     type: object
@@ -4099,7 +4146,6 @@ definitions:
         title: Budgets
       client_code:
         type: string
-        format: int64
         title: client code
       invoice:
         type: array
@@ -4152,6 +4198,9 @@ definitions:
       is_head_office:
         type: boolean
         title: 'Boolean: shows wether client is head office or not'
+      profile_image:
+        type: string
+        title: profile image of client
     title: Response for client detail
   fmClientListAttachmentResponse:
     type: object
@@ -4199,7 +4248,7 @@ definitions:
         "$ref": "#/definitions/fmConfidentialEmployeeDetails"
         title: Employee details
       bank_account_details:
-        "$ref": "#/definitions/fmBankAccountDetails"
+        "$ref": "#/definitions/fmEmployeeBankAccountDetails"
         title: Bank details
     title: Confidential Employee information
   fmContactDetail:
@@ -4553,8 +4602,10 @@ definitions:
         title: Confidential Contact Person detail of the client
       client_code:
         type: string
-        format: int64
         title: unique code of client within the organization
+      profile_image:
+        type: string
+        title: profile image of client
   fmCreateClientResponse:
     type: object
     properties:
@@ -4620,7 +4671,6 @@ definitions:
         title: organization the employee belongs to
       employee_code:
         type: string
-        format: int64
         title: unique employee code for organization
       employee_info:
         "$ref": "#/definitions/fmEmployeeInformationForUpsert"
@@ -5146,6 +5196,9 @@ definitions:
       signature:
         type: string
         title: signature file upload
+      signature_text:
+        type: string
+        title: signature text
       have_prior_medical_condition:
         type: boolean
         title: have_prior_medical_condition of criminal conviction or not
@@ -5294,6 +5347,31 @@ definitions:
         type: string
         title: unique identifier of the newly created attachment record
     title: Success response payload after adding attachment to an employee
+  fmEmployeeBankAccountDetails:
+    type: object
+    properties:
+      bank_name:
+        type: string
+        title: Name of the bank
+      branch_name:
+        type: string
+        title: Branch name
+      account_number:
+        type: string
+        title: Account number
+      s_code:
+        type: string
+        title: some code
+      account_holder_name:
+        type: string
+        title: account holder name
+      signature:
+        type: string
+        title: signature photo url
+      signature_text:
+        type: string
+        title: signature_text
+    title: Employee Bank accounts details collection
   fmEmployeeDeleteAttachmentRequest:
     type: object
     properties:
@@ -5561,6 +5639,18 @@ definitions:
         type: string
         format: date-time
         title: transfer data creation time
+  fmForgotPasswordRequest:
+    type: object
+    properties:
+      email:
+        type: string
+        title: email id of user
+  fmForgotPasswordResponse:
+    type: object
+    properties:
+      success:
+        type: boolean
+        title: acknowlege
   fmGeneralEmployeeInformation:
     type: object
     properties:
@@ -5699,6 +5789,14 @@ definitions:
           format: int64
         title: The target tasks for the 7 days
     title: Response for getting target task of an employee for a client
+  fmGetUserListFromRoleResponse:
+    type: object
+    properties:
+      users:
+        type: array
+        items:
+          "$ref": "#/definitions/fmUserData"
+        title: list of users with their roles and scopes
   fmGetUserListResponse:
     type: object
     properties:
@@ -5735,6 +5833,12 @@ definitions:
         items:
           "$ref": "#/definitions/fmFaqData"
         title: post graduate loan question
+      signature:
+        type: string
+        title: signatute file upload
+      signature_text:
+        type: string
+        title: 'signature: full_name'
   fmHolidayResponse:
     type: object
     properties:
@@ -5893,7 +5997,6 @@ definitions:
         title: name of client
       client_code:
         type: string
-        format: int64
         title: unique client code
       area:
         type: string
@@ -5959,7 +6062,6 @@ definitions:
         title: name of client
       employee_code:
         type: string
-        format: int64
         title: unique client code
       area:
         type: string
@@ -6236,6 +6338,9 @@ definitions:
       signature:
         type: string
         title: signature file upload
+      signature_text:
+        type: string
+        title: signature text
     title: Next of Keen employee information
   fmNoteResponse:
     type: object
@@ -6274,7 +6379,6 @@ definitions:
     properties:
       employee_code:
         type: string
-        format: int64
         title: Employee code within the organization
       work_permit_expiry_date:
         type: string
@@ -6467,6 +6571,8 @@ definitions:
       email:
         type: string
         title: email of reference person
+      can_contact_without_notifying:
+        type: boolean
     title: Reference employee information
   fmRefreshRequest:
     type: object
@@ -6791,8 +6897,10 @@ definitions:
         title: Confidential Contact Person detail of the client
       client_code:
         type: string
-        format: int64
         title: unique code of client within the organization
+      profile_image:
+        type: string
+        title: profile image of client
     title: request to update client by client id
   fmUpdateClientResponse:
     type: object
@@ -6821,7 +6929,6 @@ definitions:
         title: last name of the employee
       employee_code:
         type: string
-        format: int64
         title: unique employee code for organization
       contact_detail:
         "$ref": "#/definitions/fmContactDetail"
