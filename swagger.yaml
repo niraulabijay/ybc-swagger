@@ -1021,6 +1021,28 @@ paths:
       - AreaRegionService
   "/v1/department/region":
     post:
+      summary: |-
+        Create a new Region. Authorization scope of `fm.region.create` is
+        required
+      operationId: AreaRegionService_CreateRegion
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertRegionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateRegionRequest"
+      tags:
+      - AreaRegionService
+    put:
       summary: Create a new Region. Authorization scope of `fm.region.update` is required
       operationId: AreaRegionService_UpdateRegion
       responses:
@@ -6851,9 +6873,6 @@ definitions:
       organization_id:
         type: string
         title: organization for the area
-      region_id:
-        type: string
-        title: region that area belongs to
       area_manager:
         type: string
         title: id of area manager (employee-id)
@@ -7233,6 +7252,9 @@ definitions:
       region_id:
         type: string
         title: id of region
+      organization_id:
+        type: string
+        title: id of organization
       title:
         type: string
         title: title of region
