@@ -6873,6 +6873,9 @@ definitions:
       organization_id:
         type: string
         title: organization for the area
+      region_id:
+        type: string
+        title: Region that area belongs to
       area_manager:
         type: string
         title: id of area manager (employee-id)
