@@ -2528,6 +2528,19 @@ paths:
         in: query
         required: false
         type: string
+      - name: status
+        description: 'status of task : "COMPLETE", "INCOMPLETE".'
+        in: query
+        required: false
+        type: string
+      - name: client_ids
+        description: filter by ids of clients.
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
       tags:
       - TaskService
   "/v1/tasks/change-timesheet-correction-status":
@@ -3637,6 +3650,15 @@ definitions:
         title: |-
           unique identifier of the task completed by employee on the client in
           particular date
+      start_time:
+        type: string
+        format: date-time
+        title: |-
+          task must start by at least this time. Start time is combination of
+          appointment date and time
+      estimate_time:
+        type: string
+        title: the estimated time period to complete the task
       check_in_time:
         type: string
         format: date-time
@@ -3648,6 +3670,9 @@ definitions:
       title:
         type: string
         title: task title
+      description:
+        type: string
+        title: task description
   PeriodicBudgetPBudget:
     type: object
     properties:
@@ -6713,6 +6738,15 @@ definitions:
         title: |-
           unique identifier of the task completed by employee on the client in
           particular date
+      start_time:
+        type: string
+        format: date-time
+        title: |-
+          task must start by at least this time. Start time is combination of
+          appointment date and time
+      estimate_time:
+        type: string
+        title: the estimated time period to complete the task
       check_in_time:
         type: string
         format: date-time
@@ -6724,6 +6758,9 @@ definitions:
       title:
         type: string
         title: task title
+      description:
+        type: string
+        title: task descriptiom
       employee_id:
         type: string
         title: employee id of the employee for which the task was assigned to
