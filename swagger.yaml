@@ -963,7 +963,7 @@ paths:
       tags:
       - AreaRegionService
     put:
-      summary: Create a new Area. Authorization scope of `fm.area.update` is required
+      summary: Update existing Area. Authorization scope of `fm.area.update` is required
       operationId: AreaRegionService_UpdateArea
       responses:
         '200':
@@ -980,6 +980,48 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmUpdateAreaRequest"
+      tags:
+      - AreaRegionService
+  "/v1/department/area/assign-supervisor":
+    post:
+      summary: Add/Update Area Supervisor of given area
+      operationId: AreaRegionService_UpsertAreaSupervisor
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertAreaSupervisorResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpsertAreaSupervisorRequest"
+      tags:
+      - AreaRegionService
+  "/v1/department/area/remove-supervisor":
+    post:
+      summary: Remove area supervisor
+      operationId: AreaRegionService_RemoveAreaSupervisor
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmRemoveAreaSupervisorResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmRemoveAreaSupervisorRequest"
       tags:
       - AreaRegionService
   "/v1/department/areas":
@@ -3244,10 +3286,15 @@ definitions:
       area_manager:
         type: string
         title: single area manager
-      area_supervisors:
+      areamanager_restricted_clients:
         type: array
         items:
           type: string
+        title: id of clients disabled for area_manager
+      area_supervisors:
+        type: array
+        items:
+          "$ref": "#/definitions/fmAreaSupervisor"
         title: list of area supervisors in that area
   ListCheckResponseCheckResponse:
     type: object
@@ -3921,6 +3968,17 @@ definitions:
       area_manager:
         type: string
         title: Area manager employee_id
+  fmAreaSupervisor:
+    type: object
+    properties:
+      area_supervisor:
+        type: string
+        title: id of area supervisor (employee-id)
+      allowed_client_ids:
+        type: array
+        items:
+          type: string
+        title: list of allowed clients
   fmAssignClientEmployeeShiftRequest:
     type: object
     properties:
@@ -4443,11 +4501,11 @@ definitions:
       area_manager:
         type: string
         title: id of area manager (employee-id)
-      area_supervisors:
+      areamanager_restricted_clients:
         type: array
         items:
           type: string
-        title: ids of area supervisors(employee-ids)
+        title: id of clients disabled for area_manager
   fmCreateCheckRequest:
     type: object
     properties:
@@ -5158,7 +5216,7 @@ definitions:
       is_variation:
         type: boolean
         title: flag to confirm if the task is variation or not
-      is_reccurence:
+      is_recurrence:
         type: boolean
         title: wether task is recurrence
       recurrence:
@@ -6650,6 +6708,21 @@ definitions:
       region_manager:
         type: string
         title: Region manager employee_id
+  fmRemoveAreaSupervisorRequest:
+    type: object
+    properties:
+      area_id:
+        type: string
+        title: id of area
+      area_supervisor_id:
+        type: string
+        title: id of area supervisor
+  fmRemoveAreaSupervisorResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmResetPasswordRequest:
     type: object
     properties:
@@ -6818,7 +6891,7 @@ definitions:
       correction:
         type: string
         title: correction duration of the task
-      is_reccurence:
+      is_recurrence:
         type: boolean
         title: wether task is recurrence
       recurrence:
@@ -6916,11 +6989,11 @@ definitions:
       area_manager:
         type: string
         title: id of area manager (employee-id)
-      area_supervisors:
+      areamanager_restricted_clients:
         type: array
         items:
           type: string
-        title: ids of area supervisors(employee-ids)
+        title: id of clients disabled for area_manager
   fmUpdateClientMobilizationRequest:
     type: object
     properties:
@@ -7274,7 +7347,7 @@ definitions:
       task_id:
         type: string
         title: id of task
-      is_reccurence:
+      is_recurrence:
         type: boolean
         title: is recurrence
       recurrence:
@@ -7385,6 +7458,26 @@ definitions:
     properties:
       area_id:
         type: string
+  fmUpsertAreaSupervisorRequest:
+    type: object
+    properties:
+      area_id:
+        type: string
+        title: unique id of area
+      area_supervisor:
+        type: string
+        title: area supervisor id (employee-id)
+      allowed_client_ids:
+        type: array
+        items:
+          type: string
+        title: list of clients allowed to area_supervisor
+  fmUpsertAreaSupervisorResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmUpsertRecurrence:
     type: object
     properties:
