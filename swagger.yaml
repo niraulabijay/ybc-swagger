@@ -3345,7 +3345,10 @@ definitions:
       client_id:
         type: string
         title: client the employee is assigned to
-      designation_id:
+      department_id:
+        type: string
+        title: department of employee in the client
+      designation:
         type: string
         title: designation of employee in the client
       employee_id:
@@ -4030,6 +4033,15 @@ definitions:
       organization_id:
         type: string
         title: organization id of the client employee relation
+      client_employee_id:
+        type: string
+        title: unique id of client employee relation
+      department_id:
+        type: string
+        title: department of employee
+      designation:
+        type: string
+        title: designation of employee in the client
       shift_contracted_day_hours:
         type: array
         items:
@@ -4043,9 +4055,6 @@ definitions:
         type: string
         format: date-time
         title: contract end date
-      client_employee_id:
-        type: string
-        title: unique id of client employee relation
       is_head_office:
         type: boolean
         title: is employee from head office
@@ -5799,6 +5808,12 @@ definitions:
       employee_id:
         type: string
         title: unique id of employee
+      department_id:
+        type: string
+        title: department of employee
+      designation:
+        type: string
+        title: designation of employee in the client
       shift_contracted_day_hours:
         type: array
         items:
