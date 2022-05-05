@@ -984,7 +984,9 @@ paths:
       - AreaRegionService
   "/v1/department/area/assign-supervisor":
     post:
-      summary: Add/Update Area Supervisor of given area
+      summary: |-
+        Add/Update Area Supervisor of given area
+        Authorization scope of `fm.area.update` is required
       operationId: AreaRegionService_UpsertAreaSupervisor
       responses:
         '200':
@@ -1005,7 +1007,8 @@ paths:
       - AreaRegionService
   "/v1/department/area/remove-supervisor":
     post:
-      summary: Remove area supervisor
+      summary: "Remove area supervisor \nAuthorization scope of `fm.area.update` is
+        required"
       operationId: AreaRegionService_RemoveAreaSupervisor
       responses:
         '200':
@@ -1029,7 +1032,6 @@ paths:
       summary: |-
         List returns the list of Area
         ascending order of Area title
-        Authorization scope of `fm.area.list` is required
       operationId: AreaRegionService_ListArea
       responses:
         '200':
@@ -1109,7 +1111,6 @@ paths:
       summary: |-
         List returns the list of regions
         ascending order of region title
-        Authorization scope of `fm.region.list` is required
       operationId: AreaRegionService_ListRegion
       responses:
         '200':
@@ -3353,9 +3354,30 @@ definitions:
       organization_id:
         type: string
         title: organization id of the client-employee link
-      shift:
+      shift_contracted_day_hours:
+        type: array
+        items:
+          "$ref": "#/definitions/fmShiftContractedDayHours"
+        title: contracted hours for the day of the week
+      start_date:
         type: string
-        title: shift of the employee for the client
+        format: date-time
+        title: contract start date
+      end_date:
+        type: string
+        format: date-time
+        title: contract end date
+      is_head_office:
+        type: boolean
+        title: is employee from head office
+      allow_all_clients:
+        type: boolean
+        title: allow access to all client
+      allowed_client_ids:
+        type: array
+        items:
+          type: string
+        title: list of allowed clients
   ListClientMobilizationResponseClientMobilizationResponse:
     type: object
     properties:
@@ -4008,17 +4030,6 @@ definitions:
       organization_id:
         type: string
         title: organization id of the client employee relation
-      wd_rate:
-        type: number
-        format: float
-        title: week days rate
-      we_rate:
-        type: number
-        format: float
-        title: weekend days rate
-      currency:
-        type: string
-        title: rate currency
       shift_contracted_day_hours:
         type: array
         items:
@@ -4035,14 +4046,6 @@ definitions:
       client_employee_id:
         type: string
         title: unique id of client employee relation
-      holidays:
-        type: integer
-        format: int32
-        title: total holidays
-      sick:
-        type: integer
-        format: int32
-        title: total sick leaves
       is_head_office:
         type: boolean
         title: is employee from head office
@@ -4414,16 +4417,6 @@ definitions:
         type: string
       position:
         type: string
-  fmContractedDayHours:
-    type: object
-    properties:
-      day:
-        type: string
-        title: day of the week
-      hours:
-        type: number
-        format: float
-        title: contracted hours for the day
   fmContractedHours:
     type: object
     properties:
@@ -4444,11 +4437,6 @@ definitions:
       shift_name:
         type: string
         title: Some name for the shift like morning, evening
-      daywise_hours:
-        type: array
-        items:
-          "$ref": "#/definitions/fmContractedDayHours"
-        title: Hourly shifts daywise in the contract
   fmCoverResponse:
     type: object
     properties:
@@ -4606,36 +4594,20 @@ definitions:
       employee_id:
         type: string
         title: employee the client is assigned to
-      designation_id:
+      department_id:
+        type: string
+        title: department of employee
+      designation:
         type: string
         title: designation of employee in the client
       organization_id:
         type: string
         title: organization id of the client employee relation
-      wd_rate:
-        type: number
-        format: float
-        title: week days rate
-      we_rate:
-        type: number
-        format: float
-        title: weekend days rate
-      currency:
-        type: string
-        title: rate currency
       shift_contracted_day_hours:
         type: array
         items:
           "$ref": "#/definitions/fmShiftContractedDayHours"
         title: multiple shift for employee in a single client
-      holidays:
-        type: integer
-        format: int32
-        title: total holidays
-      sick:
-        type: integer
-        format: int32
-        title: total sick leaves
       start_date:
         type: string
         format: date-time
@@ -5827,30 +5799,11 @@ definitions:
       employee_id:
         type: string
         title: unique id of employee
-      wd_rate:
-        type: number
-        format: float
-        title: week days rate
-      we_rate:
-        type: number
-        format: float
-        title: weekend days rate
-      currency:
-        type: string
-        title: rate currency
       shift_contracted_day_hours:
         type: array
         items:
           "$ref": "#/definitions/fmShiftContractedDayHours"
         title: contracted hours for the day of the week
-      holidays:
-        type: integer
-        format: int32
-        title: total holidays
-      sick:
-        type: integer
-        format: int32
-        title: total sick leaves
       start_date:
         type: string
         format: date-time
@@ -6769,21 +6722,9 @@ definitions:
       shift_end_time:
         type: string
         title: shift end time of the employee for the client
-      break_time:
+      vacancy_id:
         type: string
-        title: break time
-      is_paid_break:
-        type: boolean
-        title: is break paid
-      weeks:
-        type: integer
-        format: int32
-        title: total weeks for shift
-      contracted_day_hours:
-        type: array
-        items:
-          "$ref": "#/definitions/fmContractedDayHours"
-        title: contracted hours for the day of the week
+        title: vacancy id
   fmSickPeriod:
     type: object
     properties:
