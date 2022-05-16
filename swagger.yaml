@@ -1497,6 +1497,7 @@ paths:
         in: query
         required: false
         type: string
+        format: int64
       - name: search.area
         description: area of client.
         in: query
@@ -4218,6 +4219,12 @@ definitions:
       status:
         type: string
         title: status to change to
+      client_code:
+        type: string
+        title: unique code of client
+      client_date:
+        "$ref": "#/definitions/fmCreateClientDate"
+        title: required dates of client
     title: Request for changing status of client
   fmClientChangeStatusResponse:
     type: object
@@ -4775,6 +4782,7 @@ definitions:
         title: organization the employee belongs to
       employee_code:
         type: string
+        format: int64
         title: unique employee code for organization
       employee_info:
         "$ref": "#/definitions/fmEmployeeInformationForUpsert"
@@ -6149,6 +6157,7 @@ definitions:
         title: name of client
       employee_code:
         type: string
+        format: int64
         title: unique client code
       area:
         type: string
@@ -6164,6 +6173,9 @@ definitions:
         items:
           "$ref": "#/definitions/ListEmployeeResponseEmployeeResponse"
         title: list of employees
+      metadata:
+        "$ref": "#/definitions/fmListResponseMetadata"
+        title: metadata about response
     title: response for fetching list of employees
   fmListEmployeeSickResponse:
     type: object
@@ -6466,6 +6478,7 @@ definitions:
     properties:
       employee_code:
         type: string
+        format: int64
         title: Employee code within the organization
       work_permit_expiry_date:
         type: string
@@ -7054,6 +7067,7 @@ definitions:
         title: last name of the employee
       employee_code:
         type: string
+        format: int64
         title: unique employee code for organization
       contact_detail:
         "$ref": "#/definitions/fmContactDetail"
