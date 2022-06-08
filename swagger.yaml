@@ -917,6 +917,27 @@ paths:
       tags:
       - ClientService
   "/v1/department":
+    delete:
+      summary: Delete a department. Authorization scope of `fm.department.delete`
+        is required
+      operationId: DepartmentService_Delete
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteDepartmentRequest"
+      tags:
+      - DepartmentService
     post:
       summary: |-
         Create a new department. Authorization scope of `fm.department.create` is
@@ -937,6 +958,28 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmCreateDepartmentRequest"
+      tags:
+      - DepartmentService
+    put:
+      summary: |-
+        Update department of an organization. Authorization scope of `fm.department.update`
+        is required
+      operationId: DepartmentService_Update
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateDepartmentResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateDepartmentRequest"
       tags:
       - DepartmentService
   "/v1/department/area":
@@ -1139,10 +1182,28 @@ paths:
       tags:
       - AreaRegionService
   "/v1/department/sector":
+    delete:
+      summary: Delete a sector. Authorization scope of `fm.sector.delete` is required
+      operationId: SectorService_DeleteSector
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteSectorRequest"
+      tags:
+      - SectorService
     post:
-      summary: |-
-        Create a new department. Authorization scope of `fm.department.create` is
-        required
+      summary: Create a new sector. Authorization scope of `fm.sector.create` is required
       operationId: SectorService_Create
       responses:
         '200':
@@ -1161,11 +1222,32 @@ paths:
           "$ref": "#/definitions/fmCreateSectorRequest"
       tags:
       - SectorService
+    put:
+      summary: Update sector details. Authorization scope of `fm.sector.update` is
+        required
+      operationId: SectorService_UpdateSector
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateSectorResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateSectorRequest"
+      tags:
+      - SectorService
   "/v1/department/sectors":
     get:
       summary: |-
-        List returns the list of department visible to the authroized user in
-        ascending order of department title
+        List returns the list of sector visible to the authorized user in
+        ascending order of sector title
       operationId: SectorService_List
       responses:
         '200':
@@ -1226,8 +1308,31 @@ paths:
       tags:
       - DepartmentService
   "/v1/designation":
+    delete:
+      summary: Delete a designation. Authorization scope of `fm.designation.delete`
+        is required
+      operationId: DesignationService_DeleteDesignation
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteDesignationRequest"
+      tags:
+      - DesignationService
     post:
-      summary: required
+      summary: |-
+        Create a new designation. Authorization scope of `fm.designation.create`
+        is required
       operationId: DesignationService_Create
       responses:
         '200':
@@ -1246,10 +1351,31 @@ paths:
           "$ref": "#/definitions/fmCreateDesignationRequest"
       tags:
       - DesignationService
+    put:
+      summary: Update designation details. Authorization scope of `fm.designation.update`
+        is required
+      operationId: DesignationService_UpdateDesignation
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateDesignationResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateDesignationRequest"
+      tags:
+      - DesignationService
   "/v1/designations":
     get:
       summary: |-
-        List returns the list of designation visible to the authroized user in
+        List returns the list of designation visible to the authorized user in
         descending
       operationId: DesignationService_List
       responses:
@@ -2077,6 +2203,68 @@ paths:
           "$ref": "#/definitions/fmAddAgendaDecisionRequest"
       tags:
       - MeetingService
+    put:
+      summary: Update decision of an agenda
+      operationId: MeetingService_UpdateAgendaDecision
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertAgendaDecisionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateAgendaDecisionRequest"
+      tags:
+      - MeetingService
+  "/v1/meeting/agenda/decision/objection":
+    post:
+      summary: Add objection of decision of agenda
+      operationId: MeetingService_AddAgendaDecisionObjection
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertAgendaDecisionObjectionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmAddAgendaDecisionObjectionRequest"
+      tags:
+      - MeetingService
+  "/v1/meeting/agenda/decision/objection-delete":
+    delete:
+      summary: Delete objection made for decisions of an agenda
+      operationId: MeetingService_DeleteAgendaDecisionObjection
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteAgendaDecisionObjectionRequest"
+      tags:
+      - MeetingService
   "/v1/meeting/agenda/timer":
     post:
       summary: start/stop agenda of meeting
@@ -2163,7 +2351,7 @@ paths:
   "/v1/meeting/{meeting_id}":
     get:
       summary: |-
-        Detail returns the detail of meeting along with its agendas, views and decisiosns
+        Detail returns the detail of meeting along with its agendas, views, decisions and objections
         Attendees/Creator of meeting can view the details.
       operationId: MeetingService_Detail
       responses:
@@ -3802,6 +3990,28 @@ definitions:
       contracted_hours:
         type: string
         title: contracted hours of the employee with the client
+  fmAddAgendaDecisionObjectionRequest:
+    type: object
+    properties:
+      agenda_decision_id:
+        type: string
+        title: id of decision
+      agenda_id:
+        type: string
+        title: id of agenda
+      meeting_id:
+        type: string
+        title: id of meeting
+      objection:
+        type: string
+        title: string objection of decision
+      objection_by:
+        type: string
+        title: objection done by
+      created_at:
+        type: string
+        format: date-time
+        title: objection created date
   fmAddAgendaDecisionRequest:
     type: object
     properties:
@@ -3881,7 +4091,35 @@ definitions:
         type: string
         format: date-time
         title: deadline to take action
+      agenda_decision_objections:
+        type: array
+        items:
+          "$ref": "#/definitions/fmAgendaDecisionObjection"
+        title: objections of decisions of agenda
     title: details of decisions within an agenda
+  fmAgendaDecisionObjection:
+    type: object
+    properties:
+      id:
+        type: string
+        title: id of objection of decision
+      agenda_decision_id:
+        type: string
+        title: id of decision of agenda
+      agenda_id:
+        type: string
+        title: agenda it belongs to
+      objection:
+        type: string
+        title: objection details
+      objection_by:
+        type: string
+        title: 'objection done by : employee_id'
+      created_at:
+        type: string
+        format: date-time
+        title: objection created date
+    title: details of objection of decision made for an agenda
   fmAgendaDetail:
     type: object
     properties:
@@ -3918,7 +4156,7 @@ definitions:
         items:
           "$ref": "#/definitions/fmAgendaDecision"
         title: decisions of agenda
-    title: Agenda details with complete info on views/decisions
+    title: Agenda details with complete info on views/decisions/objections
   fmAgendaTimerRequest:
     type: object
     properties:
@@ -5342,6 +5580,15 @@ definitions:
         format: date-time
         title: DBS expiry date
     title: Dbs details of employee
+  fmDeleteAgendaDecisionObjectionRequest:
+    type: object
+    properties:
+      meeting_id:
+        type: string
+        title: id of meeting
+      decision_objection_id:
+        type: string
+        title: id of objection of a decision
   fmDeleteAgendaViewRequest:
     type: object
     properties:
@@ -5351,6 +5598,36 @@ definitions:
       agenda_view_id:
         type: string
         title: id of agenda
+  fmDeleteDepartmentRequest:
+    type: object
+    properties:
+      organization_id:
+        type: string
+        title: organization_id to which the department belongs to
+      department_id:
+        type: string
+        title: department_id of department to be deleted
+  fmDeleteDesignationRequest:
+    type: object
+    properties:
+      designation_id:
+        type: string
+        title: designation_id of designation to be deleted
+      department_id:
+        type: string
+        title: department_id to which the designation belongs to
+      organization_id:
+        type: string
+        title: organization_id to which the designation belongs to
+  fmDeleteSectorRequest:
+    type: object
+    properties:
+      sector_id:
+        type: string
+        title: sector_id of sector to be deleted
+      organization_id:
+        type: string
+        title: organization_id to which the sector belongs to
   fmDetailMeetingResponse:
     type: object
     properties:
@@ -6940,6 +7217,28 @@ definitions:
       organization_id:
         type: string
         title: organization id
+  fmUpdateAgendaDecisionRequest:
+    type: object
+    properties:
+      agenda_decision_id:
+        type: string
+        title: id of decision
+      meeting_id:
+        type: string
+        title: id of meeting
+      agenda_id:
+        type: string
+        title: id of agenda
+      decision:
+        type: string
+        title: string decision of agenda
+      action_by:
+        type: string
+        title: action to be taken by
+      deadline_date:
+        type: string
+        format: date-time
+        title: deadline for action to be taken
   fmUpdateAreaRequest:
     type: object
     properties:
@@ -7047,6 +7346,51 @@ definitions:
         type: string
         title: client Id of the updated client
     title: response for UpdateClientRequest
+  fmUpdateDepartmentRequest:
+    type: object
+    properties:
+      department_id:
+        type: string
+        title: department_id of updated department
+      organization_id:
+        type: string
+        title: organization_id  to which department belongs to
+      title:
+        type: string
+        title: title of department
+      description:
+        type: string
+        title: description of department
+  fmUpdateDepartmentResponse:
+    type: object
+    properties:
+      department_id:
+        type: string
+        title: department_id of updated department
+  fmUpdateDesignationRequest:
+    type: object
+    properties:
+      designation_id:
+        type: string
+        title: designation_id of updated designation
+      department_id:
+        type: string
+        title: department_id to which the designation belongs to
+      organization_id:
+        type: string
+        title: organization_id to which the designation belongs to
+      title:
+        type: string
+        title: job title
+      description:
+        type: string
+        title: details about the designation
+  fmUpdateDesignationResponse:
+    type: object
+    properties:
+      designation_id:
+        type: string
+        title: designation_id of updated designation
   fmUpdateEmployeeRequest:
     type: object
     properties:
@@ -7344,6 +7688,27 @@ definitions:
       regional_manager:
         type: string
         title: id of area manager (employee-id)
+  fmUpdateSectorRequest:
+    type: object
+    properties:
+      sector_id:
+        type: string
+        title: sector_id of updated sector
+      organization_id:
+        type: string
+        title: organization_id to which the sector belongs to
+      title:
+        type: string
+        title: title of sector
+      description:
+        type: string
+        title: details about the sector
+  fmUpdateSectorResponse:
+    type: object
+    properties:
+      sector_id:
+        type: string
+        title: sector_id of updated sector
   fmUpdateTaskByClientRequest:
     type: object
     properties:
@@ -7411,6 +7776,12 @@ definitions:
         type: string
         title: unique id of the task
     title: Response from update task
+  fmUpsertAgendaDecisionObjectionResponse:
+    type: object
+    properties:
+      decision_objection_id:
+        type: string
+        title: id of objection
   fmUpsertAgendaDecisionResponse:
     type: object
     properties:
