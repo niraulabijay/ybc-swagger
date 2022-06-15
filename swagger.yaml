@@ -917,27 +917,6 @@ paths:
       tags:
       - ClientService
   "/v1/department":
-    delete:
-      summary: Delete a department. Authorization scope of `fm.department.delete`
-        is required
-      operationId: DepartmentService_Delete
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            properties: {}
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmDeleteDepartmentRequest"
-      tags:
-      - DepartmentService
     post:
       summary: |-
         Create a new department. Authorization scope of `fm.department.create` is
@@ -980,6 +959,28 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmUpdateDepartmentRequest"
+      tags:
+      - DepartmentService
+  "/v1/department-delete":
+    post:
+      summary: Delete a department. Authorization scope of `fm.department.delete`
+        is required
+      operationId: DepartmentService_Delete
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteDepartmentRequest"
       tags:
       - DepartmentService
   "/v1/department/area":
@@ -1182,26 +1183,6 @@ paths:
       tags:
       - AreaRegionService
   "/v1/department/sector":
-    delete:
-      summary: Delete a sector. Authorization scope of `fm.sector.delete` is required
-      operationId: SectorService_DeleteSector
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            properties: {}
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmDeleteSectorRequest"
-      tags:
-      - SectorService
     post:
       summary: Create a new sector. Authorization scope of `fm.sector.create` is required
       operationId: SectorService_Create
@@ -1243,6 +1224,27 @@ paths:
           "$ref": "#/definitions/fmUpdateSectorRequest"
       tags:
       - SectorService
+  "/v1/department/sector-delete":
+    post:
+      summary: Delete a sector. Authorization scope of `fm.sector.delete` is required
+      operationId: SectorService_DeleteSector
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteSectorRequest"
+      tags:
+      - SectorService
   "/v1/department/sectors":
     get:
       summary: |-
@@ -1275,6 +1277,71 @@ paths:
         type: string
       tags:
       - SectorService
+  "/v1/department/sub-area":
+    post:
+      summary: "Create a new Sub-Area. Authorization scope of `fm.sub-area.create`
+        is \nrequired"
+      operationId: AreaRegionService_CreateSubArea
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertSubAreaResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateSubAreaRequest"
+      tags:
+      - AreaRegionService
+    put:
+      summary: Update existing Sub Area. Authorization scope of `fm.sub-area.update`
+        is required
+      operationId: AreaRegionService_UpdateSubArea
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertSubAreaResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateSubAreaRequest"
+      tags:
+      - AreaRegionService
+  "/v1/department/sub-area-delete":
+    post:
+      summary: Delete existing Sub-Area of an Area. Authorizaton scope of `fm.sub-area.delete`
+        is required
+      operationId: AreaRegionService_DeleteSubArea
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmDeleteSubAreaResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteSubAreaRequest"
+      tags:
+      - AreaRegionService
   "/v1/departments":
     get:
       summary: |-
@@ -1308,27 +1375,6 @@ paths:
       tags:
       - DepartmentService
   "/v1/designation":
-    delete:
-      summary: Delete a designation. Authorization scope of `fm.designation.delete`
-        is required
-      operationId: DesignationService_DeleteDesignation
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            properties: {}
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmDeleteDesignationRequest"
-      tags:
-      - DesignationService
     post:
       summary: |-
         Create a new designation. Authorization scope of `fm.designation.create`
@@ -1370,6 +1416,28 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmUpdateDesignationRequest"
+      tags:
+      - DesignationService
+  "/v1/designation-delete":
+    post:
+      summary: Delete a designation. Authorization scope of `fm.designation.delete`
+        is required
+      operationId: DesignationService_DeleteDesignation
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteDesignationRequest"
       tags:
       - DesignationService
   "/v1/designations":
@@ -2245,7 +2313,7 @@ paths:
       tags:
       - MeetingService
   "/v1/meeting/agenda/decision/objection-delete":
-    delete:
+    post:
       summary: Delete objection made for decisions of an agenda
       operationId: MeetingService_DeleteAgendaDecisionObjection
       responses:
@@ -3481,6 +3549,11 @@ definitions:
         items:
           type: string
         title: id of clients disabled for area_manager
+      sub_areas:
+        type: array
+        items:
+          "$ref": "#/definitions/fmSubAreaDetails"
+        title: list of sub areas of the particular area
       area_supervisors:
         type: array
         items:
@@ -5413,6 +5486,23 @@ definitions:
     properties:
       sector_id:
         type: string
+  fmCreateSubAreaRequest:
+    type: object
+    properties:
+      title:
+        type: string
+        title: title of sub area
+      organization_id:
+        type: string
+        title: organization of the sub area
+      area_id:
+        type: string
+        title: area that sub area belongs to
+      area_supervisors:
+        type: array
+        items:
+          type: string
+        title: id of area supervisors (employee_id)
   fmCreateTaskRequest:
     type: object
     properties:
@@ -5628,6 +5718,21 @@ definitions:
       organization_id:
         type: string
         title: organization_id to which the sector belongs to
+  fmDeleteSubAreaRequest:
+    type: object
+    properties:
+      sub_area_id:
+        type: string
+        title: id of sub area to be deleted
+      area_id:
+        type: string
+        title: id of area to which the sub area belongs to
+  fmDeleteSubAreaResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmDetailMeetingResponse:
     type: object
     properties:
@@ -7046,6 +7151,26 @@ definitions:
     properties:
       monthly:
         type: string
+  fmSubAreaDetails:
+    type: object
+    properties:
+      sub_area_id:
+        type: string
+        title: id of sub area
+      area_id:
+        type: string
+        title: id of area to which the sub area belongs
+      title:
+        type: string
+        title: tile of the sub area
+      organization_id:
+        type: string
+        title: organization that the sub area belongs to
+      area_supervisors:
+        type: array
+        items:
+          type: string
+        title: id of area supervisors (employee_id)
   fmTaskByEmployeeResponse:
     type: object
     properties:
@@ -7709,6 +7834,26 @@ definitions:
       sector_id:
         type: string
         title: sector_id of updated sector
+  fmUpdateSubAreaRequest:
+    type: object
+    properties:
+      sub_area_id:
+        type: string
+        title: id of sub area to be updated
+      area_id:
+        type: string
+        title: id of area to which the sub area belongs
+      title:
+        type: string
+        title: title of sub area
+      organization_id:
+        type: string
+        title: organization id of the sub area
+      area_supervisors:
+        type: array
+        items:
+          type: string
+        title: id of area supervisors (employee_id)
   fmUpdateTaskByClientRequest:
     type: object
     properties:
@@ -7871,6 +8016,12 @@ definitions:
         items:
           "$ref": "#/definitions/fmUserScope"
         title: scopes in the group
+  fmUpsertSubAreaResponse:
+    type: object
+    properties:
+      sub_area_id:
+        type: string
+        title: id of sub area
   fmUserData:
     type: object
     properties:
