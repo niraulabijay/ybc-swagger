@@ -2864,6 +2864,104 @@ paths:
           "$ref": "#/definitions/fmChangeTimesheetCorrectionStatusRequest"
       tags:
       - TaskService
+  "/v1/tasks/group_by_employee":
+    get:
+      summary: |-
+        Task Group Data By Employee
+        Authorization scope of `fm.task.list` is required.
+      operationId: TaskService_ListTaskGroupByEmployee
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmTaskGroupByEmployeeResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: group_type
+        description: type of group.
+        in: query
+        required: false
+        type: string
+      - name: employee_id
+        description: id of employee.
+        in: query
+        required: false
+        type: string
+      - name: year
+        description: year.
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: month
+        description: month.
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: start_date
+        description: start date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: end_date
+        description: end date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: search_date
+        description: search date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      tags:
+      - TaskService
+  "/v1/tasks/groups":
+    get:
+      summary: |-
+        Task Group Data
+        Authorization scope of `fm.task.list` is required.
+      operationId: TaskService_ListTaskGroup
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmTaskGroupResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: unique id of organization.
+        in: query
+        required: false
+        type: string
+      - name: group_type
+        description: 'type of group : eg: YEARLY ,MONTHLY, WEEKLY.'
+        in: query
+        required: false
+        type: string
+      - name: start_date
+        description: start date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: end_date
+        description: end date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      tags:
+      - TaskService
   "/v1/tasks/issue":
     post:
       summary: |-
@@ -4029,6 +4127,61 @@ definitions:
         items:
           type: string
         title: 'multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY'
+  TaskGroupByEmployeeResponseEmployeeData:
+    type: object
+    properties:
+      employee_id:
+        type: string
+        title: id of employee
+      task_information:
+        type: array
+        items:
+          "$ref": "#/definitions/TaskGroupByEmployeeResponseTaskInformation"
+        title: task information
+  TaskGroupByEmployeeResponseTaskInformation:
+    type: object
+    properties:
+      key:
+        type: string
+      total_tasks:
+        type: integer
+        format: int32
+      total_hours:
+        type: number
+        format: float
+  TaskGroupResponseEmployeeTaskData:
+    type: object
+    properties:
+      employee_id:
+        type: string
+        title: unique id of employee
+      total_tasks:
+        type: integer
+        format: int32
+        title: total tasks done
+      task_total_time:
+        type: number
+        format: double
+        title: total task working duration in seconds
+      weekly_data:
+        type: array
+        items:
+          "$ref": "#/definitions/TaskGroupResponseTaskGroupWeeklyData"
+        title: weekly data
+  TaskGroupResponseTaskGroupWeeklyData:
+    type: object
+    properties:
+      day_of_week:
+        type: string
+        title: day of week
+      total_tasks:
+        type: integer
+        format: int32
+        title: total tasks done
+      task_total_time:
+        type: number
+        format: double
+        title: total task working duration in seconds
   UpdateTaskByClientRequestUpdateTaskByClient:
     type: object
     properties:
@@ -7214,6 +7367,21 @@ definitions:
       task_detail:
         "$ref": "#/definitions/fmTaskResponse"
         title: Details of the task
+  fmTaskGroupByEmployeeResponse:
+    type: object
+    properties:
+      employee_data:
+        type: array
+        items:
+          "$ref": "#/definitions/TaskGroupByEmployeeResponseEmployeeData"
+  fmTaskGroupResponse:
+    type: object
+    properties:
+      employee_data:
+        type: array
+        items:
+          "$ref": "#/definitions/TaskGroupResponseEmployeeTaskData"
+        title: employee data
   fmTaskResponse:
     type: object
     properties:
