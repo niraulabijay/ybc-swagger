@@ -4,16 +4,33 @@
 ## Table of Contents
 
 - [area_region_service.proto](#area_region_service.proto)
+    - [AreaSupervisor](#fm.AreaSupervisor)
     - [CreateAreaRequest](#fm.CreateAreaRequest)
-    - [CreateAreaResponse](#fm.CreateAreaResponse)
     - [CreateRegionRequest](#fm.CreateRegionRequest)
-    - [CreateRegionResponse](#fm.CreateRegionResponse)
+    - [CreateSubAreaRequest](#fm.CreateSubAreaRequest)
+    - [DeleteAreaRequest](#fm.DeleteAreaRequest)
+    - [DeleteAreaResponse](#fm.DeleteAreaResponse)
+    - [DeleteRegionRequest](#fm.DeleteRegionRequest)
+    - [DeleteRegionResponse](#fm.DeleteRegionResponse)
+    - [DeleteSubAreaRequest](#fm.DeleteSubAreaRequest)
+    - [DeleteSubAreaResponse](#fm.DeleteSubAreaResponse)
     - [ListAreaRequest](#fm.ListAreaRequest)
     - [ListAreaResponse](#fm.ListAreaResponse)
     - [ListAreaResponse.AreaResponse](#fm.ListAreaResponse.AreaResponse)
     - [ListRegionRequest](#fm.ListRegionRequest)
     - [ListRegionResponse](#fm.ListRegionResponse)
     - [ListRegionResponse.RegionResponse](#fm.ListRegionResponse.RegionResponse)
+    - [RemoveAreaSupervisorRequest](#fm.RemoveAreaSupervisorRequest)
+    - [RemoveAreaSupervisorResponse](#fm.RemoveAreaSupervisorResponse)
+    - [SubAreaDetails](#fm.SubAreaDetails)
+    - [UpdateAreaRequest](#fm.UpdateAreaRequest)
+    - [UpdateRegionRequest](#fm.UpdateRegionRequest)
+    - [UpdateSubAreaRequest](#fm.UpdateSubAreaRequest)
+    - [UpsertAreaResponse](#fm.UpsertAreaResponse)
+    - [UpsertAreaSupervisorRequest](#fm.UpsertAreaSupervisorRequest)
+    - [UpsertAreaSupervisorResponse](#fm.UpsertAreaSupervisorResponse)
+    - [UpsertRegionResponse](#fm.UpsertRegionResponse)
+    - [UpsertSubAreaResponse](#fm.UpsertSubAreaResponse)
   
     - [AreaRegionService](#fm.AreaRegionService)
   
@@ -21,9 +38,22 @@
     - [CheckInOutRequest](#fm.CheckInOutRequest)
     - [CreateCheckRequest](#fm.CreateCheckRequest)
     - [CreateCheckResponse](#fm.CreateCheckResponse)
+    - [CreateEmployeeCheckRequest](#fm.CreateEmployeeCheckRequest)
+    - [CreateEmployeeCheckResponse](#fm.CreateEmployeeCheckResponse)
+    - [GetEmployeeCheckRequest](#fm.GetEmployeeCheckRequest)
+    - [GetEmployeeCheckResponse](#fm.GetEmployeeCheckResponse)
+    - [GetEmployeeCheckResponse.EmployeeCheckResponse](#fm.GetEmployeeCheckResponse.EmployeeCheckResponse)
     - [ListCheckRequest](#fm.ListCheckRequest)
     - [ListCheckResponse](#fm.ListCheckResponse)
     - [ListCheckResponse.CheckResponse](#fm.ListCheckResponse.CheckResponse)
+    - [ListEmployeeCheckRequest](#fm.ListEmployeeCheckRequest)
+    - [ListEmployeeCheckResponse](#fm.ListEmployeeCheckResponse)
+    - [ListEmployeeCheckResponse.EmployeeCheckInfo](#fm.ListEmployeeCheckResponse.EmployeeCheckInfo)
+    - [ListGlobalCheckRequest](#fm.ListGlobalCheckRequest)
+    - [ListGlobalCheckResponse](#fm.ListGlobalCheckResponse)
+    - [ListGlobalCheckResponse.GlobalCheckResponse](#fm.ListGlobalCheckResponse.GlobalCheckResponse)
+    - [UpsertGlobalCheckReponse](#fm.UpsertGlobalCheckReponse)
+    - [UpsertGlobalCheckRequest](#fm.UpsertGlobalCheckRequest)
   
     - [CheckService](#fm.CheckService)
   
@@ -35,7 +65,6 @@
     - [AssignTargetTasksRequest](#fm.AssignTargetTasksRequest)
     - [AssignTargetTasksRequest.WeeklyTargetTasksEntry](#fm.AssignTargetTasksRequest.WeeklyTargetTasksEntry)
     - [AssignTargetTasksResponse](#fm.AssignTargetTasksResponse)
-    - [ContractedDayHours](#fm.ContractedDayHours)
     - [CreateClientEmployeeRequest](#fm.CreateClientEmployeeRequest)
     - [CreateClientEmployeeResponse](#fm.CreateClientEmployeeResponse)
     - [CreateEmployeeTrainingRequest](#fm.CreateEmployeeTrainingRequest)
@@ -127,18 +156,24 @@
 - [department_service.proto](#department_service.proto)
     - [CreateDepartmentRequest](#fm.CreateDepartmentRequest)
     - [CreateDepartmentResponse](#fm.CreateDepartmentResponse)
+    - [DeleteDepartmentRequest](#fm.DeleteDepartmentRequest)
     - [ListDepartmentRequest](#fm.ListDepartmentRequest)
     - [ListDepartmentResponse](#fm.ListDepartmentResponse)
     - [ListDepartmentResponse.DepartmentResponse](#fm.ListDepartmentResponse.DepartmentResponse)
+    - [UpdateDepartmentRequest](#fm.UpdateDepartmentRequest)
+    - [UpdateDepartmentResponse](#fm.UpdateDepartmentResponse)
   
     - [DepartmentService](#fm.DepartmentService)
   
 - [designation_service.proto](#designation_service.proto)
     - [CreateDesignationRequest](#fm.CreateDesignationRequest)
     - [CreateDesignationResponse](#fm.CreateDesignationResponse)
+    - [DeleteDesignationRequest](#fm.DeleteDesignationRequest)
     - [ListDesignationRequest](#fm.ListDesignationRequest)
     - [ListDesignationResponse](#fm.ListDesignationResponse)
     - [ListDesignationResponse.DesignationResponse](#fm.ListDesignationResponse.DesignationResponse)
+    - [UpdateDesignationRequest](#fm.UpdateDesignationRequest)
+    - [UpdateDesignationResponse](#fm.UpdateDesignationResponse)
   
     - [DesignationService](#fm.DesignationService)
   
@@ -258,8 +293,12 @@
     - [CreateUserOnEmployeeCreateResponse](#fm.CreateUserOnEmployeeCreateResponse)
     - [CreateUserRequest](#fm.CreateUserRequest)
     - [CreateUserResponse](#fm.CreateUserResponse)
+    - [ForgotPasswordRequest](#fm.ForgotPasswordRequest)
+    - [ForgotPasswordResponse](#fm.ForgotPasswordResponse)
     - [GetAvailableRoleRequest](#fm.GetAvailableRoleRequest)
     - [GetAvailableScopeRequest](#fm.GetAvailableScopeRequest)
+    - [GetUserListFromRoleRequest](#fm.GetUserListFromRoleRequest)
+    - [GetUserListFromRoleResponse](#fm.GetUserListFromRoleResponse)
     - [GetUserListRequest](#fm.GetUserListRequest)
     - [GetUserListResponse](#fm.GetUserListResponse)
     - [LoginRequest](#fm.LoginRequest)
@@ -283,11 +322,13 @@
     - [UserService](#fm.UserService)
   
 - [meeting_service.proto](#meeting_service.proto)
+    - [AddAgendaDecisionObjectionRequest](#fm.AddAgendaDecisionObjectionRequest)
     - [AddAgendaDecisionRequest](#fm.AddAgendaDecisionRequest)
     - [AddAgendaViewRequest](#fm.AddAgendaViewRequest)
     - [AddAttendeesRequest](#fm.AddAttendeesRequest)
     - [Agenda](#fm.Agenda)
     - [AgendaDecision](#fm.AgendaDecision)
+    - [AgendaDecisionObjection](#fm.AgendaDecisionObjection)
     - [AgendaDetail](#fm.AgendaDetail)
     - [AgendaTimerRequest](#fm.AgendaTimerRequest)
     - [AgendaTimerResponse](#fm.AgendaTimerResponse)
@@ -295,6 +336,7 @@
     - [AgendaView](#fm.AgendaView)
     - [CreateMeetingRequest](#fm.CreateMeetingRequest)
     - [CreateMeetingResponse](#fm.CreateMeetingResponse)
+    - [DeleteAgendaDecisionObjectionRequest](#fm.DeleteAgendaDecisionObjectionRequest)
     - [DeleteAgendaViewRequest](#fm.DeleteAgendaViewRequest)
     - [DetailMeetingRequest](#fm.DetailMeetingRequest)
     - [DetailMeetingResponse](#fm.DetailMeetingResponse)
@@ -302,8 +344,10 @@
     - [ListMeetingRequest](#fm.ListMeetingRequest)
     - [ListMeetingResponse](#fm.ListMeetingResponse)
     - [ListMeetingResponse.MeetingResponse](#fm.ListMeetingResponse.MeetingResponse)
+    - [UpdateAgendaDecisionRequest](#fm.UpdateAgendaDecisionRequest)
     - [UpdateMeetingRequest](#fm.UpdateMeetingRequest)
     - [UpdateMeetingResponse](#fm.UpdateMeetingResponse)
+    - [UpsertAgendaDecisionObjectionResponse](#fm.UpsertAgendaDecisionObjectionResponse)
     - [UpsertAgendaDecisionResponse](#fm.UpsertAgendaDecisionResponse)
     - [UpsertAgendaViewResponse](#fm.UpsertAgendaViewResponse)
   
@@ -332,9 +376,12 @@
 - [sector_service.proto](#sector_service.proto)
     - [CreateSectorRequest](#fm.CreateSectorRequest)
     - [CreateSectorResponse](#fm.CreateSectorResponse)
+    - [DeleteSectorRequest](#fm.DeleteSectorRequest)
     - [ListSectorRequest](#fm.ListSectorRequest)
     - [ListSectorResponse](#fm.ListSectorResponse)
     - [ListSectorResponse.SectorResponse](#fm.ListSectorResponse.SectorResponse)
+    - [UpdateSectorRequest](#fm.UpdateSectorRequest)
+    - [UpdateSectorResponse](#fm.UpdateSectorResponse)
   
     - [SectorService](#fm.SectorService)
   
@@ -342,6 +389,7 @@
     - [BankAccountDetails](#fm.BankAccountDetails)
     - [ContactDetail](#fm.ContactDetail)
     - [ContactDetail.Address](#fm.ContactDetail.Address)
+    - [EmployeeBankAccountDetails](#fm.EmployeeBankAccountDetails)
     - [ListRequestFilter](#fm.ListRequestFilter)
     - [ListResponseMetadata](#fm.ListResponseMetadata)
   
@@ -368,11 +416,20 @@
     - [ListTaskByVariationClientsResponse](#fm.ListTaskByVariationClientsResponse)
     - [ListTaskRequest](#fm.ListTaskRequest)
     - [ListTaskResponse](#fm.ListTaskResponse)
-    - [ListTaskResponse.TaskResponse](#fm.ListTaskResponse.TaskResponse)
     - [RecurrenceDetails](#fm.RecurrenceDetails)
     - [RecurrenceTypeDetails](#fm.RecurrenceTypeDetails)
     - [RecurrenceTypeDetails.MonthlyWeekDetails](#fm.RecurrenceTypeDetails.MonthlyWeekDetails)
     - [TaskByEmployeeResponse](#fm.TaskByEmployeeResponse)
+    - [TaskDetailRequest](#fm.TaskDetailRequest)
+    - [TaskDetailResponse](#fm.TaskDetailResponse)
+    - [TaskGroupByEmployeeRequest](#fm.TaskGroupByEmployeeRequest)
+    - [TaskGroupByEmployeeResponse](#fm.TaskGroupByEmployeeResponse)
+    - [TaskGroupByEmployeeResponse.TaskDetailedInformation](#fm.TaskGroupByEmployeeResponse.TaskDetailedInformation)
+    - [TaskGroupRequest](#fm.TaskGroupRequest)
+    - [TaskGroupResponse](#fm.TaskGroupResponse)
+    - [TaskGroupResponse.EmployeeTaskData](#fm.TaskGroupResponse.EmployeeTaskData)
+    - [TaskGroupResponse.TaskGroupWeeklyData](#fm.TaskGroupResponse.TaskGroupWeeklyData)
+    - [TaskResponse](#fm.TaskResponse)
     - [TimesheetResponse](#fm.TimesheetResponse)
     - [UpdateRecurrenceRequest](#fm.UpdateRecurrenceRequest)
     - [UpdateRecurrenceResponse](#fm.UpdateRecurrenceResponse)
@@ -399,6 +456,22 @@
 
 
 
+<a name="fm.AreaSupervisor"></a>
+
+### AreaSupervisor
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area_supervisor | [string](#string) |  | id of area supervisor (employee-id) |
+| allowed_client_ids | [string](#string) | repeated | list of allowed clients |
+
+
+
+
+
+
 <a name="fm.CreateAreaRequest"></a>
 
 ### CreateAreaRequest
@@ -410,22 +483,8 @@
 | title | [string](#string) |  | title of area |
 | organization_id | [string](#string) |  | organization for the area |
 | region_id | [string](#string) |  | region that area belongs to |
-| area_managers | [string](#string) | repeated | ids of area managers(employee-ids) |
-
-
-
-
-
-
-<a name="fm.CreateAreaResponse"></a>
-
-### CreateAreaResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| area_id | [string](#string) |  |  |
+| area_manager | [string](#string) |  | id of area manager (employee-id) |
+| areamanager_restricted_clients | [string](#string) | repeated | id of clients disabled for area_manager |
 
 
 
@@ -440,24 +499,120 @@
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| title | [string](#string) |  |  |
-| organization_id | [string](#string) |  |  |
-| region_managers | [string](#string) | repeated |  |
+| title | [string](#string) |  | title of region |
+| organization_id | [string](#string) |  | id of organization |
+| regional_manager | [string](#string) |  | signle region manager |
 
 
 
 
 
 
-<a name="fm.CreateRegionResponse"></a>
+<a name="fm.CreateSubAreaRequest"></a>
 
-### CreateRegionResponse
+### CreateSubAreaRequest
 
 
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| region_id | [string](#string) |  |  |
+| title | [string](#string) |  | title of sub area |
+| organization_id | [string](#string) |  | organization of the sub area |
+| area_id | [string](#string) |  | area that sub area belongs to |
+| area_supervisors | [string](#string) | repeated | id of area supervisors (employee_id) |
+
+
+
+
+
+
+<a name="fm.DeleteAreaRequest"></a>
+
+### DeleteAreaRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area_id | [string](#string) |  | id of Area to be deleted |
+| region_id | [string](#string) |  | region to which the area belongs |
+
+
+
+
+
+
+<a name="fm.DeleteAreaResponse"></a>
+
+### DeleteAreaResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
+<a name="fm.DeleteRegionRequest"></a>
+
+### DeleteRegionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region_id | [string](#string) |  | id of Region to be deleted |
+| organization_id | [string](#string) |  | organization to which the region belongs |
+
+
+
+
+
+
+<a name="fm.DeleteRegionResponse"></a>
+
+### DeleteRegionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
+<a name="fm.DeleteSubAreaRequest"></a>
+
+### DeleteSubAreaRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sub_area_id | [string](#string) |  | id of sub area to be deleted |
+| area_id | [string](#string) |  | id of area to which the sub area belongs to |
+
+
+
+
+
+
+<a name="fm.DeleteSubAreaResponse"></a>
+
+### DeleteSubAreaResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
 
 
 
@@ -474,6 +629,7 @@
 | ----- | ---- | ----- | ----------- |
 | filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
 | organization_id | [string](#string) |  |  |
+| region_id | [string](#string) |  |  |
 
 
 
@@ -507,7 +663,10 @@
 | region_id | [string](#string) |  | region that area belongs to |
 | title | [string](#string) |  | title of area |
 | organization_id | [string](#string) |  | organization id |
-| area_managers | [string](#string) | repeated | list of area managers in that region |
+| area_manager | [string](#string) |  | single area manager |
+| areamanager_restricted_clients | [string](#string) | repeated | id of clients disabled for area_manager |
+| sub_areas | [SubAreaDetails](#fm.SubAreaDetails) | repeated | list of sub areas of the particular area |
+| area_supervisors | [AreaSupervisor](#fm.AreaSupervisor) | repeated | list of area supervisors in that area |
 
 
 
@@ -524,7 +683,6 @@
 | ----- | ---- | ----- | ----------- |
 | filter | [ListRequestFilter](#fm.ListRequestFilter) |  |  |
 | organization_id | [string](#string) |  |  |
-| area_id | [string](#string) |  |  |
 
 
 
@@ -557,7 +715,191 @@
 | region_id | [string](#string) |  |  |
 | title | [string](#string) |  |  |
 | organization_id | [string](#string) |  |  |
-| region_managers | [string](#string) | repeated |  |
+| regional_manager | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.RemoveAreaSupervisorRequest"></a>
+
+### RemoveAreaSupervisorRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area_id | [string](#string) |  | id of area |
+| area_supervisor_id | [string](#string) |  | id of area supervisor |
+
+
+
+
+
+
+<a name="fm.RemoveAreaSupervisorResponse"></a>
+
+### RemoveAreaSupervisorResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
+<a name="fm.SubAreaDetails"></a>
+
+### SubAreaDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sub_area_id | [string](#string) |  | id of sub area |
+| area_id | [string](#string) |  | id of area to which the sub area belongs |
+| title | [string](#string) |  | tile of the sub area |
+| organization_id | [string](#string) |  | organization that the sub area belongs to |
+| area_supervisors | [string](#string) | repeated | id of area supervisors (employee_id) |
+
+
+
+
+
+
+<a name="fm.UpdateAreaRequest"></a>
+
+### UpdateAreaRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area_id | [string](#string) |  | id of area |
+| title | [string](#string) |  | title of area |
+| organization_id | [string](#string) |  | organization for the area |
+| region_id | [string](#string) |  | Region that area belongs to |
+| area_manager | [string](#string) |  | id of area manager (employee-id) |
+| areamanager_restricted_clients | [string](#string) | repeated | id of clients disabled for area_manager |
+
+
+
+
+
+
+<a name="fm.UpdateRegionRequest"></a>
+
+### UpdateRegionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region_id | [string](#string) |  | id of region |
+| organization_id | [string](#string) |  | id of organization |
+| title | [string](#string) |  | title of region |
+| regional_manager | [string](#string) |  | id of area manager (employee-id) |
+
+
+
+
+
+
+<a name="fm.UpdateSubAreaRequest"></a>
+
+### UpdateSubAreaRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sub_area_id | [string](#string) |  | id of sub area to be updated |
+| area_id | [string](#string) |  | id of area to which the sub area belongs |
+| title | [string](#string) |  | title of sub area |
+| organization_id | [string](#string) |  | organization id of the sub area |
+| area_supervisors | [string](#string) | repeated | id of area supervisors (employee_id) |
+
+
+
+
+
+
+<a name="fm.UpsertAreaResponse"></a>
+
+### UpsertAreaResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.UpsertAreaSupervisorRequest"></a>
+
+### UpsertAreaSupervisorRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| area_id | [string](#string) |  | unique id of area |
+| area_supervisor | [string](#string) |  | area supervisor id (employee-id) |
+| allowed_client_ids | [string](#string) | repeated | list of clients allowed to area_supervisor |
+
+
+
+
+
+
+<a name="fm.UpsertAreaSupervisorResponse"></a>
+
+### UpsertAreaSupervisorResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
+<a name="fm.UpsertRegionResponse"></a>
+
+### UpsertRegionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| region_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.UpsertSubAreaResponse"></a>
+
+### UpsertSubAreaResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sub_area_id | [string](#string) |  | id of sub area |
 
 
 
@@ -577,10 +919,19 @@
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| CreateArea | [CreateAreaRequest](#fm.CreateAreaRequest) | [CreateAreaResponse](#fm.CreateAreaResponse) | Create a new Area. Authorization scope of `fm.area.create` is required |
-| ListArea | [ListAreaRequest](#fm.ListAreaRequest) | [ListAreaResponse](#fm.ListAreaResponse) | List returns the list of Area ascending order of Area title Authorization scope of `fm.area.list` is required |
-| CreateRegion | [CreateRegionRequest](#fm.CreateRegionRequest) | [CreateRegionResponse](#fm.CreateRegionResponse) | Create a new Region. Authorization scope of `fm.region.create` is required |
-| ListRegion | [ListRegionRequest](#fm.ListRegionRequest) | [ListRegionResponse](#fm.ListRegionResponse) | List returns the list of regions ascending order of region title Authorization scope of `fm.region.list` is required |
+| CreateArea | [CreateAreaRequest](#fm.CreateAreaRequest) | [UpsertAreaResponse](#fm.UpsertAreaResponse) | Create a new Area. Authorization scope of `fm.area.create` is required |
+| ListArea | [ListAreaRequest](#fm.ListAreaRequest) | [ListAreaResponse](#fm.ListAreaResponse) | List returns the list of Area ascending order of Area title |
+| UpdateArea | [UpdateAreaRequest](#fm.UpdateAreaRequest) | [UpsertAreaResponse](#fm.UpsertAreaResponse) | Update existing Area. Authorization scope of `fm.area.update` is required |
+| DeleteArea | [DeleteAreaRequest](#fm.DeleteAreaRequest) | [DeleteAreaResponse](#fm.DeleteAreaResponse) | Delete existing Area. Authorization scope of `fm.area.delete` is required |
+| CreateSubArea | [CreateSubAreaRequest](#fm.CreateSubAreaRequest) | [UpsertSubAreaResponse](#fm.UpsertSubAreaResponse) | Create a new Sub-Area. Authorization scope of `fm.sub-area.create` is required |
+| UpdateSubArea | [UpdateSubAreaRequest](#fm.UpdateSubAreaRequest) | [UpsertSubAreaResponse](#fm.UpsertSubAreaResponse) | Update existing Sub Area. Authorization scope of `fm.sub-area.update` is required |
+| DeleteSubArea | [DeleteSubAreaRequest](#fm.DeleteSubAreaRequest) | [DeleteSubAreaResponse](#fm.DeleteSubAreaResponse) | Delete existing Sub-Area of an Area. Authorizaton scope of `fm.sub-area.delete` is required |
+| UpsertAreaSupervisor | [UpsertAreaSupervisorRequest](#fm.UpsertAreaSupervisorRequest) | [UpsertAreaSupervisorResponse](#fm.UpsertAreaSupervisorResponse) | Add/Update Area Supervisor of given area Authorization scope of `fm.area.update` is required |
+| RemoveAreaSupervisor | [RemoveAreaSupervisorRequest](#fm.RemoveAreaSupervisorRequest) | [RemoveAreaSupervisorResponse](#fm.RemoveAreaSupervisorResponse) | Remove area supervisor Authorization scope of `fm.area.update` is required |
+| CreateRegion | [CreateRegionRequest](#fm.CreateRegionRequest) | [UpsertRegionResponse](#fm.UpsertRegionResponse) | Create a new Region. Authorization scope of `fm.region.create` is required |
+| ListRegion | [ListRegionRequest](#fm.ListRegionRequest) | [ListRegionResponse](#fm.ListRegionResponse) | List returns the list of regions ascending order of region title |
+| UpdateRegion | [UpdateRegionRequest](#fm.UpdateRegionRequest) | [UpsertRegionResponse](#fm.UpsertRegionResponse) | Create a new Region. Authorization scope of `fm.region.update` is required |
+| DeleteRegion | [DeleteRegionRequest](#fm.DeleteRegionRequest) | [DeleteRegionResponse](#fm.DeleteRegionResponse) | Delete an existing Region. Authorization scope of `fm.region.delete` is required |
 
  
 
@@ -643,6 +994,89 @@ Response from create check
 
 
 
+<a name="fm.CreateEmployeeCheckRequest"></a>
+
+### CreateEmployeeCheckRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | id of employee who is about to check in or check out |
+| organization_id | [string](#string) |  | organization id of the employee |
+| check_type | [string](#string) |  | type of check i.e. check in or check out |
+| reason | [string](#string) |  | reason |
+
+
+
+
+
+
+<a name="fm.CreateEmployeeCheckResponse"></a>
+
+### CreateEmployeeCheckResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_check_id | [string](#string) |  | employee check id |
+
+
+
+
+
+
+<a name="fm.GetEmployeeCheckRequest"></a>
+
+### GetEmployeeCheckRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | id of employee |
+| date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date for check ins and check outs |
+
+
+
+
+
+
+<a name="fm.GetEmployeeCheckResponse"></a>
+
+### GetEmployeeCheckResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [GetEmployeeCheckResponse.EmployeeCheckResponse](#fm.GetEmployeeCheckResponse.EmployeeCheckResponse) | repeated | list of employee checks |
+
+
+
+
+
+
+<a name="fm.GetEmployeeCheckResponse.EmployeeCheckResponse"></a>
+
+### GetEmployeeCheckResponse.EmployeeCheckResponse
+Employee Check Definition
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_check_id | [string](#string) |  | employee check id |
+| organization_id | [string](#string) |  | organization id of the employee |
+| check_type | [string](#string) |  | type of check |
+| reason | [string](#string) |  | reason |
+| date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date for check ins and check outs |
+
+
+
+
+
+
 <a name="fm.ListCheckRequest"></a>
 
 ### ListCheckRequest
@@ -696,6 +1130,138 @@ Check definition
 
 
 
+
+<a name="fm.ListEmployeeCheckRequest"></a>
+
+### ListEmployeeCheckRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | organization id of the employee |
+| employee_id | [string](#string) | repeated | employee ids |
+| date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date for check ins and check outs |
+
+
+
+
+
+
+<a name="fm.ListEmployeeCheckResponse"></a>
+
+### ListEmployeeCheckResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListEmployeeCheckResponse.EmployeeCheckInfo](#fm.ListEmployeeCheckResponse.EmployeeCheckInfo) | repeated | result list |
+
+
+
+
+
+
+<a name="fm.ListEmployeeCheckResponse.EmployeeCheckInfo"></a>
+
+### ListEmployeeCheckResponse.EmployeeCheckInfo
+Employee Check Info Definition
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_check_id | [string](#string) |  | employee check id |
+| organization_id | [string](#string) |  | organization id of the employee |
+| check_type | [string](#string) |  | type of check |
+| reason | [string](#string) |  | reason |
+| date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date for check ins and check outs |
+
+
+
+
+
+
+<a name="fm.ListGlobalCheckRequest"></a>
+
+### ListGlobalCheckRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | organization id |
+
+
+
+
+
+
+<a name="fm.ListGlobalCheckResponse"></a>
+
+### ListGlobalCheckResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListGlobalCheckResponse.GlobalCheckResponse](#fm.ListGlobalCheckResponse.GlobalCheckResponse) | repeated | list of global checks |
+
+
+
+
+
+
+<a name="fm.ListGlobalCheckResponse.GlobalCheckResponse"></a>
+
+### ListGlobalCheckResponse.GlobalCheckResponse
+Global Check Definition
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| global_check_id | [string](#string) |  | id of global check |
+| check_type | [string](#string) |  | type of check |
+| details | [string](#string) | repeated | details of the global check |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | global check created at |
+| updated_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | global check updated at |
+
+
+
+
+
+
+<a name="fm.UpsertGlobalCheckReponse"></a>
+
+### UpsertGlobalCheckReponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
+<a name="fm.UpsertGlobalCheckRequest"></a>
+
+### UpsertGlobalCheckRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| check_type | [string](#string) |  | check whether it is a check_in or check_out |
+| organization_id | [string](#string) |  | organization id |
+| details | [string](#string) | repeated | details |
+
+
+
+
+
  
 
  
@@ -714,6 +1280,11 @@ checked after task
 | Create | [CreateCheckRequest](#fm.CreateCheckRequest) | [CreateCheckResponse](#fm.CreateCheckResponse) | Create a new check. Authorization scope of `fm.check.create` is required. |
 | CheckInOut | [CheckInOutRequest](#fm.CheckInOutRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Check can be used to check in a staff to a opening_check and check out to a closing check Authorization scope of `fm.check.in` and `fm.check.out` is required. |
 | List | [ListCheckRequest](#fm.ListCheckRequest) | [ListCheckResponse](#fm.ListCheckResponse) | List returns the list of check visible to the authroized user in descending date order. Authorization scope of `fm.check.list` is required. |
+| UpsertGlobalCheck | [UpsertGlobalCheckRequest](#fm.UpsertGlobalCheckRequest) | [UpsertGlobalCheckReponse](#fm.UpsertGlobalCheckReponse) | Add/Update global check. Authorization scope of `fm.global-check.update` is required |
+| ListGlobalCheck | [ListGlobalCheckRequest](#fm.ListGlobalCheckRequest) | [ListGlobalCheckResponse](#fm.ListGlobalCheckResponse) | ListGlobalCheck returns the list of global checks visible to the authorized user in descending order of created date. Authorization scope of `fm.global-check.list` is required. |
+| CreateEmployeeCheck | [CreateEmployeeCheckRequest](#fm.CreateEmployeeCheckRequest) | [CreateEmployeeCheckResponse](#fm.CreateEmployeeCheckResponse) | Create employee check. Authorization scope of `fm.employee-check.create` is required |
+| GetEmployeeCheck | [GetEmployeeCheckRequest](#fm.GetEmployeeCheckRequest) | [GetEmployeeCheckResponse](#fm.GetEmployeeCheckResponse) | Get individual employee checks information. Authorization scope of `fm.employee-check.detail` is required |
+| ListEmployeeCheck | [ListEmployeeCheckRequest](#fm.ListEmployeeCheckRequest) | [ListEmployeeCheckResponse](#fm.ListEmployeeCheckResponse) | Get checks information of multiple employees. Authorization scope of `fm.employee-check.list` is required |
 
  
 
@@ -768,15 +1339,12 @@ Response for client-employee shift assignment
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | organization_id | [string](#string) |  | organization id of the client employee relation |
-| wd_rate | [float](#float) |  | week days rate |
-| we_rate | [float](#float) |  | weekend days rate |
-| currency | [string](#string) |  | rate currency |
+| client_employee_id | [string](#string) |  | unique id of client employee relation |
+| department_id | [string](#string) |  | department of employee |
+| designation | [string](#string) |  | designation of employee in the client |
 | shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | multiple shift for employee in a single client |
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
-| client_employee_id | [string](#string) |  | unique id of client employee relation |
-| holidays | [int32](#int32) |  | total holidays |
-| sick | [int32](#int32) |  | total sick leaves |
 | is_head_office | [bool](#bool) |  | is employee from head office |
 | allow_all_clients | [bool](#bool) |  | allow access to all client |
 | allowed_client_ids | [string](#string) | repeated | list of allowed clients |
@@ -850,22 +1418,6 @@ Response for assigning target tasks to an employee
 
 
 
-<a name="fm.ContractedDayHours"></a>
-
-### ContractedDayHours
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| day | [string](#string) |  | day of the week |
-| hours | [float](#float) |  | contracted hours for the day |
-
-
-
-
-
-
 <a name="fm.CreateClientEmployeeRequest"></a>
 
 ### CreateClientEmployeeRequest
@@ -876,14 +1428,10 @@ Response for assigning target tasks to an employee
 | ----- | ---- | ----- | ----------- |
 | client_id | [string](#string) |  | client the employee is assigned to |
 | employee_id | [string](#string) |  | employee the client is assigned to |
-| designation_id | [string](#string) |  | designation of employee in the client |
+| department_id | [string](#string) |  | department of employee |
+| designation | [string](#string) |  | designation of employee in the client |
 | organization_id | [string](#string) |  | organization id of the client employee relation |
-| wd_rate | [float](#float) |  | week days rate |
-| we_rate | [float](#float) |  | weekend days rate |
-| currency | [string](#string) |  | rate currency |
 | shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | multiple shift for employee in a single client |
-| holidays | [int32](#int32) |  | total holidays |
-| sick | [int32](#int32) |  | total sick leaves |
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
 | is_head_office | [bool](#bool) |  | is employee from head office |
@@ -1207,12 +1755,9 @@ Response containing list of client_ids
 | client_employee_id | [string](#string) |  | unique id of client employee relation |
 | client_id | [string](#string) |  | unique id of client |
 | employee_id | [string](#string) |  | unique id of employee |
-| wd_rate | [float](#float) |  | week days rate |
-| we_rate | [float](#float) |  | weekend days rate |
-| currency | [string](#string) |  | rate currency |
+| department_id | [string](#string) |  | department of employee |
+| designation | [string](#string) |  | designation of employee in the client |
 | shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | contracted hours for the day of the week |
-| holidays | [int32](#int32) |  | total holidays |
-| sick | [int32](#int32) |  | total sick leaves |
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
 | is_head_office | [bool](#bool) |  | is employee from head office |
@@ -1417,10 +1962,16 @@ Response for getting target task of an employee for a client
 | ----- | ---- | ----- | ----------- |
 | client_employee_id | [string](#string) |  |  |
 | client_id | [string](#string) |  | client the employee is assigned to |
-| designation_id | [string](#string) |  | designation of employee in the client |
+| department_id | [string](#string) |  | department of employee in the client |
+| designation | [string](#string) |  | designation of employee in the client |
 | employee_id | [string](#string) |  | employee the client is assigned to |
 | organization_id | [string](#string) |  | organization id of the client-employee link |
-| shift | [string](#string) |  | shift of the employee for the client |
+| shift_contracted_day_hours | [ShiftContractedDayHours](#fm.ShiftContractedDayHours) | repeated | contracted hours for the day of the week |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract start date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | contract end date |
+| is_head_office | [bool](#bool) |  | is employee from head office |
+| allow_all_clients | [bool](#bool) |  | allow access to all client |
+| allowed_client_ids | [string](#string) | repeated | list of allowed clients |
 
 
 
@@ -1504,10 +2055,7 @@ Response for getting target task of an employee for a client
 | shift | [string](#string) |  | shift of the employee for the client |
 | shift_start_time | [string](#string) |  | shift start time of the employee for the client |
 | shift_end_time | [string](#string) |  | shift end time of the employee for the client |
-| break_time | [string](#string) |  | break time |
-| is_paid_break | [bool](#bool) |  | is break paid |
-| weeks | [int32](#int32) |  | total weeks for shift |
-| contracted_day_hours | [ContractedDayHours](#fm.ContractedDayHours) | repeated | contracted hours for the day of the week |
+| vacancy_id | [string](#string) |  | vacancy id |
 
 
 
@@ -1676,6 +2224,8 @@ Request for changing status of client
 | ----- | ---- | ----- | ----------- |
 | client_id | [string](#string) |  | unique identifier of the client |
 | status | [string](#string) |  | status to change to |
+| client_code | [string](#string) |  | unique code of client |
+| client_date | [CreateClientDate](#fm.CreateClientDate) |  | required dates of client |
 
 
 
@@ -1735,7 +2285,7 @@ Request for changing status of client
 | site_supervisor_phone | [string](#string) |  |  |
 | region | [Region](#fm.Region) |  | Region |
 | budget | [Budget](#fm.Budget) |  | Budgets |
-| client_code | [int64](#int64) |  | client code |
+| client_code | [string](#string) |  | client code |
 | invoice | [Invoice](#fm.Invoice) | repeated | Invoice |
 | yearly_working_weeks | [int32](#int32) |  | Working weeks in a year |
 
@@ -1777,6 +2327,7 @@ Response for client detail
 | bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details of the client |
 | contact_people | [ContactPerson](#fm.ContactPerson) | repeated | List of contact perople details of the client. Backend saves to ClientContactPersonService |
 | is_head_office | [bool](#bool) |  | Boolean: shows wether client is head office or not |
+| profile_image | [string](#string) |  | profile image of client |
 
 
 
@@ -1897,7 +2448,6 @@ Response for client detail
 | start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Start time of shifts in the client |
 | end_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | End time of shifts in the client |
 | shift_name | [string](#string) |  | Some name for the shift like morning, evening |
-| daywise_hours | [ContractedDayHours](#fm.ContractedDayHours) | repeated | Hourly shifts daywise in the contract |
 
 
 
@@ -1999,7 +2549,8 @@ Response for client mobilization creation
 | contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Contact people details of the client. Backend saves to ClientContactPersonService |
 | bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details |
 | confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential Contact Person detail of the client |
-| client_code | [int64](#int64) |  | unique code of client within the organization |
+| client_code | [string](#string) |  | unique code of client within the organization |
+| profile_image | [string](#string) |  | profile image of client |
 
 
 
@@ -2139,7 +2690,7 @@ Request for list client
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | name of client |
-| client_code | [int64](#int64) |  | unique client code |
+| client_code | [string](#string) |  | unique client code |
 | area | [string](#string) |  | area of client |
 | region | [string](#string) |  | region of client |
 
@@ -2174,7 +2725,7 @@ individual client response
 | ----- | ---- | ----- | ----------- |
 | client_id | [string](#string) |  | unique identifier of the client |
 | organization_id | [string](#string) |  | organization id the client belongs to |
-| client_code | [int64](#int64) |  | client code |
+| client_code | [string](#string) |  | client code |
 | name | [string](#string) |  | unique name of the client |
 | contact_detail | [ContactDetail](#fm.ContactDetail) |  | contact details of the client |
 | client_detail | [ClientDetail](#fm.ClientDetail) |  | information details of the client |
@@ -2183,6 +2734,7 @@ individual client response
 | created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the client was created at |
 | confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential Contact Person detail of the client |
 | is_head_office | [bool](#bool) |  | Boolean: shows wether client is head office or not |
+| profile_image | [string](#string) |  | profile image of client |
 
 
 
@@ -2341,7 +2893,8 @@ request to update client by client id
 | contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Contact Person details of the client. Backend saves to ClientContactPersonService |
 | bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank account details of the client |
 | confidential_contact_people | [ContactPerson](#fm.ContactPerson) | repeated | Confidential Contact Person detail of the client |
-| client_code | [int64](#int64) |  | unique code of client within the organization |
+| client_code | [string](#string) |  | unique code of client within the organization |
+| profile_image | [string](#string) |  | profile image of client |
 
 
 
@@ -2431,6 +2984,22 @@ response for UpdateClientRequest
 
 
 
+<a name="fm.DeleteDepartmentRequest"></a>
+
+### DeleteDepartmentRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | organization_id to which the department belongs to |
+| department_id | [string](#string) |  | department_id of department to be deleted |
+
+
+
+
+
+
 <a name="fm.ListDepartmentRequest"></a>
 
 ### ListDepartmentRequest
@@ -2479,6 +3048,39 @@ response for UpdateClientRequest
 
 
 
+
+<a name="fm.UpdateDepartmentRequest"></a>
+
+### UpdateDepartmentRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| department_id | [string](#string) |  | department_id of updated department |
+| organization_id | [string](#string) |  | organization_id to which department belongs to |
+| title | [string](#string) |  | title of department |
+| description | [string](#string) |  | description of department |
+
+
+
+
+
+
+<a name="fm.UpdateDepartmentResponse"></a>
+
+### UpdateDepartmentResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| department_id | [string](#string) |  | department_id of updated department |
+
+
+
+
+
  
 
  
@@ -2495,6 +3097,8 @@ response for UpdateClientRequest
 | ----------- | ------------ | ------------- | ------------|
 | Create | [CreateDepartmentRequest](#fm.CreateDepartmentRequest) | [CreateDepartmentResponse](#fm.CreateDepartmentResponse) | Create a new department. Authorization scope of `fm.department.create` is required |
 | List | [ListDepartmentRequest](#fm.ListDepartmentRequest) | [ListDepartmentResponse](#fm.ListDepartmentResponse) | List returns the list of department visible to the authroized user in ascending order of department title |
+| Update | [UpdateDepartmentRequest](#fm.UpdateDepartmentRequest) | [UpdateDepartmentResponse](#fm.UpdateDepartmentResponse) | Update department of an organization. Authorization scope of `fm.department.update` is required |
+| Delete | [DeleteDepartmentRequest](#fm.DeleteDepartmentRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a department. Authorization scope of `fm.department.delete` is required |
 
  
 
@@ -2534,6 +3138,23 @@ response for UpdateClientRequest
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | designation_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.DeleteDesignationRequest"></a>
+
+### DeleteDesignationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| designation_id | [string](#string) |  | designation_id of designation to be deleted |
+| department_id | [string](#string) |  | department_id to which the designation belongs to |
+| organization_id | [string](#string) |  | organization_id to which the designation belongs to |
 
 
 
@@ -2589,6 +3210,40 @@ response for UpdateClientRequest
 
 
 
+
+<a name="fm.UpdateDesignationRequest"></a>
+
+### UpdateDesignationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| designation_id | [string](#string) |  | designation_id of updated designation |
+| department_id | [string](#string) |  | department_id to which the designation belongs to |
+| organization_id | [string](#string) |  | organization_id to which the designation belongs to |
+| title | [string](#string) |  | job title |
+| description | [string](#string) |  | details about the designation |
+
+
+
+
+
+
+<a name="fm.UpdateDesignationResponse"></a>
+
+### UpdateDesignationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| designation_id | [string](#string) |  | designation_id of updated designation |
+
+
+
+
+
  
 
  
@@ -2603,8 +3258,10 @@ response for UpdateClientRequest
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Create | [CreateDesignationRequest](#fm.CreateDesignationRequest) | [CreateDesignationResponse](#fm.CreateDesignationResponse) | required |
-| List | [ListDesignationRequest](#fm.ListDesignationRequest) | [ListDesignationResponse](#fm.ListDesignationResponse) | List returns the list of designation visible to the authroized user in descending |
+| Create | [CreateDesignationRequest](#fm.CreateDesignationRequest) | [CreateDesignationResponse](#fm.CreateDesignationResponse) | Create a new designation. Authorization scope of `fm.designation.create` is required |
+| List | [ListDesignationRequest](#fm.ListDesignationRequest) | [ListDesignationResponse](#fm.ListDesignationResponse) | List returns the list of designation visible to the authorized user in descending |
+| UpdateDesignation | [UpdateDesignationRequest](#fm.UpdateDesignationRequest) | [UpdateDesignationResponse](#fm.UpdateDesignationResponse) | Update designation details. Authorization scope of `fm.designation.update` is required |
+| DeleteDesignation | [DeleteDesignationRequest](#fm.DeleteDesignationRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a designation. Authorization scope of `fm.designation.delete` is required |
 
  
 
@@ -2923,7 +3580,7 @@ Confidential Employee information
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | employee_details | [ConfidentialEmployeeDetails](#fm.ConfidentialEmployeeDetails) |  | Employee details |
-| bank_account_details | [BankAccountDetails](#fm.BankAccountDetails) |  | Bank details |
+| bank_account_details | [EmployeeBankAccountDetails](#fm.EmployeeBankAccountDetails) |  | Bank details |
 
 
 
@@ -2985,6 +3642,7 @@ CriminalConviction employee information
 | is_subject_to_conditions | [bool](#bool) |  | yes or no |
 | details | [string](#string) |  | details |
 | signature | [string](#string) |  | signature file upload |
+| signature_text | [string](#string) |  | signature text |
 | have_prior_medical_condition | [bool](#bool) |  | have_prior_medical_condition of criminal conviction or not |
 | condition_details | [string](#string) |  | prior_medical_condition details |
 | is_disable | [bool](#bool) |  | is_disable |
@@ -3137,6 +3795,7 @@ Response for employee detail
 | criminal_conv_emp_info | [CriminalConvictionEmployeeInfo](#fm.CriminalConvictionEmployeeInfo) | repeated | Criminal Conviction Information about the employee |
 | next_of_keen_employee_info | [NextOfKeenEmployeeInfo](#fm.NextOfKeenEmployeeInfo) |  | Next of kee Information about the employee |
 | education_employee_info | [EducationEmployeeInformation](#fm.EducationEmployeeInformation) | repeated | education Information about the employee |
+| status | [string](#string) |  | fetch employees of this status |
 
 
 
@@ -3297,6 +3956,8 @@ General employee information
 | employment_statement | [string](#string) |  | employement statement |
 | student_loan_faq | [FaqData](#fm.FaqData) | repeated | student loan questions |
 | postgraduate_loan_faq | [FaqData](#fm.FaqData) | repeated | post graduate loan question |
+| signature | [string](#string) |  | signatute file upload |
+| signature_text | [string](#string) |  | signature: full_name |
 
 
 
@@ -3381,6 +4042,7 @@ response for fetching list of employees
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | result | [ListEmployeeResponse.EmployeeResponse](#fm.ListEmployeeResponse.EmployeeResponse) | repeated | list of employees |
+| metadata | [ListResponseMetadata](#fm.ListResponseMetadata) |  | metadata about response |
 
 
 
@@ -3435,6 +4097,7 @@ Next of Keen employee information
 | email | [string](#string) |  | email details |
 | date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date |
 | signature | [string](#string) |  | signature file upload |
+| signature_text | [string](#string) |  | signature text |
 
 
 
@@ -3514,6 +4177,7 @@ Reference employee information
 | postcode | [string](#string) |  | postcode of reference person |
 | contact_number | [string](#string) |  | contact number of reference person |
 | email | [string](#string) |  | email of reference person |
+| can_contact_without_notifying | [bool](#bool) |  |  |
 
 
 
@@ -4381,6 +5045,36 @@ response for create user requests
 
 
 
+<a name="fm.ForgotPasswordRequest"></a>
+
+### ForgotPasswordRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| email | [string](#string) |  | email id of user |
+
+
+
+
+
+
+<a name="fm.ForgotPasswordResponse"></a>
+
+### ForgotPasswordResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| success | [bool](#bool) |  | acknowlege |
+
+
+
+
+
+
 <a name="fm.GetAvailableRoleRequest"></a>
 
 ### GetAvailableRoleRequest
@@ -4405,6 +5099,37 @@ response for create user requests
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | organization_id | [string](#string) |  | id of organization |
+
+
+
+
+
+
+<a name="fm.GetUserListFromRoleRequest"></a>
+
+### GetUserListFromRoleRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of organization |
+| role | [string](#string) |  | name of role |
+
+
+
+
+
+
+<a name="fm.GetUserListFromRoleResponse"></a>
+
+### GetUserListFromRoleResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| users | [UserData](#fm.UserData) | repeated | list of users with their roles and scopes |
 
 
 
@@ -4735,7 +5460,9 @@ Genereates jwt tokens
 | GetAvailableScopes | [GetAvailableScopeRequest](#fm.GetAvailableScopeRequest) | [ScopeResponse](#fm.ScopeResponse) | get all scopes Authorization scope of `` is required |
 | UpsertRole | [UpsertRoleRequest](#fm.UpsertRoleRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | insert or update role scopes. Authorization scope of `fm.role.create` and &#34;fm.role.update&#34; is required. |
 | GetUserListByEmployeeIds | [GetUserListRequest](#fm.GetUserListRequest) | [GetUserListResponse](#fm.GetUserListResponse) | get user list according to employee id for changing roles/scopes Authorization scope of `` is required |
+| GetUserListFromRole | [GetUserListFromRoleRequest](#fm.GetUserListFromRoleRequest) | [GetUserListFromRoleResponse](#fm.GetUserListFromRoleResponse) | get list of users from role name |
 | ResetPassword | [ResetPasswordRequest](#fm.ResetPasswordRequest) | [ResetPasswordResponse](#fm.ResetPasswordResponse) | update password using token from email |
+| ForgotPassword | [ForgotPasswordRequest](#fm.ForgotPasswordRequest) | [ForgotPasswordResponse](#fm.ForgotPasswordResponse) | forgot password endpoint |
 
  
 
@@ -4745,6 +5472,26 @@ Genereates jwt tokens
 <p align="right"><a href="#top">Top</a></p>
 
 ## meeting_service.proto
+
+
+
+<a name="fm.AddAgendaDecisionObjectionRequest"></a>
+
+### AddAgendaDecisionObjectionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agenda_decision_id | [string](#string) |  | id of decision |
+| agenda_id | [string](#string) |  | id of agenda |
+| meeting_id | [string](#string) |  | id of meeting |
+| objection | [string](#string) |  | string objection of decision |
+| objection_by | [string](#string) |  | objection done by |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | objection created date |
+
+
+
 
 
 
@@ -4832,6 +5579,27 @@ details of decisions within an agenda
 | decision | [string](#string) |  | decision details |
 | action_by | [string](#string) |  | view proposed by : employee_id |
 | deadline | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | deadline to take action |
+| agenda_decision_objections | [AgendaDecisionObjection](#fm.AgendaDecisionObjection) | repeated | objections of decisions of agenda |
+
+
+
+
+
+
+<a name="fm.AgendaDecisionObjection"></a>
+
+### AgendaDecisionObjection
+details of objection of decision made for an agenda
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | id of objection of decision |
+| agenda_decision_id | [string](#string) |  | id of decision of agenda |
+| agenda_id | [string](#string) |  | agenda it belongs to |
+| objection | [string](#string) |  | objection details |
+| objection_by | [string](#string) |  | objection done by : employee_id |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | objection created date |
 
 
 
@@ -4841,7 +5609,7 @@ details of decisions within an agenda
 <a name="fm.AgendaDetail"></a>
 
 ### AgendaDetail
-Agenda details with complete info on views/decisions
+Agenda details with complete info on views/decisions/objections
 
 
 | Field | Type | Label | Description |
@@ -4966,6 +5734,22 @@ Response for create meeting requests
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | meeting_id | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm.DeleteAgendaDecisionObjectionRequest"></a>
+
+### DeleteAgendaDecisionObjectionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of meeting |
+| decision_objection_id | [string](#string) |  | id of objection of a decision |
 
 
 
@@ -5107,6 +5891,26 @@ individual meeting response
 
 
 
+<a name="fm.UpdateAgendaDecisionRequest"></a>
+
+### UpdateAgendaDecisionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agenda_decision_id | [string](#string) |  | id of decision |
+| meeting_id | [string](#string) |  | id of meeting |
+| agenda_id | [string](#string) |  | id of agenda |
+| decision | [string](#string) |  | string decision of agenda |
+| action_by | [string](#string) |  | action to be taken by |
+| deadline_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | deadline for action to be taken |
+
+
+
+
+
+
 <a name="fm.UpdateMeetingRequest"></a>
 
 ### UpdateMeetingRequest
@@ -5140,6 +5944,21 @@ response for UpdateMeetingRequest
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | meeting_id | [string](#string) |  | meeting Id of the updated meeting |
+
+
+
+
+
+
+<a name="fm.UpsertAgendaDecisionObjectionResponse"></a>
+
+### UpsertAgendaDecisionObjectionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| decision_objection_id | [string](#string) |  | id of objection |
 
 
 
@@ -5191,13 +6010,16 @@ response for UpdateMeetingRequest
 | ----------- | ------------ | ------------- | ------------|
 | Create | [CreateMeetingRequest](#fm.CreateMeetingRequest) | [CreateMeetingResponse](#fm.CreateMeetingResponse) | Create a new meeting. Authorization scope of `fm.meeting.create` is required. |
 | List | [ListMeetingRequest](#fm.ListMeetingRequest) | [ListMeetingResponse](#fm.ListMeetingResponse) | List returns the list of meeting visible to the authorized user in descending order. Scope of `fm.meeting.list` is required. |
-| Detail | [DetailMeetingRequest](#fm.DetailMeetingRequest) | [DetailMeetingResponse](#fm.DetailMeetingResponse) | Detail returns the detail of meeting along with its agendas, views and decisiosns Attendees/Creator of meeting can view the details. |
+| Detail | [DetailMeetingRequest](#fm.DetailMeetingRequest) | [DetailMeetingResponse](#fm.DetailMeetingResponse) | Detail returns the detail of meeting along with its agendas, views, decisions and objections Attendees/Creator of meeting can view the details. |
 | Update | [UpdateMeetingRequest](#fm.UpdateMeetingRequest) | [UpdateMeetingResponse](#fm.UpdateMeetingResponse) | Update an existing meeting. Authorization scope of `fm.meeting.update` is required. |
 | AddAttendees | [AddAttendeesRequest](#fm.AddAttendeesRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Add Attendees to existing meetings. Authorization scope of `fm.meeting.update` is required. |
 | AddAgendaView | [AddAgendaViewRequest](#fm.AddAgendaViewRequest) | [UpsertAgendaViewResponse](#fm.UpsertAgendaViewResponse) | Add views to a given agenda in a meeting. |
 | EditAgendaView | [EditAgendaViewRequest](#fm.EditAgendaViewRequest) | [UpsertAgendaViewResponse](#fm.UpsertAgendaViewResponse) | Edit views of a given agenda in a meeting. |
 | DeleteAgendaView | [DeleteAgendaViewRequest](#fm.DeleteAgendaViewRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete views of a given agenda in a meeting. |
 | AddAgendaDecision | [AddAgendaDecisionRequest](#fm.AddAgendaDecisionRequest) | [UpsertAgendaDecisionResponse](#fm.UpsertAgendaDecisionResponse) | Add decision of an agenda |
+| UpdateAgendaDecision | [UpdateAgendaDecisionRequest](#fm.UpdateAgendaDecisionRequest) | [UpsertAgendaDecisionResponse](#fm.UpsertAgendaDecisionResponse) | Update decision of an agenda |
+| AddAgendaDecisionObjection | [AddAgendaDecisionObjectionRequest](#fm.AddAgendaDecisionObjectionRequest) | [UpsertAgendaDecisionObjectionResponse](#fm.UpsertAgendaDecisionObjectionResponse) | Add objection of decision of agenda |
+| DeleteAgendaDecisionObjection | [DeleteAgendaDecisionObjectionRequest](#fm.DeleteAgendaDecisionObjectionRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete objection made for decisions of an agenda |
 | AgendaTimerUpdate | [AgendaTimerRequest](#fm.AgendaTimerRequest) | [AgendaTimerResponse](#fm.AgendaTimerResponse) | start/stop agenda of meeting |
 
  
@@ -5502,6 +6324,22 @@ inividual organization response
 
 
 
+<a name="fm.DeleteSectorRequest"></a>
+
+### DeleteSectorRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sector_id | [string](#string) |  | sector_id of sector to be deleted |
+| organization_id | [string](#string) |  | organization_id to which the sector belongs to |
+
+
+
+
+
+
 <a name="fm.ListSectorRequest"></a>
 
 ### ListSectorRequest
@@ -5550,6 +6388,39 @@ inividual organization response
 
 
 
+
+<a name="fm.UpdateSectorRequest"></a>
+
+### UpdateSectorRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sector_id | [string](#string) |  | sector_id of updated sector |
+| organization_id | [string](#string) |  | organization_id to which the sector belongs to |
+| title | [string](#string) |  | title of sector |
+| description | [string](#string) |  | details about the sector |
+
+
+
+
+
+
+<a name="fm.UpdateSectorResponse"></a>
+
+### UpdateSectorResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| sector_id | [string](#string) |  | sector_id of updated sector |
+
+
+
+
+
  
 
  
@@ -5564,8 +6435,10 @@ inividual organization response
 
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
-| Create | [CreateSectorRequest](#fm.CreateSectorRequest) | [CreateSectorResponse](#fm.CreateSectorResponse) | Create a new department. Authorization scope of `fm.department.create` is required |
-| List | [ListSectorRequest](#fm.ListSectorRequest) | [ListSectorResponse](#fm.ListSectorResponse) | List returns the list of department visible to the authroized user in ascending order of department title |
+| Create | [CreateSectorRequest](#fm.CreateSectorRequest) | [CreateSectorResponse](#fm.CreateSectorResponse) | Create a new sector. Authorization scope of `fm.sector.create` is required |
+| List | [ListSectorRequest](#fm.ListSectorRequest) | [ListSectorResponse](#fm.ListSectorResponse) | List returns the list of sector visible to the authorized user in ascending order of sector title |
+| UpdateSector | [UpdateSectorRequest](#fm.UpdateSectorRequest) | [UpdateSectorResponse](#fm.UpdateSectorResponse) | Update sector details. Authorization scope of `fm.sector.update` is required |
+| DeleteSector | [DeleteSectorRequest](#fm.DeleteSectorRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete a sector. Authorization scope of `fm.sector.delete` is required |
 
  
 
@@ -5631,6 +6504,27 @@ Address details
 | post_code | [string](#string) |  | post_code |
 | county | [string](#string) |  | county |
 | town | [string](#string) |  | town |
+
+
+
+
+
+
+<a name="fm.EmployeeBankAccountDetails"></a>
+
+### EmployeeBankAccountDetails
+Employee Bank accounts details collection
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bank_name | [string](#string) |  | Name of the bank |
+| branch_name | [string](#string) |  | Branch name |
+| account_number | [string](#string) |  | Account number |
+| s_code | [string](#string) |  | some code |
+| account_holder_name | [string](#string) |  | account holder name |
+| signature | [string](#string) |  | signature photo url |
+| signature_text | [string](#string) |  | signature_text |
 
 
 
@@ -5761,7 +6655,7 @@ Request to create task
 | estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
 | organization_id | [string](#string) |  | the organization of the employee |
 | is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
-| is_reccurence | [bool](#bool) |  | wether task is recurrence |
+| is_recurrence | [bool](#bool) |  | wether task is recurrence |
 | recurrence | [UpsertRecurrence](#fm.UpsertRecurrence) |  | details of recurrence |
 
 
@@ -5913,9 +6807,12 @@ list of tasks by client_id queried by user
 | ----- | ---- | ----- | ----------- |
 | employee_id | [string](#string) |  | unique identifier of the employee involved with the client |
 | task_id | [string](#string) |  | unique identifier of the task completed by employee on the client in particular date |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
+| estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
 | check_in_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check in time of the task on the particular date |
 | check_out_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check out time of the task on the particular date |
 | title | [string](#string) |  | task title |
+| description | [string](#string) |  | task description |
 
 
 
@@ -6034,6 +6931,8 @@ Request for fetching list of tasks
 | start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | For task filter based on task start time (optional) |
 | end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | For task filter based on task start time (optional) |
 | employee_id | [string](#string) |  | id of employee (optional) |
+| status | [string](#string) |  | status of task : &#34;COMPLETE&#34;, &#34;INCOMPLETE&#34; |
+| client_ids | [string](#string) | repeated | filter by ids of clients |
 
 
 
@@ -6048,37 +6947,7 @@ Response for list of task request
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| result | [ListTaskResponse.TaskResponse](#fm.ListTaskResponse.TaskResponse) | repeated | list of tasks |
-
-
-
-
-
-
-<a name="fm.ListTaskResponse.TaskResponse"></a>
-
-### ListTaskResponse.TaskResponse
-Task definition
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| task_id | [string](#string) |  | unique identifier for the task |
-| title | [string](#string) |  | title (name) of the task |
-| description | [string](#string) |  | description of the task |
-| client_id | [string](#string) |  | client the task is associated with. Optional |
-| employee_id | [string](#string) |  | employee the task is assigned to |
-| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
-| estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
-| actual_in | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked in |
-| actual_out | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked out |
-| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time generated by system at the instance the task was created |
-| organization_id | [string](#string) |  | organization id of the employee |
-| is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
-| correction | [google.protobuf.Duration](#google.protobuf.Duration) |  | correction duration of the task |
-| is_reccurence | [bool](#bool) |  | wether task is recurrence |
-| recurrence | [RecurrenceDetails](#fm.RecurrenceDetails) |  | details of recurrence |
-| recurrence_parent_task | [string](#string) |  | Id of task from which current task was generated |
+| result | [TaskResponse](#fm.TaskResponse) | repeated | list of tasks |
 
 
 
@@ -6152,10 +7021,194 @@ Task definition
 | ----- | ---- | ----- | ----------- |
 | client_id | [string](#string) |  | unique identifier of the client on which employee was involved |
 | task_id | [string](#string) |  | unique identifier of the task completed by employee on the client in particular date |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
+| estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
 | check_in_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check in time of the task on the particular date |
 | check_out_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | check out time of the task on the particular date |
 | title | [string](#string) |  | task title |
+| description | [string](#string) |  | task descriptiom |
 | employee_id | [string](#string) |  | employee id of the employee for which the task was assigned to |
+
+
+
+
+
+
+<a name="fm.TaskDetailRequest"></a>
+
+### TaskDetailRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of task |
+
+
+
+
+
+
+<a name="fm.TaskDetailResponse"></a>
+
+### TaskDetailResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_detail | [TaskResponse](#fm.TaskResponse) |  | Details of the task |
+
+
+
+
+
+
+<a name="fm.TaskGroupByEmployeeRequest"></a>
+
+### TaskGroupByEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| group_type | [string](#string) |  | type of group |
+| employee_id | [string](#string) |  | id of employee |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | start date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | end date |
+
+
+
+
+
+
+<a name="fm.TaskGroupByEmployeeResponse"></a>
+
+### TaskGroupByEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | id of employee |
+| task_information | [TaskGroupByEmployeeResponse.TaskDetailedInformation](#fm.TaskGroupByEmployeeResponse.TaskDetailedInformation) | repeated | task information |
+| total_tasks | [int32](#int32) |  | total tasks done |
+| task_total_time | [double](#double) |  | total task working duration in seconds |
+
+
+
+
+
+
+<a name="fm.TaskGroupByEmployeeResponse.TaskDetailedInformation"></a>
+
+### TaskGroupByEmployeeResponse.TaskDetailedInformation
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| total_tasks | [int32](#int32) |  |  |
+| total_hours | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="fm.TaskGroupRequest"></a>
+
+### TaskGroupRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| group_type | [string](#string) |  | type of group : eg: YEARLY ,MONTHLY, WEEKLY |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | start date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | end date |
+
+
+
+
+
+
+<a name="fm.TaskGroupResponse"></a>
+
+### TaskGroupResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_data | [TaskGroupResponse.EmployeeTaskData](#fm.TaskGroupResponse.EmployeeTaskData) | repeated | employee data |
+
+
+
+
+
+
+<a name="fm.TaskGroupResponse.EmployeeTaskData"></a>
+
+### TaskGroupResponse.EmployeeTaskData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of employee |
+| total_tasks | [int32](#int32) |  | total tasks done |
+| task_total_time | [double](#double) |  | total task working duration in seconds |
+| weekly_data | [TaskGroupResponse.TaskGroupWeeklyData](#fm.TaskGroupResponse.TaskGroupWeeklyData) | repeated | weekly data |
+
+
+
+
+
+
+<a name="fm.TaskGroupResponse.TaskGroupWeeklyData"></a>
+
+### TaskGroupResponse.TaskGroupWeeklyData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| day_of_week | [string](#string) |  | day of week |
+| total_tasks | [int32](#int32) |  | total tasks done |
+| task_total_time | [double](#double) |  | total task working duration in seconds |
+
+
+
+
+
+
+<a name="fm.TaskResponse"></a>
+
+### TaskResponse
+Task definition
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique identifier for the task |
+| title | [string](#string) |  | title (name) of the task |
+| description | [string](#string) |  | description of the task |
+| client_id | [string](#string) |  | client the task is associated with. Optional |
+| employee_id | [string](#string) |  | employee the task is assigned to |
+| start_time | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | task must start by at least this time. Start time is combination of appointment date and time |
+| estimate_time | [google.protobuf.Duration](#google.protobuf.Duration) |  | the estimated time period to complete the task |
+| actual_in | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked in |
+| actual_out | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time the task was checked out |
+| created_at | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | time generated by system at the instance the task was created |
+| organization_id | [string](#string) |  | organization id of the employee |
+| is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
+| correction | [google.protobuf.Duration](#google.protobuf.Duration) |  | correction duration of the task |
+| is_recurrence | [bool](#bool) |  | wether task is recurrence |
+| recurrence | [RecurrenceDetails](#fm.RecurrenceDetails) |  | details of recurrence |
+| recurrence_parent_task | [string](#string) |  | Id of task from which current task was generated |
 
 
 
@@ -6191,7 +7244,7 @@ Task definition
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | task_id | [string](#string) |  | id of task |
-| is_reccurence | [bool](#bool) |  | is recurrence |
+| is_recurrence | [bool](#bool) |  | is recurrence |
 | recurrence | [UpsertRecurrence](#fm.UpsertRecurrence) |  | details of recurrence |
 
 
@@ -6382,6 +7435,7 @@ service to manage tasks
 | Checkin | [CheckinTaskRequest](#fm.CheckinTaskRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checkin can be used to check in a staff to a task. Authorization scope of `fm.task.checkin` is required. |
 | Checkout | [CheckoutTaskRequest](#fm.CheckoutTaskRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Checkout can be used to check-out a staff from an existing checked-in task. Authorization scope of `fm.task.checkout` is required. |
 | List | [ListTaskRequest](#fm.ListTaskRequest) | [ListTaskResponse](#fm.ListTaskResponse) | List returns the list of all tasks visible to the authroized user in descending date order. Authorization scope of `fm.task.list` is required. |
+| Detail | [TaskDetailRequest](#fm.TaskDetailRequest) | [TaskDetailResponse](#fm.TaskDetailResponse) | List returns the list of all tasks visible to the authroized user in descending date order. Authorization scope of `fm.task.detail` is required. |
 | Update | [UpdateTaskRequest](#fm.UpdateTaskRequest) | [UpdateTaskResponse](#fm.UpdateTaskResponse) | Update an existing task. Authorization scope of `fm.task.update` is required. |
 | UpdateRecurrence | [UpdateRecurrenceRequest](#fm.UpdateRecurrenceRequest) | [UpdateRecurrenceResponse](#fm.UpdateRecurrenceResponse) | Update task recurrence. Authorization scope of `fm.task.update` is required. |
 | ListByClient | [ListTaskByClientRequest](#fm.ListTaskByClientRequest) | [ListTaskByClientResponse](#fm.ListTaskByClientResponse) | List returns the list of task by client visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-client` is required. |
@@ -6393,6 +7447,8 @@ service to manage tasks
 | ListPeriodic | [ListPeriodicTaskRequest](#fm.ListPeriodicTaskRequest) | [ListPeriodicTaskResponse](#fm.ListPeriodicTaskResponse) | List returns the list of periodic task clients visible to the authroized user in descending date order. Authorization scope of `fm.task.periodic` is required. |
 | ListCorrection | [ListCorrectionRequest](#fm.ListCorrectionRequest) | [ListCorrectionResponse](#fm.ListCorrectionResponse) | List returns the list of corections visible to the authroized user in descending date order. Authorization scope of `fm.task.correction` is required. |
 | ChangeTimesheetCorrectionStatus | [ChangeTimesheetCorrectionStatusRequest](#fm.ChangeTimesheetCorrectionStatusRequest) | [ChangeTimesheetCorrectionStatusResponse](#fm.ChangeTimesheetCorrectionStatusResponse) | Change timesheet correction request status |
+| ListTaskGroup | [TaskGroupRequest](#fm.TaskGroupRequest) | [TaskGroupResponse](#fm.TaskGroupResponse) | Task Group Data Authorization scope of `fm.task.list` is required. |
+| ListTaskGroupByEmployee | [TaskGroupByEmployeeRequest](#fm.TaskGroupByEmployeeRequest) | [TaskGroupByEmployeeResponse](#fm.TaskGroupByEmployeeResponse) | Task Group Data By Employee Authorization scope of `fm.task.list` is required. |
 
  
 
