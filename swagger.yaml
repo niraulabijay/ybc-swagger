@@ -1517,6 +1517,91 @@ paths:
           "$ref": "#/definitions/fmUpdateEmployeeRequest"
       tags:
       - EmployeeService
+  "/v1/employee-check":
+    get:
+      summary: Get individual employee checks information. Authorization scope of
+        `fm.employee-check.detail` is required
+      operationId: CheckService_GetEmployeeCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmGetEmployeeCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: employee_id
+        description: id of employee.
+        in: query
+        required: false
+        type: string
+      - name: date
+        description: date for check ins and check outs.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      tags:
+      - CheckService
+    post:
+      summary: Create employee check. Authorization scope of `fm.employee-check.create`
+        is required
+      operationId: CheckService_CreateEmployeeCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateEmployeeCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateEmployeeCheckRequest"
+      tags:
+      - CheckService
+  "/v1/employee-checks":
+    get:
+      summary: Get checks information of multiple employees. Authorization scope of
+        `fm.employee-check.list` is required
+      operationId: CheckService_ListEmployeeCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListEmployeeCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: organization id of the employee.
+        in: query
+        required: false
+        type: string
+      - name: employee_id
+        description: employee ids.
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: date
+        description: date for check ins and check outs.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      tags:
+      - CheckService
   "/v1/employee/status":
     post:
       summary: |-
@@ -1911,6 +1996,51 @@ paths:
         type: string
       tags:
       - EmployeeSickService
+  "/v1/global-check":
+    get:
+      summary: "ListGlobalCheck returns the list of global checks visible to the authorized
+        user in \ndescending order of created date. Authorization scope of `fm.global-check.list`
+        is required."
+      operationId: CheckService_ListGlobalCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListGlobalCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: organization id.
+        in: query
+        required: false
+        type: string
+      tags:
+      - CheckService
+    post:
+      summary: |-
+        Add/Update global check.
+        Authorization scope of `fm.global-check.update` is required
+      operationId: CheckService_UpsertGlobalCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertGlobalCheckReponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpsertGlobalCheckRequest"
+      tags:
+      - CheckService
   "/v1/inventory":
     get:
       summary: |-
@@ -2890,18 +3020,6 @@ paths:
         in: query
         required: false
         type: string
-      - name: year
-        description: year.
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: month
-        description: month.
-        in: query
-        required: false
-        type: integer
-        format: int32
       - name: start_date
         description: start date.
         in: query
@@ -2910,12 +3028,6 @@ paths:
         format: date-time
       - name: end_date
         description: end date.
-        in: query
-        required: false
-        type: string
-        format: date-time
-      - name: search_date
-        description: search date.
         in: query
         required: false
         type: string
@@ -3583,6 +3695,26 @@ definitions:
         type: string
         format: date-time
         title: created at timestamp
+  GetEmployeeCheckResponseEmployeeCheckResponse:
+    type: object
+    properties:
+      employee_check_id:
+        type: string
+        title: employee check id
+      organization_id:
+        type: string
+        title: organization id of the employee
+      check_type:
+        type: string
+        title: type of check
+      reason:
+        type: string
+        title: reason
+      date:
+        type: string
+        format: date-time
+        title: date for check ins and check outs
+    title: Employee Check Definition
   GetEmployeeIdsByClientIdResponseEmployeeListData:
     type: object
     properties:
@@ -3863,6 +3995,26 @@ definitions:
         type: string
       organization_id:
         type: string
+  ListEmployeeCheckResponseEmployeeCheckInfo:
+    type: object
+    properties:
+      employee_check_id:
+        type: string
+        title: employee check id
+      organization_id:
+        type: string
+        title: organization id of the employee
+      check_type:
+        type: string
+        title: type of check
+      reason:
+        type: string
+        title: reason
+      date:
+        type: string
+        format: date-time
+        title: date for check ins and check outs
+    title: Employee Check Info Definition
   ListEmployeeResponseEmployeeResponse:
     type: object
     properties:
@@ -3929,6 +4081,29 @@ definitions:
           "$ref": "#/definitions/fmEducationEmployeeInformation"
         title: education Information about the employee
     title: individual employee record
+  ListGlobalCheckResponseGlobalCheckResponse:
+    type: object
+    properties:
+      global_check_id:
+        type: string
+        title: id of global check
+      check_type:
+        type: string
+        title: type  of check
+      details:
+        type: array
+        items:
+          type: string
+        title: details of the global check
+      created_at:
+        type: string
+        format: date-time
+        title: global check created at
+      updated_at:
+        type: string
+        format: date-time
+        title: global check updated at
+    title: Global Check Definition
   ListInventoryCategoryResponseInventoryCategory:
     type: object
     properties:
@@ -4127,18 +4302,7 @@ definitions:
         items:
           type: string
         title: 'multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY'
-  TaskGroupByEmployeeResponseEmployeeData:
-    type: object
-    properties:
-      employee_id:
-        type: string
-        title: id of employee
-      task_information:
-        type: array
-        items:
-          "$ref": "#/definitions/TaskGroupByEmployeeResponseTaskInformation"
-        title: task information
-  TaskGroupByEmployeeResponseTaskInformation:
+  TaskGroupByEmployeeResponseTaskDetailedInformation:
     type: object
     properties:
       key:
@@ -4148,7 +4312,7 @@ definitions:
         format: int32
       total_hours:
         type: number
-        format: float
+        format: double
   TaskGroupResponseEmployeeTaskData:
     type: object
     properties:
@@ -5223,6 +5387,27 @@ definitions:
     properties:
       designation_id:
         type: string
+  fmCreateEmployeeCheckRequest:
+    type: object
+    properties:
+      employee_id:
+        type: string
+        title: id of employee who is about to check in or check out
+      organization_id:
+        type: string
+        title: organization id of the employee
+      check_type:
+        type: string
+        title: type of check i.e. check in or check out
+      reason:
+        type: string
+        title: reason
+  fmCreateEmployeeCheckResponse:
+    type: object
+    properties:
+      employee_check_id:
+        type: string
+        title: employee check id
   fmCreateEmployeeRequest:
     type: object
     properties:
@@ -6381,6 +6566,14 @@ definitions:
         items:
           type: string
         title: list of allowed clients
+  fmGetEmployeeCheckResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          "$ref": "#/definitions/GetEmployeeCheckResponseEmployeeCheckResponse"
+        title: list of employee checks
   fmGetEmployeeIdsByClientIdResponse:
     type: object
     properties:
@@ -6675,6 +6868,14 @@ definitions:
         type: array
         items:
           "$ref": "#/definitions/ListDesignationResponseDesignationResponse"
+  fmListEmployeeCheckResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          "$ref": "#/definitions/ListEmployeeCheckResponseEmployeeCheckInfo"
+        title: result list
   fmListEmployeeLeaverResponse:
     type: object
     properties:
@@ -6728,6 +6929,14 @@ definitions:
         type: array
         items:
           "$ref": "#/definitions/fmFeedbackResponse"
+  fmListGlobalCheckResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          "$ref": "#/definitions/ListGlobalCheckResponseGlobalCheckResponse"
+        title: list of global checks
   fmListHolidayResponse:
     type: object
     properties:
@@ -7370,10 +7579,22 @@ definitions:
   fmTaskGroupByEmployeeResponse:
     type: object
     properties:
-      employee_data:
+      employee_id:
+        type: string
+        title: id of employee
+      task_information:
         type: array
         items:
-          "$ref": "#/definitions/TaskGroupByEmployeeResponseEmployeeData"
+          "$ref": "#/definitions/TaskGroupByEmployeeResponseTaskDetailedInformation"
+        title: task information
+      total_tasks:
+        type: integer
+        format: int32
+        title: total tasks done
+      task_total_time:
+        type: number
+        format: double
+        title: total task working duration in seconds
   fmTaskGroupResponse:
     type: object
     properties:
@@ -8132,6 +8353,26 @@ definitions:
       status:
         type: boolean
         title: action response
+  fmUpsertGlobalCheckReponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
+  fmUpsertGlobalCheckRequest:
+    type: object
+    properties:
+      check_type:
+        type: string
+        title: check whether it is a check_in or check_out
+      organization_id:
+        type: string
+        title: organization id
+      details:
+        type: array
+        items:
+          type: string
+        title: details
   fmUpsertRecurrence:
     type: object
     properties:
