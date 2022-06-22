@@ -55,6 +55,136 @@ paths:
           "$ref": "#/definitions/fmCheckInOutRequest"
       tags:
       - CheckService
+  "/v1/check/employee-check":
+    get:
+      summary: Get individual employee checks information. Authorization scope of
+        `fm.employee-check.detail` is required
+      operationId: CheckService_GetEmployeeCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmGetEmployeeCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: employee_id
+        description: id of employee.
+        in: query
+        required: false
+        type: string
+      - name: date
+        description: date for check ins and check outs.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      tags:
+      - CheckService
+    post:
+      summary: Create employee check. Authorization scope of `fm.employee-check.create`
+        is required
+      operationId: CheckService_CreateEmployeeCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateEmployeeCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateEmployeeCheckRequest"
+      tags:
+      - CheckService
+  "/v1/check/employee-checks":
+    get:
+      summary: Get checks information of multiple employees. Authorization scope of
+        `fm.employee-check.list` is required
+      operationId: CheckService_ListEmployeeCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListEmployeeCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: organization id of the employee.
+        in: query
+        required: false
+        type: string
+      - name: employee_id
+        description: employee ids.
+        in: query
+        required: false
+        type: array
+        items:
+          type: string
+        collectionFormat: multi
+      - name: date
+        description: date for check ins and check outs.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      tags:
+      - CheckService
+  "/v1/check/global-check":
+    get:
+      summary: "ListGlobalCheck returns the list of global checks visible to the authorized
+        user in \ndescending order of created date. Authorization scope of `fm.global-check.list`
+        is required."
+      operationId: CheckService_ListGlobalCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListGlobalCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: organization id.
+        in: query
+        required: false
+        type: string
+      tags:
+      - CheckService
+    post:
+      summary: |-
+        Add/Update global check.
+        Authorization scope of `fm.global-check.update` is required
+      operationId: CheckService_UpsertGlobalCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertGlobalCheckReponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpsertGlobalCheckRequest"
+      tags:
+      - CheckService
   "/v1/checks":
     get:
       summary: |-
@@ -1560,91 +1690,6 @@ paths:
           "$ref": "#/definitions/fmUpdateEmployeeRequest"
       tags:
       - EmployeeService
-  "/v1/employee-check":
-    get:
-      summary: Get individual employee checks information. Authorization scope of
-        `fm.employee-check.detail` is required
-      operationId: CheckService_GetEmployeeCheck
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmGetEmployeeCheckResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: employee_id
-        description: id of employee.
-        in: query
-        required: false
-        type: string
-      - name: date
-        description: date for check ins and check outs.
-        in: query
-        required: false
-        type: string
-        format: date-time
-      tags:
-      - CheckService
-    post:
-      summary: Create employee check. Authorization scope of `fm.employee-check.create`
-        is required
-      operationId: CheckService_CreateEmployeeCheck
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmCreateEmployeeCheckResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmCreateEmployeeCheckRequest"
-      tags:
-      - CheckService
-  "/v1/employee-checks":
-    get:
-      summary: Get checks information of multiple employees. Authorization scope of
-        `fm.employee-check.list` is required
-      operationId: CheckService_ListEmployeeCheck
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmListEmployeeCheckResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: organization_id
-        description: organization id of the employee.
-        in: query
-        required: false
-        type: string
-      - name: employee_id
-        description: employee ids.
-        in: query
-        required: false
-        type: array
-        items:
-          type: string
-        collectionFormat: multi
-      - name: date
-        description: date for check ins and check outs.
-        in: query
-        required: false
-        type: string
-        format: date-time
-      tags:
-      - CheckService
   "/v1/employee/status":
     post:
       summary: |-
@@ -2039,51 +2084,6 @@ paths:
         type: string
       tags:
       - EmployeeSickService
-  "/v1/global-check":
-    get:
-      summary: "ListGlobalCheck returns the list of global checks visible to the authorized
-        user in \ndescending order of created date. Authorization scope of `fm.global-check.list`
-        is required."
-      operationId: CheckService_ListGlobalCheck
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmListGlobalCheckResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: organization_id
-        description: organization id.
-        in: query
-        required: false
-        type: string
-      tags:
-      - CheckService
-    post:
-      summary: |-
-        Add/Update global check.
-        Authorization scope of `fm.global-check.update` is required
-      operationId: CheckService_UpsertGlobalCheck
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmUpsertGlobalCheckReponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmUpsertGlobalCheckRequest"
-      tags:
-      - CheckService
   "/v1/inventory":
     get:
       summary: |-
