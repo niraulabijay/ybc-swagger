@@ -3037,6 +3037,46 @@ paths:
           "$ref": "#/definitions/fmChangeTimesheetCorrectionStatusRequest"
       tags:
       - TaskService
+  "/v1/tasks/group_by_client":
+    get:
+      summary: |-
+        Task Group Data By Client
+        Authorization scope of `fm.task.list` is required.
+      operationId: TaskService_ListTaskGroupByClient
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmTaskGroupByClientResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: group_type
+        description: 'type of group : WEEKLY, MONTHLY, YEARLY.'
+        in: query
+        required: false
+        type: string
+      - name: client_id
+        description: id of client.
+        in: query
+        required: false
+        type: string
+      - name: start_date
+        description: start date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: end_date
+        description: end date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      tags:
+      - TaskService
   "/v1/tasks/group_by_employee":
     get:
       summary: |-
@@ -3080,7 +3120,7 @@ paths:
   "/v1/tasks/groups":
     get:
       summary: |-
-        Task Group Data
+        Task Group Data By Period (One of : Weekly, Monthly, Yearly)
         Authorization scope of `fm.task.list` is required.
       operationId: TaskService_ListTaskGroup
       responses:
@@ -3111,6 +3151,57 @@ paths:
         format: date-time
       - name: end_date
         description: end date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      tags:
+      - TaskService
+  "/v1/tasks/groups/all":
+    get:
+      summary: |-
+        Task Group Data All Periods
+        Authorization scope of `fm.task.list` is required.
+      operationId: TaskService_ListAllTaskGroup
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmAllTaskGroupResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: unique id of organization.
+        in: query
+        required: false
+        type: string
+      - name: filter
+        description: 'filter : Allowed values : EMPLOYEE, CLIENT.'
+        in: query
+        required: false
+        type: string
+      - name: filter_id
+        description: 'id of filter : client_id or employee_id (optional).'
+        in: query
+        required: false
+        type: string
+      - name: start_date
+        description: start date of the week.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: end_date
+        description: end date of the week.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: current_date
+        description: current date.
         in: query
         required: false
         type: string
@@ -3675,6 +3766,31 @@ paths:
       tags:
       - UserService
 definitions:
+  AllTaskGroupResponseSectorTaskGroupData:
+    type: object
+    properties:
+      id:
+        type: string
+        title: unique id of client/employee
+      task_data:
+        type: array
+        items:
+          "$ref": "#/definitions/AllTaskGroupResponseTaskGroupData"
+        title: task data
+  AllTaskGroupResponseTaskGroupData:
+    type: object
+    properties:
+      group_type:
+        type: string
+        title: 'group type: DAILY, WEEKLY, MONTHLY, YEARLY'
+      total_tasks:
+        type: integer
+        format: int32
+        title: total tasks done
+      task_total_time:
+        type: number
+        format: double
+        title: total task working duration in seconds
   ClientListAttachmentResponseClientAttachmentPayload:
     type: object
     properties:
@@ -4345,17 +4461,15 @@ definitions:
         items:
           type: string
         title: 'multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY'
-  TaskGroupByEmployeeResponseTaskDetailedInformation:
+  TaskGroupByClientResponseTaskEmployeeDetailedInformation:
     type: object
     properties:
-      key:
+      employee_id:
         type: string
-      total_tasks:
-        type: integer
-        format: int32
-      total_hours:
-        type: number
-        format: double
+      task_information:
+        type: array
+        items:
+          "$ref": "#/definitions/fmTaskDetailedInformation"
   TaskGroupResponseEmployeeTaskData:
     type: object
     properties:
@@ -4373,22 +4487,8 @@ definitions:
       weekly_data:
         type: array
         items:
-          "$ref": "#/definitions/TaskGroupResponseTaskGroupWeeklyData"
+          "$ref": "#/definitions/fmTaskGroupWeeklyData"
         title: weekly data
-  TaskGroupResponseTaskGroupWeeklyData:
-    type: object
-    properties:
-      day_of_week:
-        type: string
-        title: day of week
-      total_tasks:
-        type: integer
-        format: int32
-        title: total tasks done
-      task_total_time:
-        type: number
-        format: double
-        title: total task working duration in seconds
   UpdateTaskByClientRequestUpdateTaskByClient:
     type: object
     properties:
@@ -4655,6 +4755,17 @@ definitions:
           type: string
         title: delete history
     title: details of Views within an agenda
+  fmAllTaskGroupResponse:
+    type: object
+    properties:
+      filter:
+        type: string
+        title: 'filter : EMPLOYEE, CLIENT'
+      total_data:
+        type: array
+        items:
+          "$ref": "#/definitions/AllTaskGroupResponseSectorTaskGroupData"
+        title: Clientwise or emplooyeewise data
   fmArea:
     type: object
     properties:
@@ -7649,6 +7760,36 @@ definitions:
       task_detail:
         "$ref": "#/definitions/fmTaskResponse"
         title: Details of the task
+  fmTaskDetailedInformation:
+    type: object
+    properties:
+      key:
+        type: string
+      total_tasks:
+        type: integer
+        format: int32
+      total_hours:
+        type: number
+        format: double
+  fmTaskGroupByClientResponse:
+    type: object
+    properties:
+      client_id:
+        type: string
+        title: id of client
+      employee_information:
+        type: array
+        items:
+          "$ref": "#/definitions/TaskGroupByClientResponseTaskEmployeeDetailedInformation"
+        title: task information
+      total_tasks:
+        type: integer
+        format: int32
+        title: total tasks done
+      task_total_time:
+        type: number
+        format: double
+        title: total task working duration in seconds
   fmTaskGroupByEmployeeResponse:
     type: object
     properties:
@@ -7658,7 +7799,7 @@ definitions:
       task_information:
         type: array
         items:
-          "$ref": "#/definitions/TaskGroupByEmployeeResponseTaskDetailedInformation"
+          "$ref": "#/definitions/fmTaskDetailedInformation"
         title: task information
       total_tasks:
         type: integer
@@ -7676,6 +7817,20 @@ definitions:
         items:
           "$ref": "#/definitions/TaskGroupResponseEmployeeTaskData"
         title: employee data
+  fmTaskGroupWeeklyData:
+    type: object
+    properties:
+      day_of_week:
+        type: string
+        title: day of week
+      total_tasks:
+        type: integer
+        format: int32
+        title: total tasks done
+      task_total_time:
+        type: number
+        format: double
+        title: total task working duration in seconds
   fmTaskResponse:
     type: object
     properties:
