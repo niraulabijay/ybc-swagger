@@ -394,6 +394,10 @@
     - [ListResponseMetadata](#fm.ListResponseMetadata)
   
 - [task_service.proto](#task_service.proto)
+    - [AllTaskGroupRequest](#fm.AllTaskGroupRequest)
+    - [AllTaskGroupResponse](#fm.AllTaskGroupResponse)
+    - [AllTaskGroupResponse.SectorTaskGroupData](#fm.AllTaskGroupResponse.SectorTaskGroupData)
+    - [AllTaskGroupResponse.TaskGroupData](#fm.AllTaskGroupResponse.TaskGroupData)
     - [ChangeTimesheetCorrectionStatusRequest](#fm.ChangeTimesheetCorrectionStatusRequest)
     - [ChangeTimesheetCorrectionStatusResponse](#fm.ChangeTimesheetCorrectionStatusResponse)
     - [CheckinTaskRequest](#fm.CheckinTaskRequest)
@@ -422,13 +426,16 @@
     - [TaskByEmployeeResponse](#fm.TaskByEmployeeResponse)
     - [TaskDetailRequest](#fm.TaskDetailRequest)
     - [TaskDetailResponse](#fm.TaskDetailResponse)
+    - [TaskDetailedInformation](#fm.TaskDetailedInformation)
+    - [TaskGroupByClientRequest](#fm.TaskGroupByClientRequest)
+    - [TaskGroupByClientResponse](#fm.TaskGroupByClientResponse)
+    - [TaskGroupByClientResponse.TaskEmployeeDetailedInformation](#fm.TaskGroupByClientResponse.TaskEmployeeDetailedInformation)
     - [TaskGroupByEmployeeRequest](#fm.TaskGroupByEmployeeRequest)
     - [TaskGroupByEmployeeResponse](#fm.TaskGroupByEmployeeResponse)
-    - [TaskGroupByEmployeeResponse.TaskDetailedInformation](#fm.TaskGroupByEmployeeResponse.TaskDetailedInformation)
     - [TaskGroupRequest](#fm.TaskGroupRequest)
     - [TaskGroupResponse](#fm.TaskGroupResponse)
     - [TaskGroupResponse.EmployeeTaskData](#fm.TaskGroupResponse.EmployeeTaskData)
-    - [TaskGroupResponse.TaskGroupWeeklyData](#fm.TaskGroupResponse.TaskGroupWeeklyData)
+    - [TaskGroupWeeklyData](#fm.TaskGroupWeeklyData)
     - [TaskResponse](#fm.TaskResponse)
     - [TimesheetResponse](#fm.TimesheetResponse)
     - [UpdateRecurrenceRequest](#fm.UpdateRecurrenceRequest)
@@ -6578,6 +6585,75 @@ Employee Bank accounts details collection
 
 
 
+<a name="fm.AllTaskGroupRequest"></a>
+
+### AllTaskGroupRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| filter | [string](#string) |  | filter : Allowed values : EMPLOYEE, CLIENT |
+| filter_id | [string](#string) |  | id of filter : client_id or employee_id (optional) |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | start date of the week |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | end date of the week |
+| current_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | current date |
+
+
+
+
+
+
+<a name="fm.AllTaskGroupResponse"></a>
+
+### AllTaskGroupResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [string](#string) |  | filter : EMPLOYEE, CLIENT |
+| total_data | [AllTaskGroupResponse.SectorTaskGroupData](#fm.AllTaskGroupResponse.SectorTaskGroupData) | repeated | Clientwise or emplooyeewise data |
+
+
+
+
+
+
+<a name="fm.AllTaskGroupResponse.SectorTaskGroupData"></a>
+
+### AllTaskGroupResponse.SectorTaskGroupData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | unique id of client/employee |
+| task_data | [AllTaskGroupResponse.TaskGroupData](#fm.AllTaskGroupResponse.TaskGroupData) | repeated | task data |
+
+
+
+
+
+
+<a name="fm.AllTaskGroupResponse.TaskGroupData"></a>
+
+### AllTaskGroupResponse.TaskGroupData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| group_type | [string](#string) |  | group type: DAILY, WEEKLY, MONTHLY, YEARLY |
+| total_tasks | [int32](#int32) |  | total tasks done |
+| task_total_time | [double](#double) |  | total task working duration in seconds |
+
+
+
+
+
+
 <a name="fm.ChangeTimesheetCorrectionStatusRequest"></a>
 
 ### ChangeTimesheetCorrectionStatusRequest
@@ -7064,6 +7140,75 @@ Response for list of task request
 
 
 
+<a name="fm.TaskDetailedInformation"></a>
+
+### TaskDetailedInformation
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| key | [string](#string) |  |  |
+| total_tasks | [int32](#int32) |  |  |
+| total_hours | [double](#double) |  |  |
+
+
+
+
+
+
+<a name="fm.TaskGroupByClientRequest"></a>
+
+### TaskGroupByClientRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| group_type | [string](#string) |  | type of group : WEEKLY, MONTHLY, YEARLY |
+| client_id | [string](#string) |  | id of client |
+| start_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | start date |
+| end_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | end date |
+
+
+
+
+
+
+<a name="fm.TaskGroupByClientResponse"></a>
+
+### TaskGroupByClientResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of client |
+| employee_information | [TaskGroupByClientResponse.TaskEmployeeDetailedInformation](#fm.TaskGroupByClientResponse.TaskEmployeeDetailedInformation) | repeated | task information |
+| total_tasks | [int32](#int32) |  | total tasks done |
+| task_total_time | [double](#double) |  | total task working duration in seconds |
+
+
+
+
+
+
+<a name="fm.TaskGroupByClientResponse.TaskEmployeeDetailedInformation"></a>
+
+### TaskGroupByClientResponse.TaskEmployeeDetailedInformation
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  |  |
+| task_information | [TaskDetailedInformation](#fm.TaskDetailedInformation) | repeated |  |
+
+
+
+
+
+
 <a name="fm.TaskGroupByEmployeeRequest"></a>
 
 ### TaskGroupByEmployeeRequest
@@ -7091,26 +7236,9 @@ Response for list of task request
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | employee_id | [string](#string) |  | id of employee |
-| task_information | [TaskGroupByEmployeeResponse.TaskDetailedInformation](#fm.TaskGroupByEmployeeResponse.TaskDetailedInformation) | repeated | task information |
+| task_information | [TaskDetailedInformation](#fm.TaskDetailedInformation) | repeated | task information |
 | total_tasks | [int32](#int32) |  | total tasks done |
 | task_total_time | [double](#double) |  | total task working duration in seconds |
-
-
-
-
-
-
-<a name="fm.TaskGroupByEmployeeResponse.TaskDetailedInformation"></a>
-
-### TaskGroupByEmployeeResponse.TaskDetailedInformation
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| key | [string](#string) |  |  |
-| total_tasks | [int32](#int32) |  |  |
-| total_hours | [double](#double) |  |  |
 
 
 
@@ -7161,16 +7289,16 @@ Response for list of task request
 | employee_id | [string](#string) |  | unique id of employee |
 | total_tasks | [int32](#int32) |  | total tasks done |
 | task_total_time | [double](#double) |  | total task working duration in seconds |
-| weekly_data | [TaskGroupResponse.TaskGroupWeeklyData](#fm.TaskGroupResponse.TaskGroupWeeklyData) | repeated | weekly data |
+| weekly_data | [TaskGroupWeeklyData](#fm.TaskGroupWeeklyData) | repeated | weekly data |
 
 
 
 
 
 
-<a name="fm.TaskGroupResponse.TaskGroupWeeklyData"></a>
+<a name="fm.TaskGroupWeeklyData"></a>
 
-### TaskGroupResponse.TaskGroupWeeklyData
+### TaskGroupWeeklyData
 
 
 
@@ -7447,8 +7575,10 @@ service to manage tasks
 | ListPeriodic | [ListPeriodicTaskRequest](#fm.ListPeriodicTaskRequest) | [ListPeriodicTaskResponse](#fm.ListPeriodicTaskResponse) | List returns the list of periodic task clients visible to the authroized user in descending date order. Authorization scope of `fm.task.periodic` is required. |
 | ListCorrection | [ListCorrectionRequest](#fm.ListCorrectionRequest) | [ListCorrectionResponse](#fm.ListCorrectionResponse) | List returns the list of corections visible to the authroized user in descending date order. Authorization scope of `fm.task.correction` is required. |
 | ChangeTimesheetCorrectionStatus | [ChangeTimesheetCorrectionStatusRequest](#fm.ChangeTimesheetCorrectionStatusRequest) | [ChangeTimesheetCorrectionStatusResponse](#fm.ChangeTimesheetCorrectionStatusResponse) | Change timesheet correction request status |
-| ListTaskGroup | [TaskGroupRequest](#fm.TaskGroupRequest) | [TaskGroupResponse](#fm.TaskGroupResponse) | Task Group Data Authorization scope of `fm.task.list` is required. |
+| ListTaskGroup | [TaskGroupRequest](#fm.TaskGroupRequest) | [TaskGroupResponse](#fm.TaskGroupResponse) | Task Group Data By Period (One of : Weekly, Monthly, Yearly) Authorization scope of `fm.task.list` is required. |
+| ListAllTaskGroup | [AllTaskGroupRequest](#fm.AllTaskGroupRequest) | [AllTaskGroupResponse](#fm.AllTaskGroupResponse) | Task Group Data All Periods Authorization scope of `fm.task.list` is required. |
 | ListTaskGroupByEmployee | [TaskGroupByEmployeeRequest](#fm.TaskGroupByEmployeeRequest) | [TaskGroupByEmployeeResponse](#fm.TaskGroupByEmployeeResponse) | Task Group Data By Employee Authorization scope of `fm.task.list` is required. |
+| ListTaskGroupByClient | [TaskGroupByClientRequest](#fm.TaskGroupByClientRequest) | [TaskGroupByClientResponse](#fm.TaskGroupByClientResponse) | Task Group Data By Client Authorization scope of `fm.task.list` is required. |
 
  
 
