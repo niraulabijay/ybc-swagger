@@ -1177,51 +1177,6 @@ paths:
           "$ref": "#/definitions/fmDeleteAreaRequest"
       tags:
       - AreaRegionService
-  "/v1/department/area/assign-supervisor":
-    post:
-      summary: |-
-        Add/Update Area Supervisor of given area
-        Authorization scope of `fm.area.update` is required
-      operationId: AreaRegionService_UpsertAreaSupervisor
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmUpsertAreaSupervisorResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmUpsertAreaSupervisorRequest"
-      tags:
-      - AreaRegionService
-  "/v1/department/area/remove-supervisor":
-    post:
-      summary: "Remove area supervisor \nAuthorization scope of `fm.area.update` is
-        required"
-      operationId: AreaRegionService_RemoveAreaSupervisor
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmRemoveAreaSupervisorResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmRemoveAreaSupervisorRequest"
-      tags:
-      - AreaRegionService
   "/v1/department/areas":
     get:
       summary: |-
@@ -3623,7 +3578,7 @@ paths:
       tags:
       - UserService
   "/v1/user/list_by_employees":
-    get:
+    post:
       summary: |-
         get user list according to employee id for changing roles/scopes
         Authorization scope of `` is required
@@ -3638,19 +3593,11 @@ paths:
           schema:
             "$ref": "#/definitions/runtimeError"
       parameters:
-      - name: organization_id
-        description: id of organization.
-        in: query
-        required: false
-        type: string
-      - name: employee_ids
-        description: employeee ids.
-        in: query
-        required: false
-        type: array
-        items:
-          type: string
-        collectionFormat: multi
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmGetUserListRequest"
       tags:
       - UserService
   "/v1/user/reset-password":
@@ -4157,6 +4104,9 @@ definitions:
   ListEmployeeCheckResponseEmployeeCheckInfo:
     type: object
     properties:
+      employee_id:
+        type: string
+        title: id of employee
       employee_check_id:
         type: string
         title: employee check id
@@ -5990,6 +5940,11 @@ definitions:
       area_id:
         type: string
         title: area that sub area belongs to
+      client_ids:
+        type: array
+        items:
+          type: string
+        title: client ids
       area_supervisors:
         type: array
         items:
@@ -6804,6 +6759,17 @@ definitions:
         items:
           "$ref": "#/definitions/fmUserData"
         title: list of users with their roles and scopes
+  fmGetUserListRequest:
+    type: object
+    properties:
+      organization_id:
+        type: string
+        title: id of organization
+      employee_ids:
+        type: array
+        items:
+          type: string
+        title: employeee ids
   fmGetUserListResponse:
     type: object
     properties:
@@ -7617,21 +7583,6 @@ definitions:
       region_manager:
         type: string
         title: Region manager employee_id
-  fmRemoveAreaSupervisorRequest:
-    type: object
-    properties:
-      area_id:
-        type: string
-        title: id of area
-      area_supervisor_id:
-        type: string
-        title: id of area supervisor
-  fmRemoveAreaSupervisorResponse:
-    type: object
-    properties:
-      status:
-        type: boolean
-        title: action response
   fmResetPasswordRequest:
     type: object
     properties:
@@ -7717,6 +7668,11 @@ definitions:
         items:
           type: string
         title: id of area supervisors (employee_id)
+      client_ids:
+        type: array
+        items:
+          type: string
+        title: client ids
   fmTaskByEmployeeResponse:
     type: object
     properties:
@@ -8466,6 +8422,11 @@ definitions:
       organization_id:
         type: string
         title: organization id of the sub area
+      client_ids:
+        type: array
+        items:
+          type: string
+        title: client ids
       area_supervisors:
         type: array
         items:
@@ -8561,26 +8522,6 @@ definitions:
     properties:
       area_id:
         type: string
-  fmUpsertAreaSupervisorRequest:
-    type: object
-    properties:
-      area_id:
-        type: string
-        title: unique id of area
-      area_supervisor:
-        type: string
-        title: area supervisor id (employee-id)
-      allowed_client_ids:
-        type: array
-        items:
-          type: string
-        title: list of clients allowed to area_supervisor
-  fmUpsertAreaSupervisorResponse:
-    type: object
-    properties:
-      status:
-        type: boolean
-        title: action response
   fmUpsertGlobalCheckReponse:
     type: object
     properties:
