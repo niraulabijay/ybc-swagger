@@ -146,8 +146,12 @@
     - [Region](#fm.Region)
     - [Sector](#fm.Sector)
     - [StoreBudget](#fm.StoreBudget)
+    - [UpdateClientAreaRequest](#fm.UpdateClientAreaRequest)
+    - [UpdateClientAreaResponse](#fm.UpdateClientAreaResponse)
     - [UpdateClientMobilizationRequest](#fm.UpdateClientMobilizationRequest)
     - [UpdateClientMobilizationResponse](#fm.UpdateClientMobilizationResponse)
+    - [UpdateClientRegionRequest](#fm.UpdateClientRegionRequest)
+    - [UpdateClientRegionResponse](#fm.UpdateClientRegionResponse)
     - [UpdateClientRequest](#fm.UpdateClientRequest)
     - [UpdateClientResponse](#fm.UpdateClientResponse)
   
@@ -1173,11 +1177,12 @@ Employee Check Info Definition
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | employee_id | [string](#string) |  | id of employee |
-| employee_check_id | [string](#string) |  | employee check id |
 | organization_id | [string](#string) |  | organization id of the employee |
 | check_type | [string](#string) |  | type of check |
-| reason | [string](#string) |  | reason |
 | date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | date for check ins and check outs |
+| details | [GlobalCheckDetail](#fm.GlobalCheckDetail) | repeated | employee specific instructions |
+| reason | [string](#string) |  | reason |
+| check_ids | [string](#string) | repeated | check_ids |
 
 
 
@@ -2868,6 +2873,38 @@ individual client response
 
 
 
+<a name="fm.UpdateClientAreaRequest"></a>
+
+### UpdateClientAreaRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) | repeated | client ids |
+| area | [string](#string) |  | area of the client |
+| organization_id | [string](#string) |  | organization of the clients |
+
+
+
+
+
+
+<a name="fm.UpdateClientAreaResponse"></a>
+
+### UpdateClientAreaResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
 <a name="fm.UpdateClientMobilizationRequest"></a>
 
 ### UpdateClientMobilizationRequest
@@ -2900,6 +2937,38 @@ Response for update client mobilization
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | client_mobilization_id | [string](#string) |  | unique id of the updated client mobilization |
+
+
+
+
+
+
+<a name="fm.UpdateClientRegionRequest"></a>
+
+### UpdateClientRegionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) | repeated | client ids |
+| region | [string](#string) |  | region of the client |
+| organization_id | [string](#string) |  | organization of the clients |
+
+
+
+
+
+
+<a name="fm.UpdateClientRegionResponse"></a>
+
+### UpdateClientRegionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
 
 
 
@@ -2960,6 +3029,8 @@ response for UpdateClientRequest
 | Create | [CreateClientRequest](#fm.CreateClientRequest) | [CreateClientResponse](#fm.CreateClientResponse) | Create a new client. Authorization scope of `fm.client.create` is required. |
 | List | [ListClientRequest](#fm.ListClientRequest) | [ListClientResponse](#fm.ListClientResponse) | List returns the list of client visible to the authorized user in descending order. Scope of `fm.client.list` is required. |
 | Update | [UpdateClientRequest](#fm.UpdateClientRequest) | [UpdateClientResponse](#fm.UpdateClientResponse) | Update an existing client. Authorization scope of `fm.client.update` is required. |
+| UpdateClientArea | [UpdateClientAreaRequest](#fm.UpdateClientAreaRequest) | [UpdateClientAreaResponse](#fm.UpdateClientAreaResponse) | Update area of clients if it is empty. Authorization scope of `fm.client.update` is required. |
+| UpdateClientRegion | [UpdateClientRegionRequest](#fm.UpdateClientRegionRequest) | [UpdateClientRegionResponse](#fm.UpdateClientRegionResponse) | Update region of clients if it is empty. Authorization scope of `fm.client.update` is required. |
 | Detail | [ClientDetailRequest](#fm.ClientDetailRequest) | [ClientDetailResponse](#fm.ClientDetailResponse) | Details of client. Scope of `fm.client.detail` is required. |
 | ChangeStatus | [ClientChangeStatusRequest](#fm.ClientChangeStatusRequest) | [ClientChangeStatusResponse](#fm.ClientChangeStatusResponse) | Change status of a client. Scope of `fm.client.status-change` is required. |
 | SetHeadOffice | [ClientSetHeadOfficeRequest](#fm.ClientSetHeadOfficeRequest) | [ClientSetHeadOfficeResponse](#fm.ClientSetHeadOfficeResponse) | set a single head office from clients. Scope of `fm.client.set-headoffice` is required. |
