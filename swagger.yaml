@@ -303,6 +303,29 @@ paths:
           "$ref": "#/definitions/fmUpdateClientRequest"
       tags:
       - ClientService
+  "/v1/client-area":
+    patch:
+      summary: |-
+        Update area of clients if it is empty.
+        Authorization scope of `fm.client.update` is required.
+      operationId: ClientService_UpdateClientArea
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateClientAreaResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateClientAreaRequest"
+      tags:
+      - ClientService
   "/v1/client-employee":
     post:
       summary: |-
@@ -812,6 +835,29 @@ paths:
         type: string
       tags:
       - ClientEmployeeService
+  "/v1/client-region":
+    patch:
+      summary: |-
+        Update region of clients if it is empty.
+        Authorization scope of `fm.client.update` is required.
+      operationId: ClientService_UpdateClientRegion
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateClientRegionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateClientRegionRequest"
+      tags:
+      - ClientService
   "/v1/client/change-status":
     patch:
       summary: |-
@@ -8103,6 +8149,26 @@ definitions:
         items:
           type: string
         title: id of clients disabled for area_manager
+  fmUpdateClientAreaRequest:
+    type: object
+    properties:
+      client_id:
+        type: array
+        items:
+          type: string
+        title: client ids
+      area:
+        type: string
+        title: area of the client
+      organization_id:
+        type: string
+        title: organization of the clients
+  fmUpdateClientAreaResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmUpdateClientMobilizationRequest:
     type: object
     properties:
@@ -8143,6 +8209,26 @@ definitions:
         type: string
         title: unique id of the updated client mobilization
     title: Response for update client mobilization
+  fmUpdateClientRegionRequest:
+    type: object
+    properties:
+      client_id:
+        type: array
+        items:
+          type: string
+        title: client ids
+      region:
+        type: string
+        title: region of the client
+      organization_id:
+        type: string
+        title: organization of the clients
+  fmUpdateClientRegionResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmUpdateClientRequest:
     type: object
     properties:
