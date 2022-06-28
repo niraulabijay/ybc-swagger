@@ -161,18 +161,58 @@ paths:
         in: query
         required: false
         type: string
+      - name: current_date
+        description: current date.
+        in: query
+        required: false
+        type: string
+        format: date-time
       tags:
       - CheckService
-    post:
+  "/v1/check/opening-closing":
+    get:
       summary: |-
-        Add/Update global check.
+        List opening/closing check.
         Authorization scope of `fm.global-check.update` is required
-      operationId: CheckService_UpsertGlobalCheck
+      operationId: CheckService_ListOpeningClosingCheck
       responses:
         '200':
           description: A successful response.
           schema:
-            "$ref": "#/definitions/fmUpsertGlobalCheckReponse"
+            "$ref": "#/definitions/fmListOpeningClosingCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: organization_id
+        description: id of organization.
+        in: query
+        required: false
+        type: string
+      - name: type
+        description: 'type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION,
+          POSITION.'
+        in: query
+        required: false
+        type: string
+      - name: check_type
+        description: 'check type : CHECK_IN, CHECK_OUT.'
+        in: query
+        required: false
+        type: string
+      tags:
+      - CheckService
+    post:
+      summary: |-
+        Add opening/closing check.
+        Authorization scope of `fm.global-check.update` is required
+      operationId: CheckService_CreateOpeningClosingCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateOpeningClosingCheckResponse"
         default:
           description: An unexpected error response.
           schema:
@@ -182,7 +222,7 @@ paths:
         in: body
         required: true
         schema:
-          "$ref": "#/definitions/fmUpsertGlobalCheckRequest"
+          "$ref": "#/definitions/fmCreateOpeningClosingCheckRequest"
       tags:
       - CheckService
   "/v1/checks":
@@ -4202,16 +4242,8 @@ definitions:
       details:
         type: array
         items:
-          type: string
+          "$ref": "#/definitions/fmGlobalCheckDetail"
         title: details of the global check
-      created_at:
-        type: string
-        format: date-time
-        title: global check created at
-      updated_at:
-        type: string
-        format: date-time
-        title: global check updated at
     title: Global Check Definition
   ListInventoryCategoryResponseInventoryCategory:
     type: object
@@ -5886,6 +5918,55 @@ definitions:
         type: string
         title: unique id of the created note
     title: Create note response
+  fmCreateOpeningClosingCheckRequest:
+    type: object
+    properties:
+      check_type:
+        type: string
+        title: check whether it is a check_in or check_out
+      organization_id:
+        type: string
+        title: organization id
+      type:
+        type: string
+        title: 'type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION, POSITION'
+      employee_id:
+        type: string
+        title: unique if of employee (optional / required for type=EMPLOYEE)
+      employee_ids:
+        type: array
+        items:
+          type: string
+        title: list of employees (optional / required for type=CLIENT_POSITION, POSITION)
+      client_id:
+        type: string
+        title: unique id of client (optional / required for type=CLIENT_POSITION)
+      designation_id:
+        type: string
+        title: unique if of designation (optional / required for type=CLIENT_POSITION,
+          POSITION)
+      display_date:
+        type: string
+        format: date-time
+        title: Date on which opening/closing check is shown (required if is_recurrence
+          is false)
+      details:
+        type: array
+        items:
+          type: string
+        title: List of instructions
+      is_recurrence:
+        type: boolean
+        title: wether opening/closing check is recurrence
+      recurrence:
+        "$ref": "#/definitions/fmUpsertRecurrence"
+        title: details of recurrence
+  fmCreateOpeningClosingCheckResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmCreateOrganizationRequest:
     type: object
     properties:
@@ -6778,6 +6859,15 @@ definitions:
         items:
           "$ref": "#/definitions/fmUserData"
         title: list of users with their roles and scopes
+  fmGlobalCheckDetail:
+    type: object
+    properties:
+      id:
+        type: string
+        title: unique id of global check detail
+      detail:
+        type: string
+        title: instruction
   fmHmRevenueDetails:
     type: object
     properties:
@@ -7162,6 +7252,13 @@ definitions:
         "$ref": "#/definitions/fmListResponseMetadata"
         title: metadata about response
     title: List Notes response
+  fmListOpeningClosingCheckResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          "$ref": "#/definitions/fmOpeningClosingForListing"
   fmListOrganizationResponse:
     type: object
     properties:
@@ -7471,6 +7568,52 @@ definitions:
       hourly_rate:
         "$ref": "#/definitions/fmHourlyRateInfo"
     title: Official employee information used by create, update endpoints
+  fmOpeningClosingForListing:
+    type: object
+    properties:
+      id:
+        type: string
+        title: unique id of opening/closing check
+      check_type:
+        type: string
+        title: check whether it is a check_in or check_out
+      organization_id:
+        type: string
+        title: organization id
+      type:
+        type: string
+        title: 'type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION, POSITION'
+      employee_id:
+        type: string
+        title: unique if of employee (optional / required for type=EMPLOYEE)
+      employee_ids:
+        type: array
+        items:
+          type: string
+        title: list of employees (optional / required for type=CLIENT_POSITION, POSITION)
+      client_id:
+        type: string
+        title: unique id of client (optional / required for type=CLIENT_POSITION)
+      designation_id:
+        type: string
+        title: unique if of designation (optional / required for type=CLIENT_POSITION,
+          POSITION)
+      display_date:
+        type: string
+        format: date-time
+        title: Date on which opening/closing check is shown (required if is_recurrence
+          is false)
+      details:
+        type: array
+        items:
+          type: string
+        title: List of instructions
+      is_recurrence:
+        type: boolean
+        title: wether opening/closing check is recurrence
+      recurrence:
+        "$ref": "#/definitions/fmRecurrenceDetails"
+        title: details of recurrence
   fmPeriodicBudget:
     type: object
     properties:
@@ -8522,26 +8665,6 @@ definitions:
     properties:
       area_id:
         type: string
-  fmUpsertGlobalCheckReponse:
-    type: object
-    properties:
-      status:
-        type: boolean
-        title: action response
-  fmUpsertGlobalCheckRequest:
-    type: object
-    properties:
-      check_type:
-        type: string
-        title: check whether it is a check_in or check_out
-      organization_id:
-        type: string
-        title: organization id
-      details:
-        type: array
-        items:
-          type: string
-        title: details
   fmUpsertRecurrence:
     type: object
     properties:
