@@ -225,6 +225,51 @@ paths:
           "$ref": "#/definitions/fmCreateOpeningClosingCheckRequest"
       tags:
       - CheckService
+    patch:
+      summary: |-
+        Edit opening/closing check.
+        Authorization scope of `fm.global-check.update` is required
+      operationId: CheckService_UpdateOpeningClosingCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateOpeningClosingCheckResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateOpeningClosingCheckRequest"
+      tags:
+      - CheckService
+  "/v1/check/opening-closing-delete":
+    post:
+      summary: |-
+        Delete opening/closing check.
+        Authorization scope of `fm.global-check.update` is required
+      operationId: CheckService_DeleteOpeningClosingCheck
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteOpeningClosingCheckRequest"
+      tags:
+      - CheckService
   "/v1/checks":
     get:
       summary: |-
@@ -6305,6 +6350,15 @@ definitions:
       organization_id:
         type: string
         title: organization_id to which the designation belongs to
+  fmDeleteOpeningClosingCheckRequest:
+    type: object
+    properties:
+      check_id:
+        type: string
+        title: check in/out id to be deleted
+      organization_id:
+        type: string
+        title: organization id
   fmDeleteRegionRequest:
     type: object
     properties:
@@ -8589,6 +8643,58 @@ definitions:
         type: string
         title: unique id of the updated note
     title: Update note response
+  fmUpdateOpeningClosingCheckRequest:
+    type: object
+    properties:
+      check_id:
+        type: string
+        title: check in/out id to be updated
+      check_type:
+        type: string
+        title: type of check i.e. check_in or check_out
+      organization_id:
+        type: string
+        title: organization id
+      type:
+        type: string
+        title: 'type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION, POSITION'
+      employee_id:
+        type: string
+        title: unique id of employee (optional / required for type=EMPLOYEE)
+      employee_ids:
+        type: array
+        items:
+          type: string
+        title: list of employees (optional / required for type=CLIENT_POSITION, POSITION)
+      client_id:
+        type: string
+        title: unique id of client (optional / required for type=CLIENT_POSITION)
+      designation_id:
+        type: string
+        title: unique if of designation (optional / required for type=CLIENT_POSITION,
+          POSITION)
+      display_date:
+        type: string
+        format: date-time
+        title: Date on which opening/closing check is shown (required if is_recurrence
+          is false)
+      details:
+        type: array
+        items:
+          type: string
+        title: List of instructions
+      is_recurrence:
+        type: boolean
+        title: whether opening/closing check is recurrence
+      recurrence:
+        "$ref": "#/definitions/fmUpsertRecurrence"
+        title: details of recurrence
+  fmUpdateOpeningClosingCheckResponse:
+    type: object
+    properties:
+      check_id:
+        type: string
+        title: updated check in/out id
   fmUpdateRecurrenceRequest:
     type: object
     properties:
