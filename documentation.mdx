@@ -38,6 +38,7 @@
     - [CreateEmployeeCheckResponse](#fm.CreateEmployeeCheckResponse)
     - [CreateOpeningClosingCheckRequest](#fm.CreateOpeningClosingCheckRequest)
     - [CreateOpeningClosingCheckResponse](#fm.CreateOpeningClosingCheckResponse)
+    - [DeleteOpeningClosingCheckRequest](#fm.DeleteOpeningClosingCheckRequest)
     - [GetEmployeeCheckRequest](#fm.GetEmployeeCheckRequest)
     - [GetEmployeeCheckResponse](#fm.GetEmployeeCheckResponse)
     - [GetEmployeeCheckResponse.EmployeeCheckResponse](#fm.GetEmployeeCheckResponse.EmployeeCheckResponse)
@@ -54,6 +55,8 @@
     - [ListOpeningClosingCheckRequest](#fm.ListOpeningClosingCheckRequest)
     - [ListOpeningClosingCheckResponse](#fm.ListOpeningClosingCheckResponse)
     - [OpeningClosingForListing](#fm.OpeningClosingForListing)
+    - [UpdateOpeningClosingCheckRequest](#fm.UpdateOpeningClosingCheckRequest)
+    - [UpdateOpeningClosingCheckResponse](#fm.UpdateOpeningClosingCheckResponse)
   
     - [CheckService](#fm.CheckService)
   
@@ -1016,6 +1019,22 @@ Response from create check
 
 
 
+<a name="fm.DeleteOpeningClosingCheckRequest"></a>
+
+### DeleteOpeningClosingCheckRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| check_id | [string](#string) |  | check in/out id to be deleted |
+| organization_id | [string](#string) |  | organization id |
+
+
+
+
+
+
 <a name="fm.GetEmployeeCheckRequest"></a>
 
 ### GetEmployeeCheckRequest
@@ -1294,6 +1313,47 @@ Global Check Definition
 
 
 
+
+<a name="fm.UpdateOpeningClosingCheckRequest"></a>
+
+### UpdateOpeningClosingCheckRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| check_id | [string](#string) |  | check in/out id to be updated |
+| check_type | [string](#string) |  | type of check i.e. check_in or check_out |
+| organization_id | [string](#string) |  | organization id |
+| type | [string](#string) |  | type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION, POSITION |
+| employee_id | [string](#string) |  | unique id of employee (optional / required for type=EMPLOYEE) |
+| employee_ids | [string](#string) | repeated | list of employees (optional / required for type=CLIENT_POSITION, POSITION) |
+| client_id | [string](#string) |  | unique id of client (optional / required for type=CLIENT_POSITION) |
+| designation_id | [string](#string) |  | unique if of designation (optional / required for type=CLIENT_POSITION, POSITION) |
+| display_date | [google.protobuf.Timestamp](#google.protobuf.Timestamp) |  | Date on which opening/closing check is shown (required if is_recurrence is false) |
+| details | [string](#string) | repeated | List of instructions |
+| is_recurrence | [bool](#bool) |  | whether opening/closing check is recurrence |
+| recurrence | [UpsertRecurrence](#fm.UpsertRecurrence) |  | details of recurrence |
+
+
+
+
+
+
+<a name="fm.UpdateOpeningClosingCheckResponse"></a>
+
+### UpdateOpeningClosingCheckResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| check_id | [string](#string) |  | updated check in/out id |
+
+
+
+
+
  
 
  
@@ -1313,6 +1373,8 @@ checked after task
 | CheckInOut | [CheckInOutRequest](#fm.CheckInOutRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Check can be used to check in a staff to a opening_check and check out to a closing check Authorization scope of `fm.check.in` and `fm.check.out` is required. |
 | List | [ListCheckRequest](#fm.ListCheckRequest) | [ListCheckResponse](#fm.ListCheckResponse) | List returns the list of check visible to the authroized user in descending date order. Authorization scope of `fm.check.list` is required. |
 | CreateOpeningClosingCheck | [CreateOpeningClosingCheckRequest](#fm.CreateOpeningClosingCheckRequest) | [CreateOpeningClosingCheckResponse](#fm.CreateOpeningClosingCheckResponse) | Add opening/closing check. Authorization scope of `fm.global-check.update` is required |
+| UpdateOpeningClosingCheck | [UpdateOpeningClosingCheckRequest](#fm.UpdateOpeningClosingCheckRequest) | [UpdateOpeningClosingCheckResponse](#fm.UpdateOpeningClosingCheckResponse) | Edit opening/closing check. Authorization scope of `fm.global-check.update` is required |
+| DeleteOpeningClosingCheck | [DeleteOpeningClosingCheckRequest](#fm.DeleteOpeningClosingCheckRequest) | [.google.protobuf.Empty](#google.protobuf.Empty) | Delete opening/closing check. Authorization scope of `fm.global-check.update` is required |
 | ListOpeningClosingCheck | [ListOpeningClosingCheckRequest](#fm.ListOpeningClosingCheckRequest) | [ListOpeningClosingCheckResponse](#fm.ListOpeningClosingCheckResponse) | List opening/closing check. Authorization scope of `fm.global-check.update` is required |
 | ListGlobalCheck | [ListGlobalCheckRequest](#fm.ListGlobalCheckRequest) | [ListGlobalCheckResponse](#fm.ListGlobalCheckResponse) | ListGlobalCheck returns the list of global checks visible to the authorized user in descending order of created date. Authorization scope of `fm.global-check.list` is required. |
 | CreateEmployeeCheck | [CreateEmployeeCheckRequest](#fm.CreateEmployeeCheckRequest) | [CreateEmployeeCheckResponse](#fm.CreateEmployeeCheckResponse) | Create employee check. Authorization scope of `fm.employee-check.create` is required |
@@ -7695,4 +7757,3 @@ service to manage tasks
 | <a name="bool" /> bool |  | bool | boolean | boolean | bool | bool | boolean | TrueClass/FalseClass |
 | <a name="string" /> string | A string must always contain UTF-8 encoded or 7-bit ASCII text. | string | String | str/unicode | string | string | string | String (UTF-8) |
 | <a name="bytes" /> bytes | May contain any arbitrary sequence of bytes. | string | ByteString | str | []byte | ByteString | string | String (ASCII-8BIT) |
-
