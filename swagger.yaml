@@ -8704,6 +8704,9 @@ definitions:
       is_recurrence:
         type: boolean
         title: is recurrence
+      recurrence_task_id:
+        type: string
+        title: id of recurrence task (optional)
       recurrence:
         "$ref": "#/definitions/fmUpsertRecurrence"
         title: details of recurrence
