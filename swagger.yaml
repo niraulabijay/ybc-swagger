@@ -241,8 +241,7 @@ paths:
         required: false
         type: string
       - name: type
-        description: 'type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION,
-          POSITION.'
+        description: 'type of opening/closing: GLOBAL, EMPLOYEE, GROUP.'
         in: query
         required: false
         type: string
@@ -419,6 +418,29 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmUpdateClientAreaRequest"
+      tags:
+      - ClientService
+  "/v1/client-area-delete":
+    post:
+      summary: |-
+        Make area field null.
+        Authorization scope of `fm.client.update` is required.
+      operationId: ClientService_DeleteClientArea
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteClientAreaRequest"
       tags:
       - ClientService
   "/v1/client-employee":
@@ -951,6 +973,29 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmUpdateClientRegionRequest"
+      tags:
+      - ClientService
+  "/v1/client-region-delete":
+    post:
+      summary: |-
+        Make region field null.
+        Authorization scope of `fm.client.update` is required.
+      operationId: ClientService_DeleteClientRegion
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteClientRegionRequest"
       tags:
       - ClientService
   "/v1/client/change-status":
@@ -6086,22 +6131,26 @@ definitions:
         title: organization id
       type:
         type: string
-        title: 'type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION, POSITION'
+        title: 'type of opening/closing: GLOBAL, EMPLOYEE, GROUP'
       employee_id:
         type: string
-        title: unique if of employee (optional / required for type=EMPLOYEE)
+        title: unique id of employee (optional / required for type=EMPLOYEE)
       employee_ids:
         type: array
         items:
           type: string
-        title: list of employees (optional / required for type=CLIENT_POSITION, POSITION)
-      client_id:
+        title: list of employees (optional / required for type=GROUP)
+      client_ids:
+        type: array
+        items:
+          type: string
+        title: unique id of clients (optional)
+      department_id:
         type: string
-        title: unique id of client (optional / required for type=CLIENT_POSITION)
+        title: unique if of department (optional)
       designation_id:
         type: string
-        title: unique if of designation (optional / required for type=CLIENT_POSITION,
-          POSITION)
+        title: unique if of designation (optional)
       display_date:
         type: string
         format: date-time
@@ -6388,6 +6437,34 @@ definitions:
       status:
         type: boolean
         title: action response
+  fmDeleteClientAreaRequest:
+    type: object
+    properties:
+      client_id:
+        type: array
+        items:
+          type: string
+        title: client ids to be deleted
+      area:
+        type: string
+        title: area of the client
+      organization_id:
+        type: string
+        title: organization of the clients
+  fmDeleteClientRegionRequest:
+    type: object
+    properties:
+      client_id:
+        type: array
+        items:
+          type: string
+        title: client ids to be deleted
+      region:
+        type: string
+        title: region of the client
+      organization_id:
+        type: string
+        title: organization of the clients
   fmDeleteDepartmentRequest:
     type: object
     properties:
@@ -7754,22 +7831,26 @@ definitions:
         title: organization id
       type:
         type: string
-        title: 'type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION, POSITION'
+        title: 'type of opening/closing: GLOBAL, EMPLOYEE, GLOBAL'
       employee_id:
         type: string
-        title: unique if of employee (optional / required for type=EMPLOYEE)
+        title: unique if of employee
       employee_ids:
         type: array
         items:
           type: string
-        title: list of employees (optional / required for type=CLIENT_POSITION, POSITION)
-      client_id:
+        title: list of employees
+      client_ids:
+        type: array
+        items:
+          type: string
+        title: unique id of clients
+      department_id:
         type: string
-        title: unique id of client (optional / required for type=CLIENT_POSITION)
+        title: unique id of deparmtnet
       designation_id:
         type: string
-        title: unique if of designation (optional / required for type=CLIENT_POSITION,
-          POSITION)
+        title: unique if of designation
       display_date:
         type: string
         format: date-time
@@ -8714,30 +8795,9 @@ definitions:
       check_id:
         type: string
         title: check in/out id to be updated
-      check_type:
-        type: string
-        title: type of check i.e. check_in or check_out
       organization_id:
         type: string
         title: organization id
-      type:
-        type: string
-        title: 'type of opening/closing: GLOBAL, EMPLOYEE, CLIENT_POSITION, POSITION'
-      employee_id:
-        type: string
-        title: unique id of employee (optional / required for type=EMPLOYEE)
-      employee_ids:
-        type: array
-        items:
-          type: string
-        title: list of employees (optional / required for type=CLIENT_POSITION, POSITION)
-      client_id:
-        type: string
-        title: unique id of client (optional / required for type=CLIENT_POSITION)
-      designation_id:
-        type: string
-        title: unique if of designation (optional / required for type=CLIENT_POSITION,
-          POSITION)
       display_date:
         type: string
         format: date-time
