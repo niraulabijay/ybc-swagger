@@ -169,6 +169,56 @@ paths:
         format: date-time
       tags:
       - CheckService
+  "/v1/check/global-description":
+    get:
+      summary: |-
+        GetGlobalDescription returns the details of global description on the basis of check type
+        Authorization scope of `fm.global-check.list` is required.
+      operationId: CheckService_GetGlobalDescription
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmGetGlobalDescriptionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: check_type
+        description: check type i.e. opening or closing check.
+        in: query
+        required: false
+        type: string
+      - name: organization_id
+        description: organization id.
+        in: query
+        required: false
+        type: string
+      tags:
+      - CheckService
+    post:
+      summary: |-
+        UpsertGlobalDescription creates and updates the description for opening/closing check
+        Authorization scope of `fm.global-check.update` is required
+      operationId: CheckService_UpsertGlobalDescription
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertGlobalDescriptionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpsertGlobalDescriptionRequest"
+      tags:
+      - CheckService
   "/v1/check/opening-closing":
     get:
       summary: |-
@@ -3993,6 +4043,15 @@ definitions:
         type: string
         format: date-time
         title: Date of training creation
+  GetGlobalDescriptionResponseGlobalDescriptionDetails:
+    type: object
+    properties:
+      check_type:
+        type: string
+        title: check type i.e. opening or closing check
+      description:
+        type: string
+        title: description of the check
   ListAreaResponseAreaResponse:
     type: object
     properties:
@@ -6918,6 +6977,12 @@ definitions:
         items:
           "$ref": "#/definitions/GetEmployeeTrainingResponseEmployeeTrainingResponse"
     title: Response for get employee trainings
+  fmGetGlobalDescriptionResponse:
+    type: object
+    properties:
+      result:
+        "$ref": "#/definitions/GetGlobalDescriptionResponseGlobalDescriptionDetails"
+        title: Global Description details
   fmGetTargetTasksResponse:
     type: object
     properties:
@@ -8867,6 +8932,24 @@ definitions:
     properties:
       area_id:
         type: string
+  fmUpsertGlobalDescriptionRequest:
+    type: object
+    properties:
+      check_type:
+        type: string
+        title: check type i.e. opening or closing check
+      description:
+        type: string
+        title: description of the check
+      organization_id:
+        type: string
+        title: organization id
+  fmUpsertGlobalDescriptionResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmUpsertRecurrence:
     type: object
     properties:
