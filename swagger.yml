@@ -5740,6 +5740,11 @@ definitions:
       reason:
         type: string
         title: reason
+      checked_details:
+        type: array
+        items:
+          type: string
+        title: checked details ids
   fmCreateEmployeeCheckResponse:
     type: object
     properties:
@@ -6145,12 +6150,17 @@ definitions:
         items:
           type: string
         title: unique id of clients (optional)
+      designation_ids:
+        type: array
+        items:
+          type: string
+        title: unique id of designations (optional)
       department_id:
         type: string
-        title: unique if of department (optional)
+        title: unique id of department (optional)
       designation_id:
         type: string
-        title: unique if of designation (optional)
+        title: unique id of designation (optional)
       display_date:
         type: string
         format: date-time
@@ -7845,9 +7855,14 @@ definitions:
         items:
           type: string
         title: unique id of clients
+      designation_ids:
+        type: array
+        items:
+          type: string
+        title: unique id of designations
       department_id:
         type: string
-        title: unique id of deparmtnet
+        title: unique id of department
       designation_id:
         type: string
         title: unique if of designation
