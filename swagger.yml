@@ -3042,6 +3042,106 @@ paths:
           "$ref": "#/definitions/fmCheckoutTaskRequest"
       tags:
       - TaskService
+  "/v1/task/correction":
+    get:
+      summary: |-
+        List returns the list of task corrections visible to the
+        authorized user in descending date order. Authorization scope of
+        `fm.task.correction` is required.
+      operationId: TaskService_ListCorrection
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListCorrectionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: start_date
+        description: the correction report starts from this date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: end_date
+        description: the Correction report upto this date.
+        in: query
+        required: false
+        type: string
+        format: date-time
+      - name: filter.limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: filter.page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: organization_id
+        description: fetch periodic timesheet for this organization_id.
+        in: query
+        required: false
+        type: string
+      - name: client_id
+        description: client id to filter the list.
+        in: query
+        required: false
+        type: string
+      - name: employee_id
+        description: employee id to filter the list.
+        in: query
+        required: false
+        type: string
+      tags:
+      - TaskService
+    post:
+      summary: |-
+        UpsertTaskCorrection creates or updates the task correction.
+        Authorization scope of `fm.task.correction` is required.
+      operationId: TaskService_UpsertTaskCorrection
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpsertTaskCorrectionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpsertTaskCorrectionRequest"
+      tags:
+      - TaskService
+    patch:
+      summary: |-
+        ApproveTaskCorrection updates the status of task correction.
+        Authorization scope of `fm.task.correction` is required.
+      operationId: TaskService_ApproveTaskCorrection
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmApproveTaskCorrectionResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmApproveTaskCorrectionRequest"
+      tags:
+      - TaskService
   "/v1/task/detail/{task_id}":
     get:
       summary: |-
@@ -4296,22 +4396,28 @@ definitions:
   ListCorrectionResponseCorrectionResponse:
     type: object
     properties:
-      tasks:
-        "$ref": "#/definitions/fmTimesheetResponse"
-        title: list of timesheet data
-      correction_date:
+      id:
         type: string
-        format: date-time
+        title: task correction id
+      task_id:
+        type: string
+        title: task id
+      correction:
+        type: string
         title: correction time of the task report
       status:
         type: string
-        title: approved or suspended
+        title: status of the correction
+      created_at:
+        type: string
+        format: date-time
+        title: timestamp at which the correction was created
       corrected_by:
         type: string
         title: name of the person who correctes timesheet
       approved_by:
         type: string
-        title: name of the person whho approves this correction
+        title: name of the person who approves this correction
   ListDepartmentResponseDepartmentResponse:
     type: object
     properties:
@@ -4950,6 +5056,24 @@ definitions:
         items:
           "$ref": "#/definitions/AllTaskGroupResponseSectorTaskGroupData"
         title: Clientwise or emplooyeewise data
+  fmApproveTaskCorrectionRequest:
+    type: object
+    properties:
+      task_correction_id:
+        type: string
+        title: task correction id
+      organization_id:
+        type: string
+        title: organization id
+      approved_by:
+        type: string
+        title: approved by i.e. id
+  fmApproveTaskCorrectionResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmArea:
     type: object
     properties:
@@ -9083,6 +9207,37 @@ definitions:
       sub_area_id:
         type: string
         title: id of sub area
+  fmUpsertTaskCorrectionRequest:
+    type: object
+    properties:
+      task_id:
+        type: string
+        title: task id
+      client_id:
+        type: string
+        title: client id
+      employee_id:
+        type: string
+        title: employee id
+      organization_id:
+        type: string
+        title: organization id
+      corrected_by:
+        type: string
+        title: corrected by i.e. id
+      correction:
+        type: string
+        title: correction time
+      task_date:
+        type: string
+        format: date-time
+        title: date of the task
+  fmUpsertTaskCorrectionResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmUserData:
     type: object
     properties:
