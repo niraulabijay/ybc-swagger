@@ -3047,7 +3047,7 @@ paths:
       summary: |-
         List returns the list of task corrections visible to the
         authorized user in descending date order. Authorization scope of
-        `fm.task.correction` is required.
+        `fm.task.correction.list` is required.
       operationId: TaskService_ListCorrection
       responses:
         '200':
@@ -3123,7 +3123,7 @@ paths:
     patch:
       summary: |-
         ApproveTaskCorrection updates the status of task correction.
-        Authorization scope of `fm.task.correction` is required.
+        Authorization scope of `fm.task.correction.approve` is required.
       operationId: TaskService_ApproveTaskCorrection
       responses:
         '200':
@@ -6401,9 +6401,12 @@ definitions:
       is_variation:
         type: boolean
         title: flag to confirm if the task is variation or not
+      is_vary:
+        type: boolean
+        title: whether task is vary or not
       is_recurrence:
         type: boolean
-        title: wether task is recurrence
+        title: whether task is recurrence
       recurrence:
         "$ref": "#/definitions/fmUpsertRecurrence"
         title: details of recurrence
@@ -8370,6 +8373,9 @@ definitions:
       correction:
         type: string
         title: correction duration of the task
+      is_vary:
+        type: boolean
+        title: flag to confirm if the task is vary or not
       is_recurrence:
         type: boolean
         title: wether task is recurrence
@@ -9100,6 +9106,9 @@ definitions:
       is_variation:
         type: boolean
         title: flag to confirm if the task is variation or not
+      is_vary:
+        type: boolean
+        title: flag to confirm if the task is vary or not
     title: Request to update task
   fmUpdateTaskResponse:
     type: object
