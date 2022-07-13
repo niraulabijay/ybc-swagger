@@ -4418,6 +4418,9 @@ definitions:
       approved_by:
         type: string
         title: name of the person who approves this correction
+      is_negative:
+        type: boolean
+        title: whether the correction time is negative or not
   ListDepartmentResponseDepartmentResponse:
     type: object
     properties:
@@ -9184,6 +9187,9 @@ definitions:
   fmUpsertRoleRequest:
     type: object
     properties:
+      id:
+        type: string
+        title: unique id
       role:
         type: string
         title: role to update - this must be unique
@@ -9241,6 +9247,9 @@ definitions:
         type: string
         format: date-time
         title: date of the task
+      is_negative:
+        type: boolean
+        title: whether the correction time is negative or not
   fmUpsertTaskCorrectionResponse:
     type: object
     properties:
