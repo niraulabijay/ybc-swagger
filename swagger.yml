@@ -3856,6 +3856,27 @@ paths:
           "$ref": "#/definitions/fmCreateUserOnEmployeeCreateRequest"
       tags:
       - UserService
+  "/v1/user/change-password":
+    post:
+      summary: change password endpoint for logged in user to change their own password
+      operationId: UserService_ChangePassword
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmChangePasswordResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmChangePasswordRequest"
+      tags:
+      - UserService
   "/v1/user/forgot-password":
     post:
       summary: forgot password endpoint
@@ -4754,6 +4775,20 @@ definitions:
         items:
           type: string
         title: 'multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY'
+  RoleResponseUserRole:
+    type: object
+    properties:
+      id:
+        type: string
+        title: unique role id
+      role:
+        type: string
+        title: name of role
+      scopes:
+        type: array
+        items:
+          type: string
+        title: scopes for the given role
   TaskGroupByClientResponseTaskEmployeeDetailedInformation:
     type: object
     properties:
@@ -5247,6 +5282,30 @@ definitions:
       hourly_rate:
         type: number
         format: float
+  fmChangePasswordRequest:
+    type: object
+    properties:
+      user_id:
+        type: string
+        title: unique id of user
+      employee_id:
+        type: string
+        title: unique id of employee
+      organization_id:
+        type: string
+        title: unique id of organization
+      old_password:
+        type: string
+        title: previous password used to log in
+      new_password:
+        type: string
+        title: new password of user
+  fmChangePasswordResponse:
+    type: object
+    properties:
+      user_id:
+        type: string
+        title: unique id of user
   fmChangeTimesheetCorrectionStatusRequest:
     type: object
     properties:
@@ -8148,7 +8207,7 @@ definitions:
       roles:
         type: array
         items:
-          "$ref": "#/definitions/fmUserRole"
+          "$ref": "#/definitions/RoleResponseUserRole"
         title: available roles
   fmScopeResponse:
     type: object
@@ -9275,17 +9334,6 @@ definitions:
         items:
           type: string
         title: scopes of user
-  fmUserRole:
-    type: object
-    properties:
-      role:
-        type: string
-        title: name of role
-      scopes:
-        type: array
-        items:
-          type: string
-        title: scopes for the given role
   fmUserScope:
     type: object
     properties:
