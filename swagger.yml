@@ -75,6 +75,11 @@ paths:
         in: query
         required: false
         type: string
+      - name: organization_id
+        description: organization id of the employee.
+        in: query
+        required: false
+        type: string
       - name: date
         description: date for check ins and check outs.
         in: query
@@ -4148,26 +4153,6 @@ definitions:
         type: string
         format: date-time
         title: created at timestamp
-  GetEmployeeCheckResponseEmployeeCheckResponse:
-    type: object
-    properties:
-      employee_check_id:
-        type: string
-        title: employee check id
-      organization_id:
-        type: string
-        title: organization id of the employee
-      check_type:
-        type: string
-        title: type of check
-      reason:
-        type: string
-        title: reason
-      date:
-        type: string
-        format: date-time
-        title: date for check ins and check outs
-    title: Employee Check Definition
   GetEmployeeIdsByClientIdResponseEmployeeListData:
     type: object
     properties:
@@ -4466,36 +4451,6 @@ definitions:
         type: string
       organization_id:
         type: string
-  ListEmployeeCheckResponseEmployeeCheckInfo:
-    type: object
-    properties:
-      employee_id:
-        type: string
-        title: id of employee
-      organization_id:
-        type: string
-        title: organization id of the employee
-      check_type:
-        type: string
-        title: type of check
-      date:
-        type: string
-        format: date-time
-        title: date for check ins and check outs
-      details:
-        type: array
-        items:
-          "$ref": "#/definitions/fmGlobalCheckDetail"
-        title: employee specific instructions
-      reason:
-        type: string
-        title: reason
-      check_ids:
-        type: array
-        items:
-          type: string
-        title: check_ids
-    title: Employee Check Info Definition
   ListEmployeeResponseEmployeeResponse:
     type: object
     properties:
@@ -6862,6 +6817,36 @@ definitions:
         type: string
         title: signature_text
     title: Employee Bank accounts details collection
+  fmEmployeeCheckInfo:
+    type: object
+    properties:
+      employee_id:
+        type: string
+        title: id of employee
+      organization_id:
+        type: string
+        title: organization id of the employee
+      check_type:
+        type: string
+        title: type of check
+      date:
+        type: string
+        format: date-time
+        title: date for check ins and check outs
+      details:
+        type: array
+        items:
+          "$ref": "#/definitions/fmGlobalCheckDetail"
+        title: employee specific instructions
+      reason:
+        type: string
+        title: reason
+      check_ids:
+        type: array
+        items:
+          type: string
+        title: check_ids
+    title: Employee Check Info Definition
   fmEmployeeDeleteAttachmentRequest:
     type: object
     properties:
@@ -7234,8 +7219,8 @@ definitions:
       result:
         type: array
         items:
-          "$ref": "#/definitions/GetEmployeeCheckResponseEmployeeCheckResponse"
-        title: list of employee checks
+          "$ref": "#/definitions/fmEmployeeCheckInfo"
+        title: result of checkIn and CheckOut
   fmGetEmployeeIdsByClientIdResponse:
     type: object
     properties:
@@ -7562,7 +7547,7 @@ definitions:
       result:
         type: array
         items:
-          "$ref": "#/definitions/ListEmployeeCheckResponseEmployeeCheckInfo"
+          "$ref": "#/definitions/fmEmployeeCheckInfo"
         title: result list
   fmListEmployeeLeaverResponse:
     type: object
