@@ -3239,6 +3239,29 @@ paths:
           "$ref": "#/definitions/fmUpdateTaskByEmployeeRequest"
       tags:
       - TaskService
+  "/v1/task/update-vary-time":
+    post:
+      summary: |-
+        Task Edit: Update Vary Time
+        Authorization scope of `fm.task.update` is required.
+      operationId: TaskService_UpdateTaskVarytime
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateTaskVarytimeResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateTaskVarytimeRequest"
+      tags:
+      - TaskService
   "/v1/tasks":
     get:
       summary: |-
@@ -8432,6 +8455,10 @@ definitions:
       recurrence_parent_task:
         type: string
         title: Id of task from which current task was generated
+      vary_time:
+        type: string
+        format: date-time
+        title: Date/time at which vary task should be initiated
     title: Task definition
   fmTimesheetResponse:
     type: object
@@ -9164,6 +9191,22 @@ definitions:
         type: string
         title: unique id of the task
     title: Response from update task
+  fmUpdateTaskVarytimeRequest:
+    type: object
+    properties:
+      task_id:
+        type: string
+        title: unique if of task
+      vary_time:
+        type: string
+        format: date-time
+        title: Date/time at which vary task should be initiated
+  fmUpdateTaskVarytimeResponse:
+    type: object
+    properties:
+      task_id:
+        type: string
+        title: id of task updated
   fmUpsertAgendaDecisionObjectionResponse:
     type: object
     properties:
