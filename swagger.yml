@@ -1026,6 +1026,52 @@ paths:
           "$ref": "#/definitions/fmClientChangeStatusRequest"
       tags:
       - ClientService
+  "/v1/client/lead":
+    post:
+      summary: |-
+        Create a new client lead
+        Authorization scope of `fm.client.lead` is required.
+      operationId: ClientService_CreateLead
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateClientResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateClientRequest"
+      tags:
+      - ClientService
+  "/v1/client/lead/transfer":
+    get:
+      summary: |-
+        Transfer lead to prospect
+        Authorization scope of `fm.cleint.prospect` is required.
+      operationId: ClientService_TransferLeadToProspect
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: client_id
+        description: unique id of client.
+        in: query
+        required: false
+        type: string
+      tags:
+      - ClientService
   "/v1/client/set-head-office":
     post:
       summary: |-
@@ -1272,6 +1318,11 @@ paths:
         type: string
       - name: search.region
         description: region of client.
+        in: query
+        required: false
+        type: string
+      - name: search.head_office_id
+        description: head office id.
         in: query
         required: false
         type: string
@@ -4421,6 +4472,13 @@ definitions:
       profile_image:
         type: string
         title: profile image of client
+      total_branches:
+        type: integer
+        format: int32
+        title: If current client is main office, count of branches
+      branch_head_office_id:
+        type: string
+        title: If current client is branch, it shows the head office branch
     title: individual client response
   ListCorrectionResponseCorrectionResponse:
     type: object
@@ -5475,6 +5533,13 @@ definitions:
       profile_image:
         type: string
         title: profile image of client
+      total_branches:
+        type: integer
+        format: int32
+        title: If current client is main office, count of branches
+      branch_head_office_id:
+        type: string
+        title: if current client is branch office, info of head office
     title: Response for client detail
   fmClientListAttachmentResponse:
     type: object
@@ -5847,6 +5912,9 @@ definitions:
       profile_image:
         type: string
         title: profile image of client
+      branch_head_office:
+        type: string
+        title: string head office client id
   fmCreateClientResponse:
     type: object
     properties:
@@ -7523,6 +7591,9 @@ definitions:
       region:
         type: string
         title: region of client
+      head_office_id:
+        type: string
+        title: head office id
   fmListClientResponse:
     type: object
     properties:
