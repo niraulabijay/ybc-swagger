@@ -4789,17 +4789,6 @@ definitions:
       description:
         type: string
         title: task description
-  PeriodicBudgetPBudget:
-    type: object
-    properties:
-      name:
-        type: string
-      hours:
-        type: number
-        format: float
-      amount:
-        type: number
-        format: float
   RecurrenceTypeDetailsMonthlyWeekDetails:
     type: object
     properties:
@@ -5306,18 +5295,6 @@ definitions:
         type: string
         title: account holder name
     title: Bank accounts details collection
-  fmBudget:
-    type: object
-    properties:
-      labour_budget:
-        "$ref": "#/definitions/fmLabourBudget"
-      store_budget:
-        "$ref": "#/definitions/fmStoreBudget"
-      periodic_budget:
-        "$ref": "#/definitions/fmPeriodicBudget"
-      hourly_rate:
-        type: number
-        format: float
   fmChangePasswordRequest:
     type: object
     properties:
@@ -5449,15 +5426,8 @@ definitions:
         title: Area
       sector:
         type: string
-      reason_for_costing:
-        type: string
       date:
         "$ref": "#/definitions/fmClientDate"
-      contracted_day_hours:
-        type: array
-        items:
-          "$ref": "#/definitions/fmContractedHours"
-        title: Contracted hours
       status:
         type: string
         title: |-
@@ -5473,21 +5443,9 @@ definitions:
       region:
         "$ref": "#/definitions/fmRegion"
         title: Region
-      budget:
-        "$ref": "#/definitions/fmBudget"
-        title: Budgets
       client_code:
         type: string
         title: client code
-      invoice:
-        type: array
-        items:
-          "$ref": "#/definitions/fmInvoice"
-        title: Invoice
-      yearly_working_weeks:
-        type: integer
-        format: int32
-        title: Working weeks in a year
   fmClientDetailResponse:
     type: object
     properties:
@@ -5628,26 +5586,6 @@ definitions:
         type: string
       position:
         type: string
-  fmContractedHours:
-    type: object
-    properties:
-      job_type_id:
-        type: string
-        title: |-
-          NOTE: even though this is not used currently,
-          we will not be removing this field because it might be added
-          again soon
-      start_time:
-        type: string
-        format: date-time
-        title: Start time of shifts in the client
-      end_time:
-        type: string
-        format: date-time
-        title: End time of shifts in the client
-      shift_name:
-        type: string
-        title: Some name for the shift like morning, evening
   fmCoverResponse:
     type: object
     properties:
@@ -5765,15 +5703,8 @@ definitions:
         title: Area
       sector:
         type: string
-      reason_for_costing:
-        type: string
       date:
         "$ref": "#/definitions/fmCreateClientDate"
-      contracted_day_hours:
-        type: array
-        items:
-          "$ref": "#/definitions/fmContractedHours"
-        title: Contracted hours
       site_supervisor_id:
         type: string
         title: Site supervisor aka client supervisor
@@ -5784,18 +5715,6 @@ definitions:
       region:
         "$ref": "#/definitions/fmRegion"
         title: Region
-      budget:
-        "$ref": "#/definitions/fmBudget"
-        title: Budgets
-      invoice:
-        type: array
-        items:
-          "$ref": "#/definitions/fmInvoice"
-        title: Invoice
-      yearly_working_weeks:
-        type: integer
-        format: int32
-        title: Working weeks in a year
   fmCreateClientEmployeeRequest:
     type: object
     properties:
@@ -7473,15 +7392,6 @@ definitions:
         type: string
         title: overtime_rate details
     title: Hourly rate of Employee information
-  fmInvoice:
-    type: object
-    properties:
-      invoice_type:
-        type: string
-      monthly:
-        type: string
-      yearly:
-        type: string
   fmIssueResponse:
     type: object
     properties:
@@ -7522,17 +7432,6 @@ definitions:
       issue_id:
         type: string
         title: unique id of the issue
-  fmLabourBudget:
-    type: object
-    properties:
-      daily:
-        type: string
-      weekly:
-        type: string
-      monthly:
-        type: string
-      yearly:
-        type: string
   fmLicenseDetails:
     type: object
     properties:
@@ -8150,21 +8049,6 @@ definitions:
       recurrence:
         "$ref": "#/definitions/fmRecurrenceDetails"
         title: details of recurrence
-  fmPeriodicBudget:
-    type: object
-    properties:
-      frequency:
-        type: string
-      totalBudget:
-        type: number
-        format: float
-      totalHours:
-        type: number
-        format: float
-      budgets:
-        type: array
-        items:
-          "$ref": "#/definitions/PeriodicBudgetPBudget"
   fmRecurrenceDetails:
     type: object
     properties:
@@ -8322,11 +8206,6 @@ definitions:
         type: string
         format: date-time
         title: sick requested till date
-  fmStoreBudget:
-    type: object
-    properties:
-      monthly:
-        type: string
   fmSubAreaDetails:
     type: object
     properties:
