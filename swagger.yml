@@ -4842,6 +4842,24 @@ definitions:
         items:
           "$ref": "#/definitions/fmTaskGroupWeeklyData"
         title: weekly data
+  TaskResponseTaskCorrectionData:
+    type: object
+    properties:
+      correction:
+        type: string
+        title: correction time of the task report
+      status:
+        type: string
+        title: status of the correction
+      corrected_by:
+        type: string
+        title: name of the person who correctes timesheet
+      approved_by:
+        type: string
+        title: name of the person who approves this correction
+      is_negative:
+        type: boolean
+        title: whether the correction time is negative or not
   UpdateTaskByClientRequestUpdateTaskByClient:
     type: object
     properties:
@@ -8390,9 +8408,9 @@ definitions:
       is_variation:
         type: boolean
         title: flag to confirm if the task is variation or not
-      correction:
+      approved_correction:
         type: string
-        title: correction duration of the task
+        title: approved correction duration of the task
       is_vary:
         type: boolean
         title: flag to confirm if the task is vary or not
@@ -8409,6 +8427,9 @@ definitions:
         type: string
         format: date-time
         title: Date/time at which vary task should be initiated
+      correction_data:
+        "$ref": "#/definitions/TaskResponseTaskCorrectionData"
+        title: Correction data regardless of status
     title: Task definition
   fmTimesheetResponse:
     type: object
