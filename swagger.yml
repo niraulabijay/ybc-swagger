@@ -1003,6 +1003,29 @@ paths:
           "$ref": "#/definitions/fmDeleteClientRegionRequest"
       tags:
       - ClientService
+  "/v1/client/bid-planner":
+    post:
+      summary: |-
+        Create Bid Planner
+        Authorization scope of `fm.bid.create` is required
+      operationId: ClientService_CreateBidPlanner
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateBidPlannerResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateBidPlannerRequest"
+      tags:
+      - ClientService
   "/v1/client/change-status":
     patch:
       summary: |-
@@ -1116,6 +1139,29 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmClientSetHeadOfficeRequest"
+      tags:
+      - ClientService
+  "/v1/client/stage-status-change":
+    patch:
+      summary: |-
+        Change status of a bid-planner stage
+        Authorization scope of `fm.bid.change-status` is required
+      operationId: ClientService_StageStatusChange
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmStageStatusChangeResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmStageStatusChangeRequest"
       tags:
       - ClientService
   "/v1/client/{client_id}":
@@ -1354,6 +1400,18 @@ paths:
         in: query
         required: false
         type: string
+      - name: search.lead_employees
+        description: lead client estimated employees required.
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: search.lead_employee_hours
+        description: estimated hours required.
+        in: query
+        required: false
+        type: number
+        format: float
       tags:
       - ClientService
   "/v1/department":
@@ -2469,6 +2527,99 @@ paths:
           "$ref": "#/definitions/fmCreateInventoryCategoryRequest"
       tags:
       - InventoryService
+  "/v1/issue":
+    post:
+      summary: |-
+        Create a new issue.
+        Authorization scope of `fm.issue.create` is required.
+      operationId: IssueService_CreateIssue
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateIssueResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateIssueRequest"
+      tags:
+      - IssueService
+    patch:
+      summary: |-
+        Update an existing issue.
+        Authorization scope of `fm.issue.update` is required.
+      operationId: IssueService_UpdateIssue
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateIssueResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateIssueRequest"
+      tags:
+      - IssueService
+  "/v1/issues":
+    get:
+      summary: |-
+        List returns the list of all issues visible to the authroized user in
+        descending date order. Authorization scope of `fm.issue.list` is required.
+      operationId: IssueService_ListIssues
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListIssuesResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: raised_by
+        description: id of the user raising the issue.
+        in: query
+        required: false
+        type: string
+      - name: assigned_to
+        description: id of the user responsible for solving the issue.
+        in: query
+        required: false
+        type: string
+      - name: status
+        description: status of the issue.
+        in: query
+        required: false
+        type: string
+      - name: organization_id
+        description: unique id of the organization.
+        in: query
+        required: false
+        type: string
+      - name: filter.limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: filter.page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      tags:
+      - IssueService
   "/v1/job-type":
     post:
       summary: |-
@@ -2619,6 +2770,11 @@ paths:
         required: false
         type: string
         format: date-time
+      - name: client_id
+        description: unique id of client.
+        in: query
+        required: false
+        type: string
       tags:
       - MeetingService
     post:
@@ -3596,99 +3752,6 @@ paths:
         format: date-time
       tags:
       - TaskService
-  "/v1/tasks/issue":
-    post:
-      summary: |-
-        Create a new issue.
-        Authorization scope of `fm.issue.create` is required.
-      operationId: IssueService_CreateIssue
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmCreateIssueResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmCreateIssueRequest"
-      tags:
-      - IssueService
-    patch:
-      summary: |-
-        Update an existing issue.
-        Authorization scope of `fm.issue.update` is required.
-      operationId: IssueService_UpdateIssue
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmUpdateIssueResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmUpdateIssueRequest"
-      tags:
-      - IssueService
-  "/v1/tasks/issues":
-    get:
-      summary: |-
-        List returns the list of all issues visible to the authroized user in
-        descending date order. Authorization scope of `fm.issue.list` is required.
-      operationId: IssueService_ListIssues
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmListIssuesResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: raised_by
-        description: id of the user raising the issue.
-        in: query
-        required: false
-        type: string
-      - name: assigned_to
-        description: id of the user responsible for solving the issue.
-        in: query
-        required: false
-        type: string
-      - name: status
-        description: status of the issue.
-        in: query
-        required: false
-        type: string
-      - name: organization_id
-        description: unique id of the organization.
-        in: query
-        required: false
-        type: string
-      - name: filter.limit
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: filter.page
-        in: query
-        required: false
-        type: integer
-        format: int32
-      tags:
-      - IssueService
   "/v1/tasks/list-by-client":
     get:
       summary: |-
@@ -4746,6 +4809,9 @@ definitions:
       location:
         type: string
         title: location of meeting
+      client_id:
+        type: string
+        title: required if meeting is for client else it is optional
     title: individual meeting response
   ListOrganizationResponseOrganizationResponse:
     type: object
@@ -5698,6 +5764,29 @@ definitions:
         items:
           type: string
         title: id of clients disabled for area_manager
+  fmCreateBidPlannerRequest:
+    type: object
+    properties:
+      client_id:
+        type: string
+        title: client id
+      source:
+        type: string
+        title: source of bid planner
+      value:
+        type: string
+        title: value of bid planner
+      stages:
+        type: array
+        items:
+          "$ref": "#/definitions/fmCreateStageRequest"
+        title: multiple stages for the bid planner
+  fmCreateBidPlannerResponse:
+    type: object
+    properties:
+      bid_planner_id:
+        type: string
+        title: id of the created bid planner
   fmCreateCheckRequest:
     type: object
     properties:
@@ -6434,6 +6523,22 @@ definitions:
     properties:
       sector_id:
         type: string
+  fmCreateStageRequest:
+    type: object
+    properties:
+      title:
+        type: string
+        title: title of the stage
+      employee_id:
+        type: string
+        title: employee id
+      description:
+        type: string
+        title: description of the stage
+      deadline:
+        type: string
+        format: date-time
+        title: deadline of the stage
   fmCreateSubAreaRequest:
     type: object
     properties:
@@ -6801,6 +6906,9 @@ definitions:
         items:
           "$ref": "#/definitions/fmAgendaDetail"
         title: agendas of meeting along with views/decisions
+      client_id:
+        type: string
+        title: required if meeting is for client else it is optional
   fmEditAgendaViewRequest:
     type: object
     properties:
@@ -7590,6 +7698,14 @@ definitions:
       lead_status:
         type: string
         title: 'status of lead client : allowed "ACTIVE", "INACTIVE"'
+      lead_employees:
+        type: integer
+        format: int32
+        title: lead client estimated employees required
+      lead_employee_hours:
+        type: number
+        format: float
+        title: estimated hours required
   fmListClientResponse:
     type: object
     properties:
@@ -8303,6 +8419,27 @@ definitions:
         type: string
         format: date-time
         title: sick requested till date
+  fmStageStatusChangeRequest:
+    type: object
+    properties:
+      id:
+        type: string
+        title: stage id whose status is to be changed
+      bid_planner_id:
+        type: string
+        title: bid-planner id of the particular stage
+      status:
+        type: string
+        title: status after being changed
+      client_id:
+        type: string
+        title: client id of the bid planner
+  fmStageStatusChangeResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmSubAreaDetails:
     type: object
     properties:
