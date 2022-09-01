@@ -1412,6 +1412,21 @@ paths:
         required: false
         type: number
         format: float
+      - name: search.sector_id
+        description: unique id of sector.
+        in: query
+        required: false
+        type: string
+      - name: search.city
+        description: city of client.
+        in: query
+        required: false
+        type: string
+      - name: search.post_code
+        description: post code.
+        in: query
+        required: false
+        type: string
       tags:
       - ClientService
   "/v1/department":
@@ -2087,33 +2102,6 @@ paths:
         type: string
       tags:
       - EmployeeService
-    delete:
-      summary: |-
-        Soft deletes an attachment for an employee.
-        Scope of `fm.employee.delete-attachment` is required.
-      operationId: EmployeeService_DeleteAttachment
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmEmployeeDeleteAttachmentResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: employee_id
-        description: unique identifier for an employee
-        in: path
-        required: true
-        type: string
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmEmployeeDeleteAttachmentRequest"
-      tags:
-      - EmployeeService
     post:
       summary: |-
         Adds attachment for an employee.
@@ -2139,6 +2127,39 @@ paths:
         required: true
         schema:
           "$ref": "#/definitions/fmEmployeeAddAttachmentRequest"
+      tags:
+      - EmployeeService
+  "/v1/employee/{employee_id}/attachment/{attachment_id}":
+    delete:
+      summary: |-
+        Soft deletes an attachment for an employee.
+        Scope of `fm.employee.delete-attachment` is required.
+      operationId: EmployeeService_DeleteAttachment
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmEmployeeDeleteAttachmentResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: employee_id
+        description: unique identifier for an employee
+        in: path
+        required: true
+        type: string
+      - name: attachment_id
+        description: unique identifier for an attachment
+        in: path
+        required: true
+        type: string
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmEmployeeDeleteAttachmentRequest"
       tags:
       - EmployeeService
   "/v1/employees":
@@ -7706,6 +7727,15 @@ definitions:
         type: number
         format: float
         title: estimated hours required
+      sector_id:
+        type: string
+        title: unique id of sector
+      city:
+        type: string
+        title: city of client
+      post_code:
+        type: string
+        title: post code
   fmListClientResponse:
     type: object
     properties:
