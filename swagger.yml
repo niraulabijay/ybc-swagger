@@ -2410,62 +2410,6 @@ paths:
         type: string
       tags:
       - EmployeeCoverService
-  "/v1/employees/holidays":
-    get:
-      summary: |-
-        List returns the list of employee holidays visible to the authroized user
-        in descending order or created date. Authorization scope of
-        `fm.employee.holiday.list` is required.
-      operationId: EmployeeHolidayService_List
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmListHolidayResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: filter.limit
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: filter.page
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: organization_id
-        description: fetch employees this organization_id belongs to.
-        in: query
-        required: false
-        type: string
-      tags:
-      - EmployeeHolidayService
-    post:
-      summary: |-
-        Creates holiday for an employee.
-        Authentication scope of `fm.employee.holiday.create` is required.
-      operationId: EmployeeHolidayService_Create
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmCreateHolidayResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmCreateHolidayRequest"
-      tags:
-      - EmployeeHolidayService
   "/v1/employees/leavers":
     get:
       summary: |-
@@ -2499,89 +2443,6 @@ paths:
         type: string
       tags:
       - EmployeeLeaverService
-  "/v1/employees/sick":
-    post:
-      summary: |-
-        Create employee sick
-        Authentication scope of `fm.employee.sick.create` is required
-      operationId: EmployeeSickService_CreateEmployeeSick
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmCreateEmployeeSickResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmCreateEmployeeSickRequest"
-      tags:
-      - EmployeeSickService
-    patch:
-      summary: |-
-        update employee sick
-        Authentication scope of `fm.employee.sick.update` is required
-      operationId: EmployeeSickService_UpdateEmployeeSick
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmUpdateEmployeeSickResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: body
-        in: body
-        required: true
-        schema:
-          "$ref": "#/definitions/fmUpdateEmployeeSickRequest"
-      tags:
-      - EmployeeSickService
-  "/v1/employees/sicks":
-    get:
-      summary: |-
-        list employee sick
-        Authentication scope of `fm.employee.sick.list` is required
-      operationId: EmployeeSickService_ListEmployeeSick
-      responses:
-        '200':
-          description: A successful response.
-          schema:
-            "$ref": "#/definitions/fmListEmployeeSickResponse"
-        default:
-          description: An unexpected error response.
-          schema:
-            "$ref": "#/definitions/runtimeError"
-      parameters:
-      - name: filter.limit
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: filter.page
-        in: query
-        required: false
-        type: integer
-        format: int32
-      - name: client_id
-        description: fetch employees this client_id belongs to.
-        in: query
-        required: false
-        type: string
-      - name: organization_id
-        description: fetch employees this organization_id belongs to.
-        in: query
-        required: false
-        type: string
-      tags:
-      - EmployeeSickService
   "/v1/inventory":
     get:
       summary: |-
@@ -3580,6 +3441,85 @@ paths:
         type: string
       tags:
       - TaskService
+  "/v1/task/employee-absence/change-status":
+    patch:
+      summary: |-
+        Change status of employee absence
+        Authorization scope of `fm.absence.change-status` is required.
+      operationId: TaskService_ChangeAbsenceStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmChangeAbsenceStatusResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmChangeAbsenceStatusRequest"
+      tags:
+      - TaskService
+  "/v1/task/employee-absence/create":
+    post:
+      summary: |-
+        Creates absence for an employee.
+        Authorization scope of `fm.absence.create` is required.
+      operationId: TaskService_CreateAbsence
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateAbsenceResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateAbsenceRequest"
+      tags:
+      - TaskService
+  "/v1/task/employee-absence/list":
+    get:
+      summary: |-
+        ListAbsence returns the list of all employee absence visible to the authorized user in
+        descending date order. Authorization scope of `fm.absence.list` is required.
+      operationId: TaskService_ListAbsence
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListAbsenceResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: filter.limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: filter.page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: organization_id
+        description: organization to which the employee belongs.
+        in: query
+        required: false
+        type: string
+      tags:
+      - TaskService
   "/v1/task/recurrence":
     put:
       summary: |-
@@ -4543,6 +4483,50 @@ definitions:
       description:
         type: string
         title: description of the check
+  ListAbsenceResponseAbsenceList:
+    type: object
+    properties:
+      employee_absence_id:
+        type: string
+        title: id of the employee absence
+      employee_id:
+        type: string
+        title: Employee id of the associated employee
+      client_id:
+        type: string
+        title: Client id
+      organization_id:
+        type: string
+        title: Organization id of the employee
+      type:
+        type: string
+        title: type of leave i.e. HOLIDAY, SICK OR ABSENT
+      payment_type:
+        type: string
+        title: type of payment i.e. PAID OR UNPAID
+      description:
+        type: string
+        title: description regarding the leave
+      approved_by:
+        type: string
+        title: id of emoloyee who approved
+      rejected_by:
+        type: string
+        title: id of employee who rejected
+      status:
+        type: string
+        title: status i.e. PENDING, APPROVED OR REJECTED
+      created_at:
+        type: string
+        format: date-time
+        title: timestamp at which the employee absence was created
+      dates:
+        type: array
+        items:
+          type: string
+          format: date-time
+        title: dates for which leave is taken
+    title: individual employee absence response
   ListAreaResponseAreaResponse:
     type: object
     properties:
@@ -5686,6 +5670,27 @@ definitions:
         type: string
         title: account holder name
     title: Bank accounts details collection
+  fmChangeAbsenceStatusRequest:
+    type: object
+    properties:
+      employee_absence_id:
+        type: string
+        title: employee absence id whose status is to be changed
+      status_by_id:
+        type: string
+        title: employee id who approves or rejects the status change
+      status:
+        type: string
+        title: status after being changed
+      payment_type:
+        type: string
+        title: payment type after updated
+  fmChangeAbsenceStatusResponse:
+    type: object
+    properties:
+      status:
+        type: boolean
+        title: action response
   fmChangePasswordRequest:
     type: object
     properties:
@@ -6017,6 +6022,41 @@ definitions:
         type: string
         title: leave type
     title: Single cover Payload
+  fmCreateAbsenceRequest:
+    type: object
+    properties:
+      employee_id:
+        type: string
+        title: Employee id of employee who has requested for a holiday/sick/absence
+      client_id:
+        type: string
+        title: Client id
+      organization_id:
+        type: string
+        title: Organization id of the employee
+      type:
+        type: string
+        title: type of leave i.e. HOLIDAY, SICK OR ABSENT
+      payment_type:
+        type: string
+        title: type of payment i.e. PAID OR UNPAID
+      description:
+        type: string
+        title: description regarding the leave
+      dates:
+        type: array
+        items:
+          type: string
+          format: date-time
+        title: dates for which leave is taken
+    title: Request for creating absence for an employee
+  fmCreateAbsenceResponse:
+    type: object
+    properties:
+      employee_absence_id:
+        type: string
+        title: id of the created employee absence
+    title: Response for absence creation success
   fmCreateAreaRequest:
     type: object
     properties:
@@ -6389,44 +6429,6 @@ definitions:
         type: string
         title: unique id of the employee
     title: response returned when reating employee
-  fmCreateEmployeeSickRequest:
-    type: object
-    properties:
-      client_id:
-        type: string
-        title: unique Id of client for which employee is working for
-      employee_id:
-        type: string
-        title: unique Id of employee
-      sick_period:
-        "$ref": "#/definitions/fmSickPeriod"
-        title: period of requested sick
-      covered_by_employee_id:
-        type: string
-        title: covered by employee id
-      payment:
-        type: string
-        title: is sick leave paid or unpaid
-      comment:
-        type: string
-        title: comment reason for leave
-      organization_id:
-        type: string
-        title: unique Id of organization for which employee is working for
-      sick_entitlement:
-        type: string
-        title: total number of sick days in a year
-      remaining_sick_entitlement:
-        type: string
-        title: remaining sick entitlement
-    title: Request for creating sick of employee
-  fmCreateEmployeeSickResponse:
-    type: object
-    properties:
-      employee_sick_id:
-        type: string
-        title: unique id of employee sick
-    title: Response fro sick creation success
   fmCreateEmployeeTrainingRequest:
     type: object
     properties:
@@ -6490,37 +6492,6 @@ definitions:
       feedback_id:
         type: string
         title: unique id of feedback
-  fmCreateHolidayRequest:
-    type: object
-    properties:
-      employee_id:
-        type: string
-        title: Employee id of employee who has requested a leave/holiday
-      leave_from_date:
-        type: string
-        format: date-time
-        title: Leave from date
-      leave_to_date:
-        type: string
-        format: date-time
-        title: Leave upto date
-      covered_by_employee_id:
-        type: string
-        title: The employee who will be covering the absentee employee
-      client_id:
-        type: string
-        title: Client at which the employee is taking a lave
-      organization_id:
-        type: string
-        title: Organization id of the employee
-    title: Request for creating a holiday for an employee
-  fmCreateHolidayResponse:
-    type: object
-    properties:
-      holiday_id:
-        type: string
-        title: holiday id
-    title: Response for holiday creation success
   fmCreateInventoryCategoryRequest:
     type: object
     properties:
@@ -7483,51 +7454,6 @@ definitions:
           "$ref": "#/definitions/EmployeeListAttachmentResponseEmployeeAttachmentPayload"
         title: list of attachments
     title: Response payload for attachment list request
-  fmEmployeeSickResponse:
-    type: object
-    properties:
-      employee_sick_id:
-        type: string
-        title: unique id of employee sick
-      client_id:
-        type: string
-        title: unique Id of client for which employee is working for
-      employee_id:
-        type: string
-        title: unique Id of employee
-      sick_period:
-        "$ref": "#/definitions/fmSickPeriod"
-        title: period of requested sick
-      covered_by_employee_id:
-        type: string
-        title: covered by employee id
-      payment:
-        type: string
-        title: is sick leave paid or unpaid
-      comment:
-        type: string
-        title: comment reason for leave
-      status:
-        type: string
-        title: status of request
-      sick_entitlement:
-        type: string
-        title: total number of sick days in a year
-      remaining_sick_entitlement:
-        type: string
-        title: remaining sick entitlement
-      prev_sick_period:
-        type: array
-        items:
-          "$ref": "#/definitions/fmSickPeriod"
-        title: previous sick requested period
-      created_at:
-        type: string
-        format: date-time
-        title: created at
-      organization_id:
-        type: string
-        title: unique Id of organization for which employee is working for
   fmEmploymentHistoryInfo:
     type: object
     properties:
@@ -7814,40 +7740,6 @@ definitions:
       signature_text:
         type: string
         title: 'signature: full_name'
-  fmHolidayResponse:
-    type: object
-    properties:
-      employee_id:
-        type: string
-        title: Employee id of employee who has requested a leave/holiday
-      leave_from_date:
-        type: string
-        format: date-time
-        title: Leave from date
-      leave_to_date:
-        type: string
-        format: date-time
-        title: Leave upto date
-      covered_by_employee_id:
-        type: string
-        title: The employee who will be covering the absentee employee
-      client_id:
-        type: string
-        title: Client at which the employee is taking a lave
-      status:
-        type: string
-        title: Status of the holiday request
-      created_at:
-        type: string
-        format: date-time
-        title: The timestamp at which holiday record was created
-      organization_id:
-        type: string
-        title: Organization id of the employee
-      holiday_id:
-        type: string
-        title: Holiday Id
-    title: Single Holiday Payload
   fmHourlyRateInfo:
     type: object
     properties:
@@ -7946,6 +7838,14 @@ definitions:
       license_number:
         type: string
         title: if valid , license no
+  fmListAbsenceResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          "$ref": "#/definitions/ListAbsenceResponseAbsenceList"
+        title: list of employee absence
   fmListAreaResponse:
     type: object
     properties:
@@ -8112,15 +8012,6 @@ definitions:
         "$ref": "#/definitions/fmListResponseMetadata"
         title: metadata about response
     title: response for fetching list of employees
-  fmListEmployeeSickResponse:
-    type: object
-    properties:
-      result:
-        type: array
-        items:
-          "$ref": "#/definitions/fmEmployeeSickResponse"
-        title: list of employee sick
-    title: Response for creating sick of employee
   fmListFeedbackResponse:
     type: object
     properties:
@@ -8136,15 +8027,6 @@ definitions:
         items:
           "$ref": "#/definitions/ListGlobalCheckResponseGlobalCheckResponse"
         title: list of global checks
-  fmListHolidayResponse:
-    type: object
-    properties:
-      holidays:
-        type: array
-        items:
-          "$ref": "#/definitions/fmHolidayResponse"
-        title: list of holidays
-    title: Response for holiday list
   fmListInventoryCategoryResponse:
     type: object
     properties:
@@ -8736,17 +8618,6 @@ definitions:
       vacancy_id:
         type: string
         title: vacancy id
-  fmSickPeriod:
-    type: object
-    properties:
-      from_date:
-        type: string
-        format: date-time
-        title: sick requested from date
-      to_date:
-        type: string
-        format: date-time
-        title: sick requested till date
   fmStageStatusChangeRequest:
     type: object
     properties:
@@ -9377,44 +9248,6 @@ definitions:
       organization_id:
         type: string
         title: id of organization
-  fmUpdateEmployeeSickRequest:
-    type: object
-    properties:
-      employee_sick_id:
-        type: string
-        title: unique id of employee sick
-      status:
-        type: string
-        title: status of request
-      sick_period:
-        "$ref": "#/definitions/fmSickPeriod"
-        title: period of requested sick
-      covered_by_employee_id:
-        type: string
-        title: covered by employee id
-      payment:
-        type: string
-        title: is sick leave paid or unpaid
-      comment:
-        type: string
-        title: comment reason for leave
-      organization_id:
-        type: string
-        title: unique Id of organization for which employee is working for
-      sick_entitlement:
-        type: string
-        title: total number of sick days in a year
-      remaining_sick_entitlement:
-        type: string
-        title: remaining sick entitlement
-    title: Request for updating sick of employee
-  fmUpdateEmployeeSickResponse:
-    type: object
-    properties:
-      employee_sick_id:
-        type: string
-        title: unique id of employee sick
-    title: Response fro sick update success
   fmUpdateEmployeeStatusRequest:
     type: object
     properties:
