@@ -1026,6 +1026,62 @@ paths:
           "$ref": "#/definitions/fmCreateBidPlannerRequest"
       tags:
       - ClientService
+  "/v1/client/bid-planner-status/create":
+    post:
+      summary: |-
+        Create bid planner status
+        Authorization scope of `fm.bid-status.create` is required
+      operationId: ClientService_CreateBidPlannerStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmCreateBidPlannerStatusResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmCreateBidPlannerStatusRequest"
+      tags:
+      - ClientService
+  "/v1/client/bid-planner-status/list":
+    get:
+      summary: |-
+        ListBidPlannerStatus returns the list of bid planner status visible to the authorized user in
+        ascending order of title
+      operationId: ClientService_ListBidPlannerStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmListBidPlannerStatusResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: filter.limit
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: filter.page
+        in: query
+        required: false
+        type: integer
+        format: int32
+      - name: organization_id
+        description: organization id.
+        in: query
+        required: false
+        type: string
+      tags:
+      - ClientService
   "/v1/client/bid-planner/list":
     get:
       summary: "Returns all the bid planner and stages information \nAuthorization
@@ -4616,6 +4672,25 @@ definitions:
         format: date-time
         title: deadline of the stage
     title: individual stage response of the particular bid planner
+  ListBidPlannerStatusResponseBidPlannerStatusResponse:
+    type: object
+    properties:
+      bid_planner_status_id:
+        type: string
+        title: id of the bid planner status
+      title:
+        type: string
+        title: title of the bid planner status
+      description:
+        type: string
+        title: description
+      organization_id:
+        type: string
+        title: organization id to which it belongs
+      created_at:
+        type: string
+        format: date-time
+        title: time the bid planner status was created at
   ListCheckResponseCheckResponse:
     type: object
     properties:
@@ -6100,6 +6175,24 @@ definitions:
       bid_planner_id:
         type: string
         title: id of the created bid planner
+  fmCreateBidPlannerStatusRequest:
+    type: object
+    properties:
+      title:
+        type: string
+        title: title of the bid planner status
+      description:
+        type: string
+        title: description regarding the bid planner status
+      organization_id:
+        type: string
+        title: organization id to which it belongs
+  fmCreateBidPlannerStatusResponse:
+    type: object
+    properties:
+      bid_planner_status_id:
+        type: string
+        title: id of the created training type
   fmCreateCheckRequest:
     type: object
     properties:
@@ -7861,6 +7954,14 @@ definitions:
         items:
           "$ref": "#/definitions/ListBidPlannerResponseBidPlannerResponse"
         title: list of bid planners
+  fmListBidPlannerStatusResponse:
+    type: object
+    properties:
+      result:
+        type: array
+        items:
+          "$ref": "#/definitions/ListBidPlannerStatusResponseBidPlannerStatusResponse"
+        title: list of bid planner status
   fmListCheckResponse:
     type: object
     properties:
