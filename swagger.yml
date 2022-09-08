@@ -1049,6 +1049,29 @@ paths:
           "$ref": "#/definitions/fmCreateBidPlannerStatusRequest"
       tags:
       - ClientService
+  "/v1/client/bid-planner-status/delete":
+    post:
+      summary: |-
+        Delete a bid planner status
+        Authorization scope of `fm.bid-status.delete` is required
+      operationId: ClientService_DeleteBidPlannerStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            properties: {}
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmDeleteBidPlannerStatusRequest"
+      tags:
+      - ClientService
   "/v1/client/bid-planner-status/list":
     get:
       summary: |-
@@ -1080,6 +1103,29 @@ paths:
         in: query
         required: false
         type: string
+      tags:
+      - ClientService
+  "/v1/client/bid-planner-status/update":
+    patch:
+      summary: |-
+        Update bid planner status
+        Authorization scope of `fm.bid-status.update` is required
+      operationId: ClientService_UpdateBidPlannerStatus
+      responses:
+        '200':
+          description: A successful response.
+          schema:
+            "$ref": "#/definitions/fmUpdateBidPlannerStatusResponse"
+        default:
+          description: An unexpected error response.
+          schema:
+            "$ref": "#/definitions/runtimeError"
+      parameters:
+      - name: body
+        in: body
+        required: true
+        schema:
+          "$ref": "#/definitions/fmUpdateBidPlannerStatusRequest"
       tags:
       - ClientService
   "/v1/client/bid-planner/list":
@@ -7119,6 +7165,15 @@ definitions:
       status:
         type: boolean
         title: action response
+  fmDeleteBidPlannerStatusRequest:
+    type: object
+    properties:
+      bid_planner_status_id:
+        type: string
+        title: id of the bid planner status to be deleted
+      organization_id:
+        type: string
+        title: organization id
   fmDeleteClientAreaRequest:
     type: object
     properties:
@@ -9088,6 +9143,27 @@ definitions:
       bid_planner_id:
         type: string
         title: id of the bid planner that is updated
+  fmUpdateBidPlannerStatusRequest:
+    type: object
+    properties:
+      bid_planner_status_id:
+        type: string
+        title: id of the bid planner status to be updated
+      organization_id:
+        type: string
+        title: organization id
+      title:
+        type: string
+        title: title of the bid planner status
+      description:
+        type: string
+        title: description
+  fmUpdateBidPlannerStatusResponse:
+    type: object
+    properties:
+      bid_planner_status_id:
+        type: string
+        title: id of the updated bid planner status
   fmUpdateClientAreaRequest:
     type: object
     properties:
