@@ -1398,6 +1398,151 @@
         ]
       }
     },
+    "/v1/client/appointment/create": {
+      "post": {
+        "summary": "Create an Appointment.\nAuthorization scope of `fm.appointment.create` is required",
+        "operationId": "ClientService_CreateAppointment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateAppointmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateAppointmentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/appointment/delete": {
+      "post": {
+        "summary": "Delete an appointment\nAuthorization scope of `fm.appointment,delete` is required",
+        "operationId": "ClientService_DeleteAppointment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteAppointmentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/appointment/list": {
+      "get": {
+        "summary": "Returns the list of appointments visible to the authorized user in descending order\nAuthorization scope of `fm.appointment.list` is required",
+        "operationId": "ClientService_ListAppointment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListAppointmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "organization_id",
+            "description": "organization id.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/appointment/update": {
+      "patch": {
+        "summary": "Update an appointment\nAuthorization scope of `fm.appointment.update` is required",
+        "operationId": "ClientService_UpdateAppointment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateAppointmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateAppointmentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/bid-planner": {
       "post": {
         "summary": "Create Bid Planner\nAuthorization scope of `fm.bid.create` is required",
@@ -6756,6 +6901,57 @@
       },
       "title": "individual employee absence response"
     },
+    "ListAppointmentResponseAppointmentResponse": {
+      "type": "object",
+      "properties": {
+        "appointment_id": {
+          "type": "string",
+          "title": "unique appointment id"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "client id"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id to which the appointment belongs"
+        },
+        "appointment_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date for the appointment"
+        },
+        "estimated_time": {
+          "type": "string",
+          "title": "estimated time of the appointment"
+        },
+        "location": {
+          "type": "string",
+          "title": "location of the appointment"
+        },
+        "attendee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "id of employees who come for the appointment"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of appointment"
+        },
+        "note": {
+          "type": "string",
+          "title": "note detail"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the appointment was created at"
+        }
+      },
+      "title": "individual list response of appointment"
+    },
     "ListAreaResponseAreaResponse": {
       "type": "object",
       "properties": {
@@ -8898,6 +9094,56 @@
       },
       "title": "Response for absence creation success"
     },
+    "fmCreateAppointmentRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "unique client id required for the appointment"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id to which the appointment belongs"
+        },
+        "appointment_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date for the appointment"
+        },
+        "estimated_time": {
+          "type": "string",
+          "title": "estimated time of the appointment"
+        },
+        "location": {
+          "type": "string",
+          "title": "location of the appointment"
+        },
+        "attendee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "id of employees who come for the appointment"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of appointment"
+        },
+        "note": {
+          "type": "string",
+          "title": "note detail"
+        }
+      }
+    },
+    "fmCreateAppointmentResponse": {
+      "type": "object",
+      "properties": {
+        "appointment_id": {
+          "type": "string",
+          "title": "id of the created appointment"
+        }
+      }
+    },
     "fmCreateAreaRequest": {
       "type": "object",
       "properties": {
@@ -10263,6 +10509,19 @@
         }
       }
     },
+    "fmDeleteAppointmentRequest": {
+      "type": "object",
+      "properties": {
+        "appointment_id": {
+          "type": "string",
+          "title": "id of the appointment to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id to which the appointment belongs"
+        }
+      }
+    },
     "fmDeleteAreaRequest": {
       "type": "object",
       "properties": {
@@ -11450,6 +11709,18 @@
             "$ref": "#/definitions/ListAbsenceResponseAbsenceList"
           },
           "title": "list of employee absence"
+        }
+      }
+    },
+    "fmListAppointmentResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListAppointmentResponseAppointmentResponse"
+          },
+          "title": "list of appointments"
         }
       }
     },
@@ -13022,6 +13293,56 @@
           "type": "string",
           "format": "date-time",
           "title": "deadline for action to be taken"
+        }
+      }
+    },
+    "fmUpdateAppointmentRequest": {
+      "type": "object",
+      "properties": {
+        "appointment_id": {
+          "type": "string",
+          "title": "appointment id to be updated"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id to which the appointment belongs"
+        },
+        "appointment_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date for the appointment"
+        },
+        "estimated_time": {
+          "type": "string",
+          "title": "estimated time of the appointment"
+        },
+        "location": {
+          "type": "string",
+          "title": "location of the appointment"
+        },
+        "attendee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "id of employees who come for the appointment"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of appointment"
+        },
+        "note": {
+          "type": "string",
+          "title": "note detail"
+        }
+      }
+    },
+    "fmUpdateAppointmentResponse": {
+      "type": "object",
+      "properties": {
+        "appointment_id": {
+          "type": "string",
+          "title": "id of the updated appointment"
         }
       }
     },
