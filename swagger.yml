@@ -5374,6 +5374,39 @@
         ]
       }
     },
+    "/v1/task/employee-absence/cover": {
+      "post": {
+        "summary": "Add Cover for absence\nAuthorization scope of `fm.cover.create` is required.",
+        "operationId": "TaskService_CreateCover",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateCoverResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateCoverRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
     "/v1/task/employee-absence/create": {
       "post": {
         "summary": "Creates absence for an employee.\nAuthorization scope of `fm.absence.create` is required.",
@@ -6897,6 +6930,13 @@
             "format": "date-time"
           },
           "title": "dates for which leave is taken"
+        },
+        "covers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmListCoverData"
+          },
+          "title": "All covers of absence"
         }
       },
       "title": "individual employee absence response"
@@ -9499,6 +9539,42 @@
       },
       "title": "Response for create client requests"
     },
+    "fmCreateCoverRequest": {
+      "type": "object",
+      "properties": {
+        "employee_absence_id": {
+          "type": "string",
+          "title": "unqiue absence id"
+        },
+        "covered_by": {
+          "type": "string",
+          "title": "emoloyee id"
+        },
+        "estimate_time": {
+          "type": "string",
+          "title": "estimated time for cover task"
+        },
+        "absence_task_id": {
+          "type": "string",
+          "title": "unique id of task"
+        },
+        "recurrence_task_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "recurrence task ids"
+        }
+      }
+    },
+    "fmCreateCoverResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
+        }
+      }
+    },
     "fmCreateDepartmentRequest": {
       "type": "object",
       "properties": {
@@ -11874,6 +11950,35 @@
           "items": {
             "$ref": "#/definitions/ListCorrectionResponseCorrectionResponse"
           }
+        }
+      }
+    },
+    "fmListCoverData": {
+      "type": "object",
+      "properties": {
+        "cover_id": {
+          "type": "string",
+          "title": "unique id of cover"
+        },
+        "employee_absence_id": {
+          "type": "string",
+          "title": "absence id"
+        },
+        "absence_task_id": {
+          "type": "string",
+          "title": "absence task id"
+        },
+        "covered_by": {
+          "type": "string",
+          "title": "employee who covers the task"
+        },
+        "covered_task_id": {
+          "type": "string",
+          "title": "covered task id"
+        },
+        "estimated_time": {
+          "type": "string",
+          "title": "estimated time of task"
         }
       }
     },
