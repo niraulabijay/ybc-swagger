@@ -8186,6 +8186,31 @@
         }
       }
     },
+    "TaskResponseTaskEmployeeAbsence": {
+      "type": "object",
+      "properties": {
+        "employee_absence_id": {
+          "type": "string",
+          "title": "unique id of employee absence"
+        },
+        "type": {
+          "type": "string",
+          "title": "holiday type: HOLIDAY, SICK, ABSENT"
+        },
+        "payment_type": {
+          "type": "string",
+          "title": "payment type : PAID or UNPAID"
+        },
+        "description": {
+          "type": "string",
+          "title": "reason"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of absence"
+        }
+      }
+    },
     "UpdateBidPlannerRequestUpdateStages": {
       "type": "object",
       "properties": {
@@ -13565,6 +13590,10 @@
         "correction_data": {
           "$ref": "#/definitions/TaskResponseTaskCorrectionData",
           "title": "Correction data regardless of status"
+        },
+        "employee_absence": {
+          "$ref": "#/definitions/TaskResponseTaskEmployeeAbsence",
+          "title": "Employee Absence Data"
         }
       },
       "title": "Task definition"
