@@ -4972,6 +4972,49 @@
         ]
       }
     },
+    "/v1/meeting/communication/count-all": {
+      "get": {
+        "summary": "List the count of call, issue and note.",
+        "operationId": "MeetingService_ListAllCount",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListAllCountResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "organization id.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_ids",
+            "description": "client ids to filter the response (optional).",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
     "/v1/meeting/{meeting_id}": {
       "get": {
         "summary": "Detail returns the detail of meeting along with its agendas, views, decisions and objections\nAttendees/Creator of meeting can view the details.",
@@ -5104,6 +5147,13 @@
           {
             "name": "organization_id",
             "description": "unique id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "unique id of the client.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -7133,6 +7183,36 @@
       },
       "title": "individual employee absence response"
     },
+    "ListAllCountResponseCountResponse": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "unique id of the client"
+        },
+        "call": {
+          "type": "integer",
+          "format": "int32",
+          "title": "count of Call"
+        },
+        "issue": {
+          "type": "integer",
+          "format": "int32",
+          "title": "count of Issue"
+        },
+        "note": {
+          "type": "integer",
+          "format": "int32",
+          "title": "count of Note"
+        },
+        "meeting": {
+          "type": "integer",
+          "format": "int32",
+          "title": "count of Meetings"
+        }
+      },
+      "title": "individual count response"
+    },
     "ListAppointmentResponseAppointmentResponse": {
       "type": "object",
       "properties": {
@@ -7371,6 +7451,10 @@
         "message": {
           "type": "string",
           "title": "message details"
+        },
+        "caller_receiver": {
+          "type": "string",
+          "title": "whether the individual is a caller or a receiver"
         },
         "created_at": {
           "type": "string",
@@ -9571,6 +9655,10 @@
         "message": {
           "type": "string",
           "title": "message details"
+        },
+        "caller_receiver": {
+          "type": "string",
+          "title": "to identify whether the individual is a caller or a receiver"
         }
       }
     },
@@ -10417,6 +10505,10 @@
           "type": "string",
           "format": "date-time",
           "title": "note date"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of the client"
         }
       },
       "title": "Create note request"
@@ -12129,6 +12221,18 @@
         }
       }
     },
+    "fmListAllCountResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListAllCountResponseCountResponse"
+          },
+          "title": "list of counts of call, issue and note"
+        }
+      }
+    },
     "fmListAppointmentResponse": {
       "type": "object",
       "properties": {
@@ -12868,6 +12972,10 @@
         "note_id": {
           "type": "string",
           "title": "unique id of note to be updated"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of the client"
         },
         "created_at": {
           "type": "string",
@@ -13942,6 +14050,10 @@
         "message": {
           "type": "string",
           "title": "message details"
+        },
+        "caller_receiver": {
+          "type": "string",
+          "title": "whether the individual is a caller or a receiver"
         }
       }
     },
@@ -14549,6 +14661,10 @@
         "note_id": {
           "type": "string",
           "title": "unique id of note to be updated"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of the client"
         }
       },
       "title": "Update note request"
