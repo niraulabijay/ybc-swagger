@@ -1800,6 +1800,315 @@
         ]
       }
     },
+    "/v1/client/category/answer/update": {
+      "patch": {
+        "summary": "Update answer of a particular question.\nAuthorization scope of `fm.category-answer.update` is required.",
+        "operationId": "ClientService_UpdateCategoryAnswer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCategoryAnswerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCategoryAnswerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/category/create": {
+      "post": {
+        "summary": "Create a Category.\nAuthorization scope of `fm.category.create` is required.",
+        "operationId": "ClientService_CreateCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateCategoryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/category/delete": {
+      "post": {
+        "summary": "Delete a Category.\nAuthorization scope of `fm.category.delete` is required.",
+        "operationId": "ClientService_DeleteCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteCategoryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/category/list": {
+      "get": {
+        "summary": "ListCategory returns the list of category visible to the authorized user in descending order.\nAuthorization scope of `fm.category.list` is required.",
+        "operationId": "ClientService_ListCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "unique id of the client.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/category/question/create": {
+      "post": {
+        "summary": "Create a Question for a particular category.\nAuthorization scope of `fm.category-question.create` is required.",
+        "operationId": "ClientService_CreateCategoryQuestion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateCategoryQuestionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateCategoryQuestionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/category/question/delete": {
+      "post": {
+        "summary": "Delete a question of a particular category.\nAuthorization scope of `fm.category-question.delete` is required.",
+        "operationId": "ClientService_DeleteCategoryQuestion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteCategoryQuestionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/category/question/list": {
+      "get": {
+        "summary": "Returns the lists of questions of a particular category visible to the authorized user in descending order.\nAuthorization scope of `fm.category-question.list` is required.",
+        "operationId": "ClientService_ListCategoryQuestions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListCategoryQuestionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "category_id",
+            "description": "id of the category whose questions are to be displayed.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/category/question/update": {
+      "patch": {
+        "summary": "Update a question of a particular category.\nAuthorization scope of `fm.category-question.update` is required.",
+        "operationId": "ClientService_UpdateCategoryQuestion",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCategoryQuestionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCategoryQuestionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/category/update": {
+      "patch": {
+        "summary": "Update a Category.\nAuthorization scope of `fm.category.update` is required.",
+        "operationId": "ClientService_UpdateCategory",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCategoryResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCategoryRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/change-status": {
       "patch": {
         "summary": "Change status of a client.\nScope of `fm.client.status-change` is required.",
@@ -7464,6 +7773,77 @@
       },
       "title": "individual call response"
     },
+    "ListCategoryQuestionsResponseCategoryQuestions": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "title": "unique id of the question"
+        },
+        "category_id": {
+          "type": "string",
+          "title": "id of the category to which the question belongs"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "question": {
+          "type": "string",
+          "title": "the actual question"
+        },
+        "answer": {
+          "type": "string",
+          "title": "the answer of the particular question"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the question was created at"
+        }
+      },
+      "title": "individual response"
+    },
+    "ListCategoryResponseCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "id of the category"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization to which the category belongs"
+        },
+        "category_name": {
+          "type": "string",
+          "title": "name of the category"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the category"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the category was created at"
+        }
+      },
+      "title": "individual response of category"
+    },
     "ListCheckResponseCheckResponse": {
       "type": "object",
       "properties": {
@@ -9671,6 +10051,71 @@
         }
       }
     },
+    "fmCreateCategoryQuestionRequest": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "id of the category for which the question is being created"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client under which the created question falls"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "question": {
+          "type": "string",
+          "title": "the actual question that is being created"
+        }
+      }
+    },
+    "fmCreateCategoryQuestionResponse": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "title": "id of the created question"
+        }
+      }
+    },
+    "fmCreateCategoryRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "unique id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of the organization to which the category belongs"
+        },
+        "category_name": {
+          "type": "string",
+          "title": "name of the category"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "unique id of the employee"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the category"
+        }
+      }
+    },
+    "fmCreateCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "id of the created category"
+        }
+      }
+    },
     "fmCreateCheckRequest": {
       "type": "object",
       "properties": {
@@ -11058,6 +11503,36 @@
         }
       }
     },
+    "fmDeleteCategoryQuestionRequest": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "title": "id of the question that is to be deleted"
+        },
+        "category_id": {
+          "type": "string",
+          "title": "id of the category to which the question belongs"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
+    "fmDeleteCategoryRequest": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "id of the category to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization to which the category belongs"
+        }
+      }
+    },
     "fmDeleteClientAreaRequest": {
       "type": "object",
       "properties": {
@@ -12289,6 +12764,30 @@
             "$ref": "#/definitions/ListCallResponseCallResponse"
           },
           "title": "list of calls"
+        }
+      }
+    },
+    "fmListCategoryQuestionsResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListCategoryQuestionsResponseCategoryQuestions"
+          },
+          "title": "lists of questions"
+        }
+      }
+    },
+    "fmListCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListCategoryResponseCategoryResponse"
+          },
+          "title": "lists of categories"
         }
       }
     },
@@ -14063,6 +14562,105 @@
         "call_id": {
           "type": "string",
           "title": "id of the updated call"
+        }
+      }
+    },
+    "fmUpdateCategoryAnswerRequest": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "title": "id of the question whose answer is to be updated"
+        },
+        "category_id": {
+          "type": "string",
+          "title": "id of the category for which answer is being updated"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "answer": {
+          "type": "string",
+          "title": "the actual answer to be updated"
+        }
+      }
+    },
+    "fmUpdateCategoryAnswerResponse": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "title": "id of the question whose answer is updated"
+        }
+      }
+    },
+    "fmUpdateCategoryQuestionRequest": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "title": "id of the question that is to be updated"
+        },
+        "category_id": {
+          "type": "string",
+          "title": "id of the category to which the question belongs"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "question": {
+          "type": "string",
+          "title": "the actual question to be updated"
+        },
+        "is_update_answer": {
+          "type": "boolean",
+          "title": "verify if the answer of the particular question is to be updated"
+        }
+      }
+    },
+    "fmUpdateCategoryQuestionResponse": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "title": "id of the updated question"
+        }
+      }
+    },
+    "fmUpdateCategoryRequest": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "id of the category that is to be updated"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization to which the category belongs"
+        },
+        "category_name": {
+          "type": "string",
+          "title": "name of the category"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the category"
+        }
+      }
+    },
+    "fmUpdateCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "id of the updated category"
         }
       }
     },
