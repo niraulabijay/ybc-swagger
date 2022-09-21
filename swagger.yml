@@ -2560,6 +2560,38 @@
         ]
       }
     },
+    "/v1/client/{client_id}/confidential": {
+      "get": {
+        "summary": "Returns confidential details of a client.\nAuthorization scope of `fm.client.confidential` is required.",
+        "operationId": "ClientService_ClientConfidentialDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmClientConfidentialDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "client_id",
+            "description": "id of the client",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/{client_id}/mobilization": {
       "get": {
         "summary": "List client mobilization\nAuthorization scope of `fm.client.get-client-mobilization` is required",
@@ -2814,6 +2846,49 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/clients-date/list": {
+      "get": {
+        "summary": "Client Date Details\nscope of `fm.client.list` is required.",
+        "operationId": "ClientService_DateDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmClientDateDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_ids",
+            "description": "ids of clients.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -4021,6 +4096,38 @@
             "schema": {
               "$ref": "#/definitions/fmEmployeeDeleteAttachmentRequest"
             }
+          }
+        ],
+        "tags": [
+          "EmployeeService"
+        ]
+      }
+    },
+    "/v1/employee/{employee_id}/confidential": {
+      "get": {
+        "summary": "Returns confidential details of an employee.\nAuthorization scope of `fm.employee.confidential` is required.",
+        "operationId": "EmployeeService_ConfidentialDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmEmployeeConfidentialDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "employee_id",
+            "description": "id of the employee",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -7327,6 +7434,19 @@
       },
       "title": "Address details"
     },
+    "EmployeeConfidentialDetailResponseConfidentialDetails": {
+      "type": "object",
+      "properties": {
+        "employee_details": {
+          "$ref": "#/definitions/fmConfidentialEmployeeDetails",
+          "title": "confidential details of the employee"
+        },
+        "bank_account_details": {
+          "$ref": "#/definitions/fmEmployeeBankAccountDetails",
+          "title": "confidential bank details of the employee"
+        }
+      }
+    },
     "EmployeeListAttachmentResponseEmployeeAttachmentPayload": {
       "type": "object",
       "properties": {
@@ -9509,6 +9629,22 @@
         }
       }
     },
+    "fmClientConfidentialDetailResponse": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "confidential_contact_people": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmContactPerson"
+          },
+          "description": "Confidential contact person details of the client."
+        }
+      }
+    },
     "fmClientDate": {
       "type": "object",
       "properties": {
@@ -9534,6 +9670,22 @@
           "type": "string",
           "format": "date-time",
           "title": "Date in which client contract is expected to be renewed next time"
+        }
+      }
+    },
+    "fmClientDateDetailResponse": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "clients": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmClientWithDate"
+          },
+          "title": "date details of client"
         }
       }
     },
@@ -9679,6 +9831,27 @@
         "head_office_client_id": {
           "type": "string",
           "title": "id of client which is to be set to head offfice"
+        }
+      }
+    },
+    "fmClientWithDate": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of client"
+        },
+        "client_code": {
+          "type": "string",
+          "title": "unique code of client"
+        },
+        "client_dates": {
+          "$ref": "#/definitions/fmCreateClientDate",
+          "title": "date information"
         }
       }
     },
@@ -11919,6 +12092,20 @@
         }
       },
       "title": "Employee Check Info Definition"
+    },
+    "fmEmployeeConfidentialDetailResponse": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "confidential_details": {
+          "$ref": "#/definitions/EmployeeConfidentialDetailResponseConfidentialDetails",
+          "title": "required confidential details"
+        }
+      },
+      "title": "Response for employee's confidential details"
     },
     "fmEmployeeDeleteAttachmentRequest": {
       "type": "object",
