@@ -1800,6 +1800,45 @@
         ]
       }
     },
+    "/v1/client/categories-questions/list": {
+      "get": {
+        "summary": "Returns the lists of categories and their associated questions.\nAuthorization scope of `fm.category-question.list` is required.",
+        "operationId": "ClientService_ListCategoriesAndQuestions",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListCategoriesAndQuestionsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "unique id of the client (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/category/answer/update": {
       "patch": {
         "summary": "Update answer of a particular question.\nAuthorization scope of `fm.category-answer.update` is required.",
@@ -5106,6 +5145,39 @@
         ]
       }
     },
+    "/v1/meeting/agenda/decision/support": {
+      "post": {
+        "summary": "Add support to a decision of agenda",
+        "operationId": "MeetingService_AddAgendaDecisionSupport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmAddAgendaDecisionSupportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmAddAgendaDecisionSupportRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
     "/v1/meeting/agenda/timer": {
       "post": {
         "summary": "start/stop agenda of meeting",
@@ -5228,6 +5300,39 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/fmDeleteAgendaViewRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/agenda/view/reply": {
+      "post": {
+        "summary": "Add reply to a given agenda view.",
+        "operationId": "MeetingService_AddAgendaViewReply",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmAddAgendaViewReplyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmAddAgendaViewReplyRequest"
             }
           }
         ],
@@ -5519,6 +5624,39 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/fmUpdateNoteRequest"
+            }
+          }
+        ],
+        "tags": [
+          "NoteService"
+        ]
+      }
+    },
+    "/v1/note/delete": {
+      "post": {
+        "summary": "Delete an existing note.\nAuthorization scope of `fm.note.delete` is required.",
+        "operationId": "NoteService_Delete",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteNoteRequest"
             }
           }
         ],
@@ -7770,6 +7908,16 @@
           "type": "string",
           "title": "value of the bid planner"
         },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the bid planner"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time at which the bid planner was created"
+        },
         "stages": {
           "type": "array",
           "items": {
@@ -7893,6 +8041,49 @@
       },
       "title": "individual call response"
     },
+    "ListCategoriesAndQuestionsResponseAllCategoryResponse": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "id of the category"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization to which the category belongs"
+        },
+        "category_name": {
+          "type": "string",
+          "title": "name of the category"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the category"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the category was created at"
+        },
+        "questions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmAllCategoryQuestionsResponse"
+          },
+          "title": "lists of questions of the category"
+        }
+      },
+      "title": "individual response of category"
+    },
     "ListCategoryQuestionsResponseCategoryQuestions": {
       "type": "object",
       "properties": {
@@ -7924,6 +8115,11 @@
           "type": "string",
           "format": "date-time",
           "title": "time the question was created at"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the question"
         }
       },
       "title": "individual response"
@@ -8928,6 +9124,70 @@
         }
       }
     },
+    "fmAddAgendaDecisionSupportRequest": {
+      "type": "object",
+      "properties": {
+        "agenda_decision_id": {
+          "type": "string",
+          "title": "id of decision"
+        },
+        "agenda_id": {
+          "type": "string",
+          "title": "id of agenda"
+        },
+        "meeting_id": {
+          "type": "string",
+          "title": "id of meeting"
+        },
+        "supported_by": {
+          "type": "string",
+          "title": "id of employee who supports the decision"
+        }
+      }
+    },
+    "fmAddAgendaDecisionSupportResponse": {
+      "type": "object",
+      "properties": {
+        "agenda_decision_support_id": {
+          "type": "string",
+          "title": "id of decision support"
+        }
+      }
+    },
+    "fmAddAgendaViewReplyRequest": {
+      "type": "object",
+      "properties": {
+        "agenda_view_id": {
+          "type": "string",
+          "title": "id of the agenda view"
+        },
+        "agenda_id": {
+          "type": "string",
+          "title": "id of the agenda to which the agenda view belongs"
+        },
+        "meeting_id": {
+          "type": "string",
+          "title": "id of the meeting associated with the agenda view"
+        },
+        "reply": {
+          "type": "string",
+          "title": "the actual reply message"
+        },
+        "replied_by": {
+          "type": "string",
+          "title": "id of the employee who replied to the agenda view"
+        }
+      }
+    },
+    "fmAddAgendaViewReplyResponse": {
+      "type": "object",
+      "properties": {
+        "agenda_view_reply_id": {
+          "type": "string",
+          "title": "id of the created agend view reply"
+        }
+      }
+    },
     "fmAddAgendaViewRequest": {
       "type": "object",
       "properties": {
@@ -9016,6 +9276,13 @@
             "$ref": "#/definitions/fmAgendaDecisionObjection"
           },
           "title": "objections of decisions of agenda"
+        },
+        "agenda_decision_supports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmAgendaDecisionSupport"
+          },
+          "title": "supports for decisions of agenda"
         }
       },
       "title": "details of decisions within an agenda"
@@ -9050,6 +9317,27 @@
         }
       },
       "title": "details of objection of decision made for an agenda"
+    },
+    "fmAgendaDecisionSupport": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "id of support of decision"
+        },
+        "agenda_decision_id": {
+          "type": "string",
+          "title": "id of decision of agenda"
+        },
+        "agenda_id": {
+          "type": "string",
+          "title": "id of agenda the decision support belongs to"
+        },
+        "supported_by": {
+          "type": "string",
+          "title": "supported by : employee_id"
+        }
+      }
     },
     "fmAgendaDetail": {
       "type": "object",
@@ -9187,9 +9475,86 @@
             "type": "string"
           },
           "title": "delete history"
+        },
+        "agenda_view_replies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmAgendaViewReply"
+          },
+          "title": "replies of agenda views"
         }
       },
       "title": "details of Views within an agenda"
+    },
+    "fmAgendaViewReply": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "id of reply of agenda view"
+        },
+        "agenda_view_id": {
+          "type": "string",
+          "title": "id of agenda view"
+        },
+        "agenda_id": {
+          "type": "string",
+          "title": "id of agenda the view reply belongs to"
+        },
+        "reply": {
+          "type": "string",
+          "title": "actual reply message"
+        },
+        "replied_by": {
+          "type": "string",
+          "title": "replied by : employee_id"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "reply created date"
+        }
+      }
+    },
+    "fmAllCategoryQuestionsResponse": {
+      "type": "object",
+      "properties": {
+        "question_id": {
+          "type": "string",
+          "title": "unique id of the question"
+        },
+        "category_id": {
+          "type": "string",
+          "title": "id of the category to which the question belongs"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "question": {
+          "type": "string",
+          "title": "the actual question"
+        },
+        "answer": {
+          "type": "string",
+          "title": "the answer of the particular question"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the question was created at"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the question"
+        }
+      },
+      "title": "individual response of question of the category"
     },
     "fmAllTaskGroupResponse": {
       "type": "object",
@@ -10129,6 +10494,11 @@
           "type": "string",
           "title": "value of bid planner"
         },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the bid planner"
+        },
         "stages": {
           "type": "array",
           "items": {
@@ -10242,6 +10612,11 @@
         "question": {
           "type": "string",
           "title": "the actual question that is being created"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the question"
         }
       }
     },
@@ -11789,6 +12164,19 @@
         }
       }
     },
+    "fmDeleteNoteRequest": {
+      "type": "object",
+      "properties": {
+        "note_id": {
+          "type": "string",
+          "title": "id of the note to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization to which the note belongs"
+        }
+      }
+    },
     "fmDeleteOpeningClosingCheckRequest": {
       "type": "object",
       "properties": {
@@ -12951,6 +13339,18 @@
             "$ref": "#/definitions/ListCallResponseCallResponse"
           },
           "title": "list of calls"
+        }
+      }
+    },
+    "fmListCategoriesAndQuestionsResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListCategoriesAndQuestionsResponseAllCategoryResponse"
+          },
+          "title": "lists of categories"
         }
       }
     },
@@ -14653,6 +15053,11 @@
           "type": "string",
           "title": "value of the bid planner"
         },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the bid planner"
+        },
         "stages": {
           "type": "array",
           "items": {
@@ -14804,6 +15209,11 @@
         "is_update_answer": {
           "type": "boolean",
           "title": "verify if the answer of the particular question is to be updated"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the question"
         }
       }
     },
