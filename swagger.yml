@@ -8064,6 +8064,11 @@
           "type": "string",
           "title": "id of the employee"
         },
+        "percentage": {
+          "type": "number",
+          "format": "float",
+          "title": "percentage"
+        },
         "deadline": {
           "type": "string",
           "format": "date-time",
@@ -8111,6 +8116,10 @@
           "type": "string",
           "title": "the answer of the particular question"
         },
+        "approved_by": {
+          "type": "string",
+          "title": "approved_by : employee_id"
+        },
         "created_at": {
           "type": "string",
           "format": "date-time",
@@ -8146,6 +8155,11 @@
         "employee_id": {
           "type": "string",
           "title": "id of the employee"
+        },
+        "percentage": {
+          "type": "number",
+          "format": "float",
+          "title": "percentage"
         },
         "deadline": {
           "type": "string",
@@ -9091,10 +9105,9 @@
           "type": "string",
           "title": "objection done by"
         },
-        "created_at": {
+        "objection_type": {
           "type": "string",
-          "format": "date-time",
-          "title": "objection created date"
+          "title": "type of objection : NEUTRAL, LIKE OR DISLIKE"
         }
       }
     },
@@ -9116,6 +9129,10 @@
         "action_by": {
           "type": "string",
           "title": "action to be taken by"
+        },
+        "action_plan": {
+          "type": "string",
+          "title": "action plan"
         },
         "deadline_date": {
           "type": "string",
@@ -9263,7 +9280,11 @@
         },
         "action_by": {
           "type": "string",
-          "title": "view proposed by : employee_id"
+          "title": "action taken by : employee_id"
+        },
+        "action_plan": {
+          "type": "string",
+          "title": "action plan"
         },
         "deadline": {
           "type": "string",
@@ -9309,6 +9330,10 @@
         "objection_by": {
           "type": "string",
           "title": "objection done by : employee_id"
+        },
+        "objection_type": {
+          "type": "string",
+          "title": "type of objection : NEUTRAL, LIKE OR DISLIKE"
         },
         "created_at": {
           "type": "string",
@@ -9542,6 +9567,10 @@
         "answer": {
           "type": "string",
           "title": "the answer of the particular question"
+        },
+        "approved_by": {
+          "type": "string",
+          "title": "approved_by : employee_id"
         },
         "created_at": {
           "type": "string",
@@ -10647,6 +10676,11 @@
         "employee_id": {
           "type": "string",
           "title": "unique id of the employee"
+        },
+        "percentage": {
+          "type": "number",
+          "format": "float",
+          "title": "percentage"
         },
         "deadline": {
           "type": "string",
@@ -14945,6 +14979,10 @@
           "type": "string",
           "title": "action to be taken by"
         },
+        "action_plan": {
+          "type": "string",
+          "title": "action plan"
+        },
         "deadline_date": {
           "type": "string",
           "format": "date-time",
@@ -15175,6 +15213,10 @@
         "answer": {
           "type": "string",
           "title": "the actual answer to be updated"
+        },
+        "approved_by": {
+          "type": "string",
+          "title": "approved_by : employee_id"
         }
       }
     },
@@ -15244,6 +15286,11 @@
         "employee_id": {
           "type": "string",
           "title": "id of the employee"
+        },
+        "percentage": {
+          "type": "number",
+          "format": "float",
+          "title": "percentage"
         },
         "deadline": {
           "type": "string",
