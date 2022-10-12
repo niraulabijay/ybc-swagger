@@ -4982,6 +4982,39 @@
         ]
       }
     },
+    "/v1/meeting-status": {
+      "put": {
+        "summary": "Update status of a meeting.\nAuthorization scope of `fm.meeting-status.update` is required.",
+        "operationId": "MeetingService_UpdateMeetingStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateMeetingStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateMeetingStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
     "/v1/meeting/add-attendees": {
       "post": {
         "summary": "Add Attendees to existing meetings.\nAuthorization scope of `fm.meeting.update` is required.",
@@ -9387,6 +9420,10 @@
           "type": "string",
           "title": "estimated time to discuss the agenda"
         },
+        "actual_time": {
+          "type": "string",
+          "title": "actual time of the agenda discussed"
+        },
         "start_time": {
           "type": "string",
           "format": "date-time",
@@ -9428,11 +9465,6 @@
         "action": {
           "type": "string",
           "title": "timer - action : Allowed values [\"START\",\"STOP\"]"
-        },
-        "action_time": {
-          "type": "string",
-          "format": "date-time",
-          "title": "action time"
         }
       }
     },
@@ -15842,6 +15874,28 @@
         }
       },
       "title": "response for UpdateMeetingRequest"
+    },
+    "fmUpdateMeetingStatusRequest": {
+      "type": "object",
+      "properties": {
+        "meeting_id": {
+          "type": "string",
+          "title": "id of the meeting whose status is to be updated"
+        },
+        "status": {
+          "type": "string",
+          "title": "status after being changed"
+        }
+      }
+    },
+    "fmUpdateMeetingStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "action response"
+        }
+      }
     },
     "fmUpdateNewStageRequest": {
       "type": "object",
