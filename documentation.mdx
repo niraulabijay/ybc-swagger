@@ -438,6 +438,8 @@
     - [UpdateCallResponse](#fm-UpdateCallResponse)
     - [UpdateMeetingRequest](#fm-UpdateMeetingRequest)
     - [UpdateMeetingResponse](#fm-UpdateMeetingResponse)
+    - [UpdateMeetingStatusRequest](#fm-UpdateMeetingStatusRequest)
+    - [UpdateMeetingStatusResponse](#fm-UpdateMeetingStatusResponse)
     - [UpsertAgendaDecisionObjectionResponse](#fm-UpsertAgendaDecisionObjectionResponse)
     - [UpsertAgendaDecisionResponse](#fm-UpsertAgendaDecisionResponse)
     - [UpsertAgendaViewResponse](#fm-UpsertAgendaViewResponse)
@@ -7233,6 +7235,7 @@ Agenda details with complete info on views/decisions/objections
 | description | [string](#string) |  | description of agenda |
 | proposed_by | [string](#string) |  | id of the employee that proposed the agenda |
 | estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | estimated time to discuss the agenda |
+| actual_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | actual time of the agenda discussed |
 | start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start time of agenda |
 | end_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end time of agenda |
 | agenda_views | [AgendaView](#fm-AgendaView) | repeated | views of agenda |
@@ -7254,7 +7257,6 @@ Agenda details with complete info on views/decisions/objections
 | meeting_id | [string](#string) |  | id of meeting |
 | agenda_id | [string](#string) |  | id of agenda |
 | action | [string](#string) |  | timer - action : Allowed values [&#34;START&#34;,&#34;STOP&#34;] |
-| action_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | action time |
 
 
 
@@ -7788,6 +7790,37 @@ response for UpdateMeetingRequest
 
 
 
+<a name="fm-UpdateMeetingStatusRequest"></a>
+
+### UpdateMeetingStatusRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of the meeting whose status is to be updated |
+| status | [string](#string) |  | status after being changed |
+
+
+
+
+
+
+<a name="fm-UpdateMeetingStatusResponse"></a>
+
+### UpdateMeetingStatusResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
 <a name="fm-UpsertAgendaDecisionObjectionResponse"></a>
 
 ### UpsertAgendaDecisionObjectionResponse
@@ -7850,6 +7883,7 @@ response for UpdateMeetingRequest
 | List | [ListMeetingRequest](#fm-ListMeetingRequest) | [ListMeetingResponse](#fm-ListMeetingResponse) | List returns the list of meeting visible to the authorized user in descending order. Scope of `fm.meeting.list` is required. |
 | Detail | [DetailMeetingRequest](#fm-DetailMeetingRequest) | [DetailMeetingResponse](#fm-DetailMeetingResponse) | Detail returns the detail of meeting along with its agendas, views, decisions and objections Attendees/Creator of meeting can view the details. |
 | Update | [UpdateMeetingRequest](#fm-UpdateMeetingRequest) | [UpdateMeetingResponse](#fm-UpdateMeetingResponse) | Update an existing meeting. Authorization scope of `fm.meeting.update` is required. |
+| UpdateMeetingStatus | [UpdateMeetingStatusRequest](#fm-UpdateMeetingStatusRequest) | [UpdateMeetingStatusResponse](#fm-UpdateMeetingStatusResponse) | Update status of a meeting. Authorization scope of `fm.meeting-status.update` is required. |
 | AddAttendees | [AddAttendeesRequest](#fm-AddAttendeesRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Add Attendees to existing meetings. Authorization scope of `fm.meeting.update` is required. |
 | AddAgendaView | [AddAgendaViewRequest](#fm-AddAgendaViewRequest) | [UpsertAgendaViewResponse](#fm-UpsertAgendaViewResponse) | Add views to a given agenda in a meeting. |
 | EditAgendaView | [EditAgendaViewRequest](#fm-EditAgendaViewRequest) | [UpsertAgendaViewResponse](#fm-UpsertAgendaViewResponse) | Edit views of a given agenda in a meeting. |
