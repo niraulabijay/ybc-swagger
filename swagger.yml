@@ -9167,6 +9167,10 @@
           "type": "string",
           "title": "action plan"
         },
+        "action": {
+          "type": "string",
+          "title": "particular action that is taken"
+        },
         "deadline_date": {
           "type": "string",
           "format": "date-time",
@@ -9318,6 +9322,10 @@
         "action_plan": {
           "type": "string",
           "title": "action plan"
+        },
+        "action": {
+          "type": "string",
+          "title": "particular action that is taken"
         },
         "deadline": {
           "type": "string",
@@ -15030,6 +15038,10 @@
         "action_plan": {
           "type": "string",
           "title": "action plan"
+        },
+        "action": {
+          "type": "string",
+          "title": "particular action that is taken"
         },
         "deadline_date": {
           "type": "string",
