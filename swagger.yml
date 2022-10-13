@@ -11472,7 +11472,7 @@
         },
         "raised_by": {
           "type": "string",
-          "title": "id of employee owho raised the meeting"
+          "title": "id of employee who raised the meeting"
         },
         "attendee_ids": {
           "type": "array",
@@ -11499,6 +11499,14 @@
         "location": {
           "type": "string",
           "title": "location of meeting"
+        },
+        "minutes_by": {
+          "type": "string",
+          "title": "minutes_by : employee_id"
+        },
+        "cheered_by": {
+          "type": "string",
+          "title": "cheered_by : employee_id"
         }
       },
       "title": "Meeting creation request"
@@ -12388,6 +12396,14 @@
         "client_id": {
           "type": "string",
           "title": "required if meeting is for client else it is optional"
+        },
+        "minutes_by": {
+          "type": "string",
+          "title": "minutes_by : employee_id"
+        },
+        "cheered_by": {
+          "type": "string",
+          "title": "cheered_by : employee_id"
         }
       }
     },
