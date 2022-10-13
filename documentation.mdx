@@ -7388,12 +7388,14 @@ Meeting creation request
 | meeting_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the meeting |
 | estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | estimated time of the meeting |
 | department_id | [string](#string) |  | id of department of generated meeting |
-| raised_by | [string](#string) |  | id of employee owho raised the meeting |
+| raised_by | [string](#string) |  | id of employee who raised the meeting |
 | attendee_ids | [string](#string) | repeated | ids of employees who attend the meetings |
 | agendas | [Agenda](#fm-Agenda) | repeated | information of agenda of the meetong |
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
 | title | [string](#string) |  | title of the meeting |
 | location | [string](#string) |  | location of meeting |
+| minutes_by | [string](#string) |  | minutes_by : employee_id |
+| cheered_by | [string](#string) |  | cheered_by : employee_id |
 
 
 
@@ -7499,6 +7501,8 @@ request to get details of meeting by meeting_id
 | status | [string](#string) |  | status of meeting |
 | agenda_details | [AgendaDetail](#fm-AgendaDetail) | repeated | agendas of meeting along with views/decisions |
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
+| minutes_by | [string](#string) |  | minutes_by : employee_id |
+| cheered_by | [string](#string) |  | cheered_by : employee_id |
 
 
 
