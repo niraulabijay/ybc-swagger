@@ -4983,7 +4983,7 @@
       }
     },
     "/v1/meeting-status": {
-      "put": {
+      "patch": {
         "summary": "Update status of a meeting.\nAuthorization scope of `fm.meeting-status.update` is required.",
         "operationId": "MeetingService_UpdateMeetingStatus",
         "responses": {
