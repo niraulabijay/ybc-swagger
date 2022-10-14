@@ -8149,6 +8149,11 @@
           "type": "string",
           "title": "the answer of the particular question"
         },
+        "answer_word_count": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of words allowed for the answer"
+        },
         "approved_by": {
           "type": "string",
           "title": "approved_by : employee_id"
@@ -9608,6 +9613,11 @@
           "type": "string",
           "title": "the answer of the particular question"
         },
+        "answer_word_count": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of words allowed for the answer"
+        },
         "approved_by": {
           "type": "string",
           "title": "approved_by : employee_id"
@@ -10681,6 +10691,11 @@
         "question": {
           "type": "string",
           "title": "the actual question that is being created"
+        },
+        "answer_word_count": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of words allowed for the answer to this question"
         },
         "deadline": {
           "type": "string",
@@ -15307,6 +15322,11 @@
         "question": {
           "type": "string",
           "title": "the actual question to be updated"
+        },
+        "answer_word_count": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of words allowed for the answer to this question"
         },
         "is_update_answer": {
           "type": "boolean",
