@@ -2407,6 +2407,7 @@ individual response of question of the category
 | client_id | [string](#string) |  | id of the client |
 | question | [string](#string) |  | the actual question |
 | answer | [string](#string) |  | the answer of the particular question |
+| answer_word_count | [int32](#int32) |  | number of words allowed for the answer |
 | approved_by | [string](#string) |  | approved_by : employee_id |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the question was created at |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the question |
@@ -2935,6 +2936,7 @@ Response for client detail
 | client_id | [string](#string) |  | id of the client under which the created question falls |
 | organization_id | [string](#string) |  | id of the organization |
 | question | [string](#string) |  | the actual question that is being created |
+| answer_word_count | [int32](#int32) |  | number of words allowed for the answer to this question |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the question |
 
 
@@ -3637,6 +3639,7 @@ individual response
 | client_id | [string](#string) |  | id of the client |
 | question | [string](#string) |  | the actual question |
 | answer | [string](#string) |  | the answer of the particular question |
+| answer_word_count | [int32](#int32) |  | number of words allowed for the answer |
 | approved_by | [string](#string) |  | approved_by : employee_id |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the question was created at |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the question |
@@ -4211,6 +4214,7 @@ individual stage to be updated
 | category_id | [string](#string) |  | id of the category to which the question belongs |
 | organization_id | [string](#string) |  | id of the organization |
 | question | [string](#string) |  | the actual question to be updated |
+| answer_word_count | [int32](#int32) |  | number of words allowed for the answer to this question |
 | is_update_answer | [bool](#bool) |  | verify if the answer of the particular question is to be updated |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the question |
 
