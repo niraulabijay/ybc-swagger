@@ -7279,7 +7279,40 @@
         ]
       }
     },
-    "/v1/user/list__by_role": {
+    "/v1/user/list_by_employees": {
+      "post": {
+        "summary": "get user list according to employee id for changing roles/scopes\nAuthorization scope of `` is required",
+        "operationId": "UserService_GetUserListByEmployeeIds",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmGetUserListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmGetUserListRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/v1/user/list_by_role": {
       "get": {
         "summary": "get list of users from role name",
         "operationId": "UserService_GetUserListFromRole",
@@ -7311,39 +7344,6 @@
             "in": "query",
             "required": false,
             "type": "string"
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
-    },
-    "/v1/user/list_by_employees": {
-      "post": {
-        "summary": "get user list according to employee id for changing roles/scopes\nAuthorization scope of `` is required",
-        "operationId": "UserService_GetUserListByEmployeeIds",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmGetUserListResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmGetUserListRequest"
-            }
           }
         ],
         "tags": [
