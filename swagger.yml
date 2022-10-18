@@ -2490,6 +2490,82 @@
         ]
       }
     },
+    "/v1/client/tender-status": {
+      "post": {
+        "summary": "UpsertTenderStatus creates or updates the tender status.\nAuthorization scope of `fm.tender-status.create` is required.",
+        "operationId": "ClientService_UpsertTenderStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpsertTenderStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertTenderStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/tender-status/list": {
+      "get": {
+        "summary": "Returns the list of tender status.\nAuthorization scope of `fm.tender-status.list` is required.",
+        "operationId": "ClientService_ListTenderStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListTenderStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "organization id.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_ids",
+            "description": "filter by ids of clients.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/{client_id}": {
       "get": {
         "summary": "Details of client.\nScope of `fm.client.detail` is required.",
@@ -8887,6 +8963,33 @@
         }
       }
     },
+    "ListTenderStatusResponseTenderStatusResponse": {
+      "type": "object",
+      "properties": {
+        "tender_status_id": {
+          "type": "string",
+          "title": "id of the tender status"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the tender"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the tender status"
+        }
+      },
+      "title": "individual response"
+    },
     "ListTrainingTypeResponseTrainingTypeResponse": {
       "type": "object",
       "properties": {
@@ -13998,6 +14101,18 @@
       },
       "title": "Response for list of task request"
     },
+    "fmListTenderStatusResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListTenderStatusResponseTenderStatusResponse"
+          },
+          "title": "lists of tender status"
+        }
+      }
+    },
     "fmListTrainingTypeResponse": {
       "type": "object",
       "properties": {
@@ -16515,6 +16630,32 @@
       }
     },
     "fmUpsertTaskCorrectionResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "action response"
+        }
+      }
+    },
+    "fmUpsertTenderStatusRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "unique id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the tender"
+        }
+      }
+    },
+    "fmUpsertTenderStatusResponse": {
       "type": "object",
       "properties": {
         "status": {
