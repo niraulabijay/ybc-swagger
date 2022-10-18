@@ -198,6 +198,9 @@
     - [ListNewStageRequest](#fm-ListNewStageRequest)
     - [ListNewStageResponse](#fm-ListNewStageResponse)
     - [ListNewStageResponse.NewStagesResponse](#fm-ListNewStageResponse-NewStagesResponse)
+    - [ListTenderStatusRequest](#fm-ListTenderStatusRequest)
+    - [ListTenderStatusResponse](#fm-ListTenderStatusResponse)
+    - [ListTenderStatusResponse.TenderStatusResponse](#fm-ListTenderStatusResponse-TenderStatusResponse)
     - [MobilizationPrincipal](#fm-MobilizationPrincipal)
     - [PeriodicBudget](#fm-PeriodicBudget)
     - [PeriodicBudget.PBudget](#fm-PeriodicBudget-PBudget)
@@ -230,6 +233,8 @@
     - [UpdateClientResponse](#fm-UpdateClientResponse)
     - [UpdateNewStageRequest](#fm-UpdateNewStageRequest)
     - [UpdateNewStageResponse](#fm-UpdateNewStageResponse)
+    - [UpsertTenderStatusRequest](#fm-UpsertTenderStatusRequest)
+    - [UpsertTenderStatusResponse](#fm-UpsertTenderStatusResponse)
   
     - [ClientService](#fm-ClientService)
   
@@ -3896,6 +3901,56 @@ individual client response
 
 
 
+<a name="fm-ListTenderStatusRequest"></a>
+
+### ListTenderStatusRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | organization id |
+| client_ids | [string](#string) | repeated | filter by ids of clients |
+
+
+
+
+
+
+<a name="fm-ListTenderStatusResponse"></a>
+
+### ListTenderStatusResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListTenderStatusResponse.TenderStatusResponse](#fm-ListTenderStatusResponse-TenderStatusResponse) | repeated | lists of tender status |
+
+
+
+
+
+
+<a name="fm-ListTenderStatusResponse-TenderStatusResponse"></a>
+
+### ListTenderStatusResponse.TenderStatusResponse
+individual response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tender_status_id | [string](#string) |  | id of the tender status |
+| client_id | [string](#string) |  | unique id of the client |
+| organization_id | [string](#string) |  | organization id |
+| status | [string](#string) |  | status of the tender |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the tender status |
+
+
+
+
+
+
 <a name="fm-MobilizationPrincipal"></a>
 
 ### MobilizationPrincipal
@@ -4446,6 +4501,38 @@ response for UpdateClientRequest
 
 
 
+
+<a name="fm-UpsertTenderStatusRequest"></a>
+
+### UpsertTenderStatusRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique id of the client |
+| organization_id | [string](#string) |  | organization id |
+| status | [string](#string) |  | status of the tender |
+
+
+
+
+
+
+<a name="fm-UpsertTenderStatusResponse"></a>
+
+### UpsertTenderStatusResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
  
 
  
@@ -4506,6 +4593,8 @@ response for UpdateClientRequest
 | UpdateCategoryQuestion | [UpdateCategoryQuestionRequest](#fm-UpdateCategoryQuestionRequest) | [UpdateCategoryQuestionResponse](#fm-UpdateCategoryQuestionResponse) | Update a question of a particular category. Authorization scope of `fm.category-question.update` is required. |
 | DeleteCategoryQuestion | [DeleteCategoryQuestionRequest](#fm-DeleteCategoryQuestionRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete a question of a particular category. Authorization scope of `fm.category-question.delete` is required. |
 | ListCategoriesAndQuestions | [ListCategoriesAndQuestionsRequest](#fm-ListCategoriesAndQuestionsRequest) | [ListCategoriesAndQuestionsResponse](#fm-ListCategoriesAndQuestionsResponse) | Returns the lists of categories and their associated questions. Authorization scope of `fm.category-question.list` is required. |
+| UpsertTenderStatus | [UpsertTenderStatusRequest](#fm-UpsertTenderStatusRequest) | [UpsertTenderStatusResponse](#fm-UpsertTenderStatusResponse) | UpsertTenderStatus creates or updates the tender status. Authorization scope of `fm.tender-status.create` is required. |
+| ListTenderStatus | [ListTenderStatusRequest](#fm-ListTenderStatusRequest) | [ListTenderStatusResponse](#fm-ListTenderStatusResponse) | Returns the list of tender status. Authorization scope of `fm.tender-status.list` is required. |
 
  
 
