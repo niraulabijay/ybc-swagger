@@ -5604,7 +5604,7 @@
     },
     "/v1/meeting/communication/count-all": {
       "get": {
-        "summary": "List the count of call, issue and note.",
+        "summary": "List the count of call, issue, note and email.",
         "operationId": "MeetingService_ListAllCount",
         "responses": {
           "200": {
@@ -5638,6 +5638,158 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/email/create": {
+      "post": {
+        "summary": "Creates an email.\nAuthorization scope of `fm.email.create` is required.",
+        "operationId": "MeetingService_CreateEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateEmailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateEmailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/email/delete": {
+      "post": {
+        "summary": "Deletes an email.\nAuthorization scope of `fm.email.delete` is required.",
+        "operationId": "MeetingService_DeleteEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteEmailRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/email/list": {
+      "get": {
+        "summary": "Returns the list of emails visible to the authorized user in descending order.\nAuthorization scope of `fm.email.list` is required.",
+        "operationId": "MeetingService_ListEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListEmailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "client_id",
+            "description": "client id to filter the response.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "organization_id",
+            "description": "organization id.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/email/update": {
+      "patch": {
+        "summary": "Updates an email.\nAuthorization scope of `fm.email.update` is required.",
+        "operationId": "MeetingService_UpdateEmail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateEmailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateEmailRequest"
+            }
           }
         ],
         "tags": [
@@ -7885,6 +8037,11 @@
           "type": "integer",
           "format": "int32",
           "title": "count of Meetings"
+        },
+        "email": {
+          "type": "integer",
+          "format": "int32",
+          "title": "count of Emails"
         }
       },
       "title": "individual count response"
@@ -8584,6 +8741,62 @@
           "type": "string"
         }
       }
+    },
+    "ListEmailResponseEmailResponse": {
+      "type": "object",
+      "properties": {
+        "email_id": {
+          "type": "string",
+          "title": "unique id of the email"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "client id"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "email_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date on which the email was sent"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of the email"
+        },
+        "sender": {
+          "type": "string",
+          "title": "email sender's id"
+        },
+        "receiver": {
+          "type": "string",
+          "title": "email receiver's id"
+        },
+        "message": {
+          "type": "string",
+          "title": "message details"
+        },
+        "sender_receiver": {
+          "type": "string",
+          "title": "to identify whether the individual is a 'SENDER' or a 'RECEIVER'"
+        },
+        "sender_email": {
+          "type": "string",
+          "title": "sender's email"
+        },
+        "receiver_email": {
+          "type": "string",
+          "title": "receiver's email"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the email was created at"
+        }
+      },
+      "title": "individual email response"
     },
     "ListEmployeeResponseEmployeeResponse": {
       "type": "object",
@@ -11211,6 +11424,61 @@
         }
       }
     },
+    "fmCreateEmailRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "email_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date on which the email is sent"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of the email"
+        },
+        "sender": {
+          "type": "string",
+          "title": "email sender's id"
+        },
+        "receiver": {
+          "type": "string",
+          "title": "email receiver's id"
+        },
+        "message": {
+          "type": "string",
+          "title": "message details"
+        },
+        "sender_receiver": {
+          "type": "string",
+          "title": "to identify whether the individual is a 'SENDER' or a 'RECEIVER'"
+        },
+        "sender_email": {
+          "type": "string",
+          "title": "sender's email"
+        },
+        "receiver_email": {
+          "type": "string",
+          "title": "receiver's email"
+        }
+      }
+    },
+    "fmCreateEmailResponse": {
+      "type": "object",
+      "properties": {
+        "email_id": {
+          "type": "string",
+          "title": "unique id of the created email"
+        }
+      }
+    },
     "fmCreateEmployeeCheckRequest": {
       "type": "object",
       "properties": {
@@ -12351,6 +12619,19 @@
         }
       }
     },
+    "fmDeleteEmailRequest": {
+      "type": "object",
+      "properties": {
+        "email_id": {
+          "type": "string",
+          "title": "id of the email to be deleted"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        }
+      }
+    },
     "fmDeleteNewStageRequest": {
       "type": "object",
       "properties": {
@@ -13487,7 +13768,7 @@
           "items": {
             "$ref": "#/definitions/ListAllCountResponseCountResponse"
           },
-          "title": "list of counts of call, issue and note"
+          "title": "list of counts of call, issue, note and email"
         }
       }
     },
@@ -13765,6 +14046,18 @@
           "items": {
             "$ref": "#/definitions/ListDesignationResponseDesignationResponse"
           }
+        }
+      }
+    },
+    "fmListEmailResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListEmailResponseEmailResponse"
+          },
+          "title": "list of emails"
         }
       }
     },
@@ -15738,6 +16031,61 @@
         "designation_id": {
           "type": "string",
           "title": "designation_id of updated designation"
+        }
+      }
+    },
+    "fmUpdateEmailRequest": {
+      "type": "object",
+      "properties": {
+        "email_id": {
+          "type": "string",
+          "title": "unique id of the email to be updated"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "email_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date on which the email is sent"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of the email"
+        },
+        "sender": {
+          "type": "string",
+          "title": "email sender id"
+        },
+        "receiver": {
+          "type": "string",
+          "title": "email receiver id"
+        },
+        "message": {
+          "type": "string",
+          "title": "message details"
+        },
+        "sender_receiver": {
+          "type": "string",
+          "title": "to identify whether the individual is a 'SENDER' or a 'RECEIVER'"
+        },
+        "sender_email": {
+          "type": "string",
+          "title": "sender's email"
+        },
+        "receiver_email": {
+          "type": "string",
+          "title": "receiver's email"
+        }
+      }
+    },
+    "fmUpdateEmailResponse": {
+      "type": "object",
+      "properties": {
+        "email_id": {
+          "type": "string",
+          "title": "id of the updated email"
         }
       }
     },
