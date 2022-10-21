@@ -2279,6 +2279,151 @@
         ]
       }
     },
+    "/v1/client/mobilization-template/create": {
+      "post": {
+        "summary": "Creates a mobilization template.\nAuthorization scope of `fm.mobilization-template.create` is required.",
+        "operationId": "ClientService_CreateMobilizationTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateMobilizationTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateMobilizationTemplateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/mobilization-template/delete": {
+      "post": {
+        "summary": "Deletes a particular template\nAuthorization scope of `fm.mobilization-template.delete` is required.",
+        "operationId": "ClientService_DeleteMobilizationTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteMobilizationTemplateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/mobilization-template/list": {
+      "get": {
+        "summary": "Returns the list of mobilization templates visible to the authorized user in descending order.\nAuthorization scope of `fm.mobilization-template.list` is required.",
+        "operationId": "ClientService_ListMobilizationTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListMobilizationTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/mobilization-template/update": {
+      "patch": {
+        "summary": "Updates a particular template\nAuthorization scope of `fm.mobilization-template.update` is required.",
+        "operationId": "ClientService_UpdateMobilizationTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateMobilizationTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateMobilizationTemplateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/set-head-office": {
       "post": {
         "summary": "set a single head office from clients.\nScope of `fm.client.set-headoffice` is required.",
@@ -9053,6 +9198,36 @@
       },
       "title": "individual meeting response"
     },
+    "ListMobilizationTemplateResponseMobilizationTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "mobilization_template_id": {
+          "type": "string",
+          "title": "unique id of the mobilization template"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of the mobilization template"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmMobilizationTasks"
+          },
+          "title": "tasks of the template"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the template"
+        }
+      },
+      "title": "individual response"
+    },
     "ListNewStageResponseNewStagesResponse": {
       "type": "object",
       "properties": {
@@ -11914,6 +12089,35 @@
       },
       "title": "Response for create meeting requests"
     },
+    "fmCreateMobilizationTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "id of the associated organization"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of the mobilization template"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmMobilizationTasks"
+          },
+          "title": "tasks of the template"
+        }
+      }
+    },
+    "fmCreateMobilizationTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "mobilization_template_id": {
+          "type": "string",
+          "title": "unique id of the created mobilization template"
+        }
+      }
+    },
     "fmCreateNewStageRequest": {
       "type": "object",
       "properties": {
@@ -12629,6 +12833,19 @@
         "client_id": {
           "type": "string",
           "title": "id of the client"
+        }
+      }
+    },
+    "fmDeleteMobilizationTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "mobilization_template_id": {
+          "type": "string",
+          "title": "id of the mobilization template to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
         }
       }
     },
@@ -14226,6 +14443,18 @@
         }
       }
     },
+    "fmListMobilizationTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListMobilizationTemplateResponseMobilizationTemplateResponse"
+          },
+          "title": "list of mobilization templates"
+        }
+      }
+    },
     "fmListNewStageResponse": {
       "type": "object",
       "properties": {
@@ -14491,6 +14720,20 @@
         "name": {
           "type": "string",
           "title": "name of the user"
+        }
+      }
+    },
+    "fmMobilizationTasks": {
+      "type": "object",
+      "properties": {
+        "title_number": {
+          "type": "number",
+          "format": "float",
+          "title": "title number"
+        },
+        "title": {
+          "type": "string",
+          "title": "title name"
         }
       }
     },
@@ -16405,6 +16648,39 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmUpdateMobilizationTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "mobilization_template_id": {
+          "type": "string",
+          "title": "id of the mobilization template to be updated"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of the mobilization template"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmMobilizationTasks"
+          },
+          "title": "tasks of the template"
+        }
+      }
+    },
+    "fmUpdateMobilizationTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "mobilization_template_id": {
+          "type": "string",
+          "title": "id of the updated mobilization template"
         }
       }
     },
