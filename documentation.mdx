@@ -154,6 +154,8 @@
     - [CreateClientMobilizationResponse](#fm-CreateClientMobilizationResponse)
     - [CreateClientRequest](#fm-CreateClientRequest)
     - [CreateClientResponse](#fm-CreateClientResponse)
+    - [CreateMobilizationTemplateRequest](#fm-CreateMobilizationTemplateRequest)
+    - [CreateMobilizationTemplateResponse](#fm-CreateMobilizationTemplateResponse)
     - [CreateNewStageRequest](#fm-CreateNewStageRequest)
     - [CreateNewStageResponse](#fm-CreateNewStageResponse)
     - [CreateStageRequest](#fm-CreateStageRequest)
@@ -163,6 +165,7 @@
     - [DeleteCategoryRequest](#fm-DeleteCategoryRequest)
     - [DeleteClientAreaRequest](#fm-DeleteClientAreaRequest)
     - [DeleteClientRegionRequest](#fm-DeleteClientRegionRequest)
+    - [DeleteMobilizationTemplateRequest](#fm-DeleteMobilizationTemplateRequest)
     - [DeleteNewStageRequest](#fm-DeleteNewStageRequest)
     - [Invoice](#fm-Invoice)
     - [LabourBudget](#fm-LabourBudget)
@@ -195,6 +198,9 @@
     - [ListClientRequest.SearchParam](#fm-ListClientRequest-SearchParam)
     - [ListClientResponse](#fm-ListClientResponse)
     - [ListClientResponse.ClientResponse](#fm-ListClientResponse-ClientResponse)
+    - [ListMobilizationTemplateRequest](#fm-ListMobilizationTemplateRequest)
+    - [ListMobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse)
+    - [ListMobilizationTemplateResponse.MobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse-MobilizationTemplateResponse)
     - [ListNewStageRequest](#fm-ListNewStageRequest)
     - [ListNewStageResponse](#fm-ListNewStageResponse)
     - [ListNewStageResponse.NewStagesResponse](#fm-ListNewStageResponse-NewStagesResponse)
@@ -202,6 +208,7 @@
     - [ListTenderStatusResponse](#fm-ListTenderStatusResponse)
     - [ListTenderStatusResponse.TenderStatusResponse](#fm-ListTenderStatusResponse-TenderStatusResponse)
     - [MobilizationPrincipal](#fm-MobilizationPrincipal)
+    - [MobilizationTasks](#fm-MobilizationTasks)
     - [PeriodicBudget](#fm-PeriodicBudget)
     - [PeriodicBudget.PBudget](#fm-PeriodicBudget-PBudget)
     - [Region](#fm-Region)
@@ -231,6 +238,8 @@
     - [UpdateClientRegionResponse](#fm-UpdateClientRegionResponse)
     - [UpdateClientRequest](#fm-UpdateClientRequest)
     - [UpdateClientResponse](#fm-UpdateClientResponse)
+    - [UpdateMobilizationTemplateRequest](#fm-UpdateMobilizationTemplateRequest)
+    - [UpdateMobilizationTemplateResponse](#fm-UpdateMobilizationTemplateResponse)
     - [UpdateNewStageRequest](#fm-UpdateNewStageRequest)
     - [UpdateNewStageResponse](#fm-UpdateNewStageResponse)
     - [UpsertTenderStatusRequest](#fm-UpsertTenderStatusRequest)
@@ -3122,6 +3131,38 @@ Response for create client requests
 
 
 
+<a name="fm-CreateMobilizationTemplateRequest"></a>
+
+### CreateMobilizationTemplateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the associated organization |
+| name | [string](#string) |  | name of the mobilization template |
+| tasks | [MobilizationTasks](#fm-MobilizationTasks) | repeated | tasks of the template |
+
+
+
+
+
+
+<a name="fm-CreateMobilizationTemplateResponse"></a>
+
+### CreateMobilizationTemplateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mobilization_template_id | [string](#string) |  | unique id of the created mobilization template |
+
+
+
+
+
+
 <a name="fm-CreateNewStageRequest"></a>
 
 ### CreateNewStageRequest
@@ -3265,6 +3306,22 @@ Response for create client requests
 | client_id | [string](#string) | repeated | client ids to be deleted |
 | region | [string](#string) |  | region of the client |
 | organization_id | [string](#string) |  | organization of the clients |
+
+
+
+
+
+
+<a name="fm-DeleteMobilizationTemplateRequest"></a>
+
+### DeleteMobilizationTemplateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mobilization_template_id | [string](#string) |  | id of the mobilization template to be deleted |
+| organization_id | [string](#string) |  | organization id |
 
 
 
@@ -3859,6 +3916,56 @@ individual client response
 
 
 
+<a name="fm-ListMobilizationTemplateRequest"></a>
+
+### ListMobilizationTemplateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter for list request |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-ListMobilizationTemplateResponse"></a>
+
+### ListMobilizationTemplateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListMobilizationTemplateResponse.MobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse-MobilizationTemplateResponse) | repeated | list of mobilization templates |
+
+
+
+
+
+
+<a name="fm-ListMobilizationTemplateResponse-MobilizationTemplateResponse"></a>
+
+### ListMobilizationTemplateResponse.MobilizationTemplateResponse
+individual response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mobilization_template_id | [string](#string) |  | unique id of the mobilization template |
+| organization_id | [string](#string) |  | organization id |
+| name | [string](#string) |  | name of the mobilization template |
+| tasks | [MobilizationTasks](#fm-MobilizationTasks) | repeated | tasks of the template |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the template |
+
+
+
+
+
+
 <a name="fm-ListNewStageRequest"></a>
 
 ### ListNewStageRequest
@@ -3970,6 +4077,22 @@ individual response
 | type | [string](#string) |  | type of user |
 | id | [string](#string) |  | unique id of the user |
 | name | [string](#string) |  | name of the user |
+
+
+
+
+
+
+<a name="fm-MobilizationTasks"></a>
+
+### MobilizationTasks
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title_number | [float](#float) |  | title number |
+| title | [string](#string) |  | title name |
 
 
 
@@ -4477,6 +4600,39 @@ response for UpdateClientRequest
 
 
 
+<a name="fm-UpdateMobilizationTemplateRequest"></a>
+
+### UpdateMobilizationTemplateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mobilization_template_id | [string](#string) |  | id of the mobilization template to be updated |
+| organization_id | [string](#string) |  | organization id |
+| name | [string](#string) |  | name of the mobilization template |
+| tasks | [MobilizationTasks](#fm-MobilizationTasks) | repeated | tasks of the template |
+
+
+
+
+
+
+<a name="fm-UpdateMobilizationTemplateResponse"></a>
+
+### UpdateMobilizationTemplateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mobilization_template_id | [string](#string) |  | id of the updated mobilization template |
+
+
+
+
+
+
 <a name="fm-UpdateNewStageRequest"></a>
 
 ### UpdateNewStageRequest
@@ -4603,6 +4759,10 @@ response for UpdateClientRequest
 | ListCategoriesAndQuestions | [ListCategoriesAndQuestionsRequest](#fm-ListCategoriesAndQuestionsRequest) | [ListCategoriesAndQuestionsResponse](#fm-ListCategoriesAndQuestionsResponse) | Returns the lists of categories and their associated questions. Authorization scope of `fm.category-question.list` is required. |
 | UpsertTenderStatus | [UpsertTenderStatusRequest](#fm-UpsertTenderStatusRequest) | [UpsertTenderStatusResponse](#fm-UpsertTenderStatusResponse) | UpsertTenderStatus creates or updates the tender status. Authorization scope of `fm.tender-status.create` is required. |
 | ListTenderStatus | [ListTenderStatusRequest](#fm-ListTenderStatusRequest) | [ListTenderStatusResponse](#fm-ListTenderStatusResponse) | Returns the list of tender status. Authorization scope of `fm.tender-status.list` is required. |
+| CreateMobilizationTemplate | [CreateMobilizationTemplateRequest](#fm-CreateMobilizationTemplateRequest) | [CreateMobilizationTemplateResponse](#fm-CreateMobilizationTemplateResponse) | Creates a mobilization template. Authorization scope of `fm.mobilization-template.create` is required. |
+| ListMobilizationTemplate | [ListMobilizationTemplateRequest](#fm-ListMobilizationTemplateRequest) | [ListMobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse) | Returns the list of mobilization templates visible to the authorized user in descending order. Authorization scope of `fm.mobilization-template.list` is required. |
+| UpdateMobilizationTemplate | [UpdateMobilizationTemplateRequest](#fm-UpdateMobilizationTemplateRequest) | [UpdateMobilizationTemplateResponse](#fm-UpdateMobilizationTemplateResponse) | Updates a particular template Authorization scope of `fm.mobilization-template.update` is required. |
+| DeleteMobilizationTemplate | [DeleteMobilizationTemplateRequest](#fm-DeleteMobilizationTemplateRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a particular template Authorization scope of `fm.mobilization-template.delete` is required. |
 
  
 
