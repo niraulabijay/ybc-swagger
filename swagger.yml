@@ -2181,6 +2181,52 @@
         ]
       }
     },
+    "/v1/client/confidential/list": {
+      "get": {
+        "summary": "Returns confidential details of a client.\nAuthorization scope of `fm.client.confidential` is required.",
+        "operationId": "ClientService_ClientConfidentialDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmClientConfidentialDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "client_id",
+            "description": "id of the client.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "username of the user.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password of the user.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/lead": {
       "post": {
         "summary": "Create a new client lead\nAuthorization scope of `fm.client.lead` is required.",
@@ -2813,38 +2859,6 @@
             "schema": {
               "$ref": "#/definitions/fmClientAddAttachmentRequest"
             }
-          }
-        ],
-        "tags": [
-          "ClientService"
-        ]
-      }
-    },
-    "/v1/client/{client_id}/confidential": {
-      "get": {
-        "summary": "Returns confidential details of a client.\nAuthorization scope of `fm.client.confidential` is required.",
-        "operationId": "ClientService_ClientConfidentialDetail",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmClientConfidentialDetailResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "client_id",
-            "description": "id of the client",
-            "in": "path",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
@@ -4174,6 +4188,52 @@
         ]
       }
     },
+    "/v1/employee/confidential/list": {
+      "get": {
+        "summary": "Returns confidential details of an employee.\nAuthorization scope of `fm.employee.confidential` is required.",
+        "operationId": "EmployeeService_ConfidentialDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmEmployeeConfidentialDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "employee_id",
+            "description": "id of the employee.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "username",
+            "description": "username of the user.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "password",
+            "description": "password of the user.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EmployeeService"
+        ]
+      }
+    },
     "/v1/employee/status": {
       "post": {
         "summary": "Update an employee status\nAuthorization scope of `fm.employee.update-status` is required.",
@@ -4356,38 +4416,6 @@
             "schema": {
               "$ref": "#/definitions/fmEmployeeDeleteAttachmentRequest"
             }
-          }
-        ],
-        "tags": [
-          "EmployeeService"
-        ]
-      }
-    },
-    "/v1/employee/{employee_id}/confidential": {
-      "get": {
-        "summary": "Returns confidential details of an employee.\nAuthorization scope of `fm.employee.confidential` is required.",
-        "operationId": "EmployeeService_ConfidentialDetail",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmEmployeeConfidentialDetailResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "employee_id",
-            "description": "id of the employee",
-            "in": "path",
-            "required": true,
-            "type": "string"
           }
         ],
         "tags": [
@@ -9194,6 +9222,14 @@
         "client_id": {
           "type": "string",
           "title": "required if meeting is for client else it is optional"
+        },
+        "minutes_by": {
+          "type": "string",
+          "title": "minutes_by : employee_id"
+        },
+        "cheered_by": {
+          "type": "string",
+          "title": "cheered_by : employee_id"
         }
       },
       "title": "individual meeting response"
