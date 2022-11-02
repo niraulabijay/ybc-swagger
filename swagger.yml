@@ -2227,6 +2227,39 @@
         ]
       }
     },
+    "/v1/client/confidential/update": {
+      "patch": {
+        "summary": "Updates the confidential details of a client.\nAuthorization scope of `fm.client.confidential` is required.",
+        "operationId": "ClientService_UpdateClientConfidential",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateClientConfidentialResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateClientConfidentialRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/lead": {
       "post": {
         "summary": "Create a new client lead\nAuthorization scope of `fm.client.lead` is required.",
@@ -4227,6 +4260,39 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "EmployeeService"
+        ]
+      }
+    },
+    "/v1/employee/confidential/update": {
+      "patch": {
+        "summary": "Updates the confidential details of an employee.\nAuthorization scope of `fm.employee.confidential` is required.",
+        "operationId": "EmployeeService_UpdateEmployeeConfidential",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateEmployeeConfidentialResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateEmployeeConfidentialRequest"
+            }
           }
         ],
         "tags": [
@@ -16104,6 +16170,31 @@
         }
       }
     },
+    "fmUpdateClientConfidentialRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "unique id of the client"
+        },
+        "confidential_contact_people": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmContactPerson"
+          },
+          "title": "confidential details to be updated"
+        }
+      }
+    },
+    "fmUpdateClientConfidentialResponse": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the updated client"
+        }
+      }
+    },
     "fmUpdateClientMobilizationRequest": {
       "type": "object",
       "properties": {
@@ -16365,6 +16456,28 @@
         "email_id": {
           "type": "string",
           "title": "id of the updated email"
+        }
+      }
+    },
+    "fmUpdateEmployeeConfidentialRequest": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "confidential_employee_info": {
+          "$ref": "#/definitions/fmConfidentialEmployeeInfo",
+          "title": "confidential details to be updated"
+        }
+      }
+    },
+    "fmUpdateEmployeeConfidentialResponse": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "title": "id of the updated employee"
         }
       }
     },
