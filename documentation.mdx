@@ -232,6 +232,8 @@
     - [UpdateCategoryResponse](#fm-UpdateCategoryResponse)
     - [UpdateClientAreaRequest](#fm-UpdateClientAreaRequest)
     - [UpdateClientAreaResponse](#fm-UpdateClientAreaResponse)
+    - [UpdateClientConfidentialRequest](#fm-UpdateClientConfidentialRequest)
+    - [UpdateClientConfidentialResponse](#fm-UpdateClientConfidentialResponse)
     - [UpdateClientMobilizationRequest](#fm-UpdateClientMobilizationRequest)
     - [UpdateClientMobilizationResponse](#fm-UpdateClientMobilizationResponse)
     - [UpdateClientRegionRequest](#fm-UpdateClientRegionRequest)
@@ -330,6 +332,8 @@
     - [OfficialEmployeeInformationForUpsert](#fm-OfficialEmployeeInformationForUpsert)
     - [ReferenceEmployeeInfo](#fm-ReferenceEmployeeInfo)
     - [TrainingEmployeeInfo](#fm-TrainingEmployeeInfo)
+    - [UpdateEmployeeConfidentialRequest](#fm-UpdateEmployeeConfidentialRequest)
+    - [UpdateEmployeeConfidentialResponse](#fm-UpdateEmployeeConfidentialResponse)
     - [UpdateEmployeeRequest](#fm-UpdateEmployeeRequest)
     - [UpdateEmployeeResponse](#fm-UpdateEmployeeResponse)
     - [UpdateEmployeeStatusRequest](#fm-UpdateEmployeeStatusRequest)
@@ -4493,6 +4497,37 @@ individual stage to be updated
 
 
 
+<a name="fm-UpdateClientConfidentialRequest"></a>
+
+### UpdateClientConfidentialRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | unique id of the client |
+| confidential_contact_people | [ContactPerson](#fm-ContactPerson) | repeated | confidential details to be updated |
+
+
+
+
+
+
+<a name="fm-UpdateClientConfidentialResponse"></a>
+
+### UpdateClientConfidentialResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of the updated client |
+
+
+
+
+
+
 <a name="fm-UpdateClientMobilizationRequest"></a>
 
 ### UpdateClientMobilizationRequest
@@ -4725,6 +4760,7 @@ response for UpdateClientRequest
 | DeleteClientRegion | [DeleteClientRegionRequest](#fm-DeleteClientRegionRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Make region field null. Authorization scope of `fm.client.update` is required. |
 | Detail | [ClientDetailRequest](#fm-ClientDetailRequest) | [ClientDetailResponse](#fm-ClientDetailResponse) | Details of client. Scope of `fm.client.detail` is required. |
 | ClientConfidentialDetail | [ClientConfidentialDetailRequest](#fm-ClientConfidentialDetailRequest) | [ClientConfidentialDetailResponse](#fm-ClientConfidentialDetailResponse) | Returns confidential details of a client. Authorization scope of `fm.client.confidential` is required. |
+| UpdateClientConfidential | [UpdateClientConfidentialRequest](#fm-UpdateClientConfidentialRequest) | [UpdateClientConfidentialResponse](#fm-UpdateClientConfidentialResponse) | Updates the confidential details of a client. Authorization scope of `fm.client.confidential` is required. |
 | DateDetail | [ClientDateDetailRequest](#fm-ClientDateDetailRequest) | [ClientDateDetailResponse](#fm-ClientDateDetailResponse) | Client Date Details scope of `fm.client.list` is required. |
 | ChangeStatus | [ClientChangeStatusRequest](#fm-ClientChangeStatusRequest) | [ClientChangeStatusResponse](#fm-ClientChangeStatusResponse) | Change status of a client. Scope of `fm.client.status-change` is required. |
 | SetHeadOffice | [ClientSetHeadOfficeRequest](#fm-ClientSetHeadOfficeRequest) | [ClientSetHeadOfficeResponse](#fm-ClientSetHeadOfficeResponse) | set a single head office from clients. Scope of `fm.client.set-headoffice` is required. |
@@ -6094,6 +6130,37 @@ Training employee information
 
 
 
+<a name="fm-UpdateEmployeeConfidentialRequest"></a>
+
+### UpdateEmployeeConfidentialRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | id of the employee |
+| confidential_employee_info | [ConfidentialEmployeeInfo](#fm-ConfidentialEmployeeInfo) |  | confidential details to be updated |
+
+
+
+
+
+
+<a name="fm-UpdateEmployeeConfidentialResponse"></a>
+
+### UpdateEmployeeConfidentialResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | id of the updated employee |
+
+
+
+
+
+
 <a name="fm-UpdateEmployeeRequest"></a>
 
 ### UpdateEmployeeRequest
@@ -6187,6 +6254,7 @@ Response when updating an employee status
 | Update | [UpdateEmployeeRequest](#fm-UpdateEmployeeRequest) | [UpdateEmployeeResponse](#fm-UpdateEmployeeResponse) | Update an existing employee. Authorization scope of `fm.employee.update` is required. |
 | Detail | [EmployeeDetailRequest](#fm-EmployeeDetailRequest) | [EmployeeDetailResponse](#fm-EmployeeDetailResponse) | Details of employee. Scope of `fm.employee.detail` is required. |
 | ConfidentialDetail | [EmployeeConfidentialDetailRequest](#fm-EmployeeConfidentialDetailRequest) | [EmployeeConfidentialDetailResponse](#fm-EmployeeConfidentialDetailResponse) | Returns confidential details of an employee. Authorization scope of `fm.employee.confidential` is required. |
+| UpdateEmployeeConfidential | [UpdateEmployeeConfidentialRequest](#fm-UpdateEmployeeConfidentialRequest) | [UpdateEmployeeConfidentialResponse](#fm-UpdateEmployeeConfidentialResponse) | Updates the confidential details of an employee. Authorization scope of `fm.employee.confidential` is required. |
 | UpdateStatus | [UpdateEmployeeStatusRequest](#fm-UpdateEmployeeStatusRequest) | [UpdateEmployeeStatusResponse](#fm-UpdateEmployeeStatusResponse) | Update an employee status Authorization scope of `fm.employee.update-status` is required. |
 | AddAttachment | [EmployeeAddAttachmentRequest](#fm-EmployeeAddAttachmentRequest) | [EmployeeAddAttachmentResponse](#fm-EmployeeAddAttachmentResponse) | Adds attachment for an employee. Scope of `fm.employee.add-attachment` is required. |
 | ListAttachment | [EmployeeListAttachmentRequest](#fm-EmployeeListAttachmentRequest) | [EmployeeListAttachmentResponse](#fm-EmployeeListAttachmentResponse) | Lists attachment for an employee. Scope of `fm.employee.list-attachment` is required. |
