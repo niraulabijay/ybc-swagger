@@ -2260,6 +2260,158 @@
         ]
       }
     },
+    "/v1/client/crm-mobilization/create": {
+      "post": {
+        "summary": "Create a CRM mobilization.\nAuthorization scope of `fm.crm-mobilization.create` is required.",
+        "operationId": "ClientService_CreateCRMMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateCRMMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateCRMMobilizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/crm-mobilization/delete": {
+      "post": {
+        "summary": "Delete a CRM mobilization.\nAuthorization scope of `fm.crm-mobilization.delete` is required.",
+        "operationId": "ClientService_DeleteCRMMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteCRMMobilizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/crm-mobilization/list": {
+      "get": {
+        "summary": "Return the list of CRM mobilization visible to the authorized user in descending order.\nAuthorization scope of `fm.crm-mobilization.list` is required.",
+        "operationId": "ClientService_ListCRMMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListCRMMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "filter by client id (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/crm-mobilization/update": {
+      "patch": {
+        "summary": "Update a CRM mobilization.\nAuthorization scope of `fm.crm-mobilization.update` is required.",
+        "operationId": "ClientService_UpdateCRMMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCRMMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCRMMobilizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/lead": {
       "post": {
         "summary": "Create a new client lead\nAuthorization scope of `fm.client.lead` is required.",
@@ -8494,6 +8646,39 @@
         }
       }
     },
+    "ListCRMMobilizationResponseCRMMobilizationList": {
+      "type": "object",
+      "properties": {
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the crm mobilization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "template_id": {
+          "type": "string",
+          "title": "id of the mobilization template"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmMobTasks"
+          },
+          "title": "tasks of the mobilization"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the mobilization"
+        }
+      }
+    },
     "ListCallResponseCallResponse": {
       "type": "object",
       "properties": {
@@ -11215,6 +11400,39 @@
         }
       }
     },
+    "fmCreateCRMMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "template_id": {
+          "type": "string",
+          "title": "id of the mobilization template"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmMobTasks"
+          },
+          "title": "tasks of the mobilization"
+        }
+      }
+    },
+    "fmCreateCRMMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the created mobilization"
+        }
+      }
+    },
     "fmCreateCallRequest": {
       "type": "object",
       "properties": {
@@ -12812,6 +13030,19 @@
         }
       }
     },
+    "fmDeleteCRMMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "id of the crm mobilization to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
     "fmDeleteCallRequest": {
       "type": "object",
       "properties": {
@@ -14138,6 +14369,18 @@
         }
       }
     },
+    "fmListCRMMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListCRMMobilizationResponseCRMMobilizationList"
+          },
+          "title": "lists of crm mobilization"
+        }
+      }
+    },
     "fmListCallResponse": {
       "type": "object",
       "properties": {
@@ -14807,6 +15050,37 @@
         }
       },
       "title": "Response for logout"
+    },
+    "fmMobTasks": {
+      "type": "object",
+      "properties": {
+        "title_number": {
+          "type": "integer",
+          "format": "int32",
+          "title": "title number"
+        },
+        "title_name": {
+          "type": "string",
+          "title": "title name"
+        },
+        "task_owner": {
+          "type": "string",
+          "title": "task_owner : employee_id"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the task"
+        },
+        "task_detail": {
+          "type": "string",
+          "title": "task detail"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the task"
+        }
+      }
     },
     "fmMobilizationPrincipal": {
       "type": "object",
@@ -15969,6 +16243,35 @@
         "bid_planner_status_id": {
           "type": "string",
           "title": "id of the updated bid planner status"
+        }
+      }
+    },
+    "fmUpdateCRMMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the crm mobilization"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmMobTasks"
+          },
+          "title": "tasks of the mobilization to be updated"
+        }
+      }
+    },
+    "fmUpdateCRMMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "id of the updated crm mobilization"
         }
       }
     },
