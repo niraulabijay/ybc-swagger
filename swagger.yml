@@ -11798,13 +11798,6 @@
           "$ref": "#/definitions/fmBankAccountDetails",
           "title": "Bank account details"
         },
-        "confidential_contact_people": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/fmContactPerson"
-          },
-          "title": "Confidential Contact Person detail of the client"
-        },
         "client_code": {
           "type": "string",
           "title": "unique code of client within the organization"
@@ -12046,10 +12039,6 @@
         "employee_info": {
           "$ref": "#/definitions/fmEmployeeInformationForUpsert",
           "title": "Employee information"
-        },
-        "confidential_employee_info": {
-          "$ref": "#/definitions/fmConfidentialEmployeeInfo",
-          "title": "Confidential Information about the employee"
         },
         "training_info": {
           "type": "array",
@@ -16611,13 +16600,6 @@
           "$ref": "#/definitions/fmBankAccountDetails",
           "title": "Bank account details of the client"
         },
-        "confidential_contact_people": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/fmContactPerson"
-          },
-          "title": "Confidential Contact Person detail of the client"
-        },
         "client_code": {
           "type": "string",
           "title": "unique code of client within the organization"
@@ -16819,10 +16801,6 @@
         "employee_info": {
           "$ref": "#/definitions/fmEmployeeInformationForUpsert",
           "title": "Employee information"
-        },
-        "confidential_employee_info": {
-          "$ref": "#/definitions/fmConfidentialEmployeeInfo",
-          "title": "Confidential Information about the employee"
         },
         "training_info": {
           "type": "array",
