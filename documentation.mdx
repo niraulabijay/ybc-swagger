@@ -3153,7 +3153,6 @@ Response for client mobilization creation
 | client_detail | [CreateClientDetail](#fm-CreateClientDetail) |  | information details of the client |
 | contact_people | [ContactPerson](#fm-ContactPerson) | repeated | Contact people details of the client. Backend saves to ClientContactPersonService |
 | bank_account_details | [BankAccountDetails](#fm-BankAccountDetails) |  | Bank account details |
-| confidential_contact_people | [ContactPerson](#fm-ContactPerson) | repeated | Confidential Contact Person detail of the client |
 | client_code | [string](#string) |  | unique code of client within the organization |
 | profile_image | [string](#string) |  | profile image of client |
 | branch_head_office | [string](#string) |  | string head office client id |
@@ -4774,7 +4773,6 @@ request to update client by client id
 | client_detail | [ClientDetail](#fm-ClientDetail) |  | information details of the client |
 | contact_people | [ContactPerson](#fm-ContactPerson) | repeated | Contact Person details of the client. Backend saves to ClientContactPersonService |
 | bank_account_details | [BankAccountDetails](#fm-BankAccountDetails) |  | Bank account details of the client |
-| confidential_contact_people | [ContactPerson](#fm-ContactPerson) | repeated | Confidential Contact Person detail of the client |
 | client_code | [string](#string) |  | unique code of client within the organization |
 | profile_image | [string](#string) |  | profile image of client |
 | lead_detail | [LeadClientDetailUpsert](#fm-LeadClientDetailUpsert) |  | Details for lead client |
@@ -5649,7 +5647,6 @@ request to create new employee
 | organization_id | [string](#string) |  | organization the employee belongs to |
 | employee_code | [int64](#int64) |  | unique employee code for organization |
 | employee_info | [EmployeeInformationForUpsert](#fm-EmployeeInformationForUpsert) |  | Employee information |
-| confidential_employee_info | [ConfidentialEmployeeInfo](#fm-ConfidentialEmployeeInfo) |  | Confidential Information about the employee |
 | training_info | [TrainingEmployeeInfo](#fm-TrainingEmployeeInfo) | repeated | trainig Information filled by the organization |
 | history_info | [EmploymentHistoryInfo](#fm-EmploymentHistoryInfo) | repeated | employment history Information filled by the organization |
 | reference_employee_info | [ReferenceEmployeeInfo](#fm-ReferenceEmployeeInfo) | repeated | Reference Information about the employee |
@@ -6343,7 +6340,6 @@ request to update employee by employee id
 | employee_code | [int64](#int64) |  | unique employee code for organization |
 | contact_detail | [ContactDetail](#fm-ContactDetail) |  | contact details of the employee |
 | employee_info | [EmployeeInformationForUpsert](#fm-EmployeeInformationForUpsert) |  | Employee information |
-| confidential_employee_info | [ConfidentialEmployeeInfo](#fm-ConfidentialEmployeeInfo) |  | Confidential Information about the employee |
 | training_info | [TrainingEmployeeInfo](#fm-TrainingEmployeeInfo) | repeated | trainig Information filled by the organization |
 | history_info | [EmploymentHistoryInfo](#fm-EmploymentHistoryInfo) | repeated | employment history Information filled by the organization |
 | reference_employee_info | [ReferenceEmployeeInfo](#fm-ReferenceEmployeeInfo) | repeated | Reference Information about the employee |
