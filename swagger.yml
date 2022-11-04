@@ -15044,11 +15044,10 @@
       "type": "object",
       "properties": {
         "title_number": {
-          "type": "integer",
-          "format": "int32",
+          "type": "string",
           "title": "title number"
         },
-        "title_name": {
+        "title": {
           "type": "string",
           "title": "title name"
         },
@@ -15068,6 +15067,14 @@
         "status": {
           "type": "string",
           "title": "status of the task"
+        },
+        "dates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "title": "dates of the task"
         }
       }
     },
