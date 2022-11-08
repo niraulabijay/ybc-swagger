@@ -164,6 +164,7 @@
     - [DeleteAppointmentRequest](#fm-DeleteAppointmentRequest)
     - [DeleteBidPlannerStatusRequest](#fm-DeleteBidPlannerStatusRequest)
     - [DeleteCRMMobilizationRequest](#fm-DeleteCRMMobilizationRequest)
+    - [DeleteCRMMobilizationTaskRequest](#fm-DeleteCRMMobilizationTaskRequest)
     - [DeleteCategoryQuestionRequest](#fm-DeleteCategoryQuestionRequest)
     - [DeleteCategoryRequest](#fm-DeleteCategoryRequest)
     - [DeleteClientAreaRequest](#fm-DeleteClientAreaRequest)
@@ -188,6 +189,7 @@
     - [ListCRMMobilizationRequest](#fm-ListCRMMobilizationRequest)
     - [ListCRMMobilizationResponse](#fm-ListCRMMobilizationResponse)
     - [ListCRMMobilizationResponse.CRMMobilizationList](#fm-ListCRMMobilizationResponse-CRMMobilizationList)
+    - [ListCRMMobilizationResponse.CRMTasksList](#fm-ListCRMMobilizationResponse-CRMTasksList)
     - [ListCategoriesAndQuestionsRequest](#fm-ListCategoriesAndQuestionsRequest)
     - [ListCategoriesAndQuestionsResponse](#fm-ListCategoriesAndQuestionsResponse)
     - [ListCategoriesAndQuestionsResponse.AllCategoryResponse](#fm-ListCategoriesAndQuestionsResponse-AllCategoryResponse)
@@ -3308,6 +3310,22 @@ Response for create client requests
 
 
 
+<a name="fm-DeleteCRMMobilizationTaskRequest"></a>
+
+### DeleteCRMMobilizationTaskRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crm_task_id | [string](#string) |  | id of the crm task to be deleted |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
 <a name="fm-DeleteCategoryQuestionRequest"></a>
 
 ### DeleteCategoryQuestionRequest
@@ -3717,8 +3735,31 @@ individual stage response of the particular bid planner
 | client_id | [string](#string) |  | id of the client |
 | template_id | [string](#string) |  | id of the mobilization template |
 | organization_id | [string](#string) |  | id of the organization |
-| tasks | [MobTasks](#fm-MobTasks) | repeated | tasks of the mobilization |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the mobilization |
+| tasks | [ListCRMMobilizationResponse.CRMTasksList](#fm-ListCRMMobilizationResponse-CRMTasksList) | repeated | tasks of the mobilization |
+
+
+
+
+
+
+<a name="fm-ListCRMMobilizationResponse-CRMTasksList"></a>
+
+### ListCRMMobilizationResponse.CRMTasksList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crm_task_id | [string](#string) |  | unique id of the crm_task |
+| crm_mobilization_id | [string](#string) |  | unique id of the crm mobilization |
+| title | [string](#string) |  | title name |
+| task_owner | [string](#string) |  | task_owner : employee_id |
+| deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the task |
+| task_detail | [string](#string) |  | task detail |
+| status | [string](#string) |  | status of the task |
+| dates | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | repeated | dates of the task |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the crm task |
 
 
 
@@ -4189,7 +4230,6 @@ individual response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| title_number | [string](#string) |  | title number |
 | title | [string](#string) |  | title name |
 | task_owner | [string](#string) |  | task_owner : employee_id |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the task |
@@ -4498,9 +4538,15 @@ individual stage to be updated
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| crm_mobilization_id | [string](#string) |  | unique id of the crm mobilization |
 | organization_id | [string](#string) |  | id of the organization |
-| tasks | [MobTasks](#fm-MobTasks) | repeated | tasks of the mobilization to be updated |
+| crm_task_id | [string](#string) |  | unique id of the crm_task |
+| crm_mobilization_id | [string](#string) |  | unique id of the crm mobilization |
+| title | [string](#string) |  | title name |
+| task_owner | [string](#string) |  | task_owner : employee_id |
+| deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the task |
+| task_detail | [string](#string) |  | task detail |
+| status | [string](#string) |  | status of the task |
+| dates | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | repeated | dates of the task |
 
 
 
@@ -4515,7 +4561,7 @@ individual stage to be updated
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| crm_mobilization_id | [string](#string) |  | id of the updated crm mobilization |
+| crm_task_id | [string](#string) |  | id of the updated crm mobilization task |
 
 
 
@@ -4966,6 +5012,7 @@ response for UpdateClientRequest
 | ListCRMMobilization | [ListCRMMobilizationRequest](#fm-ListCRMMobilizationRequest) | [ListCRMMobilizationResponse](#fm-ListCRMMobilizationResponse) | Return the list of CRM mobilization visible to the authorized user in descending order. Authorization scope of `fm.crm-mobilization.list` is required. |
 | UpdateCRMMobilization | [UpdateCRMMobilizationRequest](#fm-UpdateCRMMobilizationRequest) | [UpdateCRMMobilizationResponse](#fm-UpdateCRMMobilizationResponse) | Update a CRM mobilization. Authorization scope of `fm.crm-mobilization.update` is required. |
 | DeleteCRMMobilization | [DeleteCRMMobilizationRequest](#fm-DeleteCRMMobilizationRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete a CRM mobilization. Authorization scope of `fm.crm-mobilization.delete` is required. |
+| DeleteCRMMobilizationTask | [DeleteCRMMobilizationTaskRequest](#fm-DeleteCRMMobilizationTaskRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete a particular task of CRM mobilization. Authorization scope of `fm.crm-mobilization-task.delete` is required. |
 
  
 
