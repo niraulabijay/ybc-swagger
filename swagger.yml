@@ -2260,6 +2260,39 @@
         ]
       }
     },
+    "/v1/client/crm-mobilization-task/delete": {
+      "post": {
+        "summary": "Delete a particular task of CRM mobilization.\nAuthorization scope of `fm.crm-mobilization-task.delete` is required.",
+        "operationId": "ClientService_DeleteCRMMobilizationTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteCRMMobilizationTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/crm-mobilization/create": {
       "post": {
         "summary": "Create a CRM mobilization.\nAuthorization scope of `fm.crm-mobilization.create` is required.",
@@ -8665,17 +8698,64 @@
           "type": "string",
           "title": "id of the organization"
         },
-        "tasks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/fmMobTasks"
-          },
-          "title": "tasks of the mobilization"
-        },
         "created_at": {
           "type": "string",
           "format": "date-time",
           "title": "created date of the mobilization"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListCRMMobilizationResponseCRMTasksList"
+          },
+          "title": "tasks of the mobilization"
+        }
+      }
+    },
+    "ListCRMMobilizationResponseCRMTasksList": {
+      "type": "object",
+      "properties": {
+        "crm_task_id": {
+          "type": "string",
+          "title": "unique id of the crm_task"
+        },
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the crm mobilization"
+        },
+        "title": {
+          "type": "string",
+          "title": "title name"
+        },
+        "task_owner": {
+          "type": "string",
+          "title": "task_owner : employee_id"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the task"
+        },
+        "task_detail": {
+          "type": "string",
+          "title": "task detail"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the task"
+        },
+        "dates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "title": "dates of the task"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the crm task"
         }
       }
     },
@@ -13032,6 +13112,19 @@
         }
       }
     },
+    "fmDeleteCRMMobilizationTaskRequest": {
+      "type": "object",
+      "properties": {
+        "crm_task_id": {
+          "type": "string",
+          "title": "id of the crm task to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
     "fmDeleteCallRequest": {
       "type": "object",
       "properties": {
@@ -15043,10 +15136,6 @@
     "fmMobTasks": {
       "type": "object",
       "properties": {
-        "title_number": {
-          "type": "string",
-          "title": "title number"
-        },
         "title": {
           "type": "string",
           "title": "title name"
@@ -16245,29 +16334,55 @@
     "fmUpdateCRMMobilizationRequest": {
       "type": "object",
       "properties": {
-        "crm_mobilization_id": {
-          "type": "string",
-          "title": "unique id of the crm mobilization"
-        },
         "organization_id": {
           "type": "string",
           "title": "id of the organization"
         },
-        "tasks": {
+        "crm_task_id": {
+          "type": "string",
+          "title": "unique id of the crm_task"
+        },
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the crm mobilization"
+        },
+        "title": {
+          "type": "string",
+          "title": "title name"
+        },
+        "task_owner": {
+          "type": "string",
+          "title": "task_owner : employee_id"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the task"
+        },
+        "task_detail": {
+          "type": "string",
+          "title": "task detail"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the task"
+        },
+        "dates": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/fmMobTasks"
+            "type": "string",
+            "format": "date-time"
           },
-          "title": "tasks of the mobilization to be updated"
+          "title": "dates of the task"
         }
       }
     },
     "fmUpdateCRMMobilizationResponse": {
       "type": "object",
       "properties": {
-        "crm_mobilization_id": {
+        "crm_task_id": {
           "type": "string",
-          "title": "id of the updated crm mobilization"
+          "title": "id of the updated crm mobilization task"
         }
       }
     },
