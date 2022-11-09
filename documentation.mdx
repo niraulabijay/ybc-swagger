@@ -468,6 +468,8 @@
     - [ListMeetingRequest](#fm-ListMeetingRequest)
     - [ListMeetingResponse](#fm-ListMeetingResponse)
     - [ListMeetingResponse.MeetingResponse](#fm-ListMeetingResponse-MeetingResponse)
+    - [MeetingTimerUpdateRequest](#fm-MeetingTimerUpdateRequest)
+    - [MeetingTimerUpdateResponse](#fm-MeetingTimerUpdateResponse)
     - [UpdateAgendaDecisionRequest](#fm-UpdateAgendaDecisionRequest)
     - [UpdateCallRequest](#fm-UpdateCallRequest)
     - [UpdateCallResponse](#fm-UpdateCallResponse)
@@ -8103,6 +8105,9 @@ request to get details of meeting by meeting_id
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
+| actual_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | actual time of the meeting discussed |
+| start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start time of the meeting |
+| end_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end time of the meeting |
 
 
 
@@ -8349,8 +8354,40 @@ individual meeting response
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | timestamp at which the meeting was created |
 | location | [string](#string) |  | location of meeting |
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
+| status | [string](#string) |  | status of the meeting |
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
+
+
+
+
+
+
+<a name="fm-MeetingTimerUpdateRequest"></a>
+
+### MeetingTimerUpdateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of the meeting |
+| action | [string](#string) |  | timer-action : &#34;START&#34; or &#34;STOP&#34; |
+
+
+
+
+
+
+<a name="fm-MeetingTimerUpdateResponse"></a>
+
+### MeetingTimerUpdateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of the updated meeting |
 
 
 
@@ -8473,6 +8510,8 @@ request to update meeting by meeting_id
 | attendee_ids | [string](#string) | repeated | names of employees who attend the meetings |
 | agenda_detail | [AgendaUpdateDetail](#fm-AgendaUpdateDetail) | repeated | information of agenda of the meetong |
 | location | [string](#string) |  | location of meeting |
+| minutes_by | [string](#string) |  | minutes_by : employee_id |
+| cheered_by | [string](#string) |  | cheered_by : employee_id |
 | deleted_agenda_ids | [string](#string) | repeated | deleted_agenda_ids |
 
 
@@ -8600,6 +8639,7 @@ response for UpdateMeetingRequest
 | AddAgendaDecisionSupport | [AddAgendaDecisionSupportRequest](#fm-AddAgendaDecisionSupportRequest) | [AddAgendaDecisionSupportResponse](#fm-AddAgendaDecisionSupportResponse) | Add support to a decision of agenda |
 | DeleteAgendaDecisionObjection | [DeleteAgendaDecisionObjectionRequest](#fm-DeleteAgendaDecisionObjectionRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete objection made for decisions of an agenda |
 | AgendaTimerUpdate | [AgendaTimerRequest](#fm-AgendaTimerRequest) | [AgendaTimerResponse](#fm-AgendaTimerResponse) | start/stop agenda of meeting |
+| MeetingTimerUpdate | [MeetingTimerUpdateRequest](#fm-MeetingTimerUpdateRequest) | [MeetingTimerUpdateResponse](#fm-MeetingTimerUpdateResponse) | start/stop meeting |
 | CreateCall | [CreateCallRequest](#fm-CreateCallRequest) | [CreateCallResponse](#fm-CreateCallResponse) | Create a Call Authorization scope of `fm.call.create` is required. |
 | ListCall | [ListCallRequest](#fm-ListCallRequest) | [ListCallResponse](#fm-ListCallResponse) | Returns the list of call visible to the authorized user in descending order Authorization scope of `fm.call.list` is required |
 | UpdateCall | [UpdateCallRequest](#fm-UpdateCallRequest) | [UpdateCallResponse](#fm-UpdateCallResponse) | Update a call Authorization scope of `fm.call.update` is required |
