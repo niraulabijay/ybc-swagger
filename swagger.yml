@@ -5515,6 +5515,39 @@
         ]
       }
     },
+    "/v1/meeting-timer/update": {
+      "patch": {
+        "summary": "start/stop meeting",
+        "operationId": "MeetingService_MeetingTimerUpdate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmMeetingTimerUpdateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmMeetingTimerUpdateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
     "/v1/meeting/add-attendees": {
       "post": {
         "summary": "Add Attendees to existing meetings.\nAuthorization scope of `fm.meeting.update` is required.",
@@ -9554,6 +9587,10 @@
           "type": "string",
           "title": "required if meeting is for client else it is optional"
         },
+        "status": {
+          "type": "string",
+          "title": "status of the meeting"
+        },
         "minutes_by": {
           "type": "string",
           "title": "minutes_by : employee_id"
@@ -13443,6 +13480,20 @@
         "cheered_by": {
           "type": "string",
           "title": "cheered_by : employee_id"
+        },
+        "actual_time": {
+          "type": "string",
+          "title": "actual time of the meeting discussed"
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "start time of the meeting"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end time of the meeting"
         }
       }
     },
@@ -15132,6 +15183,28 @@
         }
       },
       "title": "Response for logout"
+    },
+    "fmMeetingTimerUpdateRequest": {
+      "type": "object",
+      "properties": {
+        "meeting_id": {
+          "type": "string",
+          "title": "id of the meeting"
+        },
+        "action": {
+          "type": "string",
+          "title": "timer-action : \"START\" or \"STOP\""
+        }
+      }
+    },
+    "fmMeetingTimerUpdateResponse": {
+      "type": "object",
+      "properties": {
+        "meeting_id": {
+          "type": "string",
+          "title": "id of the updated meeting"
+        }
+      }
     },
     "fmMobTasks": {
       "type": "object",
@@ -17160,6 +17233,14 @@
         "location": {
           "type": "string",
           "title": "location of meeting"
+        },
+        "minutes_by": {
+          "type": "string",
+          "title": "minutes_by : employee_id"
+        },
+        "cheered_by": {
+          "type": "string",
+          "title": "cheered_by : employee_id"
         },
         "deleted_agenda_ids": {
           "type": "array",
