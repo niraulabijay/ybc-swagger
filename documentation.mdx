@@ -456,6 +456,7 @@
     - [DetailMeetingRequest](#fm-DetailMeetingRequest)
     - [DetailMeetingResponse](#fm-DetailMeetingResponse)
     - [EditAgendaViewRequest](#fm-EditAgendaViewRequest)
+    - [EmailCC](#fm-EmailCC)
     - [ListAllCountRequest](#fm-ListAllCountRequest)
     - [ListAllCountResponse](#fm-ListAllCountResponse)
     - [ListAllCountResponse.CountResponse](#fm-ListAllCountResponse-CountResponse)
@@ -7941,6 +7942,7 @@ details of Views within an agenda
 | sender_receiver | [string](#string) |  | to identify whether the individual is a &#39;SENDER&#39; or a &#39;RECEIVER&#39; |
 | sender_email | [string](#string) |  | sender&#39;s email |
 | receiver_email | [string](#string) |  | receiver&#39;s email |
+| cc | [EmailCC](#fm-EmailCC) | repeated | cc of the email |
 
 
 
@@ -7982,6 +7984,7 @@ Meeting creation request
 | location | [string](#string) |  | location of meeting |
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
+| meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
 
 
 
@@ -8105,6 +8108,7 @@ request to get details of meeting by meeting_id
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
+| meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
 | actual_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | actual time of the meeting discussed |
 | start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start time of the meeting |
 | end_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end time of the meeting |
@@ -8126,6 +8130,23 @@ request to get details of meeting by meeting_id
 | meeting_id | [string](#string) |  | id of meeting |
 | agenda_id | [string](#string) |  | id of agenda |
 | description | [string](#string) |  | details |
+
+
+
+
+
+
+<a name="fm-EmailCC"></a>
+
+### EmailCC
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| receiver_email | [string](#string) |  | receiver&#39;s email |
+| receiver_name | [string](#string) |  | receiver&#39;s name |
+| client_id | [string](#string) |  | id of the client |
 
 
 
@@ -8292,6 +8313,7 @@ individual email response
 | sender_email | [string](#string) |  | sender&#39;s email |
 | receiver_email | [string](#string) |  | receiver&#39;s email |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the email was created at |
+| cc | [EmailCC](#fm-EmailCC) | repeated | cc of the email |
 
 
 
@@ -8357,6 +8379,7 @@ individual meeting response
 | status | [string](#string) |  | status of the meeting |
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
+| meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
 
 
 
@@ -8472,6 +8495,7 @@ individual meeting response
 | sender_receiver | [string](#string) |  | to identify whether the individual is a &#39;SENDER&#39; or a &#39;RECEIVER&#39; |
 | sender_email | [string](#string) |  | sender&#39;s email |
 | receiver_email | [string](#string) |  | receiver&#39;s email |
+| cc | [EmailCC](#fm-EmailCC) | repeated | cc of the email |
 
 
 
@@ -8512,6 +8536,7 @@ request to update meeting by meeting_id
 | location | [string](#string) |  | location of meeting |
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
+| meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
 | deleted_agenda_ids | [string](#string) | repeated | deleted_agenda_ids |
 
 
