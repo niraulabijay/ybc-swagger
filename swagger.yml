@@ -13004,6 +13004,14 @@
           "type": "boolean",
           "title": "whether task is vary or not"
         },
+        "is_break": {
+          "type": "boolean",
+          "title": "if break is true or false"
+        },
+        "break_type": {
+          "type": "string",
+          "title": "if break is paid or unpaid"
+        },
         "is_recurrence": {
           "type": "boolean",
           "title": "whether task is recurrence"
@@ -16210,6 +16218,14 @@
           "type": "boolean",
           "title": "flag to confirm if the task is vary or not"
         },
+        "is_break": {
+          "type": "boolean",
+          "title": "to check break, true or false"
+        },
+        "break_type": {
+          "type": "string",
+          "title": "to check break type, paid or unpaid"
+        },
         "is_recurrence": {
           "type": "boolean",
           "title": "wether task is recurrence"
@@ -17747,6 +17763,14 @@
         "is_vary": {
           "type": "boolean",
           "title": "flag to confirm if the task is vary or not"
+        },
+        "is_break": {
+          "type": "boolean",
+          "title": "update break to true or false"
+        },
+        "break_type": {
+          "type": "string",
+          "title": "update break to true or false"
         }
       },
       "title": "Request to update task"
