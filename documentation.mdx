@@ -9624,6 +9624,8 @@ Request to create task
 | organization_id | [string](#string) |  | the organization of the employee |
 | is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
 | is_vary | [bool](#bool) |  | whether task is vary or not |
+| is_break | [bool](#bool) |  | if break is true or false |
+| break_type | [string](#string) |  | if break is paid or unpaid |
 | is_recurrence | [bool](#bool) |  | whether task is recurrence |
 | recurrence | [UpsertRecurrence](#fm-UpsertRecurrence) |  | details of recurrence |
 
@@ -10311,6 +10313,8 @@ Task definition
 | is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
 | approved_correction | [google.protobuf.Duration](#google-protobuf-Duration) |  | approved correction duration of the task |
 | is_vary | [bool](#bool) |  | flag to confirm if the task is vary or not |
+| is_break | [bool](#bool) |  | to check break, true or false |
+| break_type | [string](#string) |  | to check break type, paid or unpaid |
 | is_recurrence | [bool](#bool) |  | wether task is recurrence |
 | recurrence | [RecurrenceDetails](#fm-RecurrenceDetails) |  | details of recurrence |
 | recurrence_parent_task | [string](#string) |  | Id of task from which current task was generated |
@@ -10562,6 +10566,8 @@ Request to update task
 | estimate_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | the estimated time period to complete the task |
 | is_variation | [bool](#bool) |  | flag to confirm if the task is variation or not |
 | is_vary | [bool](#bool) |  | flag to confirm if the task is vary or not |
+| is_break | [bool](#bool) |  | update break to true or false |
+| break_type | [string](#string) |  | update break to true or false |
 
 
 
