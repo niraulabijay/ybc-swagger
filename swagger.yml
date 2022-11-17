@@ -2754,6 +2754,78 @@
         ]
       }
     },
+    "/v1/client/new-mobilization/create": {
+      "post": {
+        "summary": "Create a new mobilization.\nAuthorization scope of `fm.new-mobilization.create` is required.",
+        "operationId": "ClientService_CreateNewMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateNewMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateNewMobilizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/new-mobilization/list": {
+      "get": {
+        "summary": "Return the list of new mobilization visible to the authorized user in descending order.\nAuthorization scope of `fm.new-mobilization.list` is required.",
+        "operationId": "ClientService_ListNewMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListNewMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "filter by client_id (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/set-head-office": {
       "post": {
         "summary": "set a single head office from clients.\nScope of `fm.client.set-headoffice` is required.",
@@ -9730,6 +9802,46 @@
       },
       "title": "individual response"
     },
+    "ListNewMobilizationResponseNewMobilizationList": {
+      "type": "object",
+      "properties": {
+        "new_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the new mobilization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique client id"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "owner": {
+          "type": "string",
+          "title": "owner : employee_id"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the mobilization"
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "start date of the mobilization"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end date of the mobilization"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the mobilization"
+        }
+      }
+    },
     "ListNewStageResponseNewStagesResponse": {
       "type": "object",
       "properties": {
@@ -12700,6 +12812,46 @@
         }
       }
     },
+    "fmCreateNewMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "owner": {
+          "type": "string",
+          "title": "owner : employee_id"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the mobilization"
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "start date of the mobilization"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end date of the mobilization"
+        }
+      }
+    },
+    "fmCreateNewMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "new_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the created mobilization"
+        }
+      }
+    },
     "fmCreateNewStageRequest": {
       "type": "object",
       "properties": {
@@ -15128,6 +15280,18 @@
             "$ref": "#/definitions/ListMobilizationTemplateResponseMobilizationTemplateResponse"
           },
           "title": "list of mobilization templates"
+        }
+      }
+    },
+    "fmListNewMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListNewMobilizationResponseNewMobilizationList"
+          },
+          "title": "response list of new mobilization"
         }
       }
     },
