@@ -175,6 +175,7 @@
     - [DeleteClientAreaRequest](#fm-DeleteClientAreaRequest)
     - [DeleteClientRegionRequest](#fm-DeleteClientRegionRequest)
     - [DeleteMobilizationTemplateRequest](#fm-DeleteMobilizationTemplateRequest)
+    - [DeleteNewMobilizationRequest](#fm-DeleteNewMobilizationRequest)
     - [DeleteNewStageRequest](#fm-DeleteNewStageRequest)
     - [Invoice](#fm-Invoice)
     - [LabourBudget](#fm-LabourBudget)
@@ -259,6 +260,8 @@
     - [UpdateClientResponse](#fm-UpdateClientResponse)
     - [UpdateMobilizationTemplateRequest](#fm-UpdateMobilizationTemplateRequest)
     - [UpdateMobilizationTemplateResponse](#fm-UpdateMobilizationTemplateResponse)
+    - [UpdateNewMobilizationRequest](#fm-UpdateNewMobilizationRequest)
+    - [UpdateNewMobilizationResponse](#fm-UpdateNewMobilizationResponse)
     - [UpdateNewStageRequest](#fm-UpdateNewStageRequest)
     - [UpdateNewStageResponse](#fm-UpdateNewStageResponse)
     - [UpsertCRMMobilizationTaskDateRequest](#fm-UpsertCRMMobilizationTaskDateRequest)
@@ -3509,6 +3512,22 @@ Response for create client requests
 
 
 
+<a name="fm-DeleteNewMobilizationRequest"></a>
+
+### DeleteNewMobilizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| new_mobilization_id | [string](#string) |  | id of the new-mobilization to be deleted |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
 <a name="fm-DeleteNewStageRequest"></a>
 
 ### DeleteNewStageRequest
@@ -4990,6 +5009,41 @@ response for UpdateClientRequest
 
 
 
+<a name="fm-UpdateNewMobilizationRequest"></a>
+
+### UpdateNewMobilizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| new_mobilization_id | [string](#string) |  | id of the new-mobilization to be updated |
+| organization_id | [string](#string) |  | organization id |
+| owner | [string](#string) |  | owner : employee_id |
+| status | [string](#string) |  | status of the mobilization |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date of the mobilization |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date of the mobilization |
+
+
+
+
+
+
+<a name="fm-UpdateNewMobilizationResponse"></a>
+
+### UpdateNewMobilizationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| new_mobilization_id | [string](#string) |  | unique id of the updated new-mobilization |
+
+
+
+
+
+
 <a name="fm-UpdateNewStageRequest"></a>
 
 ### UpdateNewStageRequest
@@ -5201,6 +5255,8 @@ response for UpdateClientRequest
 | DeleteCRMMobilizationTaskDate | [DeleteCRMMobilizationTaskDateRequest](#fm-DeleteCRMMobilizationTaskDateRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete a particular task-date of CRM mobilization-task. Authorization scope of `fm.crm-mobilization-task-date.delete` is required. |
 | CreateNewMobilization | [CreateNewMobilizationRequest](#fm-CreateNewMobilizationRequest) | [CreateNewMobilizationResponse](#fm-CreateNewMobilizationResponse) | Create a new mobilization. Authorization scope of `fm.new-mobilization.create` is required. |
 | ListNewMobilization | [ListNewMobilizationRequest](#fm-ListNewMobilizationRequest) | [ListNewMobilizationResponse](#fm-ListNewMobilizationResponse) | Return the list of new mobilization visible to the authorized user in descending order. Authorization scope of `fm.new-mobilization.list` is required. |
+| UpdateNewMobilization | [UpdateNewMobilizationRequest](#fm-UpdateNewMobilizationRequest) | [UpdateNewMobilizationResponse](#fm-UpdateNewMobilizationResponse) | Updates a particular new-mobilization. Authorization scope of `fm.new-mobilization.update` is required. |
+| DeleteNewMobilization | [DeleteNewMobilizationRequest](#fm-DeleteNewMobilizationRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a particular new-mobilization Authorization scope of `fm.new-mobilization.delete` is required. |
 
  
 
