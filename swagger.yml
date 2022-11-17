@@ -2787,6 +2787,39 @@
         ]
       }
     },
+    "/v1/client/new-mobilization/delete": {
+      "post": {
+        "summary": "Deletes a particular new-mobilization\nAuthorization scope of `fm.new-mobilization.delete` is required.",
+        "operationId": "ClientService_DeleteNewMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteNewMobilizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/new-mobilization/list": {
       "get": {
         "summary": "Return the list of new mobilization visible to the authorized user in descending order.\nAuthorization scope of `fm.new-mobilization.list` is required.",
@@ -2819,6 +2852,39 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/new-mobilization/update": {
+      "patch": {
+        "summary": "Updates a particular new-mobilization.\nAuthorization scope of `fm.new-mobilization.update` is required.",
+        "operationId": "ClientService_UpdateNewMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateNewMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateNewMobilizationRequest"
+            }
           }
         ],
         "tags": [
@@ -13630,6 +13696,19 @@
         }
       }
     },
+    "fmDeleteNewMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "new_mobilization_id": {
+          "type": "string",
+          "title": "id of the new-mobilization to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
     "fmDeleteNewStageRequest": {
       "type": "object",
       "properties": {
@@ -17606,6 +17685,46 @@
         "mobilization_template_id": {
           "type": "string",
           "title": "id of the updated mobilization template"
+        }
+      }
+    },
+    "fmUpdateNewMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "new_mobilization_id": {
+          "type": "string",
+          "title": "id of the new-mobilization to be updated"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "owner": {
+          "type": "string",
+          "title": "owner : employee_id"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the mobilization"
+        },
+        "start_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "start date of the mobilization"
+        },
+        "end_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end date of the mobilization"
+        }
+      }
+    },
+    "fmUpdateNewMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "new_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the updated new-mobilization"
         }
       }
     },
