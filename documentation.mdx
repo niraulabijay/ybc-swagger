@@ -160,6 +160,8 @@
     - [CreateClientResponse](#fm-CreateClientResponse)
     - [CreateMobilizationTemplateRequest](#fm-CreateMobilizationTemplateRequest)
     - [CreateMobilizationTemplateResponse](#fm-CreateMobilizationTemplateResponse)
+    - [CreateNewMobilizationRequest](#fm-CreateNewMobilizationRequest)
+    - [CreateNewMobilizationResponse](#fm-CreateNewMobilizationResponse)
     - [CreateNewStageRequest](#fm-CreateNewStageRequest)
     - [CreateNewStageResponse](#fm-CreateNewStageResponse)
     - [CreateStageRequest](#fm-CreateStageRequest)
@@ -213,6 +215,9 @@
     - [ListMobilizationTemplateRequest](#fm-ListMobilizationTemplateRequest)
     - [ListMobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse)
     - [ListMobilizationTemplateResponse.MobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse-MobilizationTemplateResponse)
+    - [ListNewMobilizationRequest](#fm-ListNewMobilizationRequest)
+    - [ListNewMobilizationResponse](#fm-ListNewMobilizationResponse)
+    - [ListNewMobilizationResponse.NewMobilizationList](#fm-ListNewMobilizationResponse-NewMobilizationList)
     - [ListNewStageRequest](#fm-ListNewStageRequest)
     - [ListNewStageResponse](#fm-ListNewStageResponse)
     - [ListNewStageResponse.NewStagesResponse](#fm-ListNewStageResponse-NewStagesResponse)
@@ -3256,6 +3261,41 @@ Response for create client requests
 
 
 
+<a name="fm-CreateNewMobilizationRequest"></a>
+
+### CreateNewMobilizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | id of the organization |
+| owner | [string](#string) |  | owner : employee_id |
+| status | [string](#string) |  | status of the mobilization |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date of the mobilization |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date of the mobilization |
+
+
+
+
+
+
+<a name="fm-CreateNewMobilizationResponse"></a>
+
+### CreateNewMobilizationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| new_mobilization_id | [string](#string) |  | unique id of the created mobilization |
+
+
+
+
+
+
 <a name="fm-CreateNewStageRequest"></a>
 
 ### CreateNewStageRequest
@@ -4200,6 +4240,59 @@ individual response
 
 
 
+<a name="fm-ListNewMobilizationRequest"></a>
+
+### ListNewMobilizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+| client_id | [string](#string) |  | filter by client_id (optional) |
+
+
+
+
+
+
+<a name="fm-ListNewMobilizationResponse"></a>
+
+### ListNewMobilizationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListNewMobilizationResponse.NewMobilizationList](#fm-ListNewMobilizationResponse-NewMobilizationList) | repeated | response list of new mobilization |
+
+
+
+
+
+
+<a name="fm-ListNewMobilizationResponse-NewMobilizationList"></a>
+
+### ListNewMobilizationResponse.NewMobilizationList
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| new_mobilization_id | [string](#string) |  | unique id of the new mobilization |
+| client_id | [string](#string) |  | unique client id |
+| organization_id | [string](#string) |  | id of the organization |
+| owner | [string](#string) |  | owner : employee_id |
+| status | [string](#string) |  | status of the mobilization |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date of the mobilization |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date of the mobilization |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the mobilization |
+
+
+
+
+
+
 <a name="fm-ListNewStageRequest"></a>
 
 ### ListNewStageRequest
@@ -5106,6 +5199,8 @@ response for UpdateClientRequest
 | DeleteCRMMobilizationTask | [DeleteCRMMobilizationTaskRequest](#fm-DeleteCRMMobilizationTaskRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete a particular task of CRM mobilization. Authorization scope of `fm.crm-mobilization-task.delete` is required. |
 | UpsertCRMMobilizationTaskDate | [UpsertCRMMobilizationTaskDateRequest](#fm-UpsertCRMMobilizationTaskDateRequest) | [UpsertCRMMobilizationTaskDateResponse](#fm-UpsertCRMMobilizationTaskDateResponse) | Updates or creates a crm-mobilization-task date. Authorization scope of `fm.crm-mobilization-task-date.create` is required. |
 | DeleteCRMMobilizationTaskDate | [DeleteCRMMobilizationTaskDateRequest](#fm-DeleteCRMMobilizationTaskDateRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete a particular task-date of CRM mobilization-task. Authorization scope of `fm.crm-mobilization-task-date.delete` is required. |
+| CreateNewMobilization | [CreateNewMobilizationRequest](#fm-CreateNewMobilizationRequest) | [CreateNewMobilizationResponse](#fm-CreateNewMobilizationResponse) | Create a new mobilization. Authorization scope of `fm.new-mobilization.create` is required. |
+| ListNewMobilization | [ListNewMobilizationRequest](#fm-ListNewMobilizationRequest) | [ListNewMobilizationResponse](#fm-ListNewMobilizationResponse) | Return the list of new mobilization visible to the authorized user in descending order. Authorization scope of `fm.new-mobilization.list` is required. |
 
  
 
