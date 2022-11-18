@@ -2459,9 +2459,11 @@ individual response of question of the category
 | organization_id | [string](#string) |  | id of the organization |
 | client_id | [string](#string) |  | id of the client |
 | question | [string](#string) |  | the actual question |
+| answer_type | [string](#string) |  | type of answer allowed |
 | answer | [string](#string) |  | the answer of the particular question |
 | answer_word_count | [int32](#int32) |  | number of words allowed for the answer |
 | approved_by | [string](#string) |  | approved_by : employee_id |
+| approved_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of approval |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the question was created at |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the question |
 
@@ -3061,6 +3063,7 @@ Response for client detail
 | organization_id | [string](#string) |  | id of the organization |
 | question | [string](#string) |  | the actual question that is being created |
 | answer_word_count | [int32](#int32) |  | number of words allowed for the answer to this question |
+| answer_type | [string](#string) |  | type of answer allowed |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the question |
 
 
@@ -4001,9 +4004,11 @@ individual response
 | organization_id | [string](#string) |  | id of the organization |
 | client_id | [string](#string) |  | id of the client |
 | question | [string](#string) |  | the actual question |
+| answer_type | [string](#string) |  | type of answer allowed |
 | answer | [string](#string) |  | the answer of the particular question |
 | answer_word_count | [int32](#int32) |  | number of words allowed for the answer |
 | approved_by | [string](#string) |  | approved_by : employee_id |
+| approved_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of approval |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the question was created at |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the question |
 
@@ -4746,6 +4751,7 @@ individual stage to be updated
 | category_id | [string](#string) |  | id of the category to which the question belongs |
 | organization_id | [string](#string) |  | id of the organization |
 | question | [string](#string) |  | the actual question to be updated |
+| answer_type | [string](#string) |  | type of answer allowed |
 | answer_word_count | [int32](#int32) |  | number of words allowed for the answer to this question |
 | is_update_answer | [bool](#bool) |  | verify if the answer of the particular question is to be updated |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the question |
