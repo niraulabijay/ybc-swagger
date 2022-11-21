@@ -5290,6 +5290,39 @@
         ]
       }
     },
+    "/v1/issue/delete": {
+      "post": {
+        "summary": "Deletes an existing issue.\nAuthorization scope of `fm.issue.delete` is required.",
+        "operationId": "IssueService_DeleteIssue",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteIssueRequest"
+            }
+          }
+        ],
+        "tags": [
+          "IssueService"
+        ]
+      }
+    },
     "/v1/issue/status-update": {
       "patch": {
         "summary": "Updates the status of an issue.\nAuthorization scope of `fm.issue.status-update` is required.",
@@ -5343,25 +5376,18 @@
         },
         "parameters": [
           {
-            "name": "raised_by",
-            "description": "id of the user raising the issue.",
+            "name": "filter.limit",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
-            "name": "assigned_to",
-            "description": "id of the user responsible for solving the issue.",
+            "name": "filter.page",
             "in": "query",
             "required": false,
-            "type": "string"
-          },
-          {
-            "name": "status",
-            "description": "status of the issue.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "type": "integer",
+            "format": "int32"
           },
           {
             "name": "organization_id",
@@ -5378,18 +5404,20 @@
             "type": "string"
           },
           {
-            "name": "filter.limit",
+            "name": "start_date",
+            "description": "start date to filter issues.",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "date-time"
           },
           {
-            "name": "filter.page",
+            "name": "end_date",
+            "description": "end date to filter issues.",
             "in": "query",
             "required": false,
-            "type": "integer",
-            "format": "int32"
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "tags": [
@@ -12736,38 +12764,25 @@
     "fmCreateIssueRequest": {
       "type": "object",
       "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "details": {
+          "type": "string",
+          "title": "details of the issue"
+        },
         "raised_by": {
           "type": "string",
           "title": "id of the user raising the issue"
         },
-        "assigned_to": {
+        "status": {
           "type": "string",
-          "title": "id of the user responsible for solving the issue"
-        },
-        "details": {
-          "type": "string",
-          "title": "details of the isssue"
-        },
-        "deadline": {
-          "type": "string",
-          "format": "date-time",
-          "title": "deadline of solving the issue"
-        },
-        "organization_id": {
-          "type": "string",
-          "title": "unique id of the organization"
-        },
-        "department_id": {
-          "type": "string",
-          "title": "unique id of the department"
-        },
-        "client_id": {
-          "type": "string",
-          "title": "unique id of the client"
-        },
-        "subject": {
-          "type": "string",
-          "title": "subject of the issue"
+          "title": "status of the issue"
         }
       },
       "title": "Create issue request"
@@ -12777,7 +12792,7 @@
       "properties": {
         "issue_id": {
           "type": "string",
-          "title": "unique id of the issue"
+          "title": "unique id of the issue created"
         }
       },
       "title": "Create issue response"
@@ -13710,6 +13725,19 @@
         "client_id": {
           "type": "string",
           "title": "id of the client"
+        }
+      }
+    },
+    "fmDeleteIssueRequest": {
+      "type": "object",
+      "properties": {
+        "issue_id": {
+          "type": "string",
+          "title": "id of the issue to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
         }
       }
     },
@@ -14829,6 +14857,10 @@
         "subject": {
           "type": "string",
           "title": "subject of the issue"
+        },
+        "action_plan": {
+          "type": "string",
+          "title": "action plan of the issue"
         }
       }
     },
@@ -17512,47 +17544,26 @@
     "fmUpdateIssueRequest": {
       "type": "object",
       "properties": {
-        "raised_by": {
+        "issue_id": {
           "type": "string",
-          "title": "id of the user raising the issue"
+          "title": "unique id of the issue"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
         },
         "assigned_to": {
           "type": "string",
           "title": "id of the user responsible for solving the issue"
         },
-        "details": {
+        "action_plan": {
           "type": "string",
-          "title": "details of the isssue"
+          "title": "action plan of the issue"
         },
         "deadline": {
           "type": "string",
           "format": "date-time",
           "title": "deadline of solving the issue"
-        },
-        "organization_id": {
-          "type": "string",
-          "title": "unique id of the organization"
-        },
-        "department_id": {
-          "type": "string",
-          "title": "unique id of the department"
-        },
-        "resolved_at": {
-          "type": "string",
-          "format": "date-time",
-          "title": "resolved date"
-        },
-        "issue_id": {
-          "type": "string",
-          "title": "unique id of the issue"
-        },
-        "client_id": {
-          "type": "string",
-          "title": "unique id of the client"
-        },
-        "subject": {
-          "type": "string",
-          "title": "subject of the issue"
         }
       },
       "title": "Update issue request"
