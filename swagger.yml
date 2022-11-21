@@ -9843,6 +9843,10 @@
         "meeting_type": {
           "type": "string",
           "title": "type of meeting i.e.\"OPEN\" or \"CLOSE\""
+        },
+        "created_by": {
+          "type": "string",
+          "title": "id of employee who created the meeting"
         }
       },
       "title": "individual meeting response"
@@ -12858,6 +12862,10 @@
         "meeting_type": {
           "type": "string",
           "title": "type of meeting i.e.\"OPEN\" or \"CLOSE\""
+        },
+        "created_by": {
+          "type": "string",
+          "title": "id of employee who created the meeting"
         }
       },
       "title": "Meeting creation request"
@@ -13910,6 +13918,10 @@
         "cheered_by": {
           "type": "string",
           "title": "cheered_by : employee_id"
+        },
+        "created_by": {
+          "type": "string",
+          "title": "id of employee who created the meeting"
         },
         "meeting_type": {
           "type": "string",
@@ -17634,6 +17646,10 @@
         "cheered_by": {
           "type": "string",
           "title": "cheered_by : employee_id"
+        },
+        "created_by": {
+          "type": "string",
+          "title": "id of employee who created the meeting"
         },
         "meeting_type": {
           "type": "string",
