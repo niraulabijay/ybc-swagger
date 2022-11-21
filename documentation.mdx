@@ -382,6 +382,7 @@
 - [issue_service.proto](#issue_service-proto)
     - [CreateIssueRequest](#fm-CreateIssueRequest)
     - [CreateIssueResponse](#fm-CreateIssueResponse)
+    - [DeleteIssueRequest](#fm-DeleteIssueRequest)
     - [IssueResponse](#fm-IssueResponse)
     - [ListIssuesRequest](#fm-ListIssuesRequest)
     - [ListIssuesResponse](#fm-ListIssuesResponse)
@@ -6947,14 +6948,11 @@ Create issue request
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | id of the organization |
+| details | [string](#string) |  | details of the issue |
 | raised_by | [string](#string) |  | id of the user raising the issue |
-| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
-| details | [string](#string) |  | details of the isssue |
-| deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of solving the issue |
-| organization_id | [string](#string) |  | unique id of the organization |
-| department_id | [string](#string) |  | unique id of the department |
-| client_id | [string](#string) |  | unique id of the client |
-| subject | [string](#string) |  | subject of the issue |
+| status | [string](#string) |  | status of the issue |
 
 
 
@@ -6969,7 +6967,23 @@ Create issue response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| issue_id | [string](#string) |  | unique id of the issue |
+| issue_id | [string](#string) |  | unique id of the issue created |
+
+
+
+
+
+
+<a name="fm-DeleteIssueRequest"></a>
+
+### DeleteIssueRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| issue_id | [string](#string) |  | id of the issue to be deleted |
+| organization_id | [string](#string) |  | id of the organization |
 
 
 
@@ -6997,6 +7011,7 @@ Create issue response
 | issue_id | [string](#string) |  | unique id of the issue |
 | client_id | [string](#string) |  | unique id of the client |
 | subject | [string](#string) |  | subject of the issue |
+| action_plan | [string](#string) |  | action plan of the issue |
 
 
 
@@ -7011,12 +7026,11 @@ List issues request
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| raised_by | [string](#string) |  | id of the user raising the issue |
-| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
-| status | [string](#string) |  | status of the issue |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter params for list |
 | organization_id | [string](#string) |  | unique id of the organization |
 | client_id | [string](#string) |  | unique id of the client |
-| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter params for list |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter issues |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter issues |
 
 
 
@@ -7047,16 +7061,11 @@ Update issue request
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| raised_by | [string](#string) |  | id of the user raising the issue |
-| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
-| details | [string](#string) |  | details of the isssue |
-| deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of solving the issue |
-| organization_id | [string](#string) |  | unique id of the organization |
-| department_id | [string](#string) |  | unique id of the department |
-| resolved_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | resolved date |
 | issue_id | [string](#string) |  | unique id of the issue |
-| client_id | [string](#string) |  | unique id of the client |
-| subject | [string](#string) |  | subject of the issue |
+| organization_id | [string](#string) |  | id of the organization |
+| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
+| action_plan | [string](#string) |  | action plan of the issue |
+| deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of solving the issue |
 
 
 
@@ -7127,6 +7136,7 @@ service to manage issues
 | ListIssues | [ListIssuesRequest](#fm-ListIssuesRequest) | [ListIssuesResponse](#fm-ListIssuesResponse) | List returns the list of all issues visible to the authroized user in descending date order. Authorization scope of `fm.issue.list` is required. |
 | UpdateIssue | [UpdateIssueRequest](#fm-UpdateIssueRequest) | [UpdateIssueResponse](#fm-UpdateIssueResponse) | Update an existing issue. Authorization scope of `fm.issue.update` is required. |
 | UpdateIssueStatus | [UpdateIssueStatusRequest](#fm-UpdateIssueStatusRequest) | [UpdateIssueStatusResponse](#fm-UpdateIssueStatusResponse) | Updates the status of an issue. Authorization scope of `fm.issue.status-update` is required. |
+| DeleteIssue | [DeleteIssueRequest](#fm-DeleteIssueRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes an existing issue. Authorization scope of `fm.issue.delete` is required. |
 
  
 
