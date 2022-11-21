@@ -8232,6 +8232,7 @@ Meeting creation request
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
 | meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
+| created_by | [string](#string) |  | id of employee who created the meeting |
 
 
 
@@ -8355,6 +8356,7 @@ request to get details of meeting by meeting_id
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
+| created_by | [string](#string) |  | id of employee who created the meeting |
 | meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
 | actual_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | actual time of the meeting discussed |
 | start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start time of the meeting |
@@ -8627,6 +8629,7 @@ individual meeting response
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
 | meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
+| created_by | [string](#string) |  | id of employee who created the meeting |
 
 
 
@@ -8783,6 +8786,7 @@ request to update meeting by meeting_id
 | location | [string](#string) |  | location of meeting |
 | minutes_by | [string](#string) |  | minutes_by : employee_id |
 | cheered_by | [string](#string) |  | cheered_by : employee_id |
+| created_by | [string](#string) |  | id of employee who created the meeting |
 | meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
 | deleted_agenda_ids | [string](#string) | repeated | deleted_agenda_ids |
 
