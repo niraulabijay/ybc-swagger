@@ -614,6 +614,9 @@
     - [UpdateTaskResponse](#fm-UpdateTaskResponse)
     - [UpdateTaskVarytimeRequest](#fm-UpdateTaskVarytimeRequest)
     - [UpdateTaskVarytimeResponse](#fm-UpdateTaskVarytimeResponse)
+    - [UpsertAllTaskCorrectionRequest](#fm-UpsertAllTaskCorrectionRequest)
+    - [UpsertAllTaskCorrectionRequest.AllTasks](#fm-UpsertAllTaskCorrectionRequest-AllTasks)
+    - [UpsertAllTaskCorrectionResponse](#fm-UpsertAllTaskCorrectionResponse)
     - [UpsertRecurrence](#fm-UpsertRecurrence)
     - [UpsertTaskCorrectionRequest](#fm-UpsertTaskCorrectionRequest)
     - [UpsertTaskCorrectionResponse](#fm-UpsertTaskCorrectionResponse)
@@ -10791,6 +10794,57 @@ Response from update task
 
 
 
+<a name="fm-UpsertAllTaskCorrectionRequest"></a>
+
+### UpsertAllTaskCorrectionRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+| approved_by | [string](#string) |  | approved by : employee_id |
+| tasks | [UpsertAllTaskCorrectionRequest.AllTasks](#fm-UpsertAllTaskCorrectionRequest-AllTasks) | repeated | list of tasks |
+
+
+
+
+
+
+<a name="fm-UpsertAllTaskCorrectionRequest-AllTasks"></a>
+
+### UpsertAllTaskCorrectionRequest.AllTasks
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of the task |
+| client_id | [string](#string) |  | id of the client |
+| employee_id | [string](#string) |  | id of the employee |
+| organization_id | [string](#string) |  | id of the organization |
+| task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
+
+
+
+
+
+
+<a name="fm-UpsertAllTaskCorrectionResponse"></a>
+
+### UpsertAllTaskCorrectionResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
 <a name="fm-UpsertRecurrence"></a>
 
 ### UpsertRecurrence
@@ -10875,6 +10929,7 @@ service to manage tasks
 | ListPeriodic | [ListPeriodicTaskRequest](#fm-ListPeriodicTaskRequest) | [ListPeriodicTaskResponse](#fm-ListPeriodicTaskResponse) | List returns the list of periodic task clients visible to the authroized user in descending date order. Authorization scope of `fm.task.periodic` is required. |
 | UpsertTaskCorrection | [UpsertTaskCorrectionRequest](#fm-UpsertTaskCorrectionRequest) | [UpsertTaskCorrectionResponse](#fm-UpsertTaskCorrectionResponse) | UpsertTaskCorrection creates or updates the task correction. Authorization scope of `fm.task.correction` is required. |
 | ApproveTaskCorrection | [ApproveTaskCorrectionRequest](#fm-ApproveTaskCorrectionRequest) | [ApproveTaskCorrectionResponse](#fm-ApproveTaskCorrectionResponse) | ApproveTaskCorrection updates the status of task correction. Authorization scope of `fm.task.correction.approve` is required. |
+| UpsertAllTaskCorrection | [UpsertAllTaskCorrectionRequest](#fm-UpsertAllTaskCorrectionRequest) | [UpsertAllTaskCorrectionResponse](#fm-UpsertAllTaskCorrectionResponse) | Creates new task-corrections or approves the existing ones. Authorization scope of `fm.task.correction.approve-all` is required. |
 | ListCorrection | [ListCorrectionRequest](#fm-ListCorrectionRequest) | [ListCorrectionResponse](#fm-ListCorrectionResponse) | List returns the list of task corrections visible to the authorized user in descending date order. Authorization scope of `fm.task.correction.list` is required. |
 | ChangeTimesheetCorrectionStatus | [ChangeTimesheetCorrectionStatusRequest](#fm-ChangeTimesheetCorrectionStatusRequest) | [ChangeTimesheetCorrectionStatusResponse](#fm-ChangeTimesheetCorrectionStatusResponse) | Change timesheet correction request status |
 | ListTaskGroup | [TaskGroupRequest](#fm-TaskGroupRequest) | [TaskGroupResponse](#fm-TaskGroupResponse) | Task Group Data By Period (One of : Weekly, Monthly, Yearly) Authorization scope of `fm.task.list` is required. |
