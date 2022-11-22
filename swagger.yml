@@ -7055,6 +7055,39 @@
         ]
       }
     },
+    "/v1/task/correction-all": {
+      "post": {
+        "summary": "Creates new task-corrections or approves the existing ones.\nAuthorization scope of `fm.task.correction.approve-all` is required.",
+        "operationId": "TaskService_UpsertAllTaskCorrection",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpsertAllTaskCorrectionResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertAllTaskCorrectionRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
     "/v1/task/detail/{task_id}": {
       "get": {
         "summary": "List returns the list of all tasks visible to the authroized user in\ndescending date order. Authorization scope of `fm.task.detail` is required.",
@@ -10329,6 +10362,32 @@
         "contracted_hours": {
           "type": "string",
           "title": "contracted hours of the employee with the client"
+        }
+      }
+    },
+    "UpsertAllTaskCorrectionRequestAllTasks": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "title": "unique id of the task"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "task_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of the task"
         }
       }
     },
@@ -18198,6 +18257,35 @@
         "agenda_view_id": {
           "type": "string",
           "title": "id of agenda view"
+        }
+      }
+    },
+    "fmUpsertAllTaskCorrectionRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "approved_by": {
+          "type": "string",
+          "title": "approved by : employee_id"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpsertAllTaskCorrectionRequestAllTasks"
+          },
+          "title": "list of tasks"
+        }
+      }
+    },
+    "fmUpsertAllTaskCorrectionResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "action response"
         }
       }
     },
