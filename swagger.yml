@@ -2425,6 +2425,39 @@
         ]
       }
     },
+    "/v1/client/crm-mobilization/create-all": {
+      "post": {
+        "summary": "Create multiple CRM mobilizations.\nAuthorization scope of `fm.crm-mobilization.create` is required.",
+        "operationId": "ClientService_CreateCRMMobilizations",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateCRMMobilizationsResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateCRMMobilizationsRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/crm-mobilization/delete": {
       "post": {
         "summary": "Delete a CRM mobilization.\nAuthorization scope of `fm.crm-mobilization.delete` is required.",
@@ -8707,6 +8740,19 @@
       },
       "title": "Address details"
     },
+    "CreateCRMMobilizationsRequestReqTemplates": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "template_id": {
+          "type": "string",
+          "title": "id of the mobilization template"
+        }
+      }
+    },
     "EmployeeConfidentialDetailResponseConfidentialDetails": {
       "type": "object",
       "properties": {
@@ -12198,6 +12244,31 @@
         "crm_mobilization_id": {
           "type": "string",
           "title": "unique id of the created mobilization"
+        }
+      }
+    },
+    "fmCreateCRMMobilizationsRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateCRMMobilizationsRequestReqTemplates"
+          },
+          "title": "multiple template id requests"
+        }
+      }
+    },
+    "fmCreateCRMMobilizationsResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "action response"
         }
       }
     },
