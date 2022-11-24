@@ -10362,6 +10362,10 @@
           "type": "string",
           "title": "description of the training type"
         },
+        "frequency": {
+          "type": "string",
+          "title": "frequency"
+        },
         "organization_id": {
           "type": "string",
           "title": "organization id"
@@ -13646,6 +13650,10 @@
         "organization_id": {
           "type": "string",
           "title": "organization id"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency"
         }
       }
     },
@@ -18585,6 +18593,10 @@
         "description": {
           "type": "string",
           "title": "description of the training type"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency"
         }
       }
     },
