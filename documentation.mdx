@@ -461,12 +461,15 @@
     - [CreateCallResponse](#fm-CreateCallResponse)
     - [CreateEmailRequest](#fm-CreateEmailRequest)
     - [CreateEmailResponse](#fm-CreateEmailResponse)
+    - [CreateMarketingCampaignRequest](#fm-CreateMarketingCampaignRequest)
+    - [CreateMarketingCampaignResponse](#fm-CreateMarketingCampaignResponse)
     - [CreateMeetingRequest](#fm-CreateMeetingRequest)
     - [CreateMeetingResponse](#fm-CreateMeetingResponse)
     - [DeleteAgendaDecisionObjectionRequest](#fm-DeleteAgendaDecisionObjectionRequest)
     - [DeleteAgendaViewRequest](#fm-DeleteAgendaViewRequest)
     - [DeleteCallRequest](#fm-DeleteCallRequest)
     - [DeleteEmailRequest](#fm-DeleteEmailRequest)
+    - [DeleteMarketingCampaignRequest](#fm-DeleteMarketingCampaignRequest)
     - [DetailMeetingRequest](#fm-DetailMeetingRequest)
     - [DetailMeetingResponse](#fm-DetailMeetingResponse)
     - [EditAgendaViewRequest](#fm-EditAgendaViewRequest)
@@ -480,6 +483,9 @@
     - [ListEmailRequest](#fm-ListEmailRequest)
     - [ListEmailResponse](#fm-ListEmailResponse)
     - [ListEmailResponse.EmailResponse](#fm-ListEmailResponse-EmailResponse)
+    - [ListMarketingCampaignRequest](#fm-ListMarketingCampaignRequest)
+    - [ListMarketingCampaignResponse](#fm-ListMarketingCampaignResponse)
+    - [ListMarketingCampaignResponse.MarketingCampaignResponse](#fm-ListMarketingCampaignResponse-MarketingCampaignResponse)
     - [ListMeetingRequest](#fm-ListMeetingRequest)
     - [ListMeetingResponse](#fm-ListMeetingResponse)
     - [ListMeetingResponse.MeetingResponse](#fm-ListMeetingResponse-MeetingResponse)
@@ -490,6 +496,8 @@
     - [UpdateCallResponse](#fm-UpdateCallResponse)
     - [UpdateEmailRequest](#fm-UpdateEmailRequest)
     - [UpdateEmailResponse](#fm-UpdateEmailResponse)
+    - [UpdateMarketingCampaignRequest](#fm-UpdateMarketingCampaignRequest)
+    - [UpdateMarketingCampaignResponse](#fm-UpdateMarketingCampaignResponse)
     - [UpdateMeetingRequest](#fm-UpdateMeetingRequest)
     - [UpdateMeetingResponse](#fm-UpdateMeetingResponse)
     - [UpdateMeetingStatusRequest](#fm-UpdateMeetingStatusRequest)
@@ -8224,6 +8232,46 @@ details of Views within an agenda
 
 
 
+<a name="fm-CreateMarketingCampaignRequest"></a>
+
+### CreateMarketingCampaignRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | organization id |
+| email_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date on which the email is sent |
+| subject | [string](#string) |  | subject of the email |
+| sender | [string](#string) |  | email sender&#39;s id |
+| receiver | [string](#string) |  | email receiver&#39;s id |
+| message | [string](#string) |  | message details |
+| sender_receiver | [string](#string) |  | to identify whether the individual is a &#39;SENDER&#39; or a &#39;RECEIVER&#39; |
+| sender_email | [string](#string) |  | sender&#39;s email |
+| receiver_email | [string](#string) |  | receiver&#39;s email |
+| cc | [EmailCC](#fm-EmailCC) | repeated | cc of the email |
+
+
+
+
+
+
+<a name="fm-CreateMarketingCampaignResponse"></a>
+
+### CreateMarketingCampaignResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| marketing_campaign_id | [string](#string) |  | unique id of the created marketing-campaign |
+
+
+
+
+
+
 <a name="fm-CreateMeetingRequest"></a>
 
 ### CreateMeetingRequest
@@ -8324,6 +8372,22 @@ Response for create meeting requests
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | email_id | [string](#string) |  | id of the email to be deleted |
+| client_id | [string](#string) |  | id of the client |
+
+
+
+
+
+
+<a name="fm-DeleteMarketingCampaignRequest"></a>
+
+### DeleteMarketingCampaignRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| marketing_campaign_id | [string](#string) |  | id of the marketing-campaign to be deleted |
 | client_id | [string](#string) |  | id of the client |
 
 
@@ -8582,6 +8646,65 @@ individual email response
 
 
 
+<a name="fm-ListMarketingCampaignRequest"></a>
+
+### ListMarketingCampaignRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter for list request |
+| client_id | [string](#string) |  | client id to filter the response |
+| organization_id | [string](#string) |  | organization id |
+
+
+
+
+
+
+<a name="fm-ListMarketingCampaignResponse"></a>
+
+### ListMarketingCampaignResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListMarketingCampaignResponse.MarketingCampaignResponse](#fm-ListMarketingCampaignResponse-MarketingCampaignResponse) | repeated | list of marketing campaign |
+
+
+
+
+
+
+<a name="fm-ListMarketingCampaignResponse-MarketingCampaignResponse"></a>
+
+### ListMarketingCampaignResponse.MarketingCampaignResponse
+individual campaign response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| marketing_campaign_id | [string](#string) |  | unique id of the marketing-campaign |
+| client_id | [string](#string) |  | client id |
+| organization_id | [string](#string) |  | organization id |
+| email_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date on which the email was sent |
+| subject | [string](#string) |  | subject of the email |
+| sender | [string](#string) |  | email sender&#39;s id |
+| receiver | [string](#string) |  | email receiver&#39;s id |
+| message | [string](#string) |  | message details |
+| sender_receiver | [string](#string) |  | to identify whether the individual is a &#39;SENDER&#39; or a &#39;RECEIVER&#39; |
+| sender_email | [string](#string) |  | sender&#39;s email |
+| receiver_email | [string](#string) |  | receiver&#39;s email |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the campaign was created at |
+| cc | [EmailCC](#fm-EmailCC) | repeated | cc of the email |
+
+
+
+
+
+
 <a name="fm-ListMeetingRequest"></a>
 
 ### ListMeetingRequest
@@ -8780,6 +8903,46 @@ individual meeting response
 
 
 
+<a name="fm-UpdateMarketingCampaignRequest"></a>
+
+### UpdateMarketingCampaignRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| marketing_campaign_id | [string](#string) |  | unique id of the marketing-campaign to be updated |
+| client_id | [string](#string) |  | id of the client |
+| email_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date on which the email is sent |
+| subject | [string](#string) |  | subject of the email |
+| sender | [string](#string) |  | email sender id |
+| receiver | [string](#string) |  | email receiver id |
+| message | [string](#string) |  | message details |
+| sender_receiver | [string](#string) |  | to identify whether the individual is a &#39;SENDER&#39; or a &#39;RECEIVER&#39; |
+| sender_email | [string](#string) |  | sender&#39;s email |
+| receiver_email | [string](#string) |  | receiver&#39;s email |
+| cc | [EmailCC](#fm-EmailCC) | repeated | cc of the email |
+
+
+
+
+
+
+<a name="fm-UpdateMarketingCampaignResponse"></a>
+
+### UpdateMarketingCampaignResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| marketing_campaign_id | [string](#string) |  | unique id of the updated campaign |
+
+
+
+
+
+
 <a name="fm-UpdateMeetingRequest"></a>
 
 ### UpdateMeetingRequest
@@ -8938,6 +9101,10 @@ response for UpdateMeetingRequest
 | ListEmail | [ListEmailRequest](#fm-ListEmailRequest) | [ListEmailResponse](#fm-ListEmailResponse) | Returns the list of emails visible to the authorized user in descending order. Authorization scope of `fm.email.list` is required. |
 | UpdateEmail | [UpdateEmailRequest](#fm-UpdateEmailRequest) | [UpdateEmailResponse](#fm-UpdateEmailResponse) | Updates an email. Authorization scope of `fm.email.update` is required. |
 | DeleteEmail | [DeleteEmailRequest](#fm-DeleteEmailRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes an email. Authorization scope of `fm.email.delete` is required. |
+| CreateMarketingCampaign | [CreateMarketingCampaignRequest](#fm-CreateMarketingCampaignRequest) | [CreateMarketingCampaignResponse](#fm-CreateMarketingCampaignResponse) | Creates a marketing-campaign. Authorization scope of `fm.marketing-campaign.create` is required. |
+| UpdateMarketingCampaign | [UpdateMarketingCampaignRequest](#fm-UpdateMarketingCampaignRequest) | [UpdateMarketingCampaignResponse](#fm-UpdateMarketingCampaignResponse) | Updates a marketing-campaign. Authorization scope of `fm.marketing-campaign.update` is required. |
+| ListMarketingCampaign | [ListMarketingCampaignRequest](#fm-ListMarketingCampaignRequest) | [ListMarketingCampaignResponse](#fm-ListMarketingCampaignResponse) | Returns the list of campaigns visible to the authorized user in descending order. Authorization scope of `fm.marketing-campaign.list` is required. |
+| DeleteMarketingCampaign | [DeleteMarketingCampaignRequest](#fm-DeleteMarketingCampaignRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes an existing marketing-campaign. Authorization scope of `fm.marketing-campaign.delete` is required. |
 
  
 
