@@ -148,6 +148,9 @@
     - [CreateBidPlannerStatusResponse](#fm-CreateBidPlannerStatusResponse)
     - [CreateCRMMobilizationRequest](#fm-CreateCRMMobilizationRequest)
     - [CreateCRMMobilizationResponse](#fm-CreateCRMMobilizationResponse)
+    - [CreateCRMMobilizationsRequest](#fm-CreateCRMMobilizationsRequest)
+    - [CreateCRMMobilizationsRequest.ReqTemplates](#fm-CreateCRMMobilizationsRequest-ReqTemplates)
+    - [CreateCRMMobilizationsResponse](#fm-CreateCRMMobilizationsResponse)
     - [CreateCategoryQuestionRequest](#fm-CreateCategoryQuestionRequest)
     - [CreateCategoryQuestionResponse](#fm-CreateCategoryQuestionResponse)
     - [CreateCategoryRequest](#fm-CreateCategoryRequest)
@@ -3062,6 +3065,53 @@ Response for client detail
 
 
 
+<a name="fm-CreateCRMMobilizationsRequest"></a>
+
+### CreateCRMMobilizationsRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+| templates | [CreateCRMMobilizationsRequest.ReqTemplates](#fm-CreateCRMMobilizationsRequest-ReqTemplates) | repeated | multiple template id requests |
+
+
+
+
+
+
+<a name="fm-CreateCRMMobilizationsRequest-ReqTemplates"></a>
+
+### CreateCRMMobilizationsRequest.ReqTemplates
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of the client |
+| template_id | [string](#string) |  | id of the mobilization template |
+
+
+
+
+
+
+<a name="fm-CreateCRMMobilizationsResponse"></a>
+
+### CreateCRMMobilizationsResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
 <a name="fm-CreateCategoryQuestionRequest"></a>
 
 ### CreateCategoryQuestionRequest
@@ -5265,6 +5315,7 @@ response for UpdateClientRequest
 | UpdateMobilizationTemplate | [UpdateMobilizationTemplateRequest](#fm-UpdateMobilizationTemplateRequest) | [UpdateMobilizationTemplateResponse](#fm-UpdateMobilizationTemplateResponse) | Updates a particular template Authorization scope of `fm.mobilization-template.update` is required. |
 | DeleteMobilizationTemplate | [DeleteMobilizationTemplateRequest](#fm-DeleteMobilizationTemplateRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a particular template Authorization scope of `fm.mobilization-template.delete` is required. |
 | CreateCRMMobilization | [CreateCRMMobilizationRequest](#fm-CreateCRMMobilizationRequest) | [CreateCRMMobilizationResponse](#fm-CreateCRMMobilizationResponse) | Create a CRM mobilization. Authorization scope of `fm.crm-mobilization.create` is required. |
+| CreateCRMMobilizations | [CreateCRMMobilizationsRequest](#fm-CreateCRMMobilizationsRequest) | [CreateCRMMobilizationsResponse](#fm-CreateCRMMobilizationsResponse) | Create multiple CRM mobilizations. Authorization scope of `fm.crm-mobilization.create` is required. |
 | ListCRMMobilization | [ListCRMMobilizationRequest](#fm-ListCRMMobilizationRequest) | [ListCRMMobilizationResponse](#fm-ListCRMMobilizationResponse) | Return the list of CRM mobilization visible to the authorized user in descending order. Authorization scope of `fm.crm-mobilization.list` is required. |
 | UpsertCRMMobilizationTask | [UpsertCRMMobilizationTaskRequest](#fm-UpsertCRMMobilizationTaskRequest) | [UpsertCRMMobilizationTaskResponse](#fm-UpsertCRMMobilizationTaskResponse) | Updates or creates a crm-mobilization task. Authorization scope of `fm.crm-mobilization-task.create` is required. |
 | DeleteCRMMobilization | [DeleteCRMMobilizationRequest](#fm-DeleteCRMMobilizationRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete a CRM mobilization. Authorization scope of `fm.crm-mobilization.delete` is required. |
