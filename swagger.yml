@@ -6486,6 +6486,158 @@
         ]
       }
     },
+    "/v1/meeting/marketing-campaign/create": {
+      "post": {
+        "summary": "Creates a marketing-campaign.\nAuthorization scope of `fm.marketing-campaign.create` is required.",
+        "operationId": "MeetingService_CreateMarketingCampaign",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateMarketingCampaignResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateMarketingCampaignRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/marketing-campaign/delete": {
+      "post": {
+        "summary": "Deletes an existing marketing-campaign.\nAuthorization scope of `fm.marketing-campaign.delete` is required.",
+        "operationId": "MeetingService_DeleteMarketingCampaign",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteMarketingCampaignRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/marketing-campaign/list": {
+      "get": {
+        "summary": "Returns the list of campaigns visible to the authorized user in descending order.\nAuthorization scope of `fm.marketing-campaign.list` is required.",
+        "operationId": "MeetingService_ListMarketingCampaign",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListMarketingCampaignResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "client_id",
+            "description": "client id to filter the response.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "organization_id",
+            "description": "organization id.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/marketing-campaign/update": {
+      "patch": {
+        "summary": "Updates a marketing-campaign.\nAuthorization scope of `fm.marketing-campaign.update` is required.",
+        "operationId": "MeetingService_UpdateMarketingCampaign",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateMarketingCampaignResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateMarketingCampaignRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
     "/v1/meeting/{meeting_id}": {
       "get": {
         "summary": "Detail returns the detail of meeting along with its agendas, views, decisions and objections\nAttendees/Creator of meeting can view the details.",
@@ -9837,6 +9989,69 @@
         }
       }
     },
+    "ListMarketingCampaignResponseMarketingCampaignResponse": {
+      "type": "object",
+      "properties": {
+        "marketing_campaign_id": {
+          "type": "string",
+          "title": "unique id of the marketing-campaign"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "client id"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "email_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date on which the email was sent"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of the email"
+        },
+        "sender": {
+          "type": "string",
+          "title": "email sender's id"
+        },
+        "receiver": {
+          "type": "string",
+          "title": "email receiver's id"
+        },
+        "message": {
+          "type": "string",
+          "title": "message details"
+        },
+        "sender_receiver": {
+          "type": "string",
+          "title": "to identify whether the individual is a 'SENDER' or a 'RECEIVER'"
+        },
+        "sender_email": {
+          "type": "string",
+          "title": "sender's email"
+        },
+        "receiver_email": {
+          "type": "string",
+          "title": "receiver's email"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the campaign was created at"
+        },
+        "cc": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmEmailCC"
+          },
+          "title": "cc of the email"
+        }
+      },
+      "title": "individual campaign response"
+    },
     "ListMeetingResponseMeetingResponse": {
       "type": "object",
       "properties": {
@@ -12875,6 +13090,68 @@
         }
       }
     },
+    "fmCreateMarketingCampaignRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "email_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date on which the email is sent"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of the email"
+        },
+        "sender": {
+          "type": "string",
+          "title": "email sender's id"
+        },
+        "receiver": {
+          "type": "string",
+          "title": "email receiver's id"
+        },
+        "message": {
+          "type": "string",
+          "title": "message details"
+        },
+        "sender_receiver": {
+          "type": "string",
+          "title": "to identify whether the individual is a 'SENDER' or a 'RECEIVER'"
+        },
+        "sender_email": {
+          "type": "string",
+          "title": "sender's email"
+        },
+        "receiver_email": {
+          "type": "string",
+          "title": "receiver's email"
+        },
+        "cc": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmEmailCC"
+          },
+          "title": "cc of the email"
+        }
+      }
+    },
+    "fmCreateMarketingCampaignResponse": {
+      "type": "object",
+      "properties": {
+        "marketing_campaign_id": {
+          "type": "string",
+          "title": "unique id of the created marketing-campaign"
+        }
+      }
+    },
     "fmCreateMeetingRequest": {
       "type": "object",
       "properties": {
@@ -13797,6 +14074,19 @@
         "organization_id": {
           "type": "string",
           "title": "id of the organization"
+        }
+      }
+    },
+    "fmDeleteMarketingCampaignRequest": {
+      "type": "object",
+      "properties": {
+        "marketing_campaign_id": {
+          "type": "string",
+          "title": "id of the marketing-campaign to be deleted"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
         }
       }
     },
@@ -15456,6 +15746,18 @@
           "items": {
             "$ref": "#/definitions/ListJobTypeResponseJobTypeResponse"
           }
+        }
+      }
+    },
+    "fmListMarketingCampaignResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListMarketingCampaignResponseMarketingCampaignResponse"
+          },
+          "title": "list of marketing campaign"
         }
       }
     },
@@ -17660,6 +17962,68 @@
         "issue_id": {
           "type": "string",
           "title": "id of the updated issue"
+        }
+      }
+    },
+    "fmUpdateMarketingCampaignRequest": {
+      "type": "object",
+      "properties": {
+        "marketing_campaign_id": {
+          "type": "string",
+          "title": "unique id of the marketing-campaign to be updated"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "email_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date on which the email is sent"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject of the email"
+        },
+        "sender": {
+          "type": "string",
+          "title": "email sender id"
+        },
+        "receiver": {
+          "type": "string",
+          "title": "email receiver id"
+        },
+        "message": {
+          "type": "string",
+          "title": "message details"
+        },
+        "sender_receiver": {
+          "type": "string",
+          "title": "to identify whether the individual is a 'SENDER' or a 'RECEIVER'"
+        },
+        "sender_email": {
+          "type": "string",
+          "title": "sender's email"
+        },
+        "receiver_email": {
+          "type": "string",
+          "title": "receiver's email"
+        },
+        "cc": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmEmailCC"
+          },
+          "title": "cc of the email"
+        }
+      }
+    },
+    "fmUpdateMarketingCampaignResponse": {
+      "type": "object",
+      "properties": {
+        "marketing_campaign_id": {
+          "type": "string",
+          "title": "unique id of the updated campaign"
         }
       }
     },
