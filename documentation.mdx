@@ -7018,6 +7018,9 @@ Create issue request
 | details | [string](#string) |  | details of the issue |
 | raised_by | [string](#string) |  | id of the user raising the issue |
 | status | [string](#string) |  | status of the issue |
+| assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
+| action_plan | [string](#string) |  | action plan of the issue |
+| deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of solving the issue |
 
 
 
@@ -8294,7 +8297,7 @@ details of Views within an agenda
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| client_id | [string](#string) |  | id of the client |
+| title | [string](#string) |  | title of the campaign |
 | organization_id | [string](#string) |  | organization id |
 | email_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date on which the email is sent |
 | subject | [string](#string) |  | subject of the email |
@@ -8442,7 +8445,7 @@ Response for create meeting requests
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | marketing_campaign_id | [string](#string) |  | id of the marketing-campaign to be deleted |
-| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | organization id |
 
 
 
@@ -8741,7 +8744,7 @@ individual campaign response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | marketing_campaign_id | [string](#string) |  | unique id of the marketing-campaign |
-| client_id | [string](#string) |  | client id |
+| title | [string](#string) |  | title of the campaign |
 | organization_id | [string](#string) |  | organization id |
 | email_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date on which the email was sent |
 | subject | [string](#string) |  | subject of the email |
@@ -8966,7 +8969,8 @@ individual meeting response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | marketing_campaign_id | [string](#string) |  | unique id of the marketing-campaign to be updated |
-| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | organization id |
+| title | [string](#string) |  | title of the campaign |
 | email_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date on which the email is sent |
 | subject | [string](#string) |  | subject of the email |
 | sender | [string](#string) |  | email sender id |
