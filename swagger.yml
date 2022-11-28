@@ -10042,9 +10042,9 @@
           "type": "string",
           "title": "unique id of the marketing-campaign"
         },
-        "client_id": {
+        "title": {
           "type": "string",
-          "title": "client id"
+          "title": "title of the campaign"
         },
         "organization_id": {
           "type": "string",
@@ -13132,6 +13132,19 @@
         "status": {
           "type": "string",
           "title": "status of the issue"
+        },
+        "assigned_to": {
+          "type": "string",
+          "title": "id of the user responsible for solving the issue"
+        },
+        "action_plan": {
+          "type": "string",
+          "title": "action plan of the issue"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of solving the issue"
         }
       },
       "title": "Create issue request"
@@ -13168,9 +13181,9 @@
     "fmCreateMarketingCampaignRequest": {
       "type": "object",
       "properties": {
-        "client_id": {
+        "title": {
           "type": "string",
-          "title": "id of the client"
+          "title": "title of the campaign"
         },
         "organization_id": {
           "type": "string",
@@ -14163,9 +14176,9 @@
           "type": "string",
           "title": "id of the marketing-campaign to be deleted"
         },
-        "client_id": {
+        "organization_id": {
           "type": "string",
-          "title": "id of the client"
+          "title": "organization id"
         }
       }
     },
@@ -18051,9 +18064,13 @@
           "type": "string",
           "title": "unique id of the marketing-campaign to be updated"
         },
-        "client_id": {
+        "organization_id": {
           "type": "string",
-          "title": "id of the client"
+          "title": "organization id"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of the campaign"
         },
         "email_date": {
           "type": "string",
