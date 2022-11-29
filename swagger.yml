@@ -2359,6 +2359,39 @@
         ]
       }
     },
+    "/v1/client/crm-mobilization-task/create-all": {
+      "post": {
+        "summary": "Creates or updates multiple CRM mobilization tasks.\nAuthorization scope of `fm.crm-mobilization-task.create` is required.",
+        "operationId": "ClientService_UpsertCRMMobilizationTasks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpsertCRMMobilizationTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertCRMMobilizationTasksRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/crm-mobilization-task/delete": {
       "post": {
         "summary": "Delete a particular task of CRM mobilization.\nAuthorization scope of `fm.crm-mobilization-task.delete` is required.",
@@ -2384,39 +2417,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/fmDeleteCRMMobilizationTaskRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ClientService"
-        ]
-      }
-    },
-    "/v1/client/crm-mobilization/create": {
-      "post": {
-        "summary": "Create a CRM mobilization.\nAuthorization scope of `fm.crm-mobilization.create` is required.",
-        "operationId": "ClientService_CreateCRMMobilization",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmCreateCRMMobilizationResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmCreateCRMMobilizationRequest"
             }
           }
         ],
@@ -11449,6 +11449,10 @@
     "fmCRMMobTasks": {
       "type": "object",
       "properties": {
+        "crm_task_id": {
+          "type": "string",
+          "title": "unique id of the crm_task"
+        },
         "title": {
           "type": "string",
           "title": "title name"
@@ -11482,6 +11486,10 @@
     "fmCRMTaskDates": {
       "type": "object",
       "properties": {
+        "crm_task_date_id": {
+          "type": "string",
+          "title": "unique id of the crm-task-date"
+        },
         "task_date": {
           "type": "string",
           "format": "date-time",
@@ -12215,39 +12223,6 @@
         "bid_planner_status_id": {
           "type": "string",
           "title": "id of the created training type"
-        }
-      }
-    },
-    "fmCreateCRMMobilizationRequest": {
-      "type": "object",
-      "properties": {
-        "client_id": {
-          "type": "string",
-          "title": "id of the client"
-        },
-        "template_id": {
-          "type": "string",
-          "title": "id of the mobilization template"
-        },
-        "organization_id": {
-          "type": "string",
-          "title": "id of the organization"
-        },
-        "tasks": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/fmCRMMobTasks"
-          },
-          "title": "tasks of the mobilization"
-        }
-      }
-    },
-    "fmCreateCRMMobilizationResponse": {
-      "type": "object",
-      "properties": {
-        "crm_mobilization_id": {
-          "type": "string",
-          "title": "unique id of the created mobilization"
         }
       }
     },
@@ -18844,6 +18819,35 @@
         "crm_task_id": {
           "type": "string",
           "title": "unique id of the crm mobilization task"
+        }
+      }
+    },
+    "fmUpsertCRMMobilizationTasksRequest": {
+      "type": "object",
+      "properties": {
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the crm mobilization"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmCRMMobTasks"
+          },
+          "title": "tasks of the mobilization"
+        }
+      }
+    },
+    "fmUpsertCRMMobilizationTasksResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "action response"
         }
       }
     },
