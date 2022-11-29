@@ -146,8 +146,6 @@
     - [CreateBidPlannerResponse](#fm-CreateBidPlannerResponse)
     - [CreateBidPlannerStatusRequest](#fm-CreateBidPlannerStatusRequest)
     - [CreateBidPlannerStatusResponse](#fm-CreateBidPlannerStatusResponse)
-    - [CreateCRMMobilizationRequest](#fm-CreateCRMMobilizationRequest)
-    - [CreateCRMMobilizationResponse](#fm-CreateCRMMobilizationResponse)
     - [CreateCRMMobilizationsRequest](#fm-CreateCRMMobilizationsRequest)
     - [CreateCRMMobilizationsRequest.ReqTemplates](#fm-CreateCRMMobilizationsRequest-ReqTemplates)
     - [CreateCRMMobilizationsResponse](#fm-CreateCRMMobilizationsResponse)
@@ -271,6 +269,8 @@
     - [UpsertCRMMobilizationTaskDateResponse](#fm-UpsertCRMMobilizationTaskDateResponse)
     - [UpsertCRMMobilizationTaskRequest](#fm-UpsertCRMMobilizationTaskRequest)
     - [UpsertCRMMobilizationTaskResponse](#fm-UpsertCRMMobilizationTaskResponse)
+    - [UpsertCRMMobilizationTasksRequest](#fm-UpsertCRMMobilizationTasksRequest)
+    - [UpsertCRMMobilizationTasksResponse](#fm-UpsertCRMMobilizationTasksResponse)
     - [UpsertTenderStatusRequest](#fm-UpsertTenderStatusRequest)
     - [UpsertTenderStatusResponse](#fm-UpsertTenderStatusResponse)
   
@@ -2547,6 +2547,7 @@ individual response of question of the category
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| crm_task_id | [string](#string) |  | unique id of the crm_task |
 | title | [string](#string) |  | title name |
 | task_owner | [string](#string) |  | task_owner : employee_id |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the task |
@@ -2567,6 +2568,7 @@ individual response of question of the category
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| crm_task_date_id | [string](#string) |  | unique id of the crm-task-date |
 | task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | task date |
 | status | [string](#string) |  | status of the task date |
 
@@ -3026,39 +3028,6 @@ Response for client detail
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | bid_planner_status_id | [string](#string) |  | id of the created training type |
-
-
-
-
-
-
-<a name="fm-CreateCRMMobilizationRequest"></a>
-
-### CreateCRMMobilizationRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| client_id | [string](#string) |  | id of the client |
-| template_id | [string](#string) |  | id of the mobilization template |
-| organization_id | [string](#string) |  | id of the organization |
-| tasks | [CRMMobTasks](#fm-CRMMobTasks) | repeated | tasks of the mobilization |
-
-
-
-
-
-
-<a name="fm-CreateCRMMobilizationResponse"></a>
-
-### CreateCRMMobilizationResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| crm_mobilization_id | [string](#string) |  | unique id of the created mobilization |
 
 
 
@@ -5216,6 +5185,38 @@ response for UpdateClientRequest
 
 
 
+<a name="fm-UpsertCRMMobilizationTasksRequest"></a>
+
+### UpsertCRMMobilizationTasksRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crm_mobilization_id | [string](#string) |  | unique id of the crm mobilization |
+| organization_id | [string](#string) |  | id of the organization |
+| tasks | [CRMMobTasks](#fm-CRMMobTasks) | repeated | tasks of the mobilization |
+
+
+
+
+
+
+<a name="fm-UpsertCRMMobilizationTasksResponse"></a>
+
+### UpsertCRMMobilizationTasksResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
 <a name="fm-UpsertTenderStatusRequest"></a>
 
 ### UpsertTenderStatusRequest
@@ -5314,8 +5315,8 @@ response for UpdateClientRequest
 | ListMobilizationTemplate | [ListMobilizationTemplateRequest](#fm-ListMobilizationTemplateRequest) | [ListMobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse) | Returns the list of mobilization templates visible to the authorized user in descending order. Authorization scope of `fm.mobilization-template.list` is required. |
 | UpdateMobilizationTemplate | [UpdateMobilizationTemplateRequest](#fm-UpdateMobilizationTemplateRequest) | [UpdateMobilizationTemplateResponse](#fm-UpdateMobilizationTemplateResponse) | Updates a particular template Authorization scope of `fm.mobilization-template.update` is required. |
 | DeleteMobilizationTemplate | [DeleteMobilizationTemplateRequest](#fm-DeleteMobilizationTemplateRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a particular template Authorization scope of `fm.mobilization-template.delete` is required. |
-| CreateCRMMobilization | [CreateCRMMobilizationRequest](#fm-CreateCRMMobilizationRequest) | [CreateCRMMobilizationResponse](#fm-CreateCRMMobilizationResponse) | Create a CRM mobilization. Authorization scope of `fm.crm-mobilization.create` is required. |
 | CreateCRMMobilizations | [CreateCRMMobilizationsRequest](#fm-CreateCRMMobilizationsRequest) | [CreateCRMMobilizationsResponse](#fm-CreateCRMMobilizationsResponse) | Create multiple CRM mobilizations. Authorization scope of `fm.crm-mobilization.create` is required. |
+| UpsertCRMMobilizationTasks | [UpsertCRMMobilizationTasksRequest](#fm-UpsertCRMMobilizationTasksRequest) | [UpsertCRMMobilizationTasksResponse](#fm-UpsertCRMMobilizationTasksResponse) | Creates or updates multiple CRM mobilization tasks. Authorization scope of `fm.crm-mobilization-task.create` is required. |
 | ListCRMMobilization | [ListCRMMobilizationRequest](#fm-ListCRMMobilizationRequest) | [ListCRMMobilizationResponse](#fm-ListCRMMobilizationResponse) | Return the list of CRM mobilization visible to the authorized user in descending order. Authorization scope of `fm.crm-mobilization.list` is required. |
 | UpsertCRMMobilizationTask | [UpsertCRMMobilizationTaskRequest](#fm-UpsertCRMMobilizationTaskRequest) | [UpsertCRMMobilizationTaskResponse](#fm-UpsertCRMMobilizationTaskResponse) | Updates or creates a crm-mobilization task. Authorization scope of `fm.crm-mobilization-task.create` is required. |
 | DeleteCRMMobilization | [DeleteCRMMobilizationRequest](#fm-DeleteCRMMobilizationRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete a CRM mobilization. Authorization scope of `fm.crm-mobilization.delete` is required. |
