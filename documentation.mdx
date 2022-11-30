@@ -7018,10 +7018,11 @@ Create issue request
 | organization_id | [string](#string) |  | id of the organization |
 | details | [string](#string) |  | details of the issue |
 | raised_by | [string](#string) |  | id of the user raising the issue |
-| status | [string](#string) |  | status of the issue |
+| employee_id | [string](#string) |  | id of the employee |
 | assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
 | action_plan | [string](#string) |  | action plan of the issue |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of solving the issue |
+| issue_type | [string](#string) |  | type of the issue : CLIENT, EMPLOYEE, OFFICE, OTHER, NA |
 
 
 
@@ -7067,7 +7068,7 @@ Create issue response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| raised_by | [string](#string) |  | id of the user raising the issue |
+| issue_id | [string](#string) |  | unique id of the issue |
 | assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
 | details | [string](#string) |  | details of the isssue |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of solving the issue |
@@ -7077,10 +7078,12 @@ Create issue response
 | resolved_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | resolved date |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of issue creation |
 | updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of issue updated |
-| issue_id | [string](#string) |  | unique id of the issue |
+| raised_by | [string](#string) |  | id of the user raising the issue |
 | client_id | [string](#string) |  | unique id of the client |
 | subject | [string](#string) |  | subject of the issue |
 | action_plan | [string](#string) |  | action plan of the issue |
+| employee_id | [string](#string) |  | id of the employee |
+| issue_type | [string](#string) |  | type of issue |
 
 
 
@@ -7097,7 +7100,9 @@ List issues request
 | ----- | ---- | ----- | ----------- |
 | filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter params for list |
 | organization_id | [string](#string) |  | unique id of the organization |
-| client_id | [string](#string) |  | unique id of the client |
+| client_id | [string](#string) |  | unique id of the client (optional) |
+| employee_id | [string](#string) |  | id of the employee (optional) |
+| issue_type | [string](#string) |  | type of issue |
 | start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter issues |
 | end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter issues |
 
@@ -7132,6 +7137,7 @@ Update issue request
 | ----- | ---- | ----- | ----------- |
 | issue_id | [string](#string) |  | unique id of the issue |
 | organization_id | [string](#string) |  | id of the organization |
+| details | [string](#string) |  | details of the issue |
 | assigned_to | [string](#string) |  | id of the user responsible for solving the issue |
 | action_plan | [string](#string) |  | action plan of the issue |
 | deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of solving the issue |
@@ -7166,7 +7172,7 @@ Update issue response
 | ----- | ---- | ----- | ----------- |
 | issue_id | [string](#string) |  | id of the issue whose status is to be updated |
 | organization_id | [string](#string) |  | id of the organization to which the issue belongs |
-| status | [string](#string) |  | status of the issue after updated |
+| status | [string](#string) |  | status of the issue i.e. PENDING, COMPLETED, INPROGRESS |
 
 
 
