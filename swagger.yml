@@ -5431,7 +5431,21 @@
           },
           {
             "name": "client_id",
-            "description": "unique id of the client.",
+            "description": "unique id of the client (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "employee_id",
+            "description": "id of the employee (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "issue_type",
+            "description": "type of issue.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -13108,9 +13122,9 @@
           "type": "string",
           "title": "id of the user raising the issue"
         },
-        "status": {
+        "employee_id": {
           "type": "string",
-          "title": "status of the issue"
+          "title": "id of the employee"
         },
         "assigned_to": {
           "type": "string",
@@ -13124,6 +13138,10 @@
           "type": "string",
           "format": "date-time",
           "title": "deadline of solving the issue"
+        },
+        "issue_type": {
+          "type": "string",
+          "title": "type of the issue : CLIENT, EMPLOYEE, OFFICE, OTHER, NA"
         }
       },
       "title": "Create issue request"
@@ -15222,9 +15240,9 @@
     "fmIssueResponse": {
       "type": "object",
       "properties": {
-        "raised_by": {
+        "issue_id": {
           "type": "string",
-          "title": "id of the user raising the issue"
+          "title": "unique id of the issue"
         },
         "assigned_to": {
           "type": "string",
@@ -15266,9 +15284,9 @@
           "format": "date-time",
           "title": "date of issue updated"
         },
-        "issue_id": {
+        "raised_by": {
           "type": "string",
-          "title": "unique id of the issue"
+          "title": "id of the user raising the issue"
         },
         "client_id": {
           "type": "string",
@@ -15281,6 +15299,14 @@
         "action_plan": {
           "type": "string",
           "title": "action plan of the issue"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "issue_type": {
+          "type": "string",
+          "title": "type of issue"
         }
       }
     },
@@ -17984,6 +18010,10 @@
           "type": "string",
           "title": "id of the organization"
         },
+        "details": {
+          "type": "string",
+          "title": "details of the issue"
+        },
         "assigned_to": {
           "type": "string",
           "title": "id of the user responsible for solving the issue"
@@ -18023,7 +18053,7 @@
         },
         "status": {
           "type": "string",
-          "title": "status of the issue after updated"
+          "title": "status of the issue i.e. PENDING, COMPLETED, INPROGRESS"
         }
       }
     },
