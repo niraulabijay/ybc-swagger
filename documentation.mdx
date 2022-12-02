@@ -185,6 +185,7 @@
     - [DeleteMobilizationTemplateRequest](#fm-DeleteMobilizationTemplateRequest)
     - [DeleteNewMobilizationRequest](#fm-DeleteNewMobilizationRequest)
     - [DeleteNewStageRequest](#fm-DeleteNewStageRequest)
+    - [DeleteTupeRequest](#fm-DeleteTupeRequest)
     - [Invoice](#fm-Invoice)
     - [JobDates](#fm-JobDates)
     - [JobDetails](#fm-JobDetails)
@@ -3723,6 +3724,22 @@ Response for create client requests
 
 
 
+<a name="fm-DeleteTupeRequest"></a>
+
+### DeleteTupeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tupe_id | [string](#string) |  | id of the tupe to be deleted |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
 <a name="fm-Invoice"></a>
 
 ### Invoice
@@ -5650,6 +5667,7 @@ response for UpdateClientRequest
 | CreateTupe | [CreateTupeRequest](#fm-CreateTupeRequest) | [CreateTupeResponse](#fm-CreateTupeResponse) | Creates a tupe. Authorization scope of `fm.tupe.create` is required. |
 | ListTupe | [ListTupeRequest](#fm-ListTupeRequest) | [ListTupeResponse](#fm-ListTupeResponse) | Returns the list of tupe visible to the authorized user in descending order. Authorization scope of `fm.tupe.list` is required. |
 | UpdateTupe | [UpdateTupeRequest](#fm-UpdateTupeRequest) | [UpdateTupeResponse](#fm-UpdateTupeResponse) | Updates an existing tupe. Authorization scope of `fm.tupe.update` is required. |
+| DeleteTupe | [DeleteTupeRequest](#fm-DeleteTupeRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes an existing tupe. Authorization scope of `fm.tupe.delete` is required. |
 
  
 
