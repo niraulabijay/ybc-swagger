@@ -2425,6 +2425,39 @@
         ]
       }
     },
+    "/v1/client/crm-mobilization/create": {
+      "post": {
+        "summary": "Create a CRM mobilization.\nAuthorization scope of `fm.crm-mobilization.create` is required.",
+        "operationId": "ClientService_CreateCRMMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateCRMMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateCRMMobilizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/crm-mobilization/create-all": {
       "post": {
         "summary": "Create multiple CRM mobilizations.\nAuthorization scope of `fm.crm-mobilization.create` is required.",
@@ -2822,7 +2855,7 @@
     },
     "/v1/client/new-mobilization/delete": {
       "post": {
-        "summary": "Deletes a particular new-mobilization\nAuthorization scope of `fm.new-mobilization.delete` is required.",
+        "summary": "Deletes a particular new-mobilization.\nAuthorization scope of `fm.new-mobilization.delete` is required.",
         "operationId": "ClientService_DeleteNewMobilization",
         "responses": {
           "200": {
@@ -3205,6 +3238,125 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/tupe/create": {
+      "post": {
+        "summary": "Creates a tupe.\nAuthorization scope of `fm.tupe.create` is required.",
+        "operationId": "ClientService_CreateTupe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateTupeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateTupeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/tupe/list": {
+      "get": {
+        "summary": "Returns the list of tupe visible to the authorized user in descending order.\nAuthorization scope of `fm.tupe.list` is required.",
+        "operationId": "ClientService_ListTupe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListTupeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "filter by client id (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/tupe/update": {
+      "patch": {
+        "summary": "Updates an existing tupe.\nAuthorization scope of `fm.tupe.update` is required.",
+        "operationId": "ClientService_UpdateTupe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateTupeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateTupeRequest"
+            }
           }
         ],
         "tags": [
@@ -10441,6 +10593,66 @@
         }
       }
     },
+    "ListTupeResponseTupeResponse": {
+      "type": "object",
+      "properties": {
+        "tupe_id": {
+          "type": "string",
+          "title": "unique id of the tupe"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "job_detail": {
+          "$ref": "#/definitions/fmJobDetails",
+          "title": "details about the job"
+        },
+        "job_dates": {
+          "$ref": "#/definitions/fmJobDates",
+          "title": "details about job dates"
+        },
+        "age_range": {
+          "type": "string",
+          "title": "age range"
+        },
+        "holiday_entitlement_days": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of holidays entitled"
+        },
+        "employee_notice_period": {
+          "type": "string",
+          "title": "notice period for employee"
+        },
+        "employer_notice_period": {
+          "type": "string",
+          "title": "notice period for employer"
+        },
+        "records_detail": {
+          "$ref": "#/definitions/fmRecords",
+          "title": "details about different kinds of records"
+        },
+        "pension_detail": {
+          "$ref": "#/definitions/fmPensionDetails",
+          "title": "details about pension"
+        },
+        "benefits_detail": {
+          "$ref": "#/definitions/fmBenefits",
+          "title": "details about benefits"
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the tupe"
+        }
+      },
+      "title": "individual tupe response"
+    },
     "RecurrenceTypeDetailsMonthlyWeekDetails": {
       "type": "object",
       "properties": {
@@ -11460,6 +11672,49 @@
       },
       "title": "Bank accounts details collection"
     },
+    "fmBenefits": {
+      "type": "object",
+      "properties": {
+        "bonus_enhancement": {
+          "type": "boolean",
+          "title": "if there is any kind of bonus/enhancement"
+        },
+        "added_benefits": {
+          "type": "string",
+          "title": "added benefits"
+        },
+        "other_benefits": {
+          "type": "string",
+          "title": "other kind of benefits"
+        },
+        "sick_pay_claim": {
+          "type": "boolean",
+          "title": "whether sick pay claim is possible or not"
+        },
+        "sick_pay_claim_details": {
+          "type": "string",
+          "title": "details of sick pay claim"
+        },
+        "maternity_paternity_eligibility": {
+          "type": "string",
+          "title": "maternity/paternity eligibility"
+        }
+      }
+    },
+    "fmCRMDates": {
+      "type": "object",
+      "properties": {
+        "task_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "task date"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the task date"
+        }
+      }
+    },
     "fmCRMMobTasks": {
       "type": "object",
       "properties": {
@@ -11512,6 +11767,39 @@
         "status": {
           "type": "string",
           "title": "status of the task date"
+        }
+      }
+    },
+    "fmCRMTasks": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "title name"
+        },
+        "task_owner": {
+          "type": "string",
+          "title": "task_owner : employee_id"
+        },
+        "deadline": {
+          "type": "string",
+          "format": "date-time",
+          "title": "deadline of the task"
+        },
+        "task_detail": {
+          "type": "string",
+          "title": "task detail"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the task"
+        },
+        "task_dates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmCRMDates"
+          },
+          "title": "dates of the task"
         }
       }
     },
@@ -12237,6 +12525,39 @@
         "bid_planner_status_id": {
           "type": "string",
           "title": "id of the created training type"
+        }
+      }
+    },
+    "fmCreateCRMMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "template_id": {
+          "type": "string",
+          "title": "id of the mobilization template"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmCRMTasks"
+          },
+          "title": "tasks of the mobilization"
+        }
+      }
+    },
+    "fmCreateCRMMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "crm_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the created mobilization"
         }
       }
     },
@@ -13794,6 +14115,65 @@
         }
       }
     },
+    "fmCreateTupeRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "job_detail": {
+          "$ref": "#/definitions/fmJobDetails",
+          "title": "details about the job"
+        },
+        "job_dates": {
+          "$ref": "#/definitions/fmJobDates",
+          "title": "details about job dates"
+        },
+        "age_range": {
+          "type": "string",
+          "title": "age range"
+        },
+        "holiday_entitlement_days": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of holidays entitled"
+        },
+        "employee_notice_period": {
+          "type": "string",
+          "title": "notice period for employee"
+        },
+        "employer_notice_period": {
+          "type": "string",
+          "title": "notice period for employer"
+        },
+        "records_detail": {
+          "$ref": "#/definitions/fmRecords",
+          "title": "details about different kinds of records"
+        },
+        "pension_detail": {
+          "$ref": "#/definitions/fmPensionDetails",
+          "title": "details about pension"
+        },
+        "benefits_detail": {
+          "$ref": "#/definitions/fmBenefits",
+          "title": "details about benefits"
+        }
+      }
+    },
+    "fmCreateTupeResponse": {
+      "type": "object",
+      "properties": {
+        "tupe_id": {
+          "type": "string",
+          "title": "unique id of the created tupe"
+        }
+      }
+    },
     "fmCreateUserOnEmployeeCreateRequest": {
       "type": "object",
       "properties": {
@@ -15310,6 +15690,58 @@
         }
       }
     },
+    "fmJobDates": {
+      "type": "object",
+      "properties": {
+        "job_start_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "start date of the job"
+        },
+        "job_end_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end date of the job"
+        }
+      }
+    },
+    "fmJobDetails": {
+      "type": "object",
+      "properties": {
+        "job_title": {
+          "type": "string",
+          "title": "title of the job"
+        },
+        "hours_per_week": {
+          "type": "number",
+          "format": "float",
+          "title": "working hours per week"
+        },
+        "contract_working_weeks": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of working weeks based on contract"
+        },
+        "hours_spent": {
+          "type": "number",
+          "format": "float",
+          "title": "percentage of hours spent"
+        },
+        "hourly_pay_rate": {
+          "type": "number",
+          "format": "float",
+          "title": "hourly pay rate"
+        },
+        "contract_type": {
+          "type": "string",
+          "title": "type of contract"
+        },
+        "type": {
+          "type": "string",
+          "title": "type"
+        }
+      }
+    },
     "fmLeadClientDetail": {
       "type": "object",
       "properties": {
@@ -16101,6 +16533,18 @@
         }
       }
     },
+    "fmListTupeResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListTupeResponseTupeResponse"
+          },
+          "title": "lists of tupe"
+        }
+      }
+    },
     "fmLoginRequest": {
       "type": "object",
       "properties": {
@@ -16499,6 +16943,59 @@
         "recurrence": {
           "$ref": "#/definitions/fmRecurrenceDetails",
           "title": "details of recurrence"
+        }
+      }
+    },
+    "fmPensionDetails": {
+      "type": "object",
+      "properties": {
+        "pension_eligibility": {
+          "type": "boolean",
+          "title": "whether eligible for pension or not"
+        },
+        "is_pension_b_on_final_salary": {
+          "type": "boolean",
+          "title": "whether pension is based on final salary or not"
+        },
+        "is_pension_b_on_pension_scheme": {
+          "type": "boolean",
+          "title": "whether pension is based on pension scheme or not"
+        },
+        "is_pensionable_service": {
+          "type": "boolean",
+          "title": "whether the service is pensionable or not"
+        }
+      }
+    },
+    "fmRecords": {
+      "type": "object",
+      "properties": {
+        "employee_contribution": {
+          "type": "number",
+          "format": "float",
+          "title": "percentage of employee contribution"
+        },
+        "employer_contribution": {
+          "type": "number",
+          "format": "float",
+          "title": "percentage of employer contribution"
+        },
+        "sickness_record": {
+          "type": "boolean",
+          "title": "whether any kind of sickness has been recorded over the last 12 months or not"
+        },
+        "legal_action_taken": {
+          "type": "boolean",
+          "title": "if any kind of legal action is taken over the last 2 years"
+        },
+        "disciplinary_and_grievance": {
+          "type": "boolean",
+          "title": "if there is any kind of disciplinary and grievance procedure taken"
+        },
+        "holiday_taken_days": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of holidays taken"
         }
       }
     },
@@ -18703,6 +19200,65 @@
         "training_type_id": {
           "type": "string",
           "title": "id of the updated training type"
+        }
+      }
+    },
+    "fmUpdateTupeRequest": {
+      "type": "object",
+      "properties": {
+        "tupe_id": {
+          "type": "string",
+          "title": "unique id of the tupe to be updated"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "job_detail": {
+          "$ref": "#/definitions/fmJobDetails",
+          "title": "details about the job"
+        },
+        "job_dates": {
+          "$ref": "#/definitions/fmJobDates",
+          "title": "details about job dates"
+        },
+        "age_range": {
+          "type": "string",
+          "title": "age range"
+        },
+        "holiday_entitlement_days": {
+          "type": "integer",
+          "format": "int32",
+          "title": "number of holidays entitled"
+        },
+        "employee_notice_period": {
+          "type": "string",
+          "title": "notice period for employee"
+        },
+        "employer_notice_period": {
+          "type": "string",
+          "title": "notice period for employer"
+        },
+        "records_detail": {
+          "$ref": "#/definitions/fmRecords",
+          "title": "details about different kinds of records"
+        },
+        "pension_detail": {
+          "$ref": "#/definitions/fmPensionDetails",
+          "title": "details about pension"
+        },
+        "benefits_detail": {
+          "$ref": "#/definitions/fmBenefits",
+          "title": "details about benefits"
+        }
+      }
+    },
+    "fmUpdateTupeResponse": {
+      "type": "object",
+      "properties": {
+        "tupe_id": {
+          "type": "string",
+          "title": "unique id of the updated tupe"
         }
       }
     },
