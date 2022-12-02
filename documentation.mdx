@@ -117,9 +117,12 @@
     - [AllCategoryQuestionsResponse](#fm-AllCategoryQuestionsResponse)
     - [Area](#fm-Area)
     - [BasicDetails](#fm-BasicDetails)
+    - [Benefits](#fm-Benefits)
     - [Budget](#fm-Budget)
+    - [CRMDates](#fm-CRMDates)
     - [CRMMobTasks](#fm-CRMMobTasks)
     - [CRMTaskDates](#fm-CRMTaskDates)
+    - [CRMTasks](#fm-CRMTasks)
     - [ClientAddAttachmentRequest](#fm-ClientAddAttachmentRequest)
     - [ClientAddAttachmentResponse](#fm-ClientAddAttachmentResponse)
     - [ClientChangeStatusRequest](#fm-ClientChangeStatusRequest)
@@ -146,6 +149,8 @@
     - [CreateBidPlannerResponse](#fm-CreateBidPlannerResponse)
     - [CreateBidPlannerStatusRequest](#fm-CreateBidPlannerStatusRequest)
     - [CreateBidPlannerStatusResponse](#fm-CreateBidPlannerStatusResponse)
+    - [CreateCRMMobilizationRequest](#fm-CreateCRMMobilizationRequest)
+    - [CreateCRMMobilizationResponse](#fm-CreateCRMMobilizationResponse)
     - [CreateCRMMobilizationsRequest](#fm-CreateCRMMobilizationsRequest)
     - [CreateCRMMobilizationsRequest.ReqTemplates](#fm-CreateCRMMobilizationsRequest-ReqTemplates)
     - [CreateCRMMobilizationsResponse](#fm-CreateCRMMobilizationsResponse)
@@ -166,6 +171,8 @@
     - [CreateNewStageRequest](#fm-CreateNewStageRequest)
     - [CreateNewStageResponse](#fm-CreateNewStageResponse)
     - [CreateStageRequest](#fm-CreateStageRequest)
+    - [CreateTupeRequest](#fm-CreateTupeRequest)
+    - [CreateTupeResponse](#fm-CreateTupeResponse)
     - [DeleteAppointmentRequest](#fm-DeleteAppointmentRequest)
     - [DeleteBidPlannerStatusRequest](#fm-DeleteBidPlannerStatusRequest)
     - [DeleteCRMMobilizationRequest](#fm-DeleteCRMMobilizationRequest)
@@ -179,6 +186,8 @@
     - [DeleteNewMobilizationRequest](#fm-DeleteNewMobilizationRequest)
     - [DeleteNewStageRequest](#fm-DeleteNewStageRequest)
     - [Invoice](#fm-Invoice)
+    - [JobDates](#fm-JobDates)
+    - [JobDetails](#fm-JobDetails)
     - [LabourBudget](#fm-LabourBudget)
     - [LeadClientDetail](#fm-LeadClientDetail)
     - [LeadClientDetailUpsert](#fm-LeadClientDetailUpsert)
@@ -226,10 +235,15 @@
     - [ListTenderStatusRequest](#fm-ListTenderStatusRequest)
     - [ListTenderStatusResponse](#fm-ListTenderStatusResponse)
     - [ListTenderStatusResponse.TenderStatusResponse](#fm-ListTenderStatusResponse-TenderStatusResponse)
+    - [ListTupeRequest](#fm-ListTupeRequest)
+    - [ListTupeResponse](#fm-ListTupeResponse)
+    - [ListTupeResponse.TupeResponse](#fm-ListTupeResponse-TupeResponse)
     - [MobilizationPrincipal](#fm-MobilizationPrincipal)
     - [MobilizationTasks](#fm-MobilizationTasks)
+    - [PensionDetails](#fm-PensionDetails)
     - [PeriodicBudget](#fm-PeriodicBudget)
     - [PeriodicBudget.PBudget](#fm-PeriodicBudget-PBudget)
+    - [Records](#fm-Records)
     - [Region](#fm-Region)
     - [Sector](#fm-Sector)
     - [StageStatusChangeRequest](#fm-StageStatusChangeRequest)
@@ -265,6 +279,8 @@
     - [UpdateNewMobilizationResponse](#fm-UpdateNewMobilizationResponse)
     - [UpdateNewStageRequest](#fm-UpdateNewStageRequest)
     - [UpdateNewStageResponse](#fm-UpdateNewStageResponse)
+    - [UpdateTupeRequest](#fm-UpdateTupeRequest)
+    - [UpdateTupeResponse](#fm-UpdateTupeResponse)
     - [UpsertCRMMobilizationTaskDateRequest](#fm-UpsertCRMMobilizationTaskDateRequest)
     - [UpsertCRMMobilizationTaskDateResponse](#fm-UpsertCRMMobilizationTaskDateResponse)
     - [UpsertCRMMobilizationTaskRequest](#fm-UpsertCRMMobilizationTaskRequest)
@@ -2521,6 +2537,26 @@ individual response of question of the category
 
 
 
+<a name="fm-Benefits"></a>
+
+### Benefits
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| bonus_enhancement | [bool](#bool) |  | if there is any kind of bonus/enhancement |
+| added_benefits | [string](#string) |  | added benefits |
+| other_benefits | [string](#string) |  | other kind of benefits |
+| sick_pay_claim | [bool](#bool) |  | whether sick pay claim is possible or not |
+| sick_pay_claim_details | [string](#string) |  | details of sick pay claim |
+| maternity_paternity_eligibility | [string](#string) |  | maternity/paternity eligibility |
+
+
+
+
+
+
 <a name="fm-Budget"></a>
 
 ### Budget
@@ -2533,6 +2569,22 @@ individual response of question of the category
 | store_budget | [StoreBudget](#fm-StoreBudget) |  |  |
 | periodic_budget | [PeriodicBudget](#fm-PeriodicBudget) |  |  |
 | hourly_rate | [float](#float) |  |  |
+
+
+
+
+
+
+<a name="fm-CRMDates"></a>
+
+### CRMDates
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | task date |
+| status | [string](#string) |  | status of the task date |
 
 
 
@@ -2571,6 +2623,26 @@ individual response of question of the category
 | crm_task_date_id | [string](#string) |  | unique id of the crm-task-date |
 | task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | task date |
 | status | [string](#string) |  | status of the task date |
+
+
+
+
+
+
+<a name="fm-CRMTasks"></a>
+
+### CRMTasks
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title name |
+| task_owner | [string](#string) |  | task_owner : employee_id |
+| deadline | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | deadline of the task |
+| task_detail | [string](#string) |  | task detail |
+| status | [string](#string) |  | status of the task |
+| task_dates | [CRMDates](#fm-CRMDates) | repeated | dates of the task |
 
 
 
@@ -3034,6 +3106,39 @@ Response for client detail
 
 
 
+<a name="fm-CreateCRMMobilizationRequest"></a>
+
+### CreateCRMMobilizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of the client |
+| template_id | [string](#string) |  | id of the mobilization template |
+| organization_id | [string](#string) |  | id of the organization |
+| tasks | [CRMTasks](#fm-CRMTasks) | repeated | tasks of the mobilization |
+
+
+
+
+
+
+<a name="fm-CreateCRMMobilizationResponse"></a>
+
+### CreateCRMMobilizationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| crm_mobilization_id | [string](#string) |  | unique id of the created mobilization |
+
+
+
+
+
+
 <a name="fm-CreateCRMMobilizationsRequest"></a>
 
 ### CreateCRMMobilizationsRequest
@@ -3383,6 +3488,46 @@ Response for create client requests
 
 
 
+<a name="fm-CreateTupeRequest"></a>
+
+### CreateTupeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | id of the organization |
+| job_detail | [JobDetails](#fm-JobDetails) |  | details about the job |
+| job_dates | [JobDates](#fm-JobDates) |  | details about job dates |
+| age_range | [string](#string) |  | age range |
+| holiday_entitlement_days | [int32](#int32) |  | number of holidays entitled |
+| employee_notice_period | [string](#string) |  | notice period for employee |
+| employer_notice_period | [string](#string) |  | notice period for employer |
+| records_detail | [Records](#fm-Records) |  | details about different kinds of records |
+| pension_detail | [PensionDetails](#fm-PensionDetails) |  | details about pension |
+| benefits_detail | [Benefits](#fm-Benefits) |  | details about benefits |
+
+
+
+
+
+
+<a name="fm-CreateTupeResponse"></a>
+
+### CreateTupeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tupe_id | [string](#string) |  | unique id of the created tupe |
+
+
+
+
+
+
 <a name="fm-DeleteAppointmentRequest"></a>
 
 ### DeleteAppointmentRequest
@@ -3589,6 +3734,43 @@ Response for create client requests
 | invoice_type | [string](#string) |  |  |
 | monthly | [string](#string) |  |  |
 | yearly | [string](#string) |  |  |
+
+
+
+
+
+
+<a name="fm-JobDates"></a>
+
+### JobDates
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| job_start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date of the job |
+| job_end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date of the job |
+
+
+
+
+
+
+<a name="fm-JobDetails"></a>
+
+### JobDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| job_title | [string](#string) |  | title of the job |
+| hours_per_week | [float](#float) |  | working hours per week |
+| contract_working_weeks | [int32](#int32) |  | number of working weeks based on contract |
+| hours_spent | [float](#float) |  | percentage of hours spent |
+| hourly_pay_rate | [float](#float) |  | hourly pay rate |
+| contract_type | [string](#string) |  | type of contract |
+| type | [string](#string) |  | type |
 
 
 
@@ -4448,6 +4630,65 @@ individual response
 
 
 
+<a name="fm-ListTupeRequest"></a>
+
+### ListTupeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter for list request |
+| organization_id | [string](#string) |  | id of the organization |
+| client_id | [string](#string) |  | filter by client id (optional) |
+
+
+
+
+
+
+<a name="fm-ListTupeResponse"></a>
+
+### ListTupeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListTupeResponse.TupeResponse](#fm-ListTupeResponse-TupeResponse) | repeated | lists of tupe |
+
+
+
+
+
+
+<a name="fm-ListTupeResponse-TupeResponse"></a>
+
+### ListTupeResponse.TupeResponse
+individual tupe response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tupe_id | [string](#string) |  | unique id of the tupe |
+| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | id of the organization |
+| job_detail | [JobDetails](#fm-JobDetails) |  | details about the job |
+| job_dates | [JobDates](#fm-JobDates) |  | details about job dates |
+| age_range | [string](#string) |  | age range |
+| holiday_entitlement_days | [int32](#int32) |  | number of holidays entitled |
+| employee_notice_period | [string](#string) |  | notice period for employee |
+| employer_notice_period | [string](#string) |  | notice period for employer |
+| records_detail | [Records](#fm-Records) |  | details about different kinds of records |
+| pension_detail | [PensionDetails](#fm-PensionDetails) |  | details about pension |
+| benefits_detail | [Benefits](#fm-Benefits) |  | details about benefits |
+| created_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the tupe |
+
+
+
+
+
+
 <a name="fm-MobilizationPrincipal"></a>
 
 ### MobilizationPrincipal
@@ -4475,6 +4716,24 @@ individual response
 | ----- | ---- | ----- | ----------- |
 | title_number | [float](#float) |  | title number |
 | title | [string](#string) |  | title name |
+
+
+
+
+
+
+<a name="fm-PensionDetails"></a>
+
+### PensionDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| pension_eligibility | [bool](#bool) |  | whether eligible for pension or not |
+| is_pension_b_on_final_salary | [bool](#bool) |  | whether pension is based on final salary or not |
+| is_pension_b_on_pension_scheme | [bool](#bool) |  | whether pension is based on pension scheme or not |
+| is_pensionable_service | [bool](#bool) |  | whether the service is pensionable or not |
 
 
 
@@ -4510,6 +4769,26 @@ individual response
 | name | [string](#string) |  |  |
 | hours | [float](#float) |  |  |
 | amount | [float](#float) |  |  |
+
+
+
+
+
+
+<a name="fm-Records"></a>
+
+### Records
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_contribution | [float](#float) |  | percentage of employee contribution |
+| employer_contribution | [float](#float) |  | percentage of employer contribution |
+| sickness_record | [bool](#bool) |  | whether any kind of sickness has been recorded over the last 12 months or not |
+| legal_action_taken | [bool](#bool) |  | if any kind of legal action is taken over the last 2 years |
+| disciplinary_and_grievance | [bool](#bool) |  | if there is any kind of disciplinary and grievance procedure taken |
+| holiday_taken_days | [int32](#int32) |  | number of holidays taken |
 
 
 
@@ -5114,6 +5393,46 @@ response for UpdateClientRequest
 
 
 
+<a name="fm-UpdateTupeRequest"></a>
+
+### UpdateTupeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tupe_id | [string](#string) |  | unique id of the tupe to be updated |
+| organization_id | [string](#string) |  | id of the organization |
+| job_detail | [JobDetails](#fm-JobDetails) |  | details about the job |
+| job_dates | [JobDates](#fm-JobDates) |  | details about job dates |
+| age_range | [string](#string) |  | age range |
+| holiday_entitlement_days | [int32](#int32) |  | number of holidays entitled |
+| employee_notice_period | [string](#string) |  | notice period for employee |
+| employer_notice_period | [string](#string) |  | notice period for employer |
+| records_detail | [Records](#fm-Records) |  | details about different kinds of records |
+| pension_detail | [PensionDetails](#fm-PensionDetails) |  | details about pension |
+| benefits_detail | [Benefits](#fm-Benefits) |  | details about benefits |
+
+
+
+
+
+
+<a name="fm-UpdateTupeResponse"></a>
+
+### UpdateTupeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| tupe_id | [string](#string) |  | unique id of the updated tupe |
+
+
+
+
+
+
 <a name="fm-UpsertCRMMobilizationTaskDateRequest"></a>
 
 ### UpsertCRMMobilizationTaskDateRequest
@@ -5315,6 +5634,7 @@ response for UpdateClientRequest
 | ListMobilizationTemplate | [ListMobilizationTemplateRequest](#fm-ListMobilizationTemplateRequest) | [ListMobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse) | Returns the list of mobilization templates visible to the authorized user in descending order. Authorization scope of `fm.mobilization-template.list` is required. |
 | UpdateMobilizationTemplate | [UpdateMobilizationTemplateRequest](#fm-UpdateMobilizationTemplateRequest) | [UpdateMobilizationTemplateResponse](#fm-UpdateMobilizationTemplateResponse) | Updates a particular template Authorization scope of `fm.mobilization-template.update` is required. |
 | DeleteMobilizationTemplate | [DeleteMobilizationTemplateRequest](#fm-DeleteMobilizationTemplateRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a particular template Authorization scope of `fm.mobilization-template.delete` is required. |
+| CreateCRMMobilization | [CreateCRMMobilizationRequest](#fm-CreateCRMMobilizationRequest) | [CreateCRMMobilizationResponse](#fm-CreateCRMMobilizationResponse) | Create a CRM mobilization. Authorization scope of `fm.crm-mobilization.create` is required. |
 | CreateCRMMobilizations | [CreateCRMMobilizationsRequest](#fm-CreateCRMMobilizationsRequest) | [CreateCRMMobilizationsResponse](#fm-CreateCRMMobilizationsResponse) | Create multiple CRM mobilizations. Authorization scope of `fm.crm-mobilization.create` is required. |
 | UpsertCRMMobilizationTasks | [UpsertCRMMobilizationTasksRequest](#fm-UpsertCRMMobilizationTasksRequest) | [UpsertCRMMobilizationTasksResponse](#fm-UpsertCRMMobilizationTasksResponse) | Creates or updates multiple CRM mobilization tasks. Authorization scope of `fm.crm-mobilization-task.create` is required. |
 | ListCRMMobilization | [ListCRMMobilizationRequest](#fm-ListCRMMobilizationRequest) | [ListCRMMobilizationResponse](#fm-ListCRMMobilizationResponse) | Return the list of CRM mobilization visible to the authorized user in descending order. Authorization scope of `fm.crm-mobilization.list` is required. |
@@ -5326,7 +5646,10 @@ response for UpdateClientRequest
 | CreateNewMobilization | [CreateNewMobilizationRequest](#fm-CreateNewMobilizationRequest) | [CreateNewMobilizationResponse](#fm-CreateNewMobilizationResponse) | Create a new mobilization. Authorization scope of `fm.new-mobilization.create` is required. |
 | ListNewMobilization | [ListNewMobilizationRequest](#fm-ListNewMobilizationRequest) | [ListNewMobilizationResponse](#fm-ListNewMobilizationResponse) | Return the list of new mobilization visible to the authorized user in descending order. Authorization scope of `fm.new-mobilization.list` is required. |
 | UpdateNewMobilization | [UpdateNewMobilizationRequest](#fm-UpdateNewMobilizationRequest) | [UpdateNewMobilizationResponse](#fm-UpdateNewMobilizationResponse) | Updates a particular new-mobilization. Authorization scope of `fm.new-mobilization.update` is required. |
-| DeleteNewMobilization | [DeleteNewMobilizationRequest](#fm-DeleteNewMobilizationRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a particular new-mobilization Authorization scope of `fm.new-mobilization.delete` is required. |
+| DeleteNewMobilization | [DeleteNewMobilizationRequest](#fm-DeleteNewMobilizationRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a particular new-mobilization. Authorization scope of `fm.new-mobilization.delete` is required. |
+| CreateTupe | [CreateTupeRequest](#fm-CreateTupeRequest) | [CreateTupeResponse](#fm-CreateTupeResponse) | Creates a tupe. Authorization scope of `fm.tupe.create` is required. |
+| ListTupe | [ListTupeRequest](#fm-ListTupeRequest) | [ListTupeResponse](#fm-ListTupeResponse) | Returns the list of tupe visible to the authorized user in descending order. Authorization scope of `fm.tupe.list` is required. |
+| UpdateTupe | [UpdateTupeRequest](#fm-UpdateTupeRequest) | [UpdateTupeResponse](#fm-UpdateTupeResponse) | Updates an existing tupe. Authorization scope of `fm.tupe.update` is required. |
 
  
 
