@@ -3278,6 +3278,39 @@
         ]
       }
     },
+    "/v1/client/tupe/delete": {
+      "post": {
+        "summary": "Deletes an existing tupe.\nAuthorization scope of `fm.tupe.delete` is required.",
+        "operationId": "ClientService_DeleteTupe",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteTupeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/tupe/list": {
       "get": {
         "summary": "Returns the list of tupe visible to the authorized user in descending order.\nAuthorization scope of `fm.tupe.list` is required.",
@@ -14691,6 +14724,19 @@
         "training_type_id": {
           "type": "string",
           "title": "training_type_id to be deleted"
+        }
+      }
+    },
+    "fmDeleteTupeRequest": {
+      "type": "object",
+      "properties": {
+        "tupe_id": {
+          "type": "string",
+          "title": "id of the tupe to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
         }
       }
     },
