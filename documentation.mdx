@@ -494,6 +494,7 @@
     - [DetailMeetingResponse](#fm-DetailMeetingResponse)
     - [EditAgendaViewRequest](#fm-EditAgendaViewRequest)
     - [EmailCC](#fm-EmailCC)
+    - [Employees](#fm-Employees)
     - [ListAllCountRequest](#fm-ListAllCountRequest)
     - [ListAllCountResponse](#fm-ListAllCountResponse)
     - [ListAllCountResponse.CountResponse](#fm-ListAllCountResponse-CountResponse)
@@ -509,6 +510,7 @@
     - [ListMeetingRequest](#fm-ListMeetingRequest)
     - [ListMeetingResponse](#fm-ListMeetingResponse)
     - [ListMeetingResponse.MeetingResponse](#fm-ListMeetingResponse-MeetingResponse)
+    - [MeetingDates](#fm-MeetingDates)
     - [MeetingTimerUpdateRequest](#fm-MeetingTimerUpdateRequest)
     - [MeetingTimerUpdateResponse](#fm-MeetingTimerUpdateResponse)
     - [UpdateAgendaDecisionRequest](#fm-UpdateAgendaDecisionRequest)
@@ -8689,16 +8691,13 @@ Meeting creation request
 | meeting_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the meeting |
 | estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | estimated time of the meeting |
 | department_id | [string](#string) |  | id of department of generated meeting |
-| raised_by | [string](#string) |  | id of employee who raised the meeting |
+| employees_info | [Employees](#fm-Employees) |  | ids of employees |
 | attendee_ids | [string](#string) | repeated | ids of employees who attend the meetings |
 | agendas | [Agenda](#fm-Agenda) | repeated | information of agenda of the meetong |
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
 | title | [string](#string) |  | title of the meeting |
 | location | [string](#string) |  | location of meeting |
-| minutes_by | [string](#string) |  | minutes_by : employee_id |
-| cheered_by | [string](#string) |  | cheered_by : employee_id |
 | meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
-| created_by | [string](#string) |  | id of employee who created the meeting |
 
 
 
@@ -8824,10 +8823,10 @@ request to get details of meeting by meeting_id
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | meeting_id | [string](#string) |  | unique identifier of the meeting |
-| meeting_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the meeting |
+| dates | [MeetingDates](#fm-MeetingDates) |  | dates related to the meeting |
 | estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | duration time of the meeting |
 | title | [string](#string) |  | title of the meeting |
-| raised_by | [string](#string) |  | employee_id of employee who raised the meeting |
+| employees_info | [Employees](#fm-Employees) |  | ids of employees |
 | attendee_ids | [string](#string) | repeated | attendees of meeting |
 | department_id | [string](#string) |  | department id of the meeting |
 | organization_id | [string](#string) |  | organization id of the meeting |
@@ -8836,13 +8835,8 @@ request to get details of meeting by meeting_id
 | status | [string](#string) |  | status of meeting |
 | agenda_details | [AgendaDetail](#fm-AgendaDetail) | repeated | agendas of meeting along with views/decisions |
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
-| minutes_by | [string](#string) |  | minutes_by : employee_id |
-| cheered_by | [string](#string) |  | cheered_by : employee_id |
-| created_by | [string](#string) |  | id of employee who created the meeting |
 | meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
 | actual_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | actual time of the meeting discussed |
-| start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start time of the meeting |
-| end_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end time of the meeting |
 
 
 
@@ -8878,6 +8872,26 @@ request to get details of meeting by meeting_id
 | receiver_email | [string](#string) |  | receiver&#39;s email |
 | receiver_name | [string](#string) |  | receiver&#39;s name |
 | client_id | [string](#string) |  | id of the client |
+
+
+
+
+
+
+<a name="fm-Employees"></a>
+
+### Employees
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| raised_by | [string](#string) |  | id of employee who raised the meeting |
+| minutes_by | [string](#string) |  | minutes_by : employee_id |
+| cheered_by | [string](#string) |  | cheered_by : employee_id |
+| created_by | [string](#string) |  | id of employee who created the meeting |
+| proposed_by | [string](#string) |  | proposed by : employee id |
+| second_by | [string](#string) |  | second by : employee id |
 
 
 
@@ -9159,7 +9173,7 @@ individual meeting response
 | meeting_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the meeting |
 | estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | duration time of the meeting |
 | title | [string](#string) |  | title of the meeting |
-| raised_by | [string](#string) |  | employee_id of employee who raised the meeting |
+| employees_info | [Employees](#fm-Employees) |  | ids of employees |
 | attendee_ids | [string](#string) | repeated | attendees of meeting |
 | department_id | [string](#string) |  | department id of the meeting |
 | organization_id | [string](#string) |  | organization id of the meeting |
@@ -9167,10 +9181,24 @@ individual meeting response
 | location | [string](#string) |  | location of meeting |
 | client_id | [string](#string) |  | required if meeting is for client else it is optional |
 | status | [string](#string) |  | status of the meeting |
-| minutes_by | [string](#string) |  | minutes_by : employee_id |
-| cheered_by | [string](#string) |  | cheered_by : employee_id |
 | meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
-| created_by | [string](#string) |  | id of employee who created the meeting |
+
+
+
+
+
+
+<a name="fm-MeetingDates"></a>
+
+### MeetingDates
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the meeting |
+| start_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start time of the meeting |
+| end_time | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end time of the meeting |
 
 
 
@@ -9362,13 +9390,10 @@ request to update meeting by meeting_id
 | estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | estimated time of the meeting |
 | title | [string](#string) |  | title of meeting |
 | department_id | [string](#string) |  | id of department of generated meeting |
-| raised_by | [string](#string) |  | id of employee who raised the meeting |
+| employees_info | [Employees](#fm-Employees) |  | ids of employees |
 | attendee_ids | [string](#string) | repeated | names of employees who attend the meetings |
 | agenda_detail | [AgendaUpdateDetail](#fm-AgendaUpdateDetail) | repeated | information of agenda of the meetong |
 | location | [string](#string) |  | location of meeting |
-| minutes_by | [string](#string) |  | minutes_by : employee_id |
-| cheered_by | [string](#string) |  | cheered_by : employee_id |
-| created_by | [string](#string) |  | id of employee who created the meeting |
 | meeting_type | [string](#string) |  | type of meeting i.e.&#34;OPEN&#34; or &#34;CLOSE&#34; |
 | deleted_agenda_ids | [string](#string) | repeated | deleted_agenda_ids |
 
