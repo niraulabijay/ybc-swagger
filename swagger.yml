@@ -10317,9 +10317,9 @@
           "type": "string",
           "title": "title of the meeting"
         },
-        "raised_by": {
-          "type": "string",
-          "title": "employee_id of employee who raised the meeting"
+        "employees_info": {
+          "$ref": "#/definitions/fmEmployees",
+          "title": "ids of employees"
         },
         "attendee_ids": {
           "type": "array",
@@ -10353,21 +10353,9 @@
           "type": "string",
           "title": "status of the meeting"
         },
-        "minutes_by": {
-          "type": "string",
-          "title": "minutes_by : employee_id"
-        },
-        "cheered_by": {
-          "type": "string",
-          "title": "cheered_by : employee_id"
-        },
         "meeting_type": {
           "type": "string",
           "title": "type of meeting i.e.\"OPEN\" or \"CLOSE\""
-        },
-        "created_by": {
-          "type": "string",
-          "title": "id of employee who created the meeting"
         }
       },
       "title": "individual meeting response"
@@ -13611,9 +13599,9 @@
           "type": "string",
           "title": "id of department of generated meeting"
         },
-        "raised_by": {
-          "type": "string",
-          "title": "id of employee who raised the meeting"
+        "employees_info": {
+          "$ref": "#/definitions/fmEmployees",
+          "title": "ids of employees"
         },
         "attendee_ids": {
           "type": "array",
@@ -13641,21 +13629,9 @@
           "type": "string",
           "title": "location of meeting"
         },
-        "minutes_by": {
-          "type": "string",
-          "title": "minutes_by : employee_id"
-        },
-        "cheered_by": {
-          "type": "string",
-          "title": "cheered_by : employee_id"
-        },
         "meeting_type": {
           "type": "string",
           "title": "type of meeting i.e.\"OPEN\" or \"CLOSE\""
-        },
-        "created_by": {
-          "type": "string",
-          "title": "id of employee who created the meeting"
         }
       },
       "title": "Meeting creation request"
@@ -14747,10 +14723,9 @@
           "type": "string",
           "title": "unique identifier of the meeting"
         },
-        "meeting_date": {
-          "type": "string",
-          "format": "date-time",
-          "title": "date of the meeting"
+        "dates": {
+          "$ref": "#/definitions/fmMeetingDates",
+          "title": "dates related to the meeting"
         },
         "estimated_time": {
           "type": "string",
@@ -14760,9 +14735,9 @@
           "type": "string",
           "title": "title of the meeting"
         },
-        "raised_by": {
-          "type": "string",
-          "title": "employee_id of employee who raised the meeting"
+        "employees_info": {
+          "$ref": "#/definitions/fmEmployees",
+          "title": "ids of employees"
         },
         "attendee_ids": {
           "type": "array",
@@ -14803,18 +14778,6 @@
           "type": "string",
           "title": "required if meeting is for client else it is optional"
         },
-        "minutes_by": {
-          "type": "string",
-          "title": "minutes_by : employee_id"
-        },
-        "cheered_by": {
-          "type": "string",
-          "title": "cheered_by : employee_id"
-        },
-        "created_by": {
-          "type": "string",
-          "title": "id of employee who created the meeting"
-        },
         "meeting_type": {
           "type": "string",
           "title": "type of meeting i.e.\"OPEN\" or \"CLOSE\""
@@ -14822,16 +14785,6 @@
         "actual_time": {
           "type": "string",
           "title": "actual time of the meeting discussed"
-        },
-        "start_time": {
-          "type": "string",
-          "format": "date-time",
-          "title": "start time of the meeting"
-        },
-        "end_time": {
-          "type": "string",
-          "format": "date-time",
-          "title": "end time of the meeting"
         }
       }
     },
@@ -15240,6 +15193,35 @@
         }
       },
       "title": "Response payload for attachment list request"
+    },
+    "fmEmployees": {
+      "type": "object",
+      "properties": {
+        "raised_by": {
+          "type": "string",
+          "title": "id of employee who raised the meeting"
+        },
+        "minutes_by": {
+          "type": "string",
+          "title": "minutes_by : employee_id"
+        },
+        "cheered_by": {
+          "type": "string",
+          "title": "cheered_by : employee_id"
+        },
+        "created_by": {
+          "type": "string",
+          "title": "id of employee who created the meeting"
+        },
+        "proposed_by": {
+          "type": "string",
+          "title": "proposed by : employee id"
+        },
+        "second_by": {
+          "type": "string",
+          "title": "second by : employee id"
+        }
+      }
     },
     "fmEmploymentHistoryInfo": {
       "type": "object",
@@ -16638,6 +16620,26 @@
         }
       },
       "title": "Response for logout"
+    },
+    "fmMeetingDates": {
+      "type": "object",
+      "properties": {
+        "meeting_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of the meeting"
+        },
+        "start_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "start time of the meeting"
+        },
+        "end_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end time of the meeting"
+        }
+      }
     },
     "fmMeetingTimerUpdateRequest": {
       "type": "object",
@@ -18699,9 +18701,9 @@
           "type": "string",
           "title": "id of department of generated meeting"
         },
-        "raised_by": {
-          "type": "string",
-          "title": "id of employee who raised the meeting"
+        "employees_info": {
+          "$ref": "#/definitions/fmEmployees",
+          "title": "ids of employees"
         },
         "attendee_ids": {
           "type": "array",
@@ -18720,18 +18722,6 @@
         "location": {
           "type": "string",
           "title": "location of meeting"
-        },
-        "minutes_by": {
-          "type": "string",
-          "title": "minutes_by : employee_id"
-        },
-        "cheered_by": {
-          "type": "string",
-          "title": "cheered_by : employee_id"
-        },
-        "created_by": {
-          "type": "string",
-          "title": "id of employee who created the meeting"
         },
         "meeting_type": {
           "type": "string",
