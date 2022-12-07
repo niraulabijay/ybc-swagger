@@ -2326,6 +2326,39 @@
         ]
       }
     },
+    "/v1/client/crm-mobilization-task-date/create": {
+      "post": {
+        "summary": "Creates multiple CRM mobilization task dates.\nAuthorization scope of `fm.crm-mobilization-task-date.create` is required.",
+        "operationId": "ClientService_CreateCRMMobilizationTaskDates",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateCRMMobilizationTaskDatesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateCRMMobilizationTaskDatesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/crm-mobilization-task-date/delete": {
       "post": {
         "summary": "Delete a particular task-date of CRM mobilization-task.\nAuthorization scope of `fm.crm-mobilization-task-date.delete` is required.",
@@ -12579,6 +12612,35 @@
         "crm_mobilization_id": {
           "type": "string",
           "title": "unique id of the created mobilization"
+        }
+      }
+    },
+    "fmCreateCRMMobilizationTaskDatesRequest": {
+      "type": "object",
+      "properties": {
+        "crm_task_id": {
+          "type": "string",
+          "title": "id of the crm-task"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "task_dates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmCRMDates"
+          },
+          "title": "dates of the task"
+        }
+      }
+    },
+    "fmCreateCRMMobilizationTaskDatesResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "action response"
         }
       }
     },
