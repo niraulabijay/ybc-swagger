@@ -2991,6 +2991,85 @@
         ]
       }
     },
+    "/v1/client/parent-mobilization-template": {
+      "post": {
+        "summary": "Creates or Updates a parent mobilization.\nAuthorization scope of `fm.parent-mobilization-template.create` is required.",
+        "operationId": "ClientService_UpsertParentMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpsertParentMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertParentMobilizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/parent-mobilization-template/list": {
+      "get": {
+        "summary": "Returns the list of parent mobilization templates visible to the authorized user in descending order.\nAuthorization scope of `fm.parent-mobilization-template.list` is required.",
+        "operationId": "ClientService_ListParentMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListParentMobilizationResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/set-head-office": {
       "post": {
         "summary": "set a single head office from clients.\nScope of `fm.client.set-headoffice` is required.",
@@ -10400,6 +10479,10 @@
           "type": "string",
           "title": "unique id of the mobilization template"
         },
+        "parent_mobilization_id": {
+          "type": "string",
+          "title": "id of the associated parent mobilization"
+        },
         "organization_id": {
           "type": "string",
           "title": "organization id"
@@ -10511,6 +10594,36 @@
         }
       },
       "title": "inividual organization response"
+    },
+    "ListParentMobilizationResponseParentMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "id of the parent mobilization"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of the parent mobilization"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the mobilization"
+        },
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmMobilizationTemplates"
+          },
+          "title": "associated mobilization templates"
+        }
+      },
+      "title": "individual response"
     },
     "ListRegionResponseRegionResponse": {
       "type": "object",
@@ -13710,6 +13823,10 @@
     "fmCreateMobilizationTemplateRequest": {
       "type": "object",
       "properties": {
+        "parent_mobilization_id": {
+          "type": "string",
+          "title": "id of the associated parent mobilization"
+        },
         "organization_id": {
           "type": "string",
           "title": "id of the associated organization"
@@ -16473,6 +16590,18 @@
       },
       "title": "response for fetching list of organization"
     },
+    "fmListParentMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "result": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListParentMobilizationResponseParentMobilizationResponse"
+          },
+          "title": "list response of the parent mobilization"
+        }
+      }
+    },
     "fmListPeriodicTaskResponse": {
       "type": "object",
       "properties": {
@@ -16753,6 +16882,39 @@
         "title": {
           "type": "string",
           "title": "title name"
+        }
+      }
+    },
+    "fmMobilizationTemplates": {
+      "type": "object",
+      "properties": {
+        "mobilization_template_id": {
+          "type": "string",
+          "title": "unique id of the mobilization template"
+        },
+        "parent_mobilization_id": {
+          "type": "string",
+          "title": "id of the associated parent mobilization"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "organization id"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of the mobilization template"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmMobilizationTasks"
+          },
+          "title": "tasks of the template"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the template"
         }
       }
     },
@@ -18838,6 +19000,10 @@
           "type": "string",
           "title": "id of the mobilization template to be updated"
         },
+        "parent_mobilization_id": {
+          "type": "string",
+          "title": "id of the associated parent mobilization"
+        },
         "organization_id": {
           "type": "string",
           "title": "organization id"
@@ -19558,6 +19724,32 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmUpsertParentMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "parent_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the parent mobilization"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of the parent mobilization"
+        }
+      }
+    },
+    "fmUpsertParentMobilizationResponse": {
+      "type": "object",
+      "properties": {
+        "parent_mobilization_id": {
+          "type": "string",
+          "title": "unique id of the parent mobilization"
         }
       }
     },
