@@ -3063,6 +3063,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "parent_mobilization_id",
+            "description": "parent mobilization id to filter the request (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
