@@ -235,6 +235,9 @@
     - [ListNewStageRequest](#fm-ListNewStageRequest)
     - [ListNewStageResponse](#fm-ListNewStageResponse)
     - [ListNewStageResponse.NewStagesResponse](#fm-ListNewStageResponse-NewStagesResponse)
+    - [ListParentMobilizationRequest](#fm-ListParentMobilizationRequest)
+    - [ListParentMobilizationResponse](#fm-ListParentMobilizationResponse)
+    - [ListParentMobilizationResponse.ParentMobilizationResponse](#fm-ListParentMobilizationResponse-ParentMobilizationResponse)
     - [ListTenderStatusRequest](#fm-ListTenderStatusRequest)
     - [ListTenderStatusResponse](#fm-ListTenderStatusResponse)
     - [ListTenderStatusResponse.TenderStatusResponse](#fm-ListTenderStatusResponse-TenderStatusResponse)
@@ -243,6 +246,7 @@
     - [ListTupeResponse.TupeResponse](#fm-ListTupeResponse-TupeResponse)
     - [MobilizationPrincipal](#fm-MobilizationPrincipal)
     - [MobilizationTasks](#fm-MobilizationTasks)
+    - [MobilizationTemplates](#fm-MobilizationTemplates)
     - [PensionDetails](#fm-PensionDetails)
     - [PeriodicBudget](#fm-PeriodicBudget)
     - [PeriodicBudget.PBudget](#fm-PeriodicBudget-PBudget)
@@ -290,6 +294,8 @@
     - [UpsertCRMMobilizationTaskResponse](#fm-UpsertCRMMobilizationTaskResponse)
     - [UpsertCRMMobilizationTasksRequest](#fm-UpsertCRMMobilizationTasksRequest)
     - [UpsertCRMMobilizationTasksResponse](#fm-UpsertCRMMobilizationTasksResponse)
+    - [UpsertParentMobilizationRequest](#fm-UpsertParentMobilizationRequest)
+    - [UpsertParentMobilizationResponse](#fm-UpsertParentMobilizationResponse)
     - [UpsertTenderStatusRequest](#fm-UpsertTenderStatusRequest)
     - [UpsertTenderStatusResponse](#fm-UpsertTenderStatusResponse)
   
@@ -3416,6 +3422,7 @@ Response for create client requests
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| parent_mobilization_id | [string](#string) |  | id of the associated parent mobilization |
 | organization_id | [string](#string) |  | id of the associated organization |
 | name | [string](#string) |  | name of the mobilization template |
 | tasks | [MobilizationTasks](#fm-MobilizationTasks) | repeated | tasks of the template |
@@ -4520,6 +4527,7 @@ individual response
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | mobilization_template_id | [string](#string) |  | unique id of the mobilization template |
+| parent_mobilization_id | [string](#string) |  | id of the associated parent mobilization |
 | organization_id | [string](#string) |  | organization id |
 | name | [string](#string) |  | name of the mobilization template |
 | tasks | [MobilizationTasks](#fm-MobilizationTasks) | repeated | tasks of the template |
@@ -4627,6 +4635,56 @@ individual response
 | description | [string](#string) |  | description of the stage |
 | organization_id | [string](#string) |  | organization id to which the stage belongs |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the new stage was created at |
+
+
+
+
+
+
+<a name="fm-ListParentMobilizationRequest"></a>
+
+### ListParentMobilizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter for list request |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-ListParentMobilizationResponse"></a>
+
+### ListParentMobilizationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListParentMobilizationResponse.ParentMobilizationResponse](#fm-ListParentMobilizationResponse-ParentMobilizationResponse) | repeated | list response of the parent mobilization |
+
+
+
+
+
+
+<a name="fm-ListParentMobilizationResponse-ParentMobilizationResponse"></a>
+
+### ListParentMobilizationResponse.ParentMobilizationResponse
+individual response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | id of the parent mobilization |
+| organization_id | [string](#string) |  | id of the organization |
+| name | [string](#string) |  | name of the parent mobilization |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the mobilization |
+| templates | [MobilizationTemplates](#fm-MobilizationTemplates) | repeated | associated mobilization templates |
 
 
 
@@ -4769,6 +4827,26 @@ individual tupe response
 | ----- | ---- | ----- | ----------- |
 | title_number | [float](#float) |  | title number |
 | title | [string](#string) |  | title name |
+
+
+
+
+
+
+<a name="fm-MobilizationTemplates"></a>
+
+### MobilizationTemplates
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| mobilization_template_id | [string](#string) |  | unique id of the mobilization template |
+| parent_mobilization_id | [string](#string) |  | id of the associated parent mobilization |
+| organization_id | [string](#string) |  | organization id |
+| name | [string](#string) |  | name of the mobilization template |
+| tasks | [MobilizationTasks](#fm-MobilizationTasks) | repeated | tasks of the template |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the template |
 
 
 
@@ -5354,6 +5432,7 @@ response for UpdateClientRequest
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | mobilization_template_id | [string](#string) |  | id of the mobilization template to be updated |
+| parent_mobilization_id | [string](#string) |  | id of the associated parent mobilization |
 | organization_id | [string](#string) |  | organization id |
 | name | [string](#string) |  | name of the mobilization template |
 | tasks | [MobilizationTasks](#fm-MobilizationTasks) | repeated | tasks of the template |
@@ -5589,6 +5668,38 @@ response for UpdateClientRequest
 
 
 
+<a name="fm-UpsertParentMobilizationRequest"></a>
+
+### UpsertParentMobilizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent_mobilization_id | [string](#string) |  | unique id of the parent mobilization |
+| organization_id | [string](#string) |  | id of the organization |
+| name | [string](#string) |  | name of the parent mobilization |
+
+
+
+
+
+
+<a name="fm-UpsertParentMobilizationResponse"></a>
+
+### UpsertParentMobilizationResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent_mobilization_id | [string](#string) |  | unique id of the parent mobilization |
+
+
+
+
+
+
 <a name="fm-UpsertTenderStatusRequest"></a>
 
 ### UpsertTenderStatusRequest
@@ -5683,6 +5794,8 @@ response for UpdateClientRequest
 | ListCategoriesAndQuestions | [ListCategoriesAndQuestionsRequest](#fm-ListCategoriesAndQuestionsRequest) | [ListCategoriesAndQuestionsResponse](#fm-ListCategoriesAndQuestionsResponse) | Returns the lists of categories and their associated questions. Authorization scope of `fm.category-question.list` is required. |
 | UpsertTenderStatus | [UpsertTenderStatusRequest](#fm-UpsertTenderStatusRequest) | [UpsertTenderStatusResponse](#fm-UpsertTenderStatusResponse) | UpsertTenderStatus creates or updates the tender status. Authorization scope of `fm.tender-status.create` is required. |
 | ListTenderStatus | [ListTenderStatusRequest](#fm-ListTenderStatusRequest) | [ListTenderStatusResponse](#fm-ListTenderStatusResponse) | Returns the list of tender status. Authorization scope of `fm.tender-status.list` is required. |
+| UpsertParentMobilization | [UpsertParentMobilizationRequest](#fm-UpsertParentMobilizationRequest) | [UpsertParentMobilizationResponse](#fm-UpsertParentMobilizationResponse) | Creates or Updates a parent mobilization. Authorization scope of `fm.parent-mobilization-template.create` is required. |
+| ListParentMobilization | [ListParentMobilizationRequest](#fm-ListParentMobilizationRequest) | [ListParentMobilizationResponse](#fm-ListParentMobilizationResponse) | Returns the list of parent mobilization templates visible to the authorized user in descending order. Authorization scope of `fm.parent-mobilization-template.list` is required. |
 | CreateMobilizationTemplate | [CreateMobilizationTemplateRequest](#fm-CreateMobilizationTemplateRequest) | [CreateMobilizationTemplateResponse](#fm-CreateMobilizationTemplateResponse) | Creates a mobilization template. Authorization scope of `fm.mobilization-template.create` is required. |
 | ListMobilizationTemplate | [ListMobilizationTemplateRequest](#fm-ListMobilizationTemplateRequest) | [ListMobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse) | Returns the list of mobilization templates visible to the authorized user in descending order. Authorization scope of `fm.mobilization-template.list` is required. |
 | UpdateMobilizationTemplate | [UpdateMobilizationTemplateRequest](#fm-UpdateMobilizationTemplateRequest) | [UpdateMobilizationTemplateResponse](#fm-UpdateMobilizationTemplateResponse) | Updates a particular template Authorization scope of `fm.mobilization-template.update` is required. |
