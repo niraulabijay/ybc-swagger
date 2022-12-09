@@ -187,6 +187,7 @@
     - [DeleteMobilizationTemplateRequest](#fm-DeleteMobilizationTemplateRequest)
     - [DeleteNewMobilizationRequest](#fm-DeleteNewMobilizationRequest)
     - [DeleteNewStageRequest](#fm-DeleteNewStageRequest)
+    - [DeleteParentMobilizationRequest](#fm-DeleteParentMobilizationRequest)
     - [DeleteTupeRequest](#fm-DeleteTupeRequest)
     - [Invoice](#fm-Invoice)
     - [JobDates](#fm-JobDates)
@@ -3767,6 +3768,22 @@ Response for create client requests
 
 
 
+<a name="fm-DeleteParentMobilizationRequest"></a>
+
+### DeleteParentMobilizationRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| parent_mobilization_id | [string](#string) |  | id of the parent mobilization to be deleted |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
 <a name="fm-DeleteTupeRequest"></a>
 
 ### DeleteTupeRequest
@@ -4651,6 +4668,7 @@ individual response
 | ----- | ---- | ----- | ----------- |
 | filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter for list request |
 | organization_id | [string](#string) |  | id of the organization |
+| parent_mobilization_id | [string](#string) |  | parent mobilization id to filter the request (optional) |
 
 
 
@@ -5796,6 +5814,7 @@ response for UpdateClientRequest
 | ListTenderStatus | [ListTenderStatusRequest](#fm-ListTenderStatusRequest) | [ListTenderStatusResponse](#fm-ListTenderStatusResponse) | Returns the list of tender status. Authorization scope of `fm.tender-status.list` is required. |
 | UpsertParentMobilization | [UpsertParentMobilizationRequest](#fm-UpsertParentMobilizationRequest) | [UpsertParentMobilizationResponse](#fm-UpsertParentMobilizationResponse) | Creates or Updates a parent mobilization. Authorization scope of `fm.parent-mobilization-template.create` is required. |
 | ListParentMobilization | [ListParentMobilizationRequest](#fm-ListParentMobilizationRequest) | [ListParentMobilizationResponse](#fm-ListParentMobilizationResponse) | Returns the list of parent mobilization templates visible to the authorized user in descending order. Authorization scope of `fm.parent-mobilization-template.list` is required. |
+| DeleteParentMobilization | [DeleteParentMobilizationRequest](#fm-DeleteParentMobilizationRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a parent mobilization. Authorization scope of `fm.parent-mobilization-template.delete` is required. |
 | CreateMobilizationTemplate | [CreateMobilizationTemplateRequest](#fm-CreateMobilizationTemplateRequest) | [CreateMobilizationTemplateResponse](#fm-CreateMobilizationTemplateResponse) | Creates a mobilization template. Authorization scope of `fm.mobilization-template.create` is required. |
 | ListMobilizationTemplate | [ListMobilizationTemplateRequest](#fm-ListMobilizationTemplateRequest) | [ListMobilizationTemplateResponse](#fm-ListMobilizationTemplateResponse) | Returns the list of mobilization templates visible to the authorized user in descending order. Authorization scope of `fm.mobilization-template.list` is required. |
 | UpdateMobilizationTemplate | [UpdateMobilizationTemplateRequest](#fm-UpdateMobilizationTemplateRequest) | [UpdateMobilizationTemplateResponse](#fm-UpdateMobilizationTemplateResponse) | Updates a particular template Authorization scope of `fm.mobilization-template.update` is required. |
