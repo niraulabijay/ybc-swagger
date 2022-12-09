@@ -9108,6 +9108,13 @@
         "template_id": {
           "type": "string",
           "title": "id of the mobilization template"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmReqTasks"
+          },
+          "title": "tasks of the mobilization"
         }
       }
     },
@@ -17460,6 +17467,15 @@
         "region_manager": {
           "type": "string",
           "title": "Region manager employee_id"
+        }
+      }
+    },
+    "fmReqTasks": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "title of the task"
         }
       }
     },
