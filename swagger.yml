@@ -6029,6 +6029,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "department_id",
+            "description": "id of department.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
