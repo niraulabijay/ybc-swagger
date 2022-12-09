@@ -3024,6 +3024,39 @@
         ]
       }
     },
+    "/v1/client/parent-mobilization-template/delete": {
+      "post": {
+        "summary": "Deletes a parent mobilization.\nAuthorization scope of `fm.parent-mobilization-template.delete` is required.",
+        "operationId": "ClientService_DeleteParentMobilization",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteParentMobilizationRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/parent-mobilization-template/list": {
       "get": {
         "summary": "Returns the list of parent mobilization templates visible to the authorized user in descending order.\nAuthorization scope of `fm.parent-mobilization-template.list` is required.",
@@ -14816,6 +14849,19 @@
         "organization_id": {
           "type": "string",
           "title": "organization id"
+        }
+      }
+    },
+    "fmDeleteParentMobilizationRequest": {
+      "type": "object",
+      "properties": {
+        "parent_mobilization_id": {
+          "type": "string",
+          "title": "id of the parent mobilization to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
         }
       }
     },
