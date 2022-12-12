@@ -253,6 +253,7 @@
     - [PeriodicBudget.PBudget](#fm-PeriodicBudget-PBudget)
     - [Records](#fm-Records)
     - [Region](#fm-Region)
+    - [ReqTasks](#fm-ReqTasks)
     - [Sector](#fm-Sector)
     - [StageStatusChangeRequest](#fm-StageStatusChangeRequest)
     - [StageStatusChangeResponse](#fm-StageStatusChangeResponse)
@@ -3209,6 +3210,7 @@ Response for client detail
 | ----- | ---- | ----- | ----------- |
 | client_id | [string](#string) |  | id of the client |
 | template_id | [string](#string) |  | id of the mobilization template |
+| tasks | [ReqTasks](#fm-ReqTasks) | repeated | tasks of the mobilization |
 
 
 
@@ -4954,6 +4956,21 @@ individual tupe response
 | ----- | ---- | ----- | ----------- |
 | region | [string](#string) |  |  |
 | region_manager | [string](#string) |  | Region manager employee_id |
+
+
+
+
+
+
+<a name="fm-ReqTasks"></a>
+
+### ReqTasks
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title of the task |
 
 
 
@@ -7615,6 +7632,7 @@ List issues request
 | issue_type | [string](#string) |  | type of issue |
 | start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter issues |
 | end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter issues |
+| status | [string](#string) |  | status of the issue i.e. PENDING, COMPLETED, INPROGRESS |
 
 
 
@@ -9306,6 +9324,7 @@ Request for list meeting
 | start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter meeting by |
 | end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter meeting by |
 | client_id | [string](#string) |  | unique id of client |
+| department_id | [string](#string) |  | id of department |
 
 
 
