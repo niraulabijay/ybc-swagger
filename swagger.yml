@@ -5802,6 +5802,13 @@
             "required": false,
             "type": "string",
             "format": "date-time"
+          },
+          {
+            "name": "status",
+            "description": "status of the issue i.e. PENDING, COMPLETED, INPROGRESS.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
