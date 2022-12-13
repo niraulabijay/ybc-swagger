@@ -1760,6 +1760,22 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "start_date",
+            "description": "start date to filter by deadline.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date to filter by deadline.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "tags": [
