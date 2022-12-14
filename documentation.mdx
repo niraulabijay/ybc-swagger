@@ -618,6 +618,9 @@
     - [ListTaskByMobileEmployeesResponse](#fm-ListTaskByMobileEmployeesResponse)
     - [ListTaskByVariationClientsRequest](#fm-ListTaskByVariationClientsRequest)
     - [ListTaskByVariationClientsResponse](#fm-ListTaskByVariationClientsResponse)
+    - [ListTaskEmployeeRequest](#fm-ListTaskEmployeeRequest)
+    - [ListTaskEmployeeResponse](#fm-ListTaskEmployeeResponse)
+    - [ListTaskEmployeeResponse.TaskEmployeeResponse](#fm-ListTaskEmployeeResponse-TaskEmployeeResponse)
     - [ListTaskRequest](#fm-ListTaskRequest)
     - [ListTaskResponse](#fm-ListTaskResponse)
     - [RecurrenceDetails](#fm-RecurrenceDetails)
@@ -10933,6 +10936,56 @@ list of variation tasks by client_id queried by user
 
 
 
+<a name="fm-ListTaskEmployeeRequest"></a>
+
+### ListTaskEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter for list task employees request |
+| organization_id | [string](#string) |  | organization of employee the task is assigned to |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | For task filter based on task start time (optional) |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | For task filter based on task start time (optional) |
+| status | [string](#string) |  | status of task : &#34;COMPLETE&#34;, &#34;INCOMPLETE&#34; |
+
+
+
+
+
+
+<a name="fm-ListTaskEmployeeResponse"></a>
+
+### ListTaskEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [ListTaskEmployeeResponse.TaskEmployeeResponse](#fm-ListTaskEmployeeResponse-TaskEmployeeResponse) | repeated | list response of task |
+| metadata | [ListResponseMetadata](#fm-ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm-ListTaskEmployeeResponse-TaskEmployeeResponse"></a>
+
+### ListTaskEmployeeResponse.TaskEmployeeResponse
+individual response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | id of the employee to whom the task is assigned |
+
+
+
+
+
+
 <a name="fm-ListTaskRequest"></a>
 
 ### ListTaskRequest
@@ -11703,17 +11756,18 @@ service to manage tasks
 | Create | [CreateTaskRequest](#fm-CreateTaskRequest) | [CreateTaskResponse](#fm-CreateTaskResponse) | Create a new task. Authorization scope of `fm.task.create` is required. |
 | Checkin | [CheckinTaskRequest](#fm-CheckinTaskRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Checkin can be used to check in a staff to a task. Authorization scope of `fm.task.checkin` is required. |
 | Checkout | [CheckoutTaskRequest](#fm-CheckoutTaskRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Checkout can be used to check-out a staff from an existing checked-in task. Authorization scope of `fm.task.checkout` is required. |
-| List | [ListTaskRequest](#fm-ListTaskRequest) | [ListTaskResponse](#fm-ListTaskResponse) | List returns the list of all tasks visible to the authroized user in descending date order. Authorization scope of `fm.task.list` is required. |
-| Detail | [TaskDetailRequest](#fm-TaskDetailRequest) | [TaskDetailResponse](#fm-TaskDetailResponse) | List returns the list of all tasks visible to the authroized user in descending date order. Authorization scope of `fm.task.detail` is required. |
+| List | [ListTaskRequest](#fm-ListTaskRequest) | [ListTaskResponse](#fm-ListTaskResponse) | List returns the list of all tasks visible to the authorized user in descending date order. Authorization scope of `fm.task.list` is required. |
+| ListTaskEmployee | [ListTaskEmployeeRequest](#fm-ListTaskEmployeeRequest) | [ListTaskEmployeeResponse](#fm-ListTaskEmployeeResponse) | Returns the list of employee ids of tasks visible to the authorized user in descending date order. Authorization scope of `fm.task.list` is required. |
+| Detail | [TaskDetailRequest](#fm-TaskDetailRequest) | [TaskDetailResponse](#fm-TaskDetailResponse) | List returns the list of all tasks visible to the authorized user in descending date order. Authorization scope of `fm.task.detail` is required. |
 | Update | [UpdateTaskRequest](#fm-UpdateTaskRequest) | [UpdateTaskResponse](#fm-UpdateTaskResponse) | Update an existing task. Authorization scope of `fm.task.update` is required. |
 | UpdateRecurrence | [UpdateRecurrenceRequest](#fm-UpdateRecurrenceRequest) | [UpdateRecurrenceResponse](#fm-UpdateRecurrenceResponse) | Update task recurrence. Authorization scope of `fm.task.update` is required. |
-| ListByClient | [ListTaskByClientRequest](#fm-ListTaskByClientRequest) | [ListTaskByClientResponse](#fm-ListTaskByClientResponse) | List returns the list of task by client visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-client` is required. |
-| ListByEmployee | [ListTaskByEmployeeRequest](#fm-ListTaskByEmployeeRequest) | [ListTaskByEmployeeResponse](#fm-ListTaskByEmployeeResponse) | List returns the list of task by employee visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-employee` is required. |
+| ListByClient | [ListTaskByClientRequest](#fm-ListTaskByClientRequest) | [ListTaskByClientResponse](#fm-ListTaskByClientResponse) | List returns the list of task by client visible to the authorized user in descending date order. Authorization scope of `fm.task.list-by-client` is required. |
+| ListByEmployee | [ListTaskByEmployeeRequest](#fm-ListTaskByEmployeeRequest) | [ListTaskByEmployeeResponse](#fm-ListTaskByEmployeeResponse) | List returns the list of task by employee visible to the authorized user in descending date order. Authorization scope of `fm.task.list-by-employee` is required. |
 | UpdateByEmployee | [UpdateTaskByEmployeeRequest](#fm-UpdateTaskByEmployeeRequest) | [UpdateTaskByEmployeeResponse](#fm-UpdateTaskByEmployeeResponse) | Update an existing task by employee_id Authorization scope of `fm.task.update-by-client` is required. |
 | UpdateByClient | [UpdateTaskByClientRequest](#fm-UpdateTaskByClientRequest) | [UpdateTaskByClientResponse](#fm-UpdateTaskByClientResponse) | Update an existing task by client_id Authorization scope of `fm.task.update-by-client` is required. |
-| ListByMobileEmployees | [ListTaskByMobileEmployeesRequest](#fm-ListTaskByMobileEmployeesRequest) | [ListTaskByMobileEmployeesResponse](#fm-ListTaskByMobileEmployeesResponse) | List returns the list of task by mobile employees visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-mobile-employees` is required. |
-| ListByVariationClients | [ListTaskByVariationClientsRequest](#fm-ListTaskByVariationClientsRequest) | [ListTaskByVariationClientsResponse](#fm-ListTaskByVariationClientsResponse) | List returns the list of task by variation clients visible to the authroized user in descending date order. Authorization scope of `fm.task.list-by-variation-clients` is required. |
-| ListPeriodic | [ListPeriodicTaskRequest](#fm-ListPeriodicTaskRequest) | [ListPeriodicTaskResponse](#fm-ListPeriodicTaskResponse) | List returns the list of periodic task clients visible to the authroized user in descending date order. Authorization scope of `fm.task.periodic` is required. |
+| ListByMobileEmployees | [ListTaskByMobileEmployeesRequest](#fm-ListTaskByMobileEmployeesRequest) | [ListTaskByMobileEmployeesResponse](#fm-ListTaskByMobileEmployeesResponse) | List returns the list of task by mobile employees visible to the authorized user in descending date order. Authorization scope of `fm.task.list-by-mobile-employees` is required. |
+| ListByVariationClients | [ListTaskByVariationClientsRequest](#fm-ListTaskByVariationClientsRequest) | [ListTaskByVariationClientsResponse](#fm-ListTaskByVariationClientsResponse) | List returns the list of task by variation clients visible to the authorized user in descending date order. Authorization scope of `fm.task.list-by-variation-clients` is required. |
+| ListPeriodic | [ListPeriodicTaskRequest](#fm-ListPeriodicTaskRequest) | [ListPeriodicTaskResponse](#fm-ListPeriodicTaskResponse) | List returns the list of periodic task clients visible to the authorized user in descending date order. Authorization scope of `fm.task.periodic` is required. |
 | UpsertTaskCorrection | [UpsertTaskCorrectionRequest](#fm-UpsertTaskCorrectionRequest) | [UpsertTaskCorrectionResponse](#fm-UpsertTaskCorrectionResponse) | UpsertTaskCorrection creates or updates the task correction. Authorization scope of `fm.task.correction` is required. |
 | ApproveTaskCorrection | [ApproveTaskCorrectionRequest](#fm-ApproveTaskCorrectionRequest) | [ApproveTaskCorrectionResponse](#fm-ApproveTaskCorrectionResponse) | ApproveTaskCorrection updates the status of task correction. Authorization scope of `fm.task.correction.approve` is required. |
 | UpsertAllTaskCorrection | [UpsertAllTaskCorrectionRequest](#fm-UpsertAllTaskCorrectionRequest) | [UpsertAllTaskCorrectionResponse](#fm-UpsertAllTaskCorrectionResponse) | Creates new task-corrections or approves the existing ones. Authorization scope of `fm.task.correction.approve-all` is required. |
