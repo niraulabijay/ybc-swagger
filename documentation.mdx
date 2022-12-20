@@ -635,6 +635,8 @@
     - [ListTaskEmployeeRequest](#fm-ListTaskEmployeeRequest)
     - [ListTaskEmployeeResponse](#fm-ListTaskEmployeeResponse)
     - [ListTaskEmployeeResponse.TaskEmployeeResponse](#fm-ListTaskEmployeeResponse-TaskEmployeeResponse)
+    - [ListTaskGroupByAllClientRequest](#fm-ListTaskGroupByAllClientRequest)
+    - [ListTaskGroupByAllClientResponse](#fm-ListTaskGroupByAllClientResponse)
     - [ListTaskRequest](#fm-ListTaskRequest)
     - [ListTaskResponse](#fm-ListTaskResponse)
     - [RecurrenceDetails](#fm-RecurrenceDetails)
@@ -11188,6 +11190,39 @@ individual response
 
 
 
+<a name="fm-ListTaskGroupByAllClientRequest"></a>
+
+### ListTaskGroupByAllClientRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+| group_type | [string](#string) |  | type of group : WEEKLY, MONTHLY, YEARLY |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter response |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter response |
+
+
+
+
+
+
+<a name="fm-ListTaskGroupByAllClientResponse"></a>
+
+### ListTaskGroupByAllClientResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| result | [TaskGroupByClientResponse](#fm-TaskGroupByClientResponse) | repeated | list response |
+
+
+
+
+
+
 <a name="fm-ListTaskRequest"></a>
 
 ### ListTaskRequest
@@ -11979,6 +12014,7 @@ service to manage tasks
 | ListAllTaskGroup | [AllTaskGroupRequest](#fm-AllTaskGroupRequest) | [AllTaskGroupResponse](#fm-AllTaskGroupResponse) | Task Group Data All Periods Authorization scope of `fm.task.list` is required. |
 | ListTaskGroupByEmployee | [TaskGroupByEmployeeRequest](#fm-TaskGroupByEmployeeRequest) | [TaskGroupByEmployeeResponse](#fm-TaskGroupByEmployeeResponse) | Task Group Data By Employee Authorization scope of `fm.task.list` is required. |
 | ListTaskGroupByClient | [TaskGroupByClientRequest](#fm-TaskGroupByClientRequest) | [TaskGroupByClientResponse](#fm-TaskGroupByClientResponse) | Task Group Data By Client Authorization scope of `fm.task.list` is required. |
+| ListTaskGroupByAllClient | [ListTaskGroupByAllClientRequest](#fm-ListTaskGroupByAllClientRequest) | [ListTaskGroupByAllClientResponse](#fm-ListTaskGroupByAllClientResponse) | Task Group Data By all the Clients. Authorization scope of `fm.task.list` is required. |
 | UpdateTaskVarytime | [UpdateTaskVarytimeRequest](#fm-UpdateTaskVarytimeRequest) | [UpdateTaskVarytimeResponse](#fm-UpdateTaskVarytimeResponse) | Task Edit: Update Vary Time Authorization scope of `fm.task.update` is required. |
 | CreateAbsence | [CreateAbsenceRequest](#fm-CreateAbsenceRequest) | [CreateAbsenceResponse](#fm-CreateAbsenceResponse) | Creates absence for an employee. Authorization scope of `fm.absence.create` is required. |
 | ChangeAbsenceStatus | [ChangeAbsenceStatusRequest](#fm-ChangeAbsenceStatusRequest) | [ChangeAbsenceStatusResponse](#fm-ChangeAbsenceStatusResponse) | Change status of employee absence Authorization scope of `fm.absence.change-status` is required. |
