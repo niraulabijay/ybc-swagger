@@ -433,8 +433,6 @@
     - [JobTypeService](#fm-JobTypeService)
   
 - [login_service.proto](#login_service-proto)
-    - [AddWhiteListEmailsRequest](#fm-AddWhiteListEmailsRequest)
-    - [AddWhiteListEmailsResponse](#fm-AddWhiteListEmailsResponse)
     - [AssociateWithEmployeeRequest](#fm-AssociateWithEmployeeRequest)
     - [ChangePasswordRequest](#fm-ChangePasswordRequest)
     - [ChangePasswordResponse](#fm-ChangePasswordResponse)
@@ -471,10 +469,6 @@
     - [UserService](#fm-UserService)
   
 - [mail_service.proto](#mail_service-proto)
-    - [AddWhiteListAddressRequest](#fm-AddWhiteListAddressRequest)
-    - [AddWhiteListAddressResponse](#fm-AddWhiteListAddressResponse)
-    - [CheckWhiteListAddressRequest](#fm-CheckWhiteListAddressRequest)
-    - [CheckWhiteListAddressResponse](#fm-CheckWhiteListAddressResponse)
     - [SendEmailRequest](#fm-SendEmailRequest)
     - [SendEmailResponse](#fm-SendEmailResponse)
   
@@ -7879,37 +7873,6 @@ service to manage issues
 
 
 
-<a name="fm-AddWhiteListEmailsRequest"></a>
-
-### AddWhiteListEmailsRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| organization_id | [string](#string) |  | unique id of organization |
-| addresses | [string](#string) | repeated | list of email address to whitelist |
-
-
-
-
-
-
-<a name="fm-AddWhiteListEmailsResponse"></a>
-
-### AddWhiteListEmailsResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| status | [bool](#bool) |  | acknowledgement response |
-
-
-
-
-
-
 <a name="fm-AssociateWithEmployeeRequest"></a>
 
 ### AssociateWithEmployeeRequest
@@ -8448,7 +8411,6 @@ Genereates jwt tokens
 | ResetPassword | [ResetPasswordRequest](#fm-ResetPasswordRequest) | [ResetPasswordResponse](#fm-ResetPasswordResponse) | update password using token from email |
 | ForgotPassword | [ForgotPasswordRequest](#fm-ForgotPasswordRequest) | [ForgotPasswordResponse](#fm-ForgotPasswordResponse) | forgot password endpoint |
 | ChangePassword | [ChangePasswordRequest](#fm-ChangePasswordRequest) | [ChangePasswordResponse](#fm-ChangePasswordResponse) | change password endpoint for logged in user to change their own password |
-| AddWhiteListEmails | [AddWhiteListEmailsRequest](#fm-AddWhiteListEmailsRequest) | [AddWhiteListEmailsResponse](#fm-AddWhiteListEmailsResponse) | whitelist multiple email addresses |
 
  
 
@@ -8458,68 +8420,6 @@ Genereates jwt tokens
 <p align="right"><a href="#top">Top</a></p>
 
 ## mail_service.proto
-
-
-
-<a name="fm-AddWhiteListAddressRequest"></a>
-
-### AddWhiteListAddressRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| organization_id | [string](#string) |  | unique id of organization |
-| addresses | [string](#string) | repeated | list of email address to whitelist |
-
-
-
-
-
-
-<a name="fm-AddWhiteListAddressResponse"></a>
-
-### AddWhiteListAddressResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| status | [bool](#bool) |  | acknowledge |
-
-
-
-
-
-
-<a name="fm-CheckWhiteListAddressRequest"></a>
-
-### CheckWhiteListAddressRequest
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| organization_id | [string](#string) |  | unique id of organization |
-| email | [string](#string) |  | email address to check status of |
-
-
-
-
-
-
-<a name="fm-CheckWhiteListAddressResponse"></a>
-
-### CheckWhiteListAddressResponse
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| status | [string](#string) |  | status of mail |
-
-
-
 
 
 
@@ -8571,8 +8471,6 @@ Genereates jwt tokens
 | Method Name | Request Type | Response Type | Description |
 | ----------- | ------------ | ------------- | ------------|
 | SendEmail | [SendEmailRequest](#fm-SendEmailRequest) | [SendEmailResponse](#fm-SendEmailResponse) | Endpoint to send an |
-| AddWhiteListAddress | [AddWhiteListAddressRequest](#fm-AddWhiteListAddressRequest) | [AddWhiteListAddressResponse](#fm-AddWhiteListAddressResponse) | Endpoint to whitelist multiple email addresses |
-| CheckWhiteListAddress | [CheckWhiteListAddressRequest](#fm-CheckWhiteListAddressRequest) | [CheckWhiteListAddressResponse](#fm-CheckWhiteListAddressResponse) | Endpoint to check status of whitelisted email addresses |
 
  
 
@@ -10795,6 +10693,7 @@ Request to create task
 | is_break | [bool](#bool) |  | if break is true or false |
 | break_type | [string](#string) |  | if break is paid or unpaid |
 | is_recurrence | [bool](#bool) |  | whether task is recurrence |
+| task_type | [string](#string) |  | type of task |
 | recurrence | [UpsertRecurrence](#fm-UpsertRecurrence) |  | details of recurrence |
 
 
@@ -11819,6 +11718,7 @@ Request to update task
 | is_vary | [bool](#bool) |  | flag to confirm if the task is vary or not |
 | is_break | [bool](#bool) |  | update break to true or false |
 | break_type | [string](#string) |  | update break to true or false |
+| task_type | [string](#string) |  | type of task |
 
 
 
