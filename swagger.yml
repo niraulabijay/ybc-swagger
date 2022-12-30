@@ -5976,109 +5976,6 @@
         ]
       }
     },
-    "/v1/mail/send": {
-      "post": {
-        "summary": "Endpoint to send an",
-        "operationId": "MailService_SendEmail",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmSendEmailResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmSendEmailRequest"
-            }
-          }
-        ],
-        "tags": [
-          "MailService"
-        ]
-      }
-    },
-    "/v1/mail/whitelist": {
-      "get": {
-        "summary": "Endpoint to check status of whitelisted email addresses",
-        "operationId": "MailService_CheckWhiteListAddress",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmCheckWhiteListAddressResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "organization_id",
-            "description": "unique id of organization.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "email",
-            "description": "email address to check status of.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "MailService"
-        ]
-      },
-      "post": {
-        "summary": "Endpoint to whitelist multiple email addresses",
-        "operationId": "MailService_AddWhiteListAddress",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmAddWhiteListAddressResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmAddWhiteListAddressRequest"
-            }
-          }
-        ],
-        "tags": [
-          "MailService"
-        ]
-      }
-    },
     "/v1/meeting": {
       "get": {
         "summary": "List returns the list of meeting visible to the authorized user in\ndescending order. Scope of `fm.meeting.list` is required.",
@@ -9287,39 +9184,6 @@
           "UserService"
         ]
       }
-    },
-    "/v1/user/whitelist/mails": {
-      "post": {
-        "summary": "whitelist multiple email addresses",
-        "operationId": "UserService_AddWhiteListEmails",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmAddWhiteListEmailsResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmAddWhiteListEmailsRequest"
-            }
-          }
-        ],
-        "tags": [
-          "UserService"
-        ]
-      }
     }
   },
   "definitions": {
@@ -11597,56 +11461,6 @@
         }
       }
     },
-    "fmAddWhiteListAddressRequest": {
-      "type": "object",
-      "properties": {
-        "organization_id": {
-          "type": "string",
-          "title": "unique id of organization"
-        },
-        "addresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "list of email address to whitelist"
-        }
-      }
-    },
-    "fmAddWhiteListAddressResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "boolean",
-          "title": "acknowledge"
-        }
-      }
-    },
-    "fmAddWhiteListEmailsRequest": {
-      "type": "object",
-      "properties": {
-        "organization_id": {
-          "type": "string",
-          "title": "unique id of organization"
-        },
-        "addresses": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "list of email address to whitelist"
-        }
-      }
-    },
-    "fmAddWhiteListEmailsResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "boolean",
-          "title": "acknowledgement response"
-        }
-      }
-    },
     "fmAgenda": {
       "type": "object",
       "properties": {
@@ -12495,15 +12309,6 @@
         }
       },
       "title": "Request for checking in to opening_check and checking out to closing_check"
-    },
-    "fmCheckWhiteListAddressResponse": {
-      "type": "object",
-      "properties": {
-        "status": {
-          "type": "string",
-          "title": "status of mail"
-        }
-      }
     },
     "fmCheckinTaskRequest": {
       "type": "object",
@@ -14647,6 +14452,10 @@
         "is_recurrence": {
           "type": "boolean",
           "title": "whether task is recurrence"
+        },
+        "task_type": {
+          "type": "string",
+          "title": "type of task"
         },
         "recurrence": {
           "$ref": "#/definitions/fmUpsertRecurrence",
@@ -17964,31 +17773,6 @@
         }
       }
     },
-    "fmSendEmailRequest": {
-      "type": "object",
-      "properties": {
-        "signature": {
-          "type": "string",
-          "title": "signature"
-        },
-        "to_address": {
-          "type": "string",
-          "title": "Email address to send email to"
-        },
-        "subject": {
-          "type": "string",
-          "title": "subject of email"
-        },
-        "html_body": {
-          "type": "string",
-          "title": "message body in html format"
-        },
-        "text_body": {
-          "type": "string",
-          "title": "message body in plain format"
-        }
-      }
-    },
     "fmSendEmailResponse": {
       "type": "object",
       "properties": {
@@ -19941,6 +19725,10 @@
         "break_type": {
           "type": "string",
           "title": "update break to true or false"
+        },
+        "task_type": {
+          "type": "string",
+          "title": "type of task"
         }
       },
       "title": "Request to update task"
