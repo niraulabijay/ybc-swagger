@@ -14455,7 +14455,7 @@
         },
         "task_type": {
           "type": "string",
-          "title": "type of task"
+          "title": "type of task: Allowed [\"DOC\", \"VARIATION\", \"MOBILE\", \"OTHERS\", \"PERIODIC(REGULAR)\", \"PERIODIC(ONE OFF)\", \"PERIODIC(WINDOW)\", \"PERIODIC(ACCOMODATION)\"]"
         },
         "recurrence": {
           "$ref": "#/definitions/fmUpsertRecurrence",
@@ -18090,6 +18090,10 @@
         "break_type": {
           "type": "string",
           "title": "to check break type, paid or unpaid"
+        },
+        "task_type": {
+          "type": "string",
+          "title": "type of task: Allowed [\"DOC\", \"VARIATION\", \"MOBILE\", \"OTHERS\", \"PERIODIC(REGULAR)\", \"PERIODIC(ONE OFF)\", \"PERIODIC(WINDOW)\", \"PERIODIC(ACCOMODATION)\"]"
         },
         "is_recurrence": {
           "type": "boolean",
