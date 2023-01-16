@@ -8109,6 +8109,13 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "task_type",
+            "description": "type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION).",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
