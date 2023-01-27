@@ -8123,6 +8123,331 @@
         ]
       }
     },
+    "/v1/tasks/approved/group_by_client": {
+      "get": {
+        "summary": "Task Group Data By Client\nAuthorization scope of `fm.task.list` is required.",
+        "operationId": "TaskService_ListTaskGroupByClientApproved",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmTaskGroupByClientResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "group_type",
+            "description": "type of group : WEEKLY, MONTHLY, YEARLY.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "id of client.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "description": "start date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "task_type",
+            "description": "type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
+    "/v1/tasks/approved/group_by_client/all": {
+      "get": {
+        "summary": "Task Group Data By all the Clients.\nAuthorization scope of `fm.task.list` is required.",
+        "operationId": "TaskService_ListTaskGroupByAllClientApproved",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListTaskGroupByAllClientResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "group_type",
+            "description": "type of group : WEEKLY, MONTHLY, YEARLY.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "description": "start date to filter response.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date to filter response.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "task_type",
+            "description": "type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
+    "/v1/tasks/approved/group_by_employee": {
+      "get": {
+        "summary": "Task Group Data By Employee\nAuthorization scope of `fm.task.list` is required.",
+        "operationId": "TaskService_ListTaskGroupByEmployeeApproved",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmTaskGroupByEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "group_type",
+            "description": "type of group.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "employee_id",
+            "description": "id of employee.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "description": "start date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "task_type",
+            "description": "type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
+    "/v1/tasks/approved/groups": {
+      "get": {
+        "summary": "Task Group Data By Period (One of : Weekly, Monthly, Yearly)\nAuthorization scope of `fm.task.list` is required.",
+        "operationId": "TaskService_ListTaskGroupApproved",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmTaskGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "group_type",
+            "description": "type of group : eg: YEARLY ,MONTHLY, WEEKLY.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "description": "start date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "task_type",
+            "description": "type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
+    "/v1/tasks/approved/groups/all": {
+      "get": {
+        "summary": "Task Group Data All Periods\nAuthorization scope of `fm.task.list` is required.",
+        "operationId": "TaskService_ListAllTaskGroupApproved",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmAllTaskGroupResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter",
+            "description": "filter : Allowed values : EMPLOYEE, CLIENT.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter_id",
+            "description": "id of filter : client_id or employee_id (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "description": "start date of the week.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date of the week.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "current_date",
+            "description": "current date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "task_type",
+            "description": "type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
     "/v1/tasks/change-timesheet-correction-status": {
       "patch": {
         "summary": "Change timesheet correction request status",
