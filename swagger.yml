@@ -7281,6 +7281,38 @@
         ]
       }
     },
+    "/v1/organization/detail/{organization_id}": {
+      "get": {
+        "summary": "Returns the details of a particular organization and its associated employees.",
+        "operationId": "OrganizationService_Detail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmOrganizationDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "id of the organization whose information is to be fetched",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "OrganizationService"
+        ]
+      }
+    },
     "/v1/organization/reset-passwords": {
       "post": {
         "summary": "Reset all user password",
@@ -7307,6 +7339,38 @@
             "schema": {
               "$ref": "#/definitions/fmResetAllUserPasswordRequest"
             }
+          }
+        ],
+        "tags": [
+          "OrganizationService"
+        ]
+      }
+    },
+    "/v1/organization/roles/list": {
+      "get": {
+        "summary": "Lists the roles and scopes of a particular organization.",
+        "operationId": "OrganizationService_ListOrganizationRoles",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListOrganizationRolesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -11195,6 +11259,26 @@
         }
       },
       "title": "inividual organization response"
+    },
+    "ListOrganizationRolesResponseOrganizationRoles": {
+      "type": "object",
+      "properties": {
+        "role_id": {
+          "type": "string",
+          "title": "unique id of the role"
+        },
+        "role_name": {
+          "type": "string",
+          "title": "unique name of the role"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "scopes for this role"
+        }
+      }
     },
     "ListParentMobilizationResponseParentMobilizationResponse": {
       "type": "object",
@@ -16030,6 +16114,44 @@
         }
       }
     },
+    "fmEmployeesDetails": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "title": "unique id of the employee"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization the employee belongs to"
+        },
+        "first_name": {
+          "type": "string",
+          "title": "first name of the employee"
+        },
+        "middle_name": {
+          "type": "string",
+          "title": "middle name of the employee (if exists)"
+        },
+        "last_name": {
+          "type": "string",
+          "title": "last/family name of the employee"
+        },
+        "contact_detail": {
+          "$ref": "#/definitions/fmContactDetail",
+          "title": "contact details of the employee"
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the employee was created at"
+        },
+        "user_employee_details": {
+          "$ref": "#/definitions/fmUserEmployeeDetails",
+          "title": "user-employee details"
+        }
+      }
+    },
     "fmEmploymentHistoryInfo": {
       "type": "object",
       "properties": {
@@ -17218,6 +17340,18 @@
       },
       "title": "response for fetching list of organization"
     },
+    "fmListOrganizationRolesResponse": {
+      "type": "object",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListOrganizationRolesResponseOrganizationRoles"
+          },
+          "title": "list of available roles"
+        }
+      }
+    },
     "fmListParentMobilizationResponse": {
       "type": "object",
       "properties": {
@@ -17871,6 +18005,35 @@
         "recurrence": {
           "$ref": "#/definitions/fmRecurrenceDetails",
           "title": "details of recurrence"
+        }
+      }
+    },
+    "fmOrganizationDetailResponse": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of organization"
+        },
+        "contact_detail": {
+          "$ref": "#/definitions/fmContactDetail",
+          "title": "contact details of the organization"
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "time the organization was created at"
+        },
+        "employees_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmEmployeesDetails"
+          },
+          "title": "details of employees of this organization"
         }
       }
     },
@@ -20639,6 +20802,31 @@
             "type": "string"
           },
           "title": "scopes of user"
+        }
+      }
+    },
+    "fmUserEmployeeDetails": {
+      "type": "object",
+      "properties": {
+        "user_employee_id": {
+          "type": "string",
+          "title": "unique id of the user-employee"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "user_id": {
+          "type": "string",
+          "title": "id of the user"
+        },
+        "username": {
+          "type": "string",
+          "title": "unique username of the user"
+        },
+        "full_name": {
+          "type": "string",
+          "title": "name of the user"
         }
       }
     },
