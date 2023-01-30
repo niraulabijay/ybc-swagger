@@ -561,11 +561,18 @@
 - [organization_service.proto](#organization_service-proto)
     - [CreateOrganizationRequest](#fm-CreateOrganizationRequest)
     - [CreateOrganizationResponse](#fm-CreateOrganizationResponse)
+    - [EmployeesDetails](#fm-EmployeesDetails)
     - [ListOrganizationRequest](#fm-ListOrganizationRequest)
     - [ListOrganizationResponse](#fm-ListOrganizationResponse)
     - [ListOrganizationResponse.OrganizationResponse](#fm-ListOrganizationResponse-OrganizationResponse)
+    - [ListOrganizationRolesRequest](#fm-ListOrganizationRolesRequest)
+    - [ListOrganizationRolesResponse](#fm-ListOrganizationRolesResponse)
+    - [ListOrganizationRolesResponse.OrganizationRoles](#fm-ListOrganizationRolesResponse-OrganizationRoles)
+    - [OrganizationDetailRequest](#fm-OrganizationDetailRequest)
+    - [OrganizationDetailResponse](#fm-OrganizationDetailResponse)
     - [ResetAllUserPasswordRequest](#fm-ResetAllUserPasswordRequest)
     - [ResetAllUserPasswordResponse](#fm-ResetAllUserPasswordResponse)
+    - [UserEmployeeDetails](#fm-UserEmployeeDetails)
   
     - [OrganizationService](#fm-OrganizationService)
   
@@ -10014,6 +10021,28 @@ response when creating new organization
 
 
 
+<a name="fm-EmployeesDetails"></a>
+
+### EmployeesDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of the employee |
+| organization_id | [string](#string) |  | id of the organization the employee belongs to |
+| first_name | [string](#string) |  | first name of the employee |
+| middle_name | [string](#string) |  | middle name of the employee (if exists) |
+| last_name | [string](#string) |  | last/family name of the employee |
+| contact_detail | [ContactDetail](#fm-ContactDetail) |  | contact details of the employee |
+| created_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the employee was created at |
+| user_employee_details | [UserEmployeeDetails](#fm-UserEmployeeDetails) |  | user-employee details |
+
+
+
+
+
+
 <a name="fm-ListOrganizationRequest"></a>
 
 ### ListOrganizationRequest
@@ -10062,6 +10091,87 @@ inividual organization response
 
 
 
+<a name="fm-ListOrganizationRolesRequest"></a>
+
+### ListOrganizationRolesRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of the organization |
+
+
+
+
+
+
+<a name="fm-ListOrganizationRolesResponse"></a>
+
+### ListOrganizationRolesResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| roles | [ListOrganizationRolesResponse.OrganizationRoles](#fm-ListOrganizationRolesResponse-OrganizationRoles) | repeated | list of available roles |
+
+
+
+
+
+
+<a name="fm-ListOrganizationRolesResponse-OrganizationRoles"></a>
+
+### ListOrganizationRolesResponse.OrganizationRoles
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| role_id | [string](#string) |  | unique id of the role |
+| role_name | [string](#string) |  | unique name of the role |
+| scopes | [string](#string) | repeated | scopes for this role |
+
+
+
+
+
+
+<a name="fm-OrganizationDetailRequest"></a>
+
+### OrganizationDetailRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization whose information is to be fetched |
+
+
+
+
+
+
+<a name="fm-OrganizationDetailResponse"></a>
+
+### OrganizationDetailResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| name | [string](#string) |  | name of organization |
+| contact_detail | [ContactDetail](#fm-ContactDetail) |  | contact details of the organization |
+| created_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | time the organization was created at |
+| employees_details | [EmployeesDetails](#fm-EmployeesDetails) | repeated | details of employees of this organization |
+
+
+
+
+
+
 <a name="fm-ResetAllUserPasswordRequest"></a>
 
 ### ResetAllUserPasswordRequest
@@ -10092,6 +10202,25 @@ inividual organization response
 
 
 
+
+<a name="fm-UserEmployeeDetails"></a>
+
+### UserEmployeeDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_employee_id | [string](#string) |  | unique id of the user-employee |
+| employee_id | [string](#string) |  | id of the employee |
+| user_id | [string](#string) |  | id of the user |
+| username | [string](#string) |  | unique username of the user |
+| full_name | [string](#string) |  | name of the user |
+
+
+
+
+
  
 
  
@@ -10108,6 +10237,8 @@ inividual organization response
 | ----------- | ------------ | ------------- | ------------|
 | Create | [CreateOrganizationRequest](#fm-CreateOrganizationRequest) | [CreateOrganizationResponse](#fm-CreateOrganizationResponse) | Create a new organization. |
 | List | [ListOrganizationRequest](#fm-ListOrganizationRequest) | [ListOrganizationResponse](#fm-ListOrganizationResponse) | List returns the list of organization visible to the authroized user in descending order. |
+| Detail | [OrganizationDetailRequest](#fm-OrganizationDetailRequest) | [OrganizationDetailResponse](#fm-OrganizationDetailResponse) | Returns the details of a particular organization and its associated employees. |
+| ListOrganizationRoles | [ListOrganizationRolesRequest](#fm-ListOrganizationRolesRequest) | [ListOrganizationRolesResponse](#fm-ListOrganizationRolesResponse) | Lists the roles and scopes of a particular organization. |
 | ResetAllUserPassword | [ResetAllUserPasswordRequest](#fm-ResetAllUserPasswordRequest) | [ResetAllUserPasswordResponse](#fm-ResetAllUserPasswordResponse) | Reset all user password |
 
  
