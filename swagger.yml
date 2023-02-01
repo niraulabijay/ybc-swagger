@@ -9733,6 +9733,36 @@
         }
       }
     },
+    "CreateOrganizationRequestOrganizationDetails": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "title": "name of the organization"
+        },
+        "contact_details": {
+          "$ref": "#/definitions/fmContactDetail",
+          "title": "contact details of the organization"
+        }
+      }
+    },
+    "CreateOrganizationRequestUserDetails": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "username of the user"
+        },
+        "password": {
+          "type": "string",
+          "title": "password of the user"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of the user"
+        }
+      }
+    },
     "EmployeeConfidentialDetailResponseConfidentialDetails": {
       "type": "object",
       "properties": {
@@ -14744,13 +14774,13 @@
     "fmCreateOrganizationRequest": {
       "type": "object",
       "properties": {
-        "name": {
-          "type": "string",
-          "title": "name of the organization"
+        "org_details": {
+          "$ref": "#/definitions/CreateOrganizationRequestOrganizationDetails",
+          "title": "details of the organization to be created"
         },
-        "contact_details": {
-          "$ref": "#/definitions/fmContactDetail",
-          "title": "contact details of the organization"
+        "user_details": {
+          "$ref": "#/definitions/CreateOrganizationRequestUserDetails",
+          "title": "details of the user"
         }
       }
     },
