@@ -560,6 +560,8 @@
   
 - [organization_service.proto](#organization_service-proto)
     - [CreateOrganizationRequest](#fm-CreateOrganizationRequest)
+    - [CreateOrganizationRequest.OrganizationDetails](#fm-CreateOrganizationRequest-OrganizationDetails)
+    - [CreateOrganizationRequest.UserDetails](#fm-CreateOrganizationRequest-UserDetails)
     - [CreateOrganizationResponse](#fm-CreateOrganizationResponse)
     - [EmployeesDetails](#fm-EmployeesDetails)
     - [ListOrganizationRequest](#fm-ListOrganizationRequest)
@@ -9998,8 +10000,41 @@ Update note response
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| org_details | [CreateOrganizationRequest.OrganizationDetails](#fm-CreateOrganizationRequest-OrganizationDetails) |  | details of the organization to be created |
+| user_details | [CreateOrganizationRequest.UserDetails](#fm-CreateOrganizationRequest-UserDetails) |  | details of the user |
+
+
+
+
+
+
+<a name="fm-CreateOrganizationRequest-OrganizationDetails"></a>
+
+### CreateOrganizationRequest.OrganizationDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
 | name | [string](#string) |  | name of the organization |
 | contact_details | [ContactDetail](#fm-ContactDetail) |  | contact details of the organization |
+
+
+
+
+
+
+<a name="fm-CreateOrganizationRequest-UserDetails"></a>
+
+### CreateOrganizationRequest.UserDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| username | [string](#string) |  | username of the user |
+| password | [string](#string) |  | password of the user |
+| name | [string](#string) |  | name of the user |
 
 
 
