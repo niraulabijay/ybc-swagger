@@ -6047,11 +6047,15 @@
             "format": "date-time"
           },
           {
-            "name": "client_id",
-            "description": "unique id of client.",
+            "name": "client_ids",
+            "description": "ids of client whose meeting is to be fetched.",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           },
           {
             "name": "department_id",
