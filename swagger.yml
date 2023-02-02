@@ -7382,6 +7382,82 @@
         ]
       }
     },
+    "/v1/organization/user/roles-scopes": {
+      "patch": {
+        "summary": "Updates roles and scopes of a user-employee.",
+        "operationId": "OrganizationService_UpdateUserEmployeeRolesScopes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateUserEmployeeRolesScopesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateUserEmployeeRolesScopesRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrganizationService"
+        ]
+      }
+    },
+    "/v1/organization/user/roles-scopes/list": {
+      "get": {
+        "summary": "Lists user-employee roles and scopes.",
+        "operationId": "OrganizationService_ListUserEmployeeRolesScopes",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListUserEmployeeRolesScopesResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "user_employee_ids",
+            "description": "ids of user employee to fetch roles and scopes.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "OrganizationService"
+        ]
+      }
+    },
     "/v1/organizations": {
       "get": {
         "summary": "List returns the list of organization visible to the authroized user in\ndescending order.",
@@ -11548,6 +11624,29 @@
         }
       },
       "title": "individual tupe response"
+    },
+    "ListUserEmployeeRolesScopesResponseUserEmployeeRolesScopes": {
+      "type": "object",
+      "properties": {
+        "user_employee_id": {
+          "type": "string",
+          "title": "unique id of the user-employee"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "roles of the user-employee"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "scopes of the user-employee"
+        }
+      }
     },
     "RecurrenceTypeDetailsMonthlyWeekDetails": {
       "type": "object",
@@ -17588,6 +17687,18 @@
         }
       }
     },
+    "fmListUserEmployeeRolesScopesResponse": {
+      "type": "object",
+      "properties": {
+        "user_employees": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListUserEmployeeRolesScopesResponseUserEmployeeRolesScopes"
+          },
+          "title": "list of user-employee roles/scopes"
+        }
+      }
+    },
     "fmLoginRequest": {
       "type": "object",
       "properties": {
@@ -20424,6 +20535,42 @@
         "tupe_id": {
           "type": "string",
           "title": "unique id of the updated tupe"
+        }
+      }
+    },
+    "fmUpdateUserEmployeeRolesScopesRequest": {
+      "type": "object",
+      "properties": {
+        "user_employee_id": {
+          "type": "string",
+          "title": "unique id of the user-employee"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization the user-employee belongs to"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "roles to be updated"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "scopes to be updated"
+        }
+      }
+    },
+    "fmUpdateUserEmployeeRolesScopesResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "action response"
         }
       }
     },
