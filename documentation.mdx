@@ -570,10 +570,15 @@
     - [ListOrganizationRolesRequest](#fm-ListOrganizationRolesRequest)
     - [ListOrganizationRolesResponse](#fm-ListOrganizationRolesResponse)
     - [ListOrganizationRolesResponse.OrganizationRoles](#fm-ListOrganizationRolesResponse-OrganizationRoles)
+    - [ListUserEmployeeRolesScopesRequest](#fm-ListUserEmployeeRolesScopesRequest)
+    - [ListUserEmployeeRolesScopesResponse](#fm-ListUserEmployeeRolesScopesResponse)
+    - [ListUserEmployeeRolesScopesResponse.UserEmployeeRolesScopes](#fm-ListUserEmployeeRolesScopesResponse-UserEmployeeRolesScopes)
     - [OrganizationDetailRequest](#fm-OrganizationDetailRequest)
     - [OrganizationDetailResponse](#fm-OrganizationDetailResponse)
     - [ResetAllUserPasswordRequest](#fm-ResetAllUserPasswordRequest)
     - [ResetAllUserPasswordResponse](#fm-ResetAllUserPasswordResponse)
+    - [UpdateUserEmployeeRolesScopesRequest](#fm-UpdateUserEmployeeRolesScopesRequest)
+    - [UpdateUserEmployeeRolesScopesResponse](#fm-UpdateUserEmployeeRolesScopesResponse)
     - [UserEmployeeDetails](#fm-UserEmployeeDetails)
   
     - [OrganizationService](#fm-OrganizationService)
@@ -10173,6 +10178,54 @@ inividual organization response
 
 
 
+<a name="fm-ListUserEmployeeRolesScopesRequest"></a>
+
+### ListUserEmployeeRolesScopesRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| user_employee_ids | [string](#string) | repeated | ids of user employee to fetch roles and scopes |
+
+
+
+
+
+
+<a name="fm-ListUserEmployeeRolesScopesResponse"></a>
+
+### ListUserEmployeeRolesScopesResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_employees | [ListUserEmployeeRolesScopesResponse.UserEmployeeRolesScopes](#fm-ListUserEmployeeRolesScopesResponse-UserEmployeeRolesScopes) | repeated | list of user-employee roles/scopes |
+
+
+
+
+
+
+<a name="fm-ListUserEmployeeRolesScopesResponse-UserEmployeeRolesScopes"></a>
+
+### ListUserEmployeeRolesScopesResponse.UserEmployeeRolesScopes
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_employee_id | [string](#string) |  | unique id of the user-employee |
+| roles | [string](#string) | repeated | roles of the user-employee |
+| scopes | [string](#string) | repeated | scopes of the user-employee |
+
+
+
+
+
+
 <a name="fm-OrganizationDetailRequest"></a>
 
 ### OrganizationDetailRequest
@@ -10238,6 +10291,39 @@ inividual organization response
 
 
 
+<a name="fm-UpdateUserEmployeeRolesScopesRequest"></a>
+
+### UpdateUserEmployeeRolesScopesRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_employee_id | [string](#string) |  | unique id of the user-employee |
+| organization_id | [string](#string) |  | id of the organization the user-employee belongs to |
+| roles | [string](#string) | repeated | roles to be updated |
+| scopes | [string](#string) | repeated | scopes to be updated |
+
+
+
+
+
+
+<a name="fm-UpdateUserEmployeeRolesScopesResponse"></a>
+
+### UpdateUserEmployeeRolesScopesResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
 <a name="fm-UserEmployeeDetails"></a>
 
 ### UserEmployeeDetails
@@ -10275,6 +10361,8 @@ inividual organization response
 | Detail | [OrganizationDetailRequest](#fm-OrganizationDetailRequest) | [OrganizationDetailResponse](#fm-OrganizationDetailResponse) | Returns the details of a particular organization and its associated employees. |
 | ListOrganizationRoles | [ListOrganizationRolesRequest](#fm-ListOrganizationRolesRequest) | [ListOrganizationRolesResponse](#fm-ListOrganizationRolesResponse) | Lists the roles and scopes of a particular organization. |
 | ResetAllUserPassword | [ResetAllUserPasswordRequest](#fm-ResetAllUserPasswordRequest) | [ResetAllUserPasswordResponse](#fm-ResetAllUserPasswordResponse) | Reset all user password |
+| UpdateUserEmployeeRolesScopes | [UpdateUserEmployeeRolesScopesRequest](#fm-UpdateUserEmployeeRolesScopesRequest) | [UpdateUserEmployeeRolesScopesResponse](#fm-UpdateUserEmployeeRolesScopesResponse) | Updates roles and scopes of a user-employee. |
+| ListUserEmployeeRolesScopes | [ListUserEmployeeRolesScopesRequest](#fm-ListUserEmployeeRolesScopesRequest) | [ListUserEmployeeRolesScopesResponse](#fm-ListUserEmployeeRolesScopesResponse) | Lists user-employee roles and scopes. |
 
  
 
