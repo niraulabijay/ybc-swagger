@@ -8001,6 +8001,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "employee_id",
+            "description": "employee id to filter the absence response.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -16113,6 +16120,10 @@
         "status": {
           "type": "string",
           "title": "fetch employees of this status"
+        },
+        "organization_admin": {
+          "type": "boolean",
+          "title": "employee is org admin"
         }
       },
       "title": "Response for employee detail"
