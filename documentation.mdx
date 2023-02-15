@@ -172,6 +172,8 @@
     - [CreateNewMobilizationResponse](#fm-CreateNewMobilizationResponse)
     - [CreateNewStageRequest](#fm-CreateNewStageRequest)
     - [CreateNewStageResponse](#fm-CreateNewStageResponse)
+    - [CreatePlannerRequest](#fm-CreatePlannerRequest)
+    - [CreatePlannerResponse](#fm-CreatePlannerResponse)
     - [CreateStageRequest](#fm-CreateStageRequest)
     - [CreateTupeRequest](#fm-CreateTupeRequest)
     - [CreateTupeResponse](#fm-CreateTupeResponse)
@@ -188,6 +190,7 @@
     - [DeleteNewMobilizationRequest](#fm-DeleteNewMobilizationRequest)
     - [DeleteNewStageRequest](#fm-DeleteNewStageRequest)
     - [DeleteParentMobilizationRequest](#fm-DeleteParentMobilizationRequest)
+    - [DeletePlannerRequest](#fm-DeletePlannerRequest)
     - [DeleteTupeRequest](#fm-DeleteTupeRequest)
     - [Invoice](#fm-Invoice)
     - [JobDates](#fm-JobDates)
@@ -239,6 +242,9 @@
     - [ListParentMobilizationRequest](#fm-ListParentMobilizationRequest)
     - [ListParentMobilizationResponse](#fm-ListParentMobilizationResponse)
     - [ListParentMobilizationResponse.ParentMobilizationResponse](#fm-ListParentMobilizationResponse-ParentMobilizationResponse)
+    - [ListPlannerRequest](#fm-ListPlannerRequest)
+    - [ListPlannerResponse](#fm-ListPlannerResponse)
+    - [ListPlannerResponse.PlannerList](#fm-ListPlannerResponse-PlannerList)
     - [ListTenderStatusRequest](#fm-ListTenderStatusRequest)
     - [ListTenderStatusResponse](#fm-ListTenderStatusResponse)
     - [ListTenderStatusResponse.TenderStatusResponse](#fm-ListTenderStatusResponse-TenderStatusResponse)
@@ -288,6 +294,8 @@
     - [UpdateNewMobilizationResponse](#fm-UpdateNewMobilizationResponse)
     - [UpdateNewStageRequest](#fm-UpdateNewStageRequest)
     - [UpdateNewStageResponse](#fm-UpdateNewStageResponse)
+    - [UpdatePlannerRequest](#fm-UpdatePlannerRequest)
+    - [UpdatePlannerResponse](#fm-UpdatePlannerResponse)
     - [UpdateTupeRequest](#fm-UpdateTupeRequest)
     - [UpdateTupeResponse](#fm-UpdateTupeResponse)
     - [UpsertCRMMobilizationTaskDateRequest](#fm-UpsertCRMMobilizationTaskDateRequest)
@@ -3544,6 +3552,41 @@ Response for create client requests
 
 
 
+<a name="fm-CreatePlannerRequest"></a>
+
+### CreatePlannerRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | id of the organization |
+| task_title | [string](#string) |  | title of the task |
+| description | [string](#string) |  | description of the task |
+| estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | time estimated to complete the task |
+| task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
+
+
+
+
+
+
+<a name="fm-CreatePlannerResponse"></a>
+
+### CreatePlannerResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| planner_id | [string](#string) |  | unique id of the planner created |
+
+
+
+
+
+
 <a name="fm-CreateStageRequest"></a>
 
 ### CreateStageRequest
@@ -3807,6 +3850,22 @@ Response for create client requests
 | ----- | ---- | ----- | ----------- |
 | parent_mobilization_id | [string](#string) |  | id of the parent mobilization to be deleted |
 | organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-DeletePlannerRequest"></a>
+
+### DeletePlannerRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| planner_id | [string](#string) |  | id of the planner to be deleted |
+| organization_id | [string](#string) |  | id of the associated organization |
 
 
 
@@ -4740,6 +4799,62 @@ individual response
 
 
 
+<a name="fm-ListPlannerRequest"></a>
+
+### ListPlannerRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter for list request |
+| organization_id | [string](#string) |  | id of the organization |
+| client_id | [string](#string) |  | filter by client id (optional) |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter by task-date |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter by task-date |
+
+
+
+
+
+
+<a name="fm-ListPlannerResponse"></a>
+
+### ListPlannerResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| planners | [ListPlannerResponse.PlannerList](#fm-ListPlannerResponse-PlannerList) | repeated | list response of planner |
+
+
+
+
+
+
+<a name="fm-ListPlannerResponse-PlannerList"></a>
+
+### ListPlannerResponse.PlannerList
+individual planner response
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| planner_id | [string](#string) |  | unique id of the planner |
+| client_id | [string](#string) |  | id of the client |
+| organization_id | [string](#string) |  | id of the organization |
+| task_title | [string](#string) |  | title of the task |
+| description | [string](#string) |  | description of the task |
+| estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | time estimated to complete the task |
+| task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
+| created_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the planner |
+
+
+
+
+
+
 <a name="fm-ListTenderStatusRequest"></a>
 
 ### ListTenderStatusRequest
@@ -5589,6 +5704,41 @@ response for UpdateClientRequest
 
 
 
+<a name="fm-UpdatePlannerRequest"></a>
+
+### UpdatePlannerRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| planner_id | [string](#string) |  | unique id of the planner to be updated |
+| organization_id | [string](#string) |  | id of the organization |
+| task_title | [string](#string) |  | title of the task |
+| description | [string](#string) |  | description of the task |
+| estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | time estimated to complete the task |
+| task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
+
+
+
+
+
+
+<a name="fm-UpdatePlannerResponse"></a>
+
+### UpdatePlannerResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| planner_id | [string](#string) |  | unique id of the updated planner |
+
+
+
+
+
+
 <a name="fm-UpdateTupeRequest"></a>
 
 ### UpdateTupeRequest
@@ -5883,6 +6033,10 @@ response for UpdateClientRequest
 | ListTupe | [ListTupeRequest](#fm-ListTupeRequest) | [ListTupeResponse](#fm-ListTupeResponse) | Returns the list of tupe visible to the authorized user in descending order. Authorization scope of `fm.tupe.list` is required. |
 | UpdateTupe | [UpdateTupeRequest](#fm-UpdateTupeRequest) | [UpdateTupeResponse](#fm-UpdateTupeResponse) | Updates an existing tupe. Authorization scope of `fm.tupe.update` is required. |
 | DeleteTupe | [DeleteTupeRequest](#fm-DeleteTupeRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes an existing tupe. Authorization scope of `fm.tupe.delete` is required. |
+| CreatePlanner | [CreatePlannerRequest](#fm-CreatePlannerRequest) | [CreatePlannerResponse](#fm-CreatePlannerResponse) | Creates a planner for client. Authorization scope of `fm.planner.create` is required. |
+| UpdatePlanner | [UpdatePlannerRequest](#fm-UpdatePlannerRequest) | [UpdatePlannerResponse](#fm-UpdatePlannerResponse) | Updates a particular planner. Authorization scope of `fm.planner.update` is required. |
+| ListPlanner | [ListPlannerRequest](#fm-ListPlannerRequest) | [ListPlannerResponse](#fm-ListPlannerResponse) | Returns the list of planners visible to the authorized user in descending order. Authorization scope of `fm.planner.list` is required. |
+| DeletePlanner | [DeletePlannerRequest](#fm-DeletePlannerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a planner. Authorization scope of `fm.planner.delete` is required. |
 
  
 
@@ -6809,6 +6963,7 @@ Response for employee detail
 | next_of_keen_employee_info | [NextOfKeenEmployeeInfo](#fm-NextOfKeenEmployeeInfo) |  | Next of kee Information about the employee |
 | education_employee_info | [EducationEmployeeInformation](#fm-EducationEmployeeInformation) | repeated | education Information about the employee |
 | status | [string](#string) |  | fetch employees of this status |
+| organization_admin | [bool](#bool) |  | employee is org admin |
 
 
 
@@ -10981,6 +11136,7 @@ Response from create task
 | ----- | ---- | ----- | ----------- |
 | filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter for list absence request |
 | organization_id | [string](#string) |  | organization to which the employee belongs |
+| employee_id | [string](#string) |  | employee id to filter the absence response |
 
 
 
