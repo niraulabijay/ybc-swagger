@@ -3126,6 +3126,174 @@
         ]
       }
     },
+    "/v1/client/planner/create": {
+      "post": {
+        "summary": "Creates a planner for client.\nAuthorization scope of `fm.planner.create` is required.",
+        "operationId": "ClientService_CreatePlanner",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreatePlannerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreatePlannerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/planner/delete": {
+      "post": {
+        "summary": "Deletes a planner.\nAuthorization scope of `fm.planner.delete` is required.",
+        "operationId": "ClientService_DeletePlanner",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeletePlannerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/planner/list": {
+      "get": {
+        "summary": "Returns the list of planners visible to the authorized user in descending order.\nAuthorization scope of `fm.planner.list` is required.",
+        "operationId": "ClientService_ListPlanner",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListPlannerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "filter by client id (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "description": "start date to filter by task-date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date to filter by task-date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
+    "/v1/client/planner/update": {
+      "patch": {
+        "summary": "Updates a particular planner.\nAuthorization scope of `fm.planner.update` is required.",
+        "operationId": "ClientService_UpdatePlanner",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdatePlannerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdatePlannerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/set-head-office": {
       "post": {
         "summary": "set a single head office from clients.\nScope of `fm.client.set-headoffice` is required.",
@@ -11427,6 +11595,46 @@
       },
       "title": "individual response"
     },
+    "ListPlannerResponsePlannerList": {
+      "type": "object",
+      "properties": {
+        "planner_id": {
+          "type": "string",
+          "title": "unique id of the planner"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "task_title": {
+          "type": "string",
+          "title": "title of the task"
+        },
+        "description": {
+          "type": "string",
+          "title": "description of the task"
+        },
+        "estimated_time": {
+          "type": "string",
+          "title": "time estimated to complete the task"
+        },
+        "task_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of the task"
+        },
+        "created_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "created date of the planner"
+        }
+      },
+      "title": "individual planner response"
+    },
     "ListRegionResponseRegionResponse": {
       "type": "object",
       "properties": {
@@ -14900,6 +15108,45 @@
       },
       "title": "response when creating new organization"
     },
+    "fmCreatePlannerRequest": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "task_title": {
+          "type": "string",
+          "title": "title of the task"
+        },
+        "description": {
+          "type": "string",
+          "title": "description of the task"
+        },
+        "estimated_time": {
+          "type": "string",
+          "title": "time estimated to complete the task"
+        },
+        "task_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of the task"
+        }
+      }
+    },
+    "fmCreatePlannerResponse": {
+      "type": "object",
+      "properties": {
+        "planner_id": {
+          "type": "string",
+          "title": "unique id of the planner created"
+        }
+      }
+    },
     "fmCreateRegionRequest": {
       "type": "object",
       "properties": {
@@ -15661,6 +15908,19 @@
         "organization_id": {
           "type": "string",
           "title": "id of the organization"
+        }
+      }
+    },
+    "fmDeletePlannerRequest": {
+      "type": "object",
+      "properties": {
+        "planner_id": {
+          "type": "string",
+          "title": "id of the planner to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the associated organization"
         }
       }
     },
@@ -17517,6 +17777,18 @@
             "$ref": "#/definitions/fmTimesheetResponse"
           },
           "title": "list of periodic tasks  queried by user"
+        }
+      }
+    },
+    "fmListPlannerResponse": {
+      "type": "object",
+      "properties": {
+        "planners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ListPlannerResponsePlannerList"
+          },
+          "title": "list response of planner"
         }
       }
     },
@@ -20206,6 +20478,45 @@
         "check_id": {
           "type": "string",
           "title": "updated check in/out id"
+        }
+      }
+    },
+    "fmUpdatePlannerRequest": {
+      "type": "object",
+      "properties": {
+        "planner_id": {
+          "type": "string",
+          "title": "unique id of the planner to be updated"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "task_title": {
+          "type": "string",
+          "title": "title of the task"
+        },
+        "description": {
+          "type": "string",
+          "title": "description of the task"
+        },
+        "estimated_time": {
+          "type": "string",
+          "title": "time estimated to complete the task"
+        },
+        "task_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of the task"
+        }
+      }
+    },
+    "fmUpdatePlannerResponse": {
+      "type": "object",
+      "properties": {
+        "planner_id": {
+          "type": "string",
+          "title": "unique id of the updated planner"
         }
       }
     },
