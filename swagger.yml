@@ -7550,6 +7550,72 @@
         ]
       }
     },
+    "/v1/organization/user-employee": {
+      "post": {
+        "summary": "Checks and Creates user and user-employee for an employee if not exists.",
+        "operationId": "OrganizationService_CreateUserEmployee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateUserEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateUserEmployeeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrganizationService"
+        ]
+      }
+    },
+    "/v1/organization/user-employee/password": {
+      "patch": {
+        "summary": "Changes password of a user-employee.",
+        "operationId": "OrganizationService_ChangeUserEmployeePassword",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmChangeUserEmployeePasswordResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmChangeUserEmployeePasswordRequest"
+            }
+          }
+        ],
+        "tags": [
+          "OrganizationService"
+        ]
+      }
+    },
     "/v1/organization/user/roles-scopes": {
       "patch": {
         "summary": "Updates roles and scopes of a user-employee.",
@@ -13099,6 +13165,28 @@
         }
       }
     },
+    "fmChangeUserEmployeePasswordRequest": {
+      "type": "object",
+      "properties": {
+        "user_employee_id": {
+          "type": "string",
+          "title": "unique id of the user-employee whose password is to be changes"
+        },
+        "password": {
+          "type": "string",
+          "title": "password to be changed"
+        }
+      }
+    },
+    "fmChangeUserEmployeePasswordResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "acknowledgement status"
+        }
+      }
+    },
     "fmCheckInOutRequest": {
       "type": "object",
       "properties": {
@@ -15445,6 +15533,24 @@
         "tupe_id": {
           "type": "string",
           "title": "unique id of the created tupe"
+        }
+      }
+    },
+    "fmCreateUserEmployeeRequest": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        }
+      }
+    },
+    "fmCreateUserEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "user_employee_id": {
+          "type": "string",
+          "title": "unique id of the user-employee"
         }
       }
     },
