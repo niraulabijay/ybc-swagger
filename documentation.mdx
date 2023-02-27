@@ -622,6 +622,8 @@
     - [AllTaskGroupResponse.TaskGroupData](#fm-AllTaskGroupResponse-TaskGroupData)
     - [ApproveTaskCorrectionRequest](#fm-ApproveTaskCorrectionRequest)
     - [ApproveTaskCorrectionResponse](#fm-ApproveTaskCorrectionResponse)
+    - [CancelTaskRequest](#fm-CancelTaskRequest)
+    - [CancelTaskResponse](#fm-CancelTaskResponse)
     - [ChangeAbsenceStatusRequest](#fm-ChangeAbsenceStatusRequest)
     - [ChangeAbsenceStatusResponse](#fm-ChangeAbsenceStatusResponse)
     - [ChangeTimesheetCorrectionStatusRequest](#fm-ChangeTimesheetCorrectionStatusRequest)
@@ -10986,6 +10988,37 @@ Employee Bank accounts details collection
 
 
 
+<a name="fm-CancelTaskRequest"></a>
+
+### CancelTaskRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of the task to be cancelled |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-CancelTaskResponse"></a>
+
+### CancelTaskResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | acknowledgment respone |
+
+
+
+
+
+
 <a name="fm-ChangeAbsenceStatusRequest"></a>
 
 ### ChangeAbsenceStatusRequest
@@ -11949,6 +11982,7 @@ Task definition
 | is_break | [bool](#bool) |  | to check break, true or false |
 | break_type | [string](#string) |  | to check break type, paid or unpaid |
 | task_type | [string](#string) |  | type of task: Allowed [&#34;DOC&#34;, &#34;VARIATION&#34;, &#34;MOBILE&#34;, &#34;OTHERS&#34;, &#34;PERIODIC(REGULAR)&#34;, &#34;PERIODIC(ONE OFF)&#34;, &#34;PERIODIC(WINDOW)&#34;, &#34;PERIODIC(ACCOMODATION)&#34;] |
+| cancel_status | [bool](#bool) |  | cancel status of the task |
 | is_recurrence | [bool](#bool) |  | wether task is recurrence |
 | recurrence | [RecurrenceDetails](#fm-RecurrenceDetails) |  | details of recurrence |
 | recurrence_parent_task | [string](#string) |  | Id of task from which current task was generated |
@@ -12410,6 +12444,7 @@ service to manage tasks
 | ListAbsence | [ListAbsenceRequest](#fm-ListAbsenceRequest) | [ListAbsenceResponse](#fm-ListAbsenceResponse) | ListAbsence returns the list of all employee absence visible to the authorized user in descending date order. Authorization scope of `fm.absence.list` is required. |
 | UpdateAbsence | [UpdateAbsenceRequest](#fm-UpdateAbsenceRequest) | [UpdateAbsenceResponse](#fm-UpdateAbsenceResponse) | Updates the detail of an employee absence. Authorization scope of `fm.absence.update` is required. |
 | CreateCover | [CreateCoverRequest](#fm-CreateCoverRequest) | [CreateCoverResponse](#fm-CreateCoverResponse) | Add Cover for absence Authorization scope of `fm.cover.create` is required. |
+| CancelTask | [CancelTaskRequest](#fm-CancelTaskRequest) | [CancelTaskResponse](#fm-CancelTaskResponse) | Cancels a task where check-in has not been done yet. Authorization scope of `fm.task.cancel` is required. |
 
  
 
