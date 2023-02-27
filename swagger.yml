@@ -7828,6 +7828,39 @@
         ]
       }
     },
+    "/v1/task/cancel": {
+      "post": {
+        "summary": "Cancels a task where check-in has not been done yet.\nAuthorization scope of `fm.task.cancel` is required.",
+        "operationId": "TaskService_CancelTask",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCancelTaskResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCancelTaskRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
     "/v1/task/checkin": {
       "post": {
         "summary": "Checkin can be used to check in a staff to a task.\nAuthorization scope of `fm.task.checkin` is required.",
@@ -13076,6 +13109,28 @@
             "$ref": "#/definitions/fmCRMDates"
           },
           "title": "dates of the task"
+        }
+      }
+    },
+    "fmCancelTaskRequest": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "title": "unique id of the task to be cancelled"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
+    "fmCancelTaskResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "acknowledgment respone"
         }
       }
     },
@@ -19158,6 +19213,10 @@
         "task_type": {
           "type": "string",
           "title": "type of task: Allowed [\"DOC\", \"VARIATION\", \"MOBILE\", \"OTHERS\", \"PERIODIC(REGULAR)\", \"PERIODIC(ONE OFF)\", \"PERIODIC(WINDOW)\", \"PERIODIC(ACCOMODATION)\"]"
+        },
+        "cancel_status": {
+          "type": "boolean",
+          "title": "cancel status of the task"
         },
         "is_recurrence": {
           "type": "boolean",
