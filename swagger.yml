@@ -5243,6 +5243,104 @@
         ]
       }
     },
+    "/v1/employee/new/create": {
+      "post": {
+        "summary": "Creates a new employee.",
+        "operationId": "EmployeeService_CreateNewEmployee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateNewEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateNewEmployeeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EmployeeService"
+        ]
+      }
+    },
+    "/v1/employee/organization-code": {
+      "post": {
+        "summary": "Creates or Updates a unique code for an organization.\nAuthorization scope of `fm.employee.create` is required.",
+        "operationId": "EmployeeService_UpsertOrganizationCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpsertOrganizationCodeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertOrganizationCodeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "EmployeeService"
+        ]
+      }
+    },
+    "/v1/employee/organization-code/detail": {
+      "get": {
+        "summary": "Get code of an organization.\nAuthorization scope of `fm.employee.create` is required.",
+        "operationId": "EmployeeService_GetOrganizationCode",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmGetOrganizationCodeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "id of the organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "EmployeeService"
+        ]
+      }
+    },
     "/v1/employee/status": {
       "post": {
         "summary": "Update an employee status\nAuthorization scope of `fm.employee.update-status` is required.",
@@ -15039,6 +15137,48 @@
         }
       }
     },
+    "fmCreateNewEmployeeRequest": {
+      "type": "object",
+      "properties": {
+        "organization_code": {
+          "type": "string",
+          "title": "code of the organization"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of employee, EG: Mr, Mrs, Miss"
+        },
+        "first_name": {
+          "type": "string",
+          "title": "First Name of the employee"
+        },
+        "middle_name": {
+          "type": "string",
+          "title": "Middle name of the employee"
+        },
+        "last_name": {
+          "type": "string",
+          "title": "Last name of the employee"
+        },
+        "contact_detail": {
+          "$ref": "#/definitions/fmContactDetail",
+          "title": "contact details of the employee"
+        },
+        "national_insurance_number": {
+          "type": "string",
+          "title": "National insurance number"
+        }
+      }
+    },
+    "fmCreateNewEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "title": "unique id of the created new employee"
+        }
+      }
+    },
     "fmCreateNewMobilizationRequest": {
       "type": "object",
       "properties": {
@@ -16990,6 +17130,19 @@
         "result": {
           "$ref": "#/definitions/GetGlobalDescriptionResponseGlobalDescriptionDetails",
           "title": "Global Description details"
+        }
+      }
+    },
+    "fmGetOrganizationCodeResponse": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "organization_code": {
+          "type": "string",
+          "title": "code of the requested organization"
         }
       }
     },
@@ -21259,6 +21412,24 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmUpsertOrganizationCodeRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
+    "fmUpsertOrganizationCodeResponse": {
+      "type": "object",
+      "properties": {
+        "organization_code": {
+          "type": "string",
+          "title": "unique code created for the organization"
         }
       }
     },
