@@ -362,6 +362,8 @@
     - [ConfidentialEmployeeInfo](#fm-ConfidentialEmployeeInfo)
     - [CreateEmployeeRequest](#fm-CreateEmployeeRequest)
     - [CreateEmployeeResponse](#fm-CreateEmployeeResponse)
+    - [CreateNewEmployeeRequest](#fm-CreateNewEmployeeRequest)
+    - [CreateNewEmployeeResponse](#fm-CreateNewEmployeeResponse)
     - [CriminalConvictionEmployeeInfo](#fm-CriminalConvictionEmployeeInfo)
     - [DbsDetails](#fm-DbsDetails)
     - [EducationEmployeeInformation](#fm-EducationEmployeeInformation)
@@ -382,6 +384,8 @@
     - [EmploymentHistoryInfo](#fm-EmploymentHistoryInfo)
     - [FaqData](#fm-FaqData)
     - [GeneralEmployeeInformation](#fm-GeneralEmployeeInformation)
+    - [GetOrganizationCodeRequest](#fm-GetOrganizationCodeRequest)
+    - [GetOrganizationCodeResponse](#fm-GetOrganizationCodeResponse)
     - [HmRevenueDetails](#fm-HmRevenueDetails)
     - [HourlyRateInfo](#fm-HourlyRateInfo)
     - [LicenseDetails](#fm-LicenseDetails)
@@ -400,6 +404,8 @@
     - [UpdateEmployeeResponse](#fm-UpdateEmployeeResponse)
     - [UpdateEmployeeStatusRequest](#fm-UpdateEmployeeStatusRequest)
     - [UpdateEmployeeStatusResponse](#fm-UpdateEmployeeStatusResponse)
+    - [UpsertOrganizationCodeRequest](#fm-UpsertOrganizationCodeRequest)
+    - [UpsertOrganizationCodeResponse](#fm-UpsertOrganizationCodeResponse)
   
     - [EmployeeService](#fm-EmployeeService)
   
@@ -6755,6 +6761,42 @@ response returned when reating employee
 
 
 
+<a name="fm-CreateNewEmployeeRequest"></a>
+
+### CreateNewEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_code | [string](#string) |  | code of the organization |
+| title | [string](#string) |  | title of employee, EG: Mr, Mrs, Miss |
+| first_name | [string](#string) |  | First Name of the employee |
+| middle_name | [string](#string) |  | Middle name of the employee |
+| last_name | [string](#string) |  | Last name of the employee |
+| contact_detail | [ContactDetail](#fm-ContactDetail) |  | contact details of the employee |
+| national_insurance_number | [string](#string) |  | National insurance number |
+
+
+
+
+
+
+<a name="fm-CreateNewEmployeeResponse"></a>
+
+### CreateNewEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_id | [string](#string) |  | unique id of the created new employee |
+
+
+
+
+
+
 <a name="fm-CriminalConvictionEmployeeInfo"></a>
 
 ### CriminalConvictionEmployeeInfo
@@ -7110,6 +7152,37 @@ General employee information
 | area | [string](#string) |  | Area of the employee |
 | profile_picture | [string](#string) |  | profile picture |
 | photo_id | [string](#string) |  | photo for id card |
+
+
+
+
+
+
+<a name="fm-GetOrganizationCodeRequest"></a>
+
+### GetOrganizationCodeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-GetOrganizationCodeResponse"></a>
+
+### GetOrganizationCodeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+| organization_code | [string](#string) |  | code of the requested organization |
 
 
 
@@ -7479,6 +7552,36 @@ Response when updating an employee status
 
 
 
+
+<a name="fm-UpsertOrganizationCodeRequest"></a>
+
+### UpsertOrganizationCodeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-UpsertOrganizationCodeResponse"></a>
+
+### UpsertOrganizationCodeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_code | [string](#string) |  | unique code created for the organization |
+
+
+
+
+
  
 
  
@@ -7503,6 +7606,9 @@ Response when updating an employee status
 | AddAttachment | [EmployeeAddAttachmentRequest](#fm-EmployeeAddAttachmentRequest) | [EmployeeAddAttachmentResponse](#fm-EmployeeAddAttachmentResponse) | Adds attachment for an employee. Scope of `fm.employee.add-attachment` is required. |
 | ListAttachment | [EmployeeListAttachmentRequest](#fm-EmployeeListAttachmentRequest) | [EmployeeListAttachmentResponse](#fm-EmployeeListAttachmentResponse) | Lists attachment for an employee. Scope of `fm.employee.list-attachment` is required. |
 | DeleteAttachment | [EmployeeDeleteAttachmentRequest](#fm-EmployeeDeleteAttachmentRequest) | [EmployeeDeleteAttachmentResponse](#fm-EmployeeDeleteAttachmentResponse) | Soft deletes an attachment for an employee. Scope of `fm.employee.delete-attachment` is required. |
+| UpsertOrganizationCode | [UpsertOrganizationCodeRequest](#fm-UpsertOrganizationCodeRequest) | [UpsertOrganizationCodeResponse](#fm-UpsertOrganizationCodeResponse) | Creates or Updates a unique code for an organization. Authorization scope of `fm.employee.create` is required. |
+| GetOrganizationCode | [GetOrganizationCodeRequest](#fm-GetOrganizationCodeRequest) | [GetOrganizationCodeResponse](#fm-GetOrganizationCodeResponse) | Get code of an organization. Authorization scope of `fm.employee.create` is required. |
+| CreateNewEmployee | [CreateNewEmployeeRequest](#fm-CreateNewEmployeeRequest) | [CreateNewEmployeeResponse](#fm-CreateNewEmployeeResponse) | Creates a new employee. |
 
  
 
