@@ -11379,6 +11379,14 @@
             "$ref": "#/definitions/fmEducationEmployeeInformation"
           },
           "title": "education Information about the employee"
+        },
+        "job_description": {
+          "type": "string",
+          "title": "job description"
+        },
+        "reference": {
+          "type": "string",
+          "title": "reference"
         }
       },
       "title": "individual employee record"
@@ -15167,6 +15175,14 @@
         "national_insurance_number": {
           "type": "string",
           "title": "National insurance number"
+        },
+        "job_description": {
+          "type": "string",
+          "title": "job description"
+        },
+        "reference": {
+          "type": "string",
+          "title": "reference"
         }
       }
     },
@@ -16685,6 +16701,14 @@
         "organization_admin": {
           "type": "boolean",
           "title": "employee is org admin"
+        },
+        "job_description": {
+          "type": "string",
+          "title": "job description"
+        },
+        "reference": {
+          "type": "string",
+          "title": "reference"
         }
       },
       "title": "Response for employee detail"
