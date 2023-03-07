@@ -9973,6 +9973,39 @@
         ]
       }
     },
+    "/v1/user/role/user-employee": {
+      "post": {
+        "summary": "Assign a role to multiple user-employees.\nAuthorization scope of `fm.role.create` is required.",
+        "operationId": "UserService_AddRoleToUsers",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmAddRoleToUsersResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmAddRoleToUsersRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/v1/user/roles": {
       "get": {
         "summary": "get roles\nAuthorization scope of `` is required.",
@@ -10070,6 +10103,19 @@
     }
   },
   "definitions": {
+    "AddRoleToUsersRequestUserEmployee": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "id of user"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of employee"
+        }
+      }
+    },
     "AllTaskGroupResponseSectorTaskGroupData": {
       "type": "object",
       "properties": {
@@ -12462,6 +12508,35 @@
             "type": "string"
           },
           "title": "employee ids of additional attendees"
+        }
+      }
+    },
+    "fmAddRoleToUsersRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "role": {
+          "type": "string",
+          "title": "role to be assigned"
+        },
+        "user_employee": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddRoleToUsersRequestUserEmployee"
+          },
+          "title": "ids of user and employee"
+        }
+      }
+    },
+    "fmAddRoleToUsersResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "acknowledgement response"
         }
       }
     },
