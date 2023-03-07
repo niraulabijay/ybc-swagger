@@ -447,6 +447,9 @@
     - [JobTypeService](#fm-JobTypeService)
   
 - [login_service.proto](#login_service-proto)
+    - [AddRoleToUsersRequest](#fm-AddRoleToUsersRequest)
+    - [AddRoleToUsersRequest.UserEmployee](#fm-AddRoleToUsersRequest-UserEmployee)
+    - [AddRoleToUsersResponse](#fm-AddRoleToUsersResponse)
     - [AssociateWithEmployeeRequest](#fm-AssociateWithEmployeeRequest)
     - [ChangePasswordRequest](#fm-ChangePasswordRequest)
     - [ChangePasswordResponse](#fm-ChangePasswordResponse)
@@ -8160,6 +8163,54 @@ service to manage issues
 
 
 
+<a name="fm-AddRoleToUsersRequest"></a>
+
+### AddRoleToUsersRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+| role | [string](#string) |  | role to be assigned |
+| user_employee | [AddRoleToUsersRequest.UserEmployee](#fm-AddRoleToUsersRequest-UserEmployee) | repeated | ids of user and employee |
+
+
+
+
+
+
+<a name="fm-AddRoleToUsersRequest-UserEmployee"></a>
+
+### AddRoleToUsersRequest.UserEmployee
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | id of user |
+| employee_id | [string](#string) |  | id of employee |
+
+
+
+
+
+
+<a name="fm-AddRoleToUsersResponse"></a>
+
+### AddRoleToUsersResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | acknowledgement response |
+
+
+
+
+
+
 <a name="fm-AssociateWithEmployeeRequest"></a>
 
 ### AssociateWithEmployeeRequest
@@ -8698,6 +8749,7 @@ Genereates jwt tokens
 | ResetPassword | [ResetPasswordRequest](#fm-ResetPasswordRequest) | [ResetPasswordResponse](#fm-ResetPasswordResponse) | update password using token from email |
 | ForgotPassword | [ForgotPasswordRequest](#fm-ForgotPasswordRequest) | [ForgotPasswordResponse](#fm-ForgotPasswordResponse) | forgot password endpoint |
 | ChangePassword | [ChangePasswordRequest](#fm-ChangePasswordRequest) | [ChangePasswordResponse](#fm-ChangePasswordResponse) | change password endpoint for logged in user to change their own password |
+| AddRoleToUsers | [AddRoleToUsersRequest](#fm-AddRoleToUsersRequest) | [AddRoleToUsersResponse](#fm-AddRoleToUsersResponse) | Assign a role to multiple user-employees. Authorization scope of `fm.role.create` is required. |
 
  
 
