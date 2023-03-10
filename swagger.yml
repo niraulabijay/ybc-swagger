@@ -9802,6 +9802,72 @@
         ]
       }
     },
+    "/v1/user/disable/user-employee": {
+      "post": {
+        "summary": "Disable active status of a user-employee.\nAuthorization scope of `fm.userEmployee.disable` is required.",
+        "operationId": "UserService_DisableUserEmployee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmDisableUserEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDisableUserEmployeeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
+    "/v1/user/enable/user-employee": {
+      "post": {
+        "summary": "Enable active status of a user-employee.\nAuthorization scope of `fm.userEmployee.enable` is required.",
+        "operationId": "UserService_EnableUserEmployee",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmEnableUserEmployeeResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmEnableUserEmployeeRequest"
+            }
+          }
+        ],
+        "tags": [
+          "UserService"
+        ]
+      }
+    },
     "/v1/user/forgot-password": {
       "post": {
         "summary": "forgot password endpoint",
@@ -16471,6 +16537,32 @@
         }
       }
     },
+    "fmDisableUserEmployeeRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "id of user"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of employee"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
+    "fmDisableUserEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "acknowledgement response"
+        }
+      }
+    },
     "fmEditAgendaViewRequest": {
       "type": "object",
       "properties": {
@@ -16985,6 +17077,32 @@
         }
       },
       "title": "history of employment of employee information"
+    },
+    "fmEnableUserEmployeeRequest": {
+      "type": "object",
+      "properties": {
+        "user_id": {
+          "type": "string",
+          "title": "id of user"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of employee"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
+    "fmEnableUserEmployeeResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "acknowledgement response"
+        }
+      }
     },
     "fmFaqData": {
       "type": "object",
@@ -21740,6 +21858,10 @@
             "type": "string"
           },
           "title": "scopes of user"
+        },
+        "active": {
+          "type": "boolean",
+          "title": "active status of user-employee"
         }
       }
     },
