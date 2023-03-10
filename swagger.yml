@@ -3574,6 +3574,22 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          },
+          {
+            "name": "start_date",
+            "description": "start date to filter by created_date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date to filter by created_date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           }
         ],
         "tags": [
@@ -12494,6 +12510,10 @@
         "supported_by": {
           "type": "string",
           "title": "id of employee who supports the decision"
+        },
+        "support": {
+          "type": "string",
+          "title": "reason to support the decision"
         }
       }
     },
@@ -12729,6 +12749,10 @@
         "supported_by": {
           "type": "string",
           "title": "supported by : employee_id"
+        },
+        "support": {
+          "type": "string",
+          "title": "reason to support the decision"
         }
       }
     },
