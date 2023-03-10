@@ -4884,6 +4884,8 @@ individual planner response
 | ----- | ---- | ----- | ----------- |
 | organization_id | [string](#string) |  | organization id |
 | client_ids | [string](#string) | repeated | filter by ids of clients |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter by created_date |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter by created_date |
 
 
 
@@ -8946,6 +8948,7 @@ Genereates jwt tokens
 | agenda_id | [string](#string) |  | id of agenda |
 | meeting_id | [string](#string) |  | id of meeting |
 | supported_by | [string](#string) |  | id of employee who supports the decision |
+| support | [string](#string) |  | reason to support the decision |
 
 
 
@@ -9109,6 +9112,7 @@ details of objection of decision made for an agenda
 | agenda_decision_id | [string](#string) |  | id of decision of agenda |
 | agenda_id | [string](#string) |  | id of agenda the decision support belongs to |
 | supported_by | [string](#string) |  | supported by : employee_id |
+| support | [string](#string) |  | reason to support the decision |
 
 
 
