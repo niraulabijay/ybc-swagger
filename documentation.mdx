@@ -457,6 +457,10 @@
     - [CreateUserOnEmployeeCreateResponse](#fm-CreateUserOnEmployeeCreateResponse)
     - [CreateUserRequest](#fm-CreateUserRequest)
     - [CreateUserResponse](#fm-CreateUserResponse)
+    - [DisableUserEmployeeRequest](#fm-DisableUserEmployeeRequest)
+    - [DisableUserEmployeeResponse](#fm-DisableUserEmployeeResponse)
+    - [EnableUserEmployeeRequest](#fm-EnableUserEmployeeRequest)
+    - [EnableUserEmployeeResponse](#fm-EnableUserEmployeeResponse)
     - [ForgotPasswordRequest](#fm-ForgotPasswordRequest)
     - [ForgotPasswordResponse](#fm-ForgotPasswordResponse)
     - [GetAvailableRoleRequest](#fm-GetAvailableRoleRequest)
@@ -8328,6 +8332,70 @@ response for create user requests
 
 
 
+<a name="fm-DisableUserEmployeeRequest"></a>
+
+### DisableUserEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | id of user |
+| employee_id | [string](#string) |  | id of employee |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-DisableUserEmployeeResponse"></a>
+
+### DisableUserEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | acknowledgement response |
+
+
+
+
+
+
+<a name="fm-EnableUserEmployeeRequest"></a>
+
+### EnableUserEmployeeRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| user_id | [string](#string) |  | id of user |
+| employee_id | [string](#string) |  | id of employee |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-EnableUserEmployeeResponse"></a>
+
+### EnableUserEmployeeResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | acknowledgement response |
+
+
+
+
+
+
 <a name="fm-ForgotPasswordRequest"></a>
 
 ### ForgotPasswordRequest
@@ -8672,6 +8740,7 @@ Request for updating roles
 | employee_id | [string](#string) |  | id of employee |
 | roles | [string](#string) | repeated | roles of user |
 | scopes | [string](#string) | repeated | scopes of user |
+| active | [bool](#bool) |  | active status of user-employee |
 
 
 
@@ -8750,6 +8819,8 @@ Genereates jwt tokens
 | ForgotPassword | [ForgotPasswordRequest](#fm-ForgotPasswordRequest) | [ForgotPasswordResponse](#fm-ForgotPasswordResponse) | forgot password endpoint |
 | ChangePassword | [ChangePasswordRequest](#fm-ChangePasswordRequest) | [ChangePasswordResponse](#fm-ChangePasswordResponse) | change password endpoint for logged in user to change their own password |
 | AddRoleToUsers | [AddRoleToUsersRequest](#fm-AddRoleToUsersRequest) | [AddRoleToUsersResponse](#fm-AddRoleToUsersResponse) | Assign a role to multiple user-employees. Authorization scope of `fm.role.create` is required. |
+| EnableUserEmployee | [EnableUserEmployeeRequest](#fm-EnableUserEmployeeRequest) | [EnableUserEmployeeResponse](#fm-EnableUserEmployeeResponse) | Enable active status of a user-employee. Authorization scope of `fm.userEmployee.enable` is required. |
+| DisableUserEmployee | [DisableUserEmployeeRequest](#fm-DisableUserEmployeeRequest) | [DisableUserEmployeeResponse](#fm-DisableUserEmployeeResponse) | Disable active status of a user-employee. Authorization scope of `fm.userEmployee.disable` is required. |
 
  
 
