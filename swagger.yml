@@ -1126,25 +1126,41 @@
         },
         "parameters": [
           {
-            "name": "client_id",
-            "description": "Unique id of client with the training.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
-            "description": "organization id of the employee working for client.",
+            "description": "organization id of the employee.",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "trainee_id",
-            "description": "Unique id of trainee employee.",
+            "description": "filter response by unique id of trainee employee (optional).",
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "training_subject",
+            "description": "filter response by subject of the training (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "start_date",
+            "description": "start date to filter by training_date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "end_date",
+            "description": "end date to filter by training_date.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
           },
           {
             "name": "filter.limit",
@@ -1166,7 +1182,7 @@
         ]
       },
       "post": {
-        "summary": "Create training for employee of client\nAuthorization scope of `fm.client-employee.create-employee-training` is\nrequired",
+        "summary": "Create training for employee.\nAuthorization scope of `fm.client-employee.create-employee-training` is\nrequired",
         "operationId": "ClientEmployeeService_CreateEmployeeTraining",
         "responses": {
           "200": {
@@ -1189,6 +1205,72 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/fmCreateEmployeeTrainingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientEmployeeService"
+        ]
+      }
+    },
+    "/v1/client-employee/training/delete": {
+      "post": {
+        "summary": "Delete training of employee.\nAuthorization scope of `fm.client-employee.delete-employee-training` is required.",
+        "operationId": "ClientEmployeeService_DeleteEmployeeTraining",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteEmployeeTrainingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientEmployeeService"
+        ]
+      }
+    },
+    "/v1/client-employee/training/update": {
+      "patch": {
+        "summary": "Update training of employee.\nAuthorization scope of `fm.client-employee.update-employee-training` is required.",
+        "operationId": "ClientEmployeeService_UpdateEmployeeTraining",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateEmployeeTrainingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateEmployeeTrainingRequest"
             }
           }
         ],
@@ -10398,6 +10480,10 @@
     "GetEmployeeTrainingResponseEmployeeTrainingResponse": {
       "type": "object",
       "properties": {
+        "employee_training_id": {
+          "type": "string",
+          "title": "Unique id of the training for employee"
+        },
         "trainee_id": {
           "type": "string",
           "title": "Unique id of trainee employee"
@@ -10416,20 +10502,15 @@
           "title": "Date of the training"
         },
         "attachment_file": {
-          "type": "string",
-          "title": "Attachment file regarding training"
-        },
-        "client_id": {
-          "type": "string",
-          "title": "Unique id for the client"
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Attachment files regarding training"
         },
         "organization_id": {
           "type": "string",
-          "title": "organization id of the employee working for client"
-        },
-        "employee_training_id": {
-          "type": "string",
-          "title": "Unique id of the training for employee"
+          "title": "organization id of the employee"
         },
         "created_at": {
           "type": "string",
@@ -14912,9 +14993,12 @@
     "fmCreateEmployeeTrainingRequest": {
       "type": "object",
       "properties": {
-        "trainee_id": {
-          "type": "string",
-          "title": "Unique id of trainee employee"
+        "trainee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Unique ids of trainee employees who are to be assigned to the training program"
         },
         "trainer_id": {
           "type": "string",
@@ -14929,17 +15013,16 @@
           "format": "date-time",
           "title": "Date of the training"
         },
-        "attachment_file": {
-          "type": "string",
-          "title": "Attachment file regarding training"
-        },
-        "client_id": {
-          "type": "string",
-          "title": "Unique id for the client"
+        "attachment_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Attachment files regarding training"
         },
         "organization_id": {
           "type": "string",
-          "title": "organization id of the employee working for client"
+          "title": "id of the organization"
         }
       },
       "title": "Request to create employee training"
@@ -14947,9 +15030,12 @@
     "fmCreateEmployeeTrainingResponse": {
       "type": "object",
       "properties": {
-        "employee_training_id": {
-          "type": "string",
-          "title": "Unique id of the training for employee"
+        "employee_training_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Unique ids of the training for employees"
         }
       },
       "title": "Response for creating employee training"
@@ -16286,6 +16372,19 @@
         "client_id": {
           "type": "string",
           "title": "id of the client"
+        }
+      }
+    },
+    "fmDeleteEmployeeTrainingRequest": {
+      "type": "object",
+      "properties": {
+        "employee_training_id": {
+          "type": "string",
+          "title": "unique id of the employee training to be deleted"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
         }
       }
     },
@@ -20617,6 +20716,52 @@
         }
       },
       "title": "Response when updating an employee status"
+    },
+    "fmUpdateEmployeeTrainingRequest": {
+      "type": "object",
+      "properties": {
+        "employee_training_id": {
+          "type": "string",
+          "title": "Unique id of the training for employee"
+        },
+        "trainee_id": {
+          "type": "string",
+          "title": "Unique id of trainee employee"
+        },
+        "trainer_id": {
+          "type": "string",
+          "title": "Unique id of trainer employee"
+        },
+        "training_subject": {
+          "type": "string",
+          "title": "Subject of the training"
+        },
+        "training_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Date of the training"
+        },
+        "attachment_files": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Attachment files regarding training"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
+    "fmUpdateEmployeeTrainingResponse": {
+      "type": "object",
+      "properties": {
+        "employee_training_id": {
+          "type": "string",
+          "title": "unique id of the updated employee training program"
+        }
+      }
     },
     "fmUpdateIssueRequest": {
       "type": "object",
