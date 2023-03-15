@@ -81,6 +81,7 @@
     - [CreateTransferRequest](#fm-CreateTransferRequest)
     - [CreateTransferResponse](#fm-CreateTransferResponse)
     - [DaywiseTargetTasks](#fm-DaywiseTargetTasks)
+    - [DeleteEmployeeTrainingRequest](#fm-DeleteEmployeeTrainingRequest)
     - [FeedbackResponse](#fm-FeedbackResponse)
     - [GetClientEmployeeIdsByEmployeeRequest](#fm-GetClientEmployeeIdsByEmployeeRequest)
     - [GetClientEmployeeIdsByEmployeeResponse](#fm-GetClientEmployeeIdsByEmployeeResponse)
@@ -110,6 +111,8 @@
     - [ListTransferResponse](#fm-ListTransferResponse)
     - [ShiftContractedDayHours](#fm-ShiftContractedDayHours)
     - [TransferResponse](#fm-TransferResponse)
+    - [UpdateEmployeeTrainingRequest](#fm-UpdateEmployeeTrainingRequest)
+    - [UpdateEmployeeTrainingResponse](#fm-UpdateEmployeeTrainingResponse)
   
     - [ClientEmployeeService](#fm-ClientEmployeeService)
   
@@ -1881,13 +1884,12 @@ Request to create employee training
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| trainee_id | [string](#string) |  | Unique id of trainee employee |
+| trainee_ids | [string](#string) | repeated | Unique ids of trainee employees who are to be assigned to the training program |
 | trainer_id | [string](#string) |  | Unique id of trainer employee |
 | training_subject | [string](#string) |  | Subject of the training |
 | training_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date of the training |
-| attachment_file | [string](#string) |  | Attachment file regarding training |
-| client_id | [string](#string) |  | Unique id for the client |
-| organization_id | [string](#string) |  | organization id of the employee working for client |
+| attachment_files | [string](#string) | repeated | Attachment files regarding training |
+| organization_id | [string](#string) |  | id of the organization |
 
 
 
@@ -1902,7 +1904,7 @@ Response for creating employee training
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| employee_training_id | [string](#string) |  | Unique id of the training for employee |
+| employee_training_ids | [string](#string) | repeated | Unique ids of the training for employees |
 
 
 
@@ -1992,6 +1994,22 @@ Response for creating employee training
 | ----- | ---- | ----- | ----------- |
 | day | [string](#string) |  | day of the week |
 | num_tasks | [int64](#int64) |  | number of target tasks for the day |
+
+
+
+
+
+
+<a name="fm-DeleteEmployeeTrainingRequest"></a>
+
+### DeleteEmployeeTrainingRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_training_id | [string](#string) |  | unique id of the employee training to be deleted |
+| organization_id | [string](#string) |  | id of the organization |
 
 
 
@@ -2239,9 +2257,11 @@ Request to get employee trainings
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| client_id | [string](#string) |  | Unique id of client with the training |
-| organization_id | [string](#string) |  | organization id of the employee working for client |
-| trainee_id | [string](#string) |  | Unique id of trainee employee |
+| organization_id | [string](#string) |  | organization id of the employee |
+| trainee_id | [string](#string) |  | filter response by unique id of trainee employee (optional) |
+| training_subject | [string](#string) |  | filter response by subject of the training (optional) |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter by training_date |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter by training_date |
 | filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter options for list |
 
 
@@ -2272,14 +2292,13 @@ Response for get employee trainings
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
+| employee_training_id | [string](#string) |  | Unique id of the training for employee |
 | trainee_id | [string](#string) |  | Unique id of trainee employee |
 | trainer_id | [string](#string) |  | Unique id of trainer employee |
 | training_subject | [string](#string) |  | Subject of the training |
 | training_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date of the training |
-| attachment_file | [string](#string) |  | Attachment file regarding training |
-| client_id | [string](#string) |  | Unique id for the client |
-| organization_id | [string](#string) |  | organization id of the employee working for client |
-| employee_training_id | [string](#string) |  | Unique id of the training for employee |
+| attachment_file | [string](#string) | repeated | Attachment files regarding training |
+| organization_id | [string](#string) |  | organization id of the employee |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date of training creation |
 
 
@@ -2500,6 +2519,42 @@ Response for getting target task of an employee for a client
 
 
 
+
+<a name="fm-UpdateEmployeeTrainingRequest"></a>
+
+### UpdateEmployeeTrainingRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_training_id | [string](#string) |  | Unique id of the training for employee |
+| trainee_id | [string](#string) |  | Unique id of trainee employee |
+| trainer_id | [string](#string) |  | Unique id of trainer employee |
+| training_subject | [string](#string) |  | Subject of the training |
+| training_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date of the training |
+| attachment_files | [string](#string) | repeated | Attachment files regarding training |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-UpdateEmployeeTrainingResponse"></a>
+
+### UpdateEmployeeTrainingResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_training_id | [string](#string) |  | unique id of the updated employee training program |
+
+
+
+
+
  
 
  
@@ -2526,8 +2581,10 @@ Response for getting target task of an employee for a client
 | GetClientEmployeeIdsByEmployeeId | [GetClientEmployeeIdsByEmployeeRequest](#fm-GetClientEmployeeIdsByEmployeeRequest) | [GetClientEmployeeIdsByEmployeeResponse](#fm-GetClientEmployeeIdsByEmployeeResponse) | Get client_employee_ids by employee_id Authorization scope of `fm.client-employee.get-client-employee-ids-by-employee-id` is required. |
 | GetClientIdsByEmployeeId | [GetClientIdsByEmployeeRequest](#fm-GetClientIdsByEmployeeRequest) | [GetClientIdsByEmployeeResponse](#fm-GetClientIdsByEmployeeResponse) | Get client_ids by employee_id Authorization scope of `fm.client-employee.get-client-ids-by-employee-id` is required. |
 | GetEmployeeIdsByClientId | [GetEmployeeIdsByClientIdRequest](#fm-GetEmployeeIdsByClientIdRequest) | [GetEmployeeIdsByClientIdResponse](#fm-GetEmployeeIdsByClientIdResponse) | Get employees by Client_id Authorization scope of `fm.client-employee.get-employee-ids-by-client-id` is required. |
-| CreateEmployeeTraining | [CreateEmployeeTrainingRequest](#fm-CreateEmployeeTrainingRequest) | [CreateEmployeeTrainingResponse](#fm-CreateEmployeeTrainingResponse) | Create training for employee of client Authorization scope of `fm.client-employee.create-employee-training` is required |
+| CreateEmployeeTraining | [CreateEmployeeTrainingRequest](#fm-CreateEmployeeTrainingRequest) | [CreateEmployeeTrainingResponse](#fm-CreateEmployeeTrainingResponse) | Create training for employee. Authorization scope of `fm.client-employee.create-employee-training` is required |
 | GetEmployeeTraining | [GetEmployeeTrainingRequest](#fm-GetEmployeeTrainingRequest) | [GetEmployeeTrainingResponse](#fm-GetEmployeeTrainingResponse) | Get employee trainings Authorization scope of `fm.client-employee.get-employee-trainings` is required. |
+| UpdateEmployeeTraining | [UpdateEmployeeTrainingRequest](#fm-UpdateEmployeeTrainingRequest) | [UpdateEmployeeTrainingResponse](#fm-UpdateEmployeeTrainingResponse) | Update training of employee. Authorization scope of `fm.client-employee.update-employee-training` is required. |
+| DeleteEmployeeTraining | [DeleteEmployeeTrainingRequest](#fm-DeleteEmployeeTrainingRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete training of employee. Authorization scope of `fm.client-employee.delete-employee-training` is required. |
 | CreateTransfer | [CreateTransferRequest](#fm-CreateTransferRequest) | [CreateTransferResponse](#fm-CreateTransferResponse) | Create a new transfer. Authorization scope of `fm.client-employee.transfer.create` is required. |
 | ListTransfer | [ListTransferRequest](#fm-ListTransferRequest) | [ListTransferResponse](#fm-ListTransferResponse) | List transfers. Authorization scope of `fm.client-employee.transfer.list` is required. |
 | CreateFeedback | [CreateFeedbackRequest](#fm-CreateFeedbackRequest) | [CreateFeedbackResponse](#fm-CreateFeedbackResponse) | Create a new feedback. Authorization scope of `fm.client-employee.feedback.create` is required. |
