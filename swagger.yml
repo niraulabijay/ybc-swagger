@@ -633,187 +633,6 @@
         ]
       }
     },
-    "/v1/client-employee": {
-      "post": {
-        "summary": "Create a new client employee relation(many to many). this helps to assign\nemployee to the client.\nAuthorization scope of `fm.client-employee.create` is required.",
-        "operationId": "ClientEmployeeService_Create",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmCreateClientEmployeeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmCreateClientEmployeeRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
-    "/v1/client-employee/contracted-hours": {
-      "get": {
-        "summary": "Get contracted hours of the employee for the client\nAuthorization scope of `fm.client-employee.get-contracted-hours` is\nrequired.",
-        "operationId": "ClientEmployeeService_GetContractedHours",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmGetContractedHoursResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "client_employee_id",
-            "description": "unique id of client employee relation.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "organization_id",
-            "description": "organization id of the client employee relation.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      },
-      "put": {
-        "summary": "Assign contracted hours to the employee for the client\nAuthorization scope of `fm.client-employee.assign-contracted-hours` is\nrequired.",
-        "operationId": "ClientEmployeeService_AssignContractedHours",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmAssignContractedHoursResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmAssignContractedHoursRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
-    "/v1/client-employee/contracted-hours-by-client": {
-      "get": {
-        "summary": "Get contracted hours of the multiple employees of a signle client(by id)\nAuthorization scope of `fm.client-employee.get-contracted-hours-by-client` is\nrequired.",
-        "operationId": "ClientEmployeeService_GetContractedHoursByClient",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmGetContractedHoursByClientResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "client_id",
-            "description": "unique id of client.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "organization_id",
-            "description": "organization id of the client employee relation.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
-    "/v1/client-employee/contracted-hours-by-employee": {
-      "get": {
-        "summary": "Get contracted hours of a employees for his/her multiplr clients\nAuthorization scope of `fm.client-employee.get-contracted-hours-by-employee` is\nrequired.",
-        "operationId": "ClientEmployeeService_GetContractedHoursByEmployee",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmGetContractedHoursByEmployeeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "employee_id",
-            "description": "unique id of employee.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "organization_id",
-            "description": "organization id of the client employee relation.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
     "/v1/client-employee/feedback": {
       "get": {
         "summary": "List feedbacks.\nAuthorization scope of `fm.client-employee.feedback.list` is required.",
@@ -905,142 +724,6 @@
         ]
       }
     },
-    "/v1/client-employee/get-client-ids-by-employee/{employee_id}": {
-      "get": {
-        "summary": "Get client_ids by employee_id\nAuthorization scope of `fm.client-employee.get-client-ids-by-employee-id`\nis required.",
-        "operationId": "ClientEmployeeService_GetClientIdsByEmployeeId",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmGetClientIdsByEmployeeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "employee_id",
-            "description": "Employee id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
-    "/v1/client-employee/get-employees-by-client": {
-      "get": {
-        "summary": "Get employees by Client_id\nAuthorization scope of `fm.client-employee.get-employee-ids-by-client-id`\nis required.",
-        "operationId": "ClientEmployeeService_GetEmployeeIdsByClientId",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmGetEmployeeIdsByClientIdResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "organization_id",
-            "description": "organization id.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "client_id",
-            "description": "Id of client.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
-    "/v1/client-employee/get-ids-by-employee/{employee_id}": {
-      "get": {
-        "summary": "Get client_employee_ids by employee_id\nAuthorization scope of\n`fm.client-employee.get-client-employee-ids-by-employee-id` is required.",
-        "operationId": "ClientEmployeeService_GetClientEmployeeIdsByEmployeeId",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmGetClientEmployeeIdsByEmployeeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "employee_id",
-            "description": "Employee id",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
-    "/v1/client-employee/shift": {
-      "put": {
-        "summary": "Assign shift to the employee for the client\nAuthorization scope of `fm.client-employee.assign-shift` is required.",
-        "operationId": "ClientEmployeeService_AssignShift",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmAssignClientEmployeeShiftResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmAssignClientEmployeeShiftRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
     "/v1/client-employee/target-tasks": {
       "put": {
         "summary": "Assign target tasks for each day of the week in a fixed interval of time\nfor an employee for a client\nAuthorization scope of `fm.client-employee.assign-target-tasks` is\nrequired.",
@@ -1099,6 +782,39 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientEmployeeService"
+        ]
+      }
+    },
+    "/v1/client-employee/training-status/update": {
+      "patch": {
+        "summary": "Update status of training of employee.\nAuthorization scope of `fm.client-employee.update-employee-training-status` is required.",
+        "operationId": "ClientEmployeeService_UpdateEmployeeTrainingStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateEmployeeTrainingStatusResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateEmployeeTrainingStatusRequest"
+            }
           }
         ],
         "tags": [
@@ -1358,51 +1074,6 @@
             "in": "query",
             "required": false,
             "type": "string"
-          },
-          {
-            "name": "organization_id",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
-    "/v1/client-employees": {
-      "get": {
-        "summary": "List the employees assigned in the clients\nAuthorization scope of `fm.client-employee.list` is required.",
-        "operationId": "ClientEmployeeService_List",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmListClientEmployeeResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter.limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "filter.page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
           },
           {
             "name": "organization_id",
@@ -13146,28 +12817,6 @@
         }
       }
     },
-    "fmAssignClientEmployeeShiftRequest": {
-      "type": "object",
-      "properties": {
-        "client_employee_id": {
-          "type": "string",
-          "title": "unique id of client employee relation"
-        },
-        "shift": {
-          "type": "string",
-          "title": "shift of the employee for the client"
-        },
-        "shift_time": {
-          "type": "string",
-          "title": "shift time of the employee for the client"
-        },
-        "organization_id": {
-          "type": "string",
-          "title": "organization id of the client employee relation"
-        }
-      },
-      "title": "Request for client-employee shift assignment"
-    },
     "fmAssignClientEmployeeShiftResponse": {
       "type": "object",
       "properties": {
@@ -13177,59 +12826,6 @@
         }
       },
       "title": "Response for client-employee shift assignment"
-    },
-    "fmAssignContractedHoursRequest": {
-      "type": "object",
-      "properties": {
-        "organization_id": {
-          "type": "string",
-          "title": "organization id of the client employee relation"
-        },
-        "client_employee_id": {
-          "type": "string",
-          "title": "unique id of client employee relation"
-        },
-        "department_id": {
-          "type": "string",
-          "title": "department of employee"
-        },
-        "designation": {
-          "type": "string",
-          "title": "designation of employee in the client"
-        },
-        "shift_contracted_day_hours": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/fmShiftContractedDayHours"
-          },
-          "title": "multiple shift for employee in a single client"
-        },
-        "start_date": {
-          "type": "string",
-          "format": "date-time",
-          "title": "contract start date"
-        },
-        "end_date": {
-          "type": "string",
-          "format": "date-time",
-          "title": "contract end date"
-        },
-        "is_head_office": {
-          "type": "boolean",
-          "title": "is employee from head office"
-        },
-        "allow_all_clients": {
-          "type": "boolean",
-          "title": "allow access to all client"
-        },
-        "allowed_client_ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "list of allowed clients"
-        }
-      }
     },
     "fmAssignContractedHoursResponse": {
       "type": "object",
@@ -14548,63 +14144,6 @@
         "region": {
           "$ref": "#/definitions/fmRegion",
           "title": "Region"
-        }
-      }
-    },
-    "fmCreateClientEmployeeRequest": {
-      "type": "object",
-      "properties": {
-        "client_id": {
-          "type": "string",
-          "title": "client the employee is assigned to"
-        },
-        "employee_id": {
-          "type": "string",
-          "title": "employee the client is assigned to"
-        },
-        "department_id": {
-          "type": "string",
-          "title": "department of employee"
-        },
-        "designation": {
-          "type": "string",
-          "title": "designation of employee in the client"
-        },
-        "organization_id": {
-          "type": "string",
-          "title": "organization id of the client employee relation"
-        },
-        "shift_contracted_day_hours": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/fmShiftContractedDayHours"
-          },
-          "title": "multiple shift for employee in a single client"
-        },
-        "start_date": {
-          "type": "string",
-          "format": "date-time",
-          "title": "contract start date"
-        },
-        "end_date": {
-          "type": "string",
-          "format": "date-time",
-          "title": "contract end date"
-        },
-        "is_head_office": {
-          "type": "boolean",
-          "title": "is employee from head office"
-        },
-        "allow_all_clients": {
-          "type": "boolean",
-          "title": "allow access to all client"
-        },
-        "allowed_client_ids": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "title": "list of allowed clients"
         }
       }
     },
@@ -20762,6 +20301,28 @@
         "employee_training_id": {
           "type": "string",
           "title": "unique id of the updated employee training program"
+        }
+      }
+    },
+    "fmUpdateEmployeeTrainingStatusRequest": {
+      "type": "object",
+      "properties": {
+        "employee_training_id": {
+          "type": "string",
+          "title": "unique id of the employee training"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        }
+      }
+    },
+    "fmUpdateEmployeeTrainingStatusResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "acknowledgement status"
         }
       }
     },
