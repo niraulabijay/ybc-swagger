@@ -113,6 +113,8 @@
     - [TransferResponse](#fm-TransferResponse)
     - [UpdateEmployeeTrainingRequest](#fm-UpdateEmployeeTrainingRequest)
     - [UpdateEmployeeTrainingResponse](#fm-UpdateEmployeeTrainingResponse)
+    - [UpdateEmployeeTrainingStatusRequest](#fm-UpdateEmployeeTrainingStatusRequest)
+    - [UpdateEmployeeTrainingStatusResponse](#fm-UpdateEmployeeTrainingStatusResponse)
   
     - [ClientEmployeeService](#fm-ClientEmployeeService)
   
@@ -2555,6 +2557,37 @@ Response for getting target task of an employee for a client
 
 
 
+
+<a name="fm-UpdateEmployeeTrainingStatusRequest"></a>
+
+### UpdateEmployeeTrainingStatusRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| employee_training_id | [string](#string) |  | unique id of the employee training |
+| organization_id | [string](#string) |  | id of the organization |
+
+
+
+
+
+
+<a name="fm-UpdateEmployeeTrainingStatusResponse"></a>
+
+### UpdateEmployeeTrainingStatusResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | acknowledgement status |
+
+
+
+
+
  
 
  
@@ -2585,6 +2618,7 @@ Response for getting target task of an employee for a client
 | GetEmployeeTraining | [GetEmployeeTrainingRequest](#fm-GetEmployeeTrainingRequest) | [GetEmployeeTrainingResponse](#fm-GetEmployeeTrainingResponse) | Get employee trainings Authorization scope of `fm.client-employee.get-employee-trainings` is required. |
 | UpdateEmployeeTraining | [UpdateEmployeeTrainingRequest](#fm-UpdateEmployeeTrainingRequest) | [UpdateEmployeeTrainingResponse](#fm-UpdateEmployeeTrainingResponse) | Update training of employee. Authorization scope of `fm.client-employee.update-employee-training` is required. |
 | DeleteEmployeeTraining | [DeleteEmployeeTrainingRequest](#fm-DeleteEmployeeTrainingRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete training of employee. Authorization scope of `fm.client-employee.delete-employee-training` is required. |
+| UpdateEmployeeTrainingStatus | [UpdateEmployeeTrainingStatusRequest](#fm-UpdateEmployeeTrainingStatusRequest) | [UpdateEmployeeTrainingStatusResponse](#fm-UpdateEmployeeTrainingStatusResponse) | Update status of training of employee. Authorization scope of `fm.client-employee.update-employee-training-status` is required. |
 | CreateTransfer | [CreateTransferRequest](#fm-CreateTransferRequest) | [CreateTransferResponse](#fm-CreateTransferResponse) | Create a new transfer. Authorization scope of `fm.client-employee.transfer.create` is required. |
 | ListTransfer | [ListTransferRequest](#fm-ListTransferRequest) | [ListTransferResponse](#fm-ListTransferResponse) | List transfers. Authorization scope of `fm.client-employee.transfer.list` is required. |
 | CreateFeedback | [CreateFeedbackRequest](#fm-CreateFeedbackRequest) | [CreateFeedbackResponse](#fm-CreateFeedbackResponse) | Create a new feedback. Authorization scope of `fm.client-employee.feedback.create` is required. |
