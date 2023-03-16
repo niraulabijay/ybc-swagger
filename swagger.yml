@@ -1106,7 +1106,73 @@
         ]
       }
     },
-    "/v1/client-employee/training": {
+    "/v1/client-employee/training/create": {
+      "post": {
+        "summary": "Create training for employee.\nAuthorization scope of `fm.client-employee.create-employee-training` is\nrequired",
+        "operationId": "ClientEmployeeService_CreateEmployeeTraining",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateEmployeeTrainingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateEmployeeTrainingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientEmployeeService"
+        ]
+      }
+    },
+    "/v1/client-employee/training/delete": {
+      "post": {
+        "summary": "Delete training of employee.\nAuthorization scope of `fm.client-employee.delete-employee-training` is required.",
+        "operationId": "ClientEmployeeService_DeleteEmployeeTraining",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteEmployeeTrainingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientEmployeeService"
+        ]
+      }
+    },
+    "/v1/client-employee/training/list": {
       "get": {
         "summary": "Get employee trainings\nAuthorization scope of `fm.client-employee.get-employee-trainings` is\nrequired.",
         "operationId": "ClientEmployeeService_GetEmployeeTraining",
@@ -1175,70 +1241,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      },
-      "post": {
-        "summary": "Create training for employee.\nAuthorization scope of `fm.client-employee.create-employee-training` is\nrequired",
-        "operationId": "ClientEmployeeService_CreateEmployeeTraining",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmCreateEmployeeTrainingResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmCreateEmployeeTrainingRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
-    "/v1/client-employee/training/delete": {
-      "post": {
-        "summary": "Delete training of employee.\nAuthorization scope of `fm.client-employee.delete-employee-training` is required.",
-        "operationId": "ClientEmployeeService_DeleteEmployeeTraining",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "properties": {}
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmDeleteEmployeeTrainingRequest"
-            }
           }
         ],
         "tags": [
