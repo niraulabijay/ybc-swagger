@@ -3917,6 +3917,265 @@
         ]
       }
     },
+    "/v1/comment": {
+      "post": {
+        "summary": "Store new comment",
+        "operationId": "CommentService_CreateComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateCommentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CommentService"
+        ]
+      }
+    },
+    "/v1/comment-reply": {
+      "post": {
+        "summary": "Store Comment Reply",
+        "operationId": "CommentService_CreateReply",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateReplyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateReplyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CommentService"
+        ]
+      }
+    },
+    "/v1/comment-reply/{reply_id}": {
+      "delete": {
+        "summary": "Delete a comment reply",
+        "operationId": "CommentService_DeleteReply",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmDeleteReplyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reply_id",
+            "description": "the unique id of comment",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CommentService"
+        ]
+      },
+      "put": {
+        "summary": "Update a comment reply",
+        "operationId": "CommentService_UpdateReply",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateReplyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "reply_id",
+            "description": "the unique id of reply",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateReplyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CommentService"
+        ]
+      }
+    },
+    "/v1/comment/{comment_id}": {
+      "delete": {
+        "summary": "Delete a comment",
+        "operationId": "CommentService_DeleteComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmDeleteCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "comment_id",
+            "description": "the unique id of comment",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CommentService"
+        ]
+      },
+      "put": {
+        "summary": "Update a comment",
+        "operationId": "CommentService_UpdateComment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "comment_id",
+            "description": "the unique id of comment",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateCommentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "CommentService"
+        ]
+      }
+    },
+    "/v1/comments/{commentable_id}/{commentable_type}/all": {
+      "get": {
+        "summary": "Get list of comments of a commentable type and id.",
+        "operationId": "CommentService_GetAllComments",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListCommentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "commentable_id",
+            "description": "Id to uniquely identify the commentable",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "commentable_type",
+            "description": "The type of commentable",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "employee_id",
+            "description": "Employee id to filter the data\nOptional.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "organization_id",
+            "description": "Currently logged in organization_id.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "CommentService"
+        ]
+      }
+    },
     "/v1/department": {
       "post": {
         "summary": "Create a new department. Authorization scope of `fm.department.create` is\nrequired",
@@ -13508,6 +13767,46 @@
         }
       }
     },
+    "fmCommentResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "to uniquely identify a comment"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "the id of the employee who is commenting"
+        },
+        "commentable_type": {
+          "type": "string",
+          "title": "a unique type for comment"
+        },
+        "commentable_id": {
+          "type": "string",
+          "title": "an id to uniquely identify a comment"
+        },
+        "comment": {
+          "type": "string",
+          "title": "the comment string"
+        },
+        "description": {
+          "type": "string",
+          "title": "description if you need it"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "timestamp of when the comment was created"
+        },
+        "replies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmReplyResponse"
+          }
+        }
+      }
+    },
     "fmConfidentialEmployeeDetails": {
       "type": "object",
       "properties": {
@@ -14257,6 +14556,35 @@
       },
       "title": "Response for create client requests"
     },
+    "fmCreateCommentRequest": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "title": "the id of the employee who is commenting"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the associated organization"
+        },
+        "commentable_type": {
+          "type": "string",
+          "title": "a unique type for comment"
+        },
+        "commentable_id": {
+          "type": "string",
+          "title": "an id to uniquely identify a comment"
+        },
+        "comment": {
+          "type": "string",
+          "title": "the comment string"
+        },
+        "description": {
+          "type": "string",
+          "title": "description if you need it (optional)"
+        }
+      }
+    },
     "fmCreateCoverRequest": {
       "type": "object",
       "properties": {
@@ -14266,7 +14594,12 @@
         },
         "covered_by": {
           "type": "string",
-          "title": "emoloyee id"
+          "title": "employee id"
+        },
+        "cover_rate": {
+          "type": "number",
+          "format": "float",
+          "title": "cover rate"
         },
         "estimate_time": {
           "type": "string",
@@ -15255,6 +15588,36 @@
         }
       }
     },
+    "fmCreateReplyRequest": {
+      "type": "object",
+      "properties": {
+        "employee_id": {
+          "type": "string",
+          "title": "the id of the employee who is replying to comment"
+        },
+        "comment_id": {
+          "type": "string",
+          "title": "id of the comment"
+        },
+        "comment": {
+          "type": "string",
+          "title": "the comment string"
+        },
+        "description": {
+          "type": "string",
+          "title": "description if you need it (optional)"
+        }
+      }
+    },
+    "fmCreateReplyResponse": {
+      "type": "object",
+      "properties": {
+        "reply_id": {
+          "type": "string",
+          "title": "unique if of reply"
+        }
+      }
+    },
     "fmCreateSectorRequest": {
       "type": "object",
       "properties": {
@@ -15385,6 +15748,11 @@
         "task_type": {
           "type": "string",
           "title": "type of task: Allowed [\"DOC\", \"VARIATION\", \"MOBILE\", \"OTHERS\", \"PERIODIC(REGULAR)\", \"PERIODIC(ONE OFF)\", \"PERIODIC(WINDOW)\", \"PERIODIC(ACCOMODATION)\"]"
+        },
+        "rate": {
+          "type": "number",
+          "format": "float",
+          "title": "rate if task type is 'MOBILE' or 'OTHERS'"
         },
         "recurrence": {
           "$ref": "#/definitions/fmUpsertRecurrence",
@@ -15873,6 +16241,15 @@
         }
       }
     },
+    "fmDeleteCommentResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "the status of action"
+        }
+      }
+    },
     "fmDeleteDepartmentRequest": {
       "type": "object",
       "properties": {
@@ -16065,6 +16442,15 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmDeleteReplyResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "the status of action"
         }
       }
     },
@@ -17598,6 +17984,17 @@
         }
       }
     },
+    "fmListCommentResponse": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmCommentResponse"
+          }
+        }
+      }
+    },
     "fmListCorrectionResponse": {
       "type": "object",
       "properties": {
@@ -18845,6 +19242,32 @@
         }
       }
     },
+    "fmReplyResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "unique id of reply"
+        },
+        "comment_id": {
+          "type": "string",
+          "title": "id of the comment"
+        },
+        "comment": {
+          "type": "string",
+          "title": "the comment string"
+        },
+        "description": {
+          "type": "string",
+          "title": "description if you need it (optional)"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "timestamp of when the comment was created"
+        }
+      }
+    },
     "fmReqTasks": {
       "type": "object",
       "properties": {
@@ -19247,6 +19670,16 @@
         "task_type": {
           "type": "string",
           "title": "type of task: Allowed [\"DOC\", \"VARIATION\", \"MOBILE\", \"OTHERS\", \"PERIODIC(REGULAR)\", \"PERIODIC(ONE OFF)\", \"PERIODIC(WINDOW)\", \"PERIODIC(ACCOMODATION)\"]"
+        },
+        "rate": {
+          "type": "number",
+          "format": "float",
+          "title": "rate if task type is 'MOBILE' or 'OTHERS'"
+        },
+        "cover_rate": {
+          "type": "number",
+          "format": "float",
+          "title": "cover rate"
         },
         "cancel_status": {
           "type": "boolean",
@@ -19966,6 +20399,32 @@
         }
       },
       "title": "response for UpdateClientRequest"
+    },
+    "fmUpdateCommentRequest": {
+      "type": "object",
+      "properties": {
+        "comment_id": {
+          "type": "string",
+          "title": "the unique id of comment"
+        },
+        "comment": {
+          "type": "string",
+          "title": "the comment string"
+        },
+        "description": {
+          "type": "string",
+          "title": "description if you need it (optional)"
+        }
+      }
+    },
+    "fmUpdateCommentResponse": {
+      "type": "object",
+      "properties": {
+        "comment_id": {
+          "type": "string",
+          "title": "the unique id of comment"
+        }
+      }
     },
     "fmUpdateDepartmentRequest": {
       "type": "object",
@@ -20838,6 +21297,32 @@
         }
       }
     },
+    "fmUpdateReplyRequest": {
+      "type": "object",
+      "properties": {
+        "reply_id": {
+          "type": "string",
+          "title": "the unique id of reply"
+        },
+        "comment": {
+          "type": "string",
+          "title": "the comment string"
+        },
+        "description": {
+          "type": "string",
+          "title": "description if you need it (optional)"
+        }
+      }
+    },
+    "fmUpdateReplyResponse": {
+      "type": "object",
+      "properties": {
+        "reply_id": {
+          "type": "string",
+          "title": "the unique id of comment"
+        }
+      }
+    },
     "fmUpdateSectorRequest": {
       "type": "object",
       "properties": {
@@ -20997,6 +21482,11 @@
         "task_type": {
           "type": "string",
           "title": "type of task"
+        },
+        "rate": {
+          "type": "number",
+          "format": "float",
+          "title": "rate if task type is 'MOBILE' or 'OTHERS'"
         }
       },
       "title": "Request to update task"
