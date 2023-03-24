@@ -4008,6 +4008,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteReplyRequest"
+            }
           }
         ],
         "tags": [
@@ -4078,6 +4086,14 @@
             "in": "path",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmDeleteCommentRequest"
+            }
           }
         ],
         "tags": [
@@ -8910,6 +8926,28 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "employee_ids",
+            "description": "multiple employee ids.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "client_ids",
+            "description": "multiple  client ids.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -9337,6 +9375,28 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "employee_ids",
+            "description": "multiple employee ids.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "client_ids",
+            "description": "multiple  client ids.",
+            "in": "query",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
           }
         ],
         "tags": [
@@ -16241,6 +16301,19 @@
         }
       }
     },
+    "fmDeleteCommentRequest": {
+      "type": "object",
+      "properties": {
+        "comment_id": {
+          "type": "string",
+          "title": "the unique id of comment"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the associated organization"
+        }
+      }
+    },
     "fmDeleteCommentResponse": {
       "type": "object",
       "properties": {
@@ -16442,6 +16515,15 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmDeleteReplyRequest": {
+      "type": "object",
+      "properties": {
+        "reply_id": {
+          "type": "string",
+          "title": "the unique id of comment"
         }
       }
     },
@@ -20414,6 +20496,10 @@
         "description": {
           "type": "string",
           "title": "description if you need it (optional)"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the associated organization"
         }
       }
     },
