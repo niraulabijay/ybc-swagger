@@ -6264,6 +6264,7 @@ response for UpdateClientRequest
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | comment_id | [string](#string) |  | the unique id of comment |
+| organization_id | [string](#string) |  | id of the associated organization |
 
 
 
@@ -6378,6 +6379,7 @@ response for UpdateClientRequest
 | comment_id | [string](#string) |  | the unique id of comment |
 | comment | [string](#string) |  | the comment string |
 | description | [string](#string) |  | description if you need it (optional) |
+| organization_id | [string](#string) |  | id of the associated organization |
 
 
 
@@ -12498,6 +12500,7 @@ Response for list of task request
 | start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date |
 | end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date |
 | task_type | [string](#string) |  | type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION) |
+| client_ids | [string](#string) | repeated | multiple client ids |
 
 
 
@@ -12535,6 +12538,8 @@ Response for list of task request
 | start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date |
 | end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date |
 | task_type | [string](#string) |  | type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION) |
+| employee_ids | [string](#string) | repeated | multiple employee ids |
+| client_ids | [string](#string) | repeated | multiple client ids |
 
 
 
