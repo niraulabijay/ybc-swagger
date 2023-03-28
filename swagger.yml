@@ -12046,9 +12046,9 @@
           "type": "string",
           "title": "description of the task"
         },
-        "estimated_time": {
+        "task_type": {
           "type": "string",
-          "title": "time estimated to complete the task"
+          "title": "type of task"
         },
         "task_date": {
           "type": "string",
@@ -15633,23 +15633,29 @@
           "type": "string",
           "title": "description of the task"
         },
-        "estimated_time": {
+        "task_type": {
           "type": "string",
-          "title": "time estimated to complete the task"
+          "title": "type of task: Allowed [\"DOC\", \"VARIATION\", \"MOBILE\", \"OTHERS\", \"PERIODIC(REGULAR)\", \"PERIODIC(ONE OFF)\", \"PERIODIC(WINDOW)\", \"PERIODIC(ACCOMODATION)\"]"
         },
-        "task_date": {
-          "type": "string",
-          "format": "date-time",
-          "title": "date of the task"
+        "task_dates": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "title": "dates of the task"
         }
       }
     },
     "fmCreatePlannerResponse": {
       "type": "object",
       "properties": {
-        "planner_id": {
-          "type": "string",
-          "title": "unique id of the planner created"
+        "planner_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "unique ids of the planners created"
         }
       }
     },
@@ -21334,14 +21340,14 @@
           "type": "string",
           "title": "description of the task"
         },
-        "estimated_time": {
-          "type": "string",
-          "title": "time estimated to complete the task"
-        },
         "task_date": {
           "type": "string",
           "format": "date-time",
           "title": "date of the task"
+        },
+        "task_type": {
+          "type": "string",
+          "title": "type of task: Allowed [\"DOC\", \"VARIATION\", \"MOBILE\", \"OTHERS\", \"PERIODIC(REGULAR)\", \"PERIODIC(ONE OFF)\", \"PERIODIC(WINDOW)\", \"PERIODIC(ACCOMODATION)\"]"
         }
       }
     },
