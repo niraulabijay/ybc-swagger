@@ -3693,8 +3693,8 @@ Response for create client requests
 | organization_id | [string](#string) |  | id of the organization |
 | task_title | [string](#string) |  | title of the task |
 | description | [string](#string) |  | description of the task |
-| estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | time estimated to complete the task |
-| task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
+| task_type | [string](#string) |  | type of task: Allowed [&#34;DOC&#34;, &#34;VARIATION&#34;, &#34;MOBILE&#34;, &#34;OTHERS&#34;, &#34;PERIODIC(REGULAR)&#34;, &#34;PERIODIC(ONE OFF)&#34;, &#34;PERIODIC(WINDOW)&#34;, &#34;PERIODIC(ACCOMODATION)&#34;] |
+| task_dates | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | repeated | dates of the task |
 
 
 
@@ -3709,7 +3709,7 @@ Response for create client requests
 
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
-| planner_id | [string](#string) |  | unique id of the planner created |
+| planner_ids | [string](#string) | repeated | unique ids of the planners created |
 
 
 
@@ -4975,7 +4975,7 @@ individual planner response
 | organization_id | [string](#string) |  | id of the organization |
 | task_title | [string](#string) |  | title of the task |
 | description | [string](#string) |  | description of the task |
-| estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | time estimated to complete the task |
+| task_type | [string](#string) |  | type of task |
 | task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
 | created_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the planner |
 
@@ -5847,8 +5847,8 @@ response for UpdateClientRequest
 | organization_id | [string](#string) |  | id of the organization |
 | task_title | [string](#string) |  | title of the task |
 | description | [string](#string) |  | description of the task |
-| estimated_time | [google.protobuf.Duration](#google-protobuf-Duration) |  | time estimated to complete the task |
 | task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
+| task_type | [string](#string) |  | type of task: Allowed [&#34;DOC&#34;, &#34;VARIATION&#34;, &#34;MOBILE&#34;, &#34;OTHERS&#34;, &#34;PERIODIC(REGULAR)&#34;, &#34;PERIODIC(ONE OFF)&#34;, &#34;PERIODIC(WINDOW)&#34;, &#34;PERIODIC(ACCOMODATION)&#34;] |
 
 
 
