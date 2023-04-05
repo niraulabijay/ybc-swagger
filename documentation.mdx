@@ -532,6 +532,8 @@
     - [AgendaDecision](#fm-AgendaDecision)
     - [AgendaDecisionObjection](#fm-AgendaDecisionObjection)
     - [AgendaDecisionSupport](#fm-AgendaDecisionSupport)
+    - [AgendaDecisionTimerRequest](#fm-AgendaDecisionTimerRequest)
+    - [AgendaDecisionTimerResponse](#fm-AgendaDecisionTimerResponse)
     - [AgendaDetail](#fm-AgendaDetail)
     - [AgendaTimerRequest](#fm-AgendaTimerRequest)
     - [AgendaTimerResponse](#fm-AgendaTimerResponse)
@@ -9514,6 +9516,38 @@ details of objection of decision made for an agenda
 
 
 
+<a name="fm-AgendaDecisionTimerRequest"></a>
+
+### AgendaDecisionTimerRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| meeting_id | [string](#string) |  | id of meeting |
+| agenda_id | [string](#string) |  | id of agenda |
+| action | [string](#string) |  | timer - action : Allowed values [&#34;START&#34;,&#34;STOP&#34;] |
+
+
+
+
+
+
+<a name="fm-AgendaDecisionTimerResponse"></a>
+
+### AgendaDecisionTimerResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| agenda_id | [string](#string) |  | unique id of agenda |
+
+
+
+
+
+
 <a name="fm-AgendaDetail"></a>
 
 ### AgendaDetail
@@ -10592,6 +10626,7 @@ response for UpdateMeetingRequest
 | AddAgendaDecisionSupport | [AddAgendaDecisionSupportRequest](#fm-AddAgendaDecisionSupportRequest) | [AddAgendaDecisionSupportResponse](#fm-AddAgendaDecisionSupportResponse) | Add support to a decision of agenda |
 | DeleteAgendaDecisionObjection | [DeleteAgendaDecisionObjectionRequest](#fm-DeleteAgendaDecisionObjectionRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete objection made for decisions of an agenda |
 | AgendaTimerUpdate | [AgendaTimerRequest](#fm-AgendaTimerRequest) | [AgendaTimerResponse](#fm-AgendaTimerResponse) | start/stop agenda of meeting |
+| AgendaDecisionTimer | [AgendaDecisionTimerRequest](#fm-AgendaDecisionTimerRequest) | [AgendaDecisionTimerResponse](#fm-AgendaDecisionTimerResponse) | Start/Stop decision for an agenda of a meeting. Authorization scope of `fm.agenda-decision-timer.update` is required |
 | MeetingTimerUpdate | [MeetingTimerUpdateRequest](#fm-MeetingTimerUpdateRequest) | [MeetingTimerUpdateResponse](#fm-MeetingTimerUpdateResponse) | start/stop meeting |
 | CreateCall | [CreateCallRequest](#fm-CreateCallRequest) | [CreateCallResponse](#fm-CreateCallResponse) | Create a Call Authorization scope of `fm.call.create` is required. |
 | ListCall | [ListCallRequest](#fm-ListCallRequest) | [ListCallResponse](#fm-ListCallResponse) | Returns the list of call visible to the authorized user in descending order Authorization scope of `fm.call.list` is required |
@@ -10631,7 +10666,9 @@ Create note request
 | for | [string](#string) | repeated | notes for |
 | notes | [string](#string) |  | notes detail |
 | note_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | note date |
-| client_id | [string](#string) |  | unique id of the client |
+| client_id | [string](#string) |  | unique id of the client if note_type is &#39;CLIENT&#39; |
+| employee_id | [string](#string) |  | id of the employee if note_type is &#39;EMPLOYEE&#39; |
+| note_type | [string](#string) |  | type of the note : CLIENT, EMPLOYEE, OFFICE, OTHER, NA |
 
 
 
@@ -10680,7 +10717,9 @@ List notes request
 | created_by | [string](#string) |  | id of the note creator |
 | for | [string](#string) |  | id for whom notes are created |
 | organization_id | [string](#string) |  | unique id of the organization |
-| client_id | [string](#string) |  | unique id of the client |
+| client_id | [string](#string) |  | unique id of the client (optional) |
+| employee_id | [string](#string) |  | id of the employee (optional) |
+| note_type | [string](#string) |  | type of note to filter response |
 | filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter params for list |
 
 
@@ -10719,6 +10758,8 @@ List Notes response
 | note_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | note date |
 | note_id | [string](#string) |  | unique id of note to be updated |
 | client_id | [string](#string) |  | unique id of the client |
+| employee_id | [string](#string) |  | id of the employee |
+| note_type | [string](#string) |  | type of the note : CLIENT, EMPLOYEE, OFFICE, OTHER, NA |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of note creation |
 | updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of note updated |
 
