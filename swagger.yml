@@ -6706,6 +6706,39 @@
         ]
       }
     },
+    "/v1/meeting/agenda/decision/timer": {
+      "post": {
+        "summary": "Start/Stop decision for an agenda of a meeting.\nAuthorization scope of `fm.agenda-decision-timer.update` is required",
+        "operationId": "MeetingService_AgendaDecisionTimer",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmAgendaDecisionTimerResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmAgendaDecisionTimerRequest"
+            }
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
     "/v1/meeting/agenda/timer": {
       "post": {
         "summary": "start/stop agenda of meeting",
@@ -7539,7 +7572,21 @@
           },
           {
             "name": "client_id",
-            "description": "unique id of the client.",
+            "description": "unique id of the client (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "employee_id",
+            "description": "id of the employee (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "note_type",
+            "description": "type of note to filter response.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -12851,6 +12898,32 @@
         }
       }
     },
+    "fmAgendaDecisionTimerRequest": {
+      "type": "object",
+      "properties": {
+        "meeting_id": {
+          "type": "string",
+          "title": "id of meeting"
+        },
+        "agenda_id": {
+          "type": "string",
+          "title": "id of agenda"
+        },
+        "action": {
+          "type": "string",
+          "title": "timer - action : Allowed values [\"START\",\"STOP\"]"
+        }
+      }
+    },
+    "fmAgendaDecisionTimerResponse": {
+      "type": "object",
+      "properties": {
+        "agenda_id": {
+          "type": "string",
+          "title": "unique id of agenda"
+        }
+      }
+    },
     "fmAgendaDetail": {
       "type": "object",
       "properties": {
@@ -15497,7 +15570,15 @@
         },
         "client_id": {
           "type": "string",
-          "title": "unique id of the client"
+          "title": "unique id of the client if note_type is 'CLIENT'"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee if note_type is 'EMPLOYEE'"
+        },
+        "note_type": {
+          "type": "string",
+          "title": "type of the note : CLIENT, EMPLOYEE, OFFICE, OTHER, NA"
         }
       },
       "title": "Create note request"
@@ -18919,6 +19000,14 @@
         "client_id": {
           "type": "string",
           "title": "unique id of the client"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "note_type": {
+          "type": "string",
+          "title": "type of the note : CLIENT, EMPLOYEE, OFFICE, OTHER, NA"
         },
         "created_at": {
           "type": "string",
