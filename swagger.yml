@@ -10584,6 +10584,15 @@
           "type": "string",
           "title": "organization id of the employee"
         },
+        "status": {
+          "type": "string",
+          "title": "status of the training"
+        },
+        "completion_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "training completion date"
+        },
         "created_at": {
           "type": "string",
           "format": "date-time",
@@ -20987,6 +20996,10 @@
         "organization_id": {
           "type": "string",
           "title": "id of the organization"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of the training i.e. 'COMPLETE', 'INCOMPLETE'"
         }
       }
     },
