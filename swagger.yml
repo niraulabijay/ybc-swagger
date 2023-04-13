@@ -156,7 +156,7 @@
       }
     },
     "/v1/check/employee-checks": {
-      "get": {
+      "post": {
         "summary": "Get checks information of multiple employees. Authorization scope of `fm.employee-check.list` is required",
         "operationId": "CheckService_ListEmployeeCheck",
         "responses": {
@@ -175,30 +175,12 @@
         },
         "parameters": [
           {
-            "name": "organization_id",
-            "description": "organization id of the employee.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "employee_id",
-            "description": "employee ids.",
-            "in": "query",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi"
-          },
-          {
-            "name": "date",
-            "description": "date for check ins and check outs.",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "format": "date-time"
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmListEmployeeCheckRequest"
+            }
           }
         ],
         "tags": [
@@ -18290,6 +18272,27 @@
             "$ref": "#/definitions/ListEmailResponseEmailResponse"
           },
           "title": "list of emails"
+        }
+      }
+    },
+    "fmListEmployeeCheckRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "organization id of the employee"
+        },
+        "employee_id": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "employee ids"
+        },
+        "date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date for check ins and check outs"
         }
       }
     },
