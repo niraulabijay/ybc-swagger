@@ -2322,6 +2322,8 @@ Response for get employee trainings
 | training_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date of the training |
 | attachment_file | [string](#string) | repeated | Attachment files regarding training |
 | organization_id | [string](#string) |  | organization id of the employee |
+| status | [string](#string) |  | status of the training |
+| completion_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | training completion date |
 | created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date of training creation |
 
 
@@ -2589,6 +2591,7 @@ Response for getting target task of an employee for a client
 | ----- | ---- | ----- | ----------- |
 | employee_training_id | [string](#string) |  | unique id of the employee training |
 | organization_id | [string](#string) |  | id of the organization |
+| status | [string](#string) |  | status of the training i.e. &#39;COMPLETE&#39;, &#39;INCOMPLETE&#39; |
 
 
 
