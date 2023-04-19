@@ -12963,6 +12963,16 @@
           "format": "date-time",
           "title": "end time of agenda"
         },
+        "decision_start_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "start time of decision"
+        },
+        "decision_end_time": {
+          "type": "string",
+          "format": "date-time",
+          "title": "end time of decision"
+        },
         "agenda_views": {
           "type": "array",
           "items": {
