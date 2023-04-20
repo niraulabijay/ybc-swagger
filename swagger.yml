@@ -14032,6 +14032,14 @@
         "contact_no": {
           "type": "string",
           "title": "contact number\nNOTE: creating and not deleting older fields for backward compatibility"
+        },
+        "house_number": {
+          "type": "string",
+          "title": "house number"
+        },
+        "client_contact_name": {
+          "type": "string",
+          "title": "client contact name"
         }
       }
     },
@@ -16928,6 +16936,14 @@
         "account_number": {
           "type": "string",
           "title": "Account number"
+        },
+        "account_type": {
+          "type": "string",
+          "title": "Type of Account"
+        },
+        "payment_method": {
+          "type": "string",
+          "title": "Method of payment"
         },
         "s_code": {
           "type": "string",
