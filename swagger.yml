@@ -8282,6 +8282,39 @@
         ]
       }
     },
+    "/v1/task/corrections/upsert": {
+      "post": {
+        "summary": "Creates new task-corrections or updates the existing ones.\nAuthorization scope of `fm.task.correction.correct-all` is required.",
+        "operationId": "TaskService_UpsertCorrectionsOfTasks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpsertCorrectionsOfTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertCorrectionsOfTasksRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
     "/v1/task/detail/{task_id}": {
       "get": {
         "summary": "List returns the list of all tasks visible to the authorized user in\ndescending date order. Authorization scope of `fm.task.detail` is required.",
@@ -12544,32 +12577,6 @@
         "contracted_hours": {
           "type": "string",
           "title": "contracted hours of the employee with the client"
-        }
-      }
-    },
-    "UpsertAllTaskCorrectionRequestAllTasks": {
-      "type": "object",
-      "properties": {
-        "task_id": {
-          "type": "string",
-          "title": "unique id of the task"
-        },
-        "client_id": {
-          "type": "string",
-          "title": "id of the client"
-        },
-        "employee_id": {
-          "type": "string",
-          "title": "id of the employee"
-        },
-        "organization_id": {
-          "type": "string",
-          "title": "id of the organization"
-        },
-        "task_date": {
-          "type": "string",
-          "format": "date-time",
-          "title": "date of the task"
         }
       }
     },
@@ -21950,9 +21957,35 @@
         "tasks": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/UpsertAllTaskCorrectionRequestAllTasks"
+            "$ref": "#/definitions/fmUpsertAllTaskCorrectionRequestAllTasks"
           },
           "title": "list of tasks"
+        }
+      }
+    },
+    "fmUpsertAllTaskCorrectionRequestAllTasks": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "title": "unique id of the task"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "task_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of the task"
         }
       }
     },
@@ -22076,6 +22109,65 @@
       }
     },
     "fmUpsertCRMMobilizationTasksResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean",
+          "title": "action response"
+        }
+      }
+    },
+    "fmUpsertCorrectionsOfTasksRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "id of the organization"
+        },
+        "corrected_by": {
+          "type": "string",
+          "title": "corrected by : id"
+        },
+        "tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmUpsertCorrectionsOfTasksRequestAllTasks"
+          },
+          "title": "list of tasks"
+        }
+      }
+    },
+    "fmUpsertCorrectionsOfTasksRequestAllTasks": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "title": "unique id of task"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "client id"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "employee id"
+        },
+        "correction": {
+          "type": "string",
+          "title": "correction time"
+        },
+        "task_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of the task"
+        },
+        "is_negative": {
+          "type": "boolean",
+          "title": "whether the correction time is negative or not"
+        }
+      }
+    },
+    "fmUpsertCorrectionsOfTasksResponse": {
       "type": "object",
       "properties": {
         "status": {
