@@ -737,6 +737,9 @@
     - [UpsertAllTaskCorrectionRequest](#fm-UpsertAllTaskCorrectionRequest)
     - [UpsertAllTaskCorrectionRequest.AllTasks](#fm-UpsertAllTaskCorrectionRequest-AllTasks)
     - [UpsertAllTaskCorrectionResponse](#fm-UpsertAllTaskCorrectionResponse)
+    - [UpsertCorrectionsOfTasksRequest](#fm-UpsertCorrectionsOfTasksRequest)
+    - [UpsertCorrectionsOfTasksRequest.AllTasks](#fm-UpsertCorrectionsOfTasksRequest-AllTasks)
+    - [UpsertCorrectionsOfTasksResponse](#fm-UpsertCorrectionsOfTasksResponse)
     - [UpsertRecurrence](#fm-UpsertRecurrence)
     - [UpsertTaskCorrectionRequest](#fm-UpsertTaskCorrectionRequest)
     - [UpsertTaskCorrectionResponse](#fm-UpsertTaskCorrectionResponse)
@@ -13033,6 +13036,58 @@ Response from update task
 
 
 
+<a name="fm-UpsertCorrectionsOfTasksRequest"></a>
+
+### UpsertCorrectionsOfTasksRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | id of the organization |
+| corrected_by | [string](#string) |  | corrected by : id |
+| tasks | [UpsertCorrectionsOfTasksRequest.AllTasks](#fm-UpsertCorrectionsOfTasksRequest-AllTasks) | repeated | list of tasks |
+
+
+
+
+
+
+<a name="fm-UpsertCorrectionsOfTasksRequest-AllTasks"></a>
+
+### UpsertCorrectionsOfTasksRequest.AllTasks
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of task |
+| client_id | [string](#string) |  | client id |
+| employee_id | [string](#string) |  | employee id |
+| correction | [google.protobuf.Duration](#google-protobuf-Duration) |  | correction time |
+| task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
+| is_negative | [bool](#bool) |  | whether the correction time is negative or not |
+
+
+
+
+
+
+<a name="fm-UpsertCorrectionsOfTasksResponse"></a>
+
+### UpsertCorrectionsOfTasksResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| status | [bool](#bool) |  | action response |
+
+
+
+
+
+
 <a name="fm-UpsertRecurrence"></a>
 
 ### UpsertRecurrence
@@ -13138,6 +13193,7 @@ service to manage tasks
 | UpdateAbsence | [UpdateAbsenceRequest](#fm-UpdateAbsenceRequest) | [UpdateAbsenceResponse](#fm-UpdateAbsenceResponse) | Updates the detail of an employee absence. Authorization scope of `fm.absence.update` is required. |
 | CreateCover | [CreateCoverRequest](#fm-CreateCoverRequest) | [CreateCoverResponse](#fm-CreateCoverResponse) | Add Cover for absence Authorization scope of `fm.cover.create` is required. |
 | CancelTask | [CancelTaskRequest](#fm-CancelTaskRequest) | [CancelTaskResponse](#fm-CancelTaskResponse) | Cancels a task where check-in has not been done yet. Authorization scope of `fm.task.cancel` is required. |
+| UpsertCorrectionsOfTasks | [UpsertCorrectionsOfTasksRequest](#fm-UpsertCorrectionsOfTasksRequest) | [UpsertCorrectionsOfTasksResponse](#fm-UpsertCorrectionsOfTasksResponse) | Creates new task-corrections or updates the existing ones. Authorization scope of `fm.task.correction.correct-all` is required. |
 
  
 
