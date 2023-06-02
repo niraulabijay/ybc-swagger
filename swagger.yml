@@ -473,12 +473,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "filter for selected organization check request.",
             "in": "query",
@@ -653,12 +647,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -951,12 +939,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [
@@ -1062,12 +1044,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "employee_id",
@@ -1259,12 +1235,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "organization id.",
             "in": "query",
@@ -1441,12 +1411,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -2380,12 +2344,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "id of the organization.",
             "in": "query",
@@ -2601,12 +2559,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -2903,12 +2855,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "id of the organization.",
             "in": "query",
@@ -3026,12 +2972,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -3266,12 +3206,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -3511,12 +3445,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "id of the organization.",
             "in": "query",
@@ -3717,12 +3645,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [
@@ -3838,12 +3760,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -4455,12 +4371,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "in": "query",
             "required": false,
@@ -4609,12 +4519,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "in": "query",
             "required": false,
@@ -4755,12 +4659,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -4905,12 +4803,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "organization id.",
             "in": "query",
@@ -5050,12 +4942,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -5198,12 +5084,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -5681,12 +5561,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "fetch employees this organization_id belongs to.",
             "in": "query",
@@ -5766,12 +5640,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -5873,12 +5741,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "filter for selected organization check request.",
             "in": "query",
@@ -5968,12 +5830,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "inventory_category_ids",
@@ -6183,12 +6039,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "unique id of the organization.",
             "in": "query",
@@ -6312,12 +6162,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "in": "query",
             "required": false,
@@ -6427,12 +6271,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -7115,12 +6953,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "client_id",
             "description": "client id to filter the response.",
             "in": "query",
@@ -7316,12 +7148,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "client_id",
             "description": "client id to filter the response.",
             "in": "query",
@@ -7472,12 +7298,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "client_id",
@@ -7735,12 +7555,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           }
         ],
         "tags": [
@@ -8013,6 +7827,45 @@
               "type": "string"
             },
             "collectionFormat": "multi"
+          }
+        ],
+        "tags": [
+          "OrganizationService"
+        ]
+      }
+    },
+    "/v1/organization/{organization_id}/admin": {
+      "patch": {
+        "summary": "Change organization admin",
+        "operationId": "OrganizationService_ChangeOrganizationAdmin",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmChangeOrganizationAdminResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmChangeOrganizationAdminRequest"
+            }
           }
         ],
         "tags": [
@@ -8462,12 +8315,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "fetch periodic timesheet for this organization_id.",
             "in": "query",
@@ -8787,12 +8634,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "organization to which the employee belongs.",
             "in": "query",
@@ -9009,12 +8850,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -9502,12 +9337,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "organization of employee the task is assigned to.",
             "in": "query",
@@ -9951,12 +9780,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "client_id",
             "description": "fetch timesheet for this client_id.",
             "in": "query",
@@ -10017,12 +9840,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "employee_id",
@@ -10087,12 +9904,6 @@
             "format": "int32"
           },
           {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "organization_id",
             "description": "fetch mobile employee timesheet for this organization_id.",
             "in": "query",
@@ -10153,12 +9964,6 @@
             "required": false,
             "type": "integer",
             "format": "int32"
-          },
-          {
-            "name": "filter.name",
-            "in": "query",
-            "required": false,
-            "type": "string"
           },
           {
             "name": "organization_id",
@@ -12409,12 +12214,17 @@
           "$ref": "#/definitions/fmContactDetail",
           "title": "contact details of the organization"
         },
+        "employee_count": {
+          "type": "integer",
+          "format": "int32",
+          "title": "The number of employees a organization has in it"
+        },
         "created_date": {
           "type": "string",
           "format": "date-time",
           "title": "time the organization is created at"
         },
-        "employee_detail": {
+        "organization_admin": {
           "$ref": "#/definitions/fmEmployeesDetails"
         }
       },
@@ -13909,6 +13719,26 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmChangeOrganizationAdminRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "The employee to be made admin"
+        }
+      }
+    },
+    "fmChangeOrganizationAdminResponse": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "type": "boolean"
         }
       }
     },
@@ -19066,9 +18896,6 @@
         "page": {
           "type": "integer",
           "format": "int32"
-        },
-        "name": {
-          "type": "string"
         }
       }
     },
@@ -19726,6 +19553,22 @@
             "$ref": "#/definitions/fmEmployeesDetails"
           },
           "title": "details of employees of this organization"
+        }
+      }
+    },
+    "fmOrganizationListRequestFilter": {
+      "type": "object",
+      "properties": {
+        "limit": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "page": {
+          "type": "integer",
+          "format": "int32"
+        },
+        "name": {
+          "type": "string"
         }
       }
     },
