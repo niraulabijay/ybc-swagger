@@ -8002,6 +8002,12 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "filter.status",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -12234,15 +12240,6 @@
           "type": "string",
           "format": "date-time",
           "title": "time the new stage was created at"
-        }
-      }
-    },
-    "ListOrganizationResponseMetaData": {
-      "type": "object",
-      "properties": {
-        "total_rows": {
-          "type": "integer",
-          "format": "int32"
         }
       }
     },
@@ -17936,6 +17933,19 @@
             "$ref": "#/definitions/fmEmployeesDetails"
           },
           "title": "List of employees"
+        },
+        "metadata": {
+          "$ref": "#/definitions/fmGetOrganizationEmployeeListResponseMetaData",
+          "title": "Metadata"
+        }
+      }
+    },
+    "fmGetOrganizationEmployeeListResponseMetaData": {
+      "type": "object",
+      "properties": {
+        "total_rows": {
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
@@ -18901,10 +18911,19 @@
           "title": "list of organizations"
         },
         "metadata": {
-          "$ref": "#/definitions/ListOrganizationResponseMetaData"
+          "$ref": "#/definitions/fmListOrganizationResponseMetaData"
         }
       },
       "title": "response for fetching list of organization"
+    },
+    "fmListOrganizationResponseMetaData": {
+      "type": "object",
+      "properties": {
+        "total_rows": {
+          "type": "integer",
+          "format": "int32"
+        }
+      }
     },
     "fmListOrganizationRolesResponse": {
       "type": "object",
@@ -19647,6 +19666,9 @@
           "format": "int32"
         },
         "name": {
+          "type": "string"
+        },
+        "status": {
           "type": "string"
         }
       }
