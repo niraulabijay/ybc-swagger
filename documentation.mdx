@@ -629,6 +629,7 @@
     - [EmployeesDetails](#fm-EmployeesDetails)
     - [GetOrganizationEmployeeListRequest](#fm-GetOrganizationEmployeeListRequest)
     - [GetOrganizationEmployeeListResponse](#fm-GetOrganizationEmployeeListResponse)
+    - [GetOrganizationEmployeeListResponse.MetaData](#fm-GetOrganizationEmployeeListResponse-MetaData)
     - [ListOrganizationRequest](#fm-ListOrganizationRequest)
     - [ListOrganizationResponse](#fm-ListOrganizationResponse)
     - [ListOrganizationResponse.MetaData](#fm-ListOrganizationResponse-MetaData)
@@ -11224,6 +11225,22 @@ response when creating new organization
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | data | [EmployeesDetails](#fm-EmployeesDetails) | repeated | List of employees |
+| metadata | [GetOrganizationEmployeeListResponse.MetaData](#fm-GetOrganizationEmployeeListResponse-MetaData) |  | Metadata |
+
+
+
+
+
+
+<a name="fm-GetOrganizationEmployeeListResponse-MetaData"></a>
+
+### GetOrganizationEmployeeListResponse.MetaData
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| total_rows | [int32](#int32) |  |  |
 
 
 
@@ -11437,6 +11454,7 @@ inividual organization response
 | limit | [int32](#int32) |  |  |
 | page | [int32](#int32) |  |  |
 | name | [string](#string) |  |  |
+| status | [string](#string) |  |  |
 
 
 
