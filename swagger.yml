@@ -2874,6 +2874,39 @@
         ]
       }
     },
+    "/v1/client/planner/change-status": {
+      "patch": {
+        "summary": "Update Planner Status\nAuthorization scope of `fm.planner.status-update` is required.",
+        "operationId": "ClientService_ChangePlannerStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmChangePlannerStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/client/planner/create": {
       "post": {
         "summary": "Creates a planner for client.\nAuthorization scope of `fm.planner.create` is required.",
@@ -3002,6 +3035,13 @@
             "required": false,
             "type": "string",
             "format": "date-time"
+          },
+          {
+            "name": "stauts",
+            "description": "status of planner.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -12355,6 +12395,10 @@
           "type": "string",
           "title": "type of task"
         },
+        "status": {
+          "type": "string",
+          "title": "status of planner"
+        },
         "task_date": {
           "type": "string",
           "format": "date-time",
@@ -13843,6 +13887,23 @@
         "user_id": {
           "type": "string",
           "title": "unique id of user"
+        }
+      }
+    },
+    "fmChangePlannerStatusRequest": {
+      "type": "object",
+      "properties": {
+        "planner_id": {
+          "type": "string",
+          "title": "id of the planner to be updated"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "id of the associated organization"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of planner : Values \"PENDING\", \"INPROGRESS\", \"COMPLETE\""
         }
       }
     },
