@@ -128,6 +128,7 @@
     - [CRMMobTasks](#fm-CRMMobTasks)
     - [CRMTaskDates](#fm-CRMTaskDates)
     - [CRMTasks](#fm-CRMTasks)
+    - [ChangePlannerStatusRequest](#fm-ChangePlannerStatusRequest)
     - [ClientAddAttachmentRequest](#fm-ClientAddAttachmentRequest)
     - [ClientAddAttachmentResponse](#fm-ClientAddAttachmentResponse)
     - [ClientChangeStatusRequest](#fm-ClientChangeStatusRequest)
@@ -2851,6 +2852,23 @@ individual response of question of the category
 
 
 
+<a name="fm-ChangePlannerStatusRequest"></a>
+
+### ChangePlannerStatusRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| planner_id | [string](#string) |  | id of the planner to be updated |
+| organization_id | [string](#string) |  | id of the associated organization |
+| status | [string](#string) |  | status of planner : Values &#34;PENDING&#34;, &#34;INPROGRESS&#34;, &#34;COMPLETE&#34; |
+
+
+
+
+
+
 <a name="fm-ClientAddAttachmentRequest"></a>
 
 ### ClientAddAttachmentRequest
@@ -4967,6 +4985,7 @@ individual response
 | client_id | [string](#string) |  | filter by client id (optional) |
 | start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | start date to filter by task-date |
 | end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | end date to filter by task-date |
+| stauts | [string](#string) |  | status of planner |
 
 
 
@@ -5002,6 +5021,7 @@ individual planner response
 | task_title | [string](#string) |  | title of the task |
 | description | [string](#string) |  | description of the task |
 | task_type | [string](#string) |  | type of task |
+| status | [string](#string) |  | status of planner |
 | task_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of the task |
 | created_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created date of the planner |
 
@@ -6194,6 +6214,7 @@ response for UpdateClientRequest
 | UpdatePlanner | [UpdatePlannerRequest](#fm-UpdatePlannerRequest) | [UpdatePlannerResponse](#fm-UpdatePlannerResponse) | Updates a particular planner. Authorization scope of `fm.planner.update` is required. |
 | ListPlanner | [ListPlannerRequest](#fm-ListPlannerRequest) | [ListPlannerResponse](#fm-ListPlannerResponse) | Returns the list of planners visible to the authorized user in descending order. Authorization scope of `fm.planner.list` is required. |
 | DeletePlanner | [DeletePlannerRequest](#fm-DeletePlannerRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Deletes a planner. Authorization scope of `fm.planner.delete` is required. |
+| ChangePlannerStatus | [ChangePlannerStatusRequest](#fm-ChangePlannerStatusRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Update Planner Status Authorization scope of `fm.planner.status-update` is required. |
 
  
 
