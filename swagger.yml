@@ -12399,6 +12399,14 @@
           "type": "string",
           "title": "status of planner"
         },
+        "created_by": {
+          "type": "string",
+          "title": "id of employee creating the planner"
+        },
+        "updated_by": {
+          "type": "string",
+          "title": "id of employee updating the planner"
+        },
         "task_date": {
           "type": "string",
           "format": "date-time",
