@@ -441,6 +441,21 @@
   
     - [EmployeeService](#fm-EmployeeService)
   
+- [feeback_service.proto](#feeback_service-proto)
+    - [CreateFeedbackTemplateRequest](#fm-CreateFeedbackTemplateRequest)
+    - [CreateFeedbackTemplateRequest.CreateTemplateCategory](#fm-CreateFeedbackTemplateRequest-CreateTemplateCategory)
+    - [CreateFeedbackTemplateResponse](#fm-CreateFeedbackTemplateResponse)
+    - [FeedbackTemplate](#fm-FeedbackTemplate)
+    - [ListFeedbackTemplateRequest](#fm-ListFeedbackTemplateRequest)
+    - [ListFeedbackTemplateResponse](#fm-ListFeedbackTemplateResponse)
+    - [TemplateCategory](#fm-TemplateCategory)
+    - [TemplateCategoryTask](#fm-TemplateCategoryTask)
+    - [UpsertTemplateCategoryTasksRequest](#fm-UpsertTemplateCategoryTasksRequest)
+    - [UpsertTemplateCategoryTasksRequest.TemplateCategoryTask](#fm-UpsertTemplateCategoryTasksRequest-TemplateCategoryTask)
+    - [UpsertTemplateCategoryTasksResponse](#fm-UpsertTemplateCategoryTasksResponse)
+  
+    - [FeedbackService](#fm-FeedbackService)
+  
 - [inventory_service.proto](#inventory_service-proto)
     - [CreateInventoryCategoryRequest](#fm-CreateInventoryCategoryRequest)
     - [CreateInventoryCategoryResponse](#fm-CreateInventoryCategoryResponse)
@@ -8183,6 +8198,220 @@ Response when updating an employee status
 | UpsertOrganizationCode | [UpsertOrganizationCodeRequest](#fm-UpsertOrganizationCodeRequest) | [UpsertOrganizationCodeResponse](#fm-UpsertOrganizationCodeResponse) | Creates or Updates a unique code for an organization. Authorization scope of `fm.employee.create` is required. |
 | GetOrganizationCode | [GetOrganizationCodeRequest](#fm-GetOrganizationCodeRequest) | [GetOrganizationCodeResponse](#fm-GetOrganizationCodeResponse) | Get code of an organization. Authorization scope of `fm.employee.create` is required. |
 | CreateNewEmployee | [CreateNewEmployeeRequest](#fm-CreateNewEmployeeRequest) | [CreateNewEmployeeResponse](#fm-CreateNewEmployeeResponse) | Creates a new employee. |
+
+ 
+
+
+
+<a name="feeback_service-proto"></a>
+<p align="right"><a href="#top">Top</a></p>
+
+## feeback_service.proto
+
+
+
+<a name="fm-CreateFeedbackTemplateRequest"></a>
+
+### CreateFeedbackTemplateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| template_type | [string](#string) |  | Template type : Values =&gt; CSR, YSR, EMAIL, CALL, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING QA_EMPLOYEE, QA_CLIENT |
+| template_name | [string](#string) |  | name of template |
+| category | [CreateFeedbackTemplateRequest.CreateTemplateCategory](#fm-CreateFeedbackTemplateRequest-CreateTemplateCategory) | repeated | category of template: either services or areas |
+
+
+
+
+
+
+<a name="fm-CreateFeedbackTemplateRequest-CreateTemplateCategory"></a>
+
+### CreateFeedbackTemplateRequest.CreateTemplateCategory
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title of category |
+| type | [string](#string) |  | type of category (optional) : only used for spec_are : HYGEINIC, NON-HYGEINIC |
+| short_name | [string](#string) |  | short name (optional) |
+
+
+
+
+
+
+<a name="fm-CreateFeedbackTemplateResponse"></a>
+
+### CreateFeedbackTemplateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_template_id | [string](#string) |  | id of feedback template |
+
+
+
+
+
+
+<a name="fm-FeedbackTemplate"></a>
+
+### FeedbackTemplate
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | unique id of feedback template |
+| organization_id | [string](#string) |  | unique id of organization |
+| template_type | [string](#string) |  | Template type : Value : CSR, YSR, EMAIL, CALL, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING QA_EMPLOYEE, QA_CLIENT |
+| template_name | [string](#string) |  | name of template |
+| categories | [TemplateCategory](#fm-TemplateCategory) | repeated | category of template: either services or areas |
+
+
+
+
+
+
+<a name="fm-ListFeedbackTemplateRequest"></a>
+
+### ListFeedbackTemplateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| template_type | [string](#string) |  | Template type (optional) : Values =&gt; CSR, YSR, EMAIL, CALL, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING QA_EMPLOYEE, QA_CLIENT |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter options for client-list |
+
+
+
+
+
+
+<a name="fm-ListFeedbackTemplateResponse"></a>
+
+### ListFeedbackTemplateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| templates | [FeedbackTemplate](#fm-FeedbackTemplate) | repeated | List of templates |
+| metadata | [ListResponseMetadata](#fm-ListResponseMetadata) |  | metadata about response |
+
+
+
+
+
+
+<a name="fm-TemplateCategory"></a>
+
+### TemplateCategory
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| category_id | [string](#string) |  | unique id of template category |
+| title | [string](#string) |  | title of category |
+| type | [string](#string) |  | type of category (optional) : only used for spec_are : HYGEINIC, NON-HYGEINIC |
+| short_name | [string](#string) |  | short name (optional) |
+| task_details | [TemplateCategoryTask](#fm-TemplateCategoryTask) | repeated | details of category i.e area lists |
+
+
+
+
+
+
+<a name="fm-TemplateCategoryTask"></a>
+
+### TemplateCategoryTask
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| task_id | [string](#string) |  | unique id of category_task |
+| title | [string](#string) |  | title of task |
+| frequency | [string](#string) |  | frequency (optional) |
+
+
+
+
+
+
+<a name="fm-UpsertTemplateCategoryTasksRequest"></a>
+
+### UpsertTemplateCategoryTasksRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_template_id | [string](#string) |  | id of feedback template |
+| template_category_id | [string](#string) |  | id of template category: either services or areas |
+| task_details | [UpsertTemplateCategoryTasksRequest.TemplateCategoryTask](#fm-UpsertTemplateCategoryTasksRequest-TemplateCategoryTask) | repeated | multiple task details |
+
+
+
+
+
+
+<a name="fm-UpsertTemplateCategoryTasksRequest-TemplateCategoryTask"></a>
+
+### UpsertTemplateCategoryTasksRequest.TemplateCategoryTask
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| title | [string](#string) |  | title of task |
+| frequency | [string](#string) |  | frequency (optional) |
+
+
+
+
+
+
+<a name="fm-UpsertTemplateCategoryTasksResponse"></a>
+
+### UpsertTemplateCategoryTasksResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_template_id | [string](#string) |  | id of feedback template |
+
+
+
+
+
+ 
+
+ 
+
+ 
+
+
+<a name="fm-FeedbackService"></a>
+
+### FeedbackService
+
+
+| Method Name | Request Type | Response Type | Description |
+| ----------- | ------------ | ------------- | ------------|
+| CreateFeedbackTemplate | [CreateFeedbackTemplateRequest](#fm-CreateFeedbackTemplateRequest) | [CreateFeedbackTemplateResponse](#fm-CreateFeedbackTemplateResponse) | Create Feedback Template |
+| UpsertTemplateCategoryTasks | [UpsertTemplateCategoryTasksRequest](#fm-UpsertTemplateCategoryTasksRequest) | [UpsertTemplateCategoryTasksResponse](#fm-UpsertTemplateCategoryTasksResponse) | Add Details to Feedback template i.e area lists |
+| ListFeedbackTemplates | [ListFeedbackTemplateRequest](#fm-ListFeedbackTemplateRequest) | [ListFeedbackTemplateResponse](#fm-ListFeedbackTemplateResponse) | List Feedback Templates |
 
  
 
