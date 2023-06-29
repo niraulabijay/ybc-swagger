@@ -5747,6 +5747,125 @@
         ]
       }
     },
+    "/v1/feedback-template": {
+      "post": {
+        "summary": "Create Feedback Template",
+        "operationId": "FeedbackService_CreateFeedbackTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateFeedbackTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateFeedbackTemplateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
+    "/v1/feedback-template/tasks": {
+      "put": {
+        "summary": "Add Details to Feedback template i.e area lists",
+        "operationId": "FeedbackService_UpsertTemplateCategoryTasks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpsertTemplateCategoryTasksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertTemplateCategoryTasksRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
+    "/v1/feedback-templates": {
+      "get": {
+        "summary": "List Feedback Templates",
+        "operationId": "FeedbackService_ListFeedbackTemplates",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListFeedbackTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "template_type",
+            "description": "Template type (optional) : Values =\u003e CSR, YSR, EMAIL, CALL, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING QA_EMPLOYEE, QA_CLIENT.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/inventory": {
       "get": {
         "summary": "Returns the list of inventory items in ascending order of name.\nAuthorization scope of `fm.inventory.list` is required.",
@@ -10729,6 +10848,23 @@
         }
       }
     },
+    "CreateFeedbackTemplateRequestCreateTemplateCategory": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "title of category"
+        },
+        "type": {
+          "type": "string",
+          "title": "type of category (optional) : only used for spec_are : HYGEINIC, NON-HYGEINIC"
+        },
+        "short_name": {
+          "type": "string",
+          "title": "short name (optional)"
+        }
+      }
+    },
     "CreateOrganizationRequestOrganizationDetails": {
       "type": "object",
       "properties": {
@@ -15472,6 +15608,39 @@
         }
       }
     },
+    "fmCreateFeedbackTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "template_type": {
+          "type": "string",
+          "title": "Template type : Values =\u003e CSR, YSR, EMAIL, CALL, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING QA_EMPLOYEE, QA_CLIENT"
+        },
+        "template_name": {
+          "type": "string",
+          "title": "name of template"
+        },
+        "category": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CreateFeedbackTemplateRequestCreateTemplateCategory"
+          },
+          "title": "category of template: either services or areas"
+        }
+      }
+    },
+    "fmCreateFeedbackTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "feedback_template_id": {
+          "type": "string",
+          "title": "id of feedback template"
+        }
+      }
+    },
     "fmCreateInventoryCategoryRequest": {
       "type": "object",
       "properties": {
@@ -17789,6 +17958,34 @@
         }
       }
     },
+    "fmFeedbackTemplate": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "unique id of feedback template"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "template_type": {
+          "type": "string",
+          "title": "Template type : Value : CSR, YSR, EMAIL, CALL, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING\nQA_EMPLOYEE, QA_CLIENT"
+        },
+        "template_name": {
+          "type": "string",
+          "title": "name of template"
+        },
+        "categories": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmTemplateCategory"
+          },
+          "title": "category of template: either services or areas"
+        }
+      }
+    },
     "fmForgotPasswordRequest": {
       "type": "object",
       "properties": {
@@ -18800,6 +18997,22 @@
           "items": {
             "$ref": "#/definitions/fmFeedbackResponse"
           }
+        }
+      }
+    },
+    "fmListFeedbackTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "templates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmFeedbackTemplate"
+          },
+          "title": "List of templates"
+        },
+        "metadata": {
+          "$ref": "#/definitions/fmListResponseMetadata",
+          "title": "metadata about response"
         }
       }
     },
@@ -20427,6 +20640,51 @@
         }
       },
       "title": "Task definition"
+    },
+    "fmTemplateCategory": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "unique id of template category"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of category"
+        },
+        "type": {
+          "type": "string",
+          "title": "type of category (optional) : only used for spec_are : HYGEINIC, NON-HYGEINIC"
+        },
+        "short_name": {
+          "type": "string",
+          "title": "short name (optional)"
+        },
+        "task_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmTemplateCategoryTask"
+          },
+          "title": "details of category i.e area lists"
+        }
+      }
+    },
+    "fmTemplateCategoryTask": {
+      "type": "object",
+      "properties": {
+        "task_id": {
+          "type": "string",
+          "title": "unique id of category_task"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of task"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency (optional)"
+        }
+      }
     },
     "fmTimesheetResponse": {
       "type": "object",
@@ -22846,6 +23104,48 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmUpsertTemplateCategoryTasksRequest": {
+      "type": "object",
+      "properties": {
+        "feedback_template_id": {
+          "type": "string",
+          "title": "id of feedback template"
+        },
+        "template_category_id": {
+          "type": "string",
+          "title": "id of template category: either services or areas"
+        },
+        "task_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmUpsertTemplateCategoryTasksRequestTemplateCategoryTask"
+          },
+          "title": "multiple task details"
+        }
+      }
+    },
+    "fmUpsertTemplateCategoryTasksRequestTemplateCategoryTask": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "title of task"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency (optional)"
+        }
+      }
+    },
+    "fmUpsertTemplateCategoryTasksResponse": {
+      "type": "object",
+      "properties": {
+        "feedback_template_id": {
+          "type": "string",
+          "title": "id of feedback template"
         }
       }
     },
