@@ -5747,6 +5747,124 @@
         ]
       }
     },
+    "/v1/feedback-report": {
+      "post": {
+        "summary": "Create feedback report",
+        "operationId": "FeedbackService_CreateFeedbackReport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmCreateFeedbackReportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateFeedbackReportRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
+    "/v1/feedback-report/{feedback_report_id}": {
+      "delete": {
+        "summary": "Delete feedback report",
+        "operationId": "FeedbackService_DeleteFeedbackReport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "feedback_report_id",
+            "description": "unique id of feedback report",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
+    "/v1/feedback-reports": {
+      "get": {
+        "summary": "List feedback report",
+        "operationId": "FeedbackService_ListFeedbackReport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListFeedbackReportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "unique id of client (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "filter.limit",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter.page",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback-template": {
       "post": {
         "summary": "Create Feedback Template",
@@ -15566,6 +15684,49 @@
       },
       "title": "Response for creating employee training"
     },
+    "fmCreateFeedbackReportRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "reported_by": {
+          "type": "string",
+          "title": "id of employee who creates report"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of report"
+        },
+        "report_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of uploading report"
+        },
+        "is_recurrence": {
+          "type": "boolean",
+          "title": "whether task is recurrence"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/fmUpsertRecurrence",
+          "title": "details of recurrence"
+        }
+      }
+    },
+    "fmCreateFeedbackReportResponse": {
+      "type": "object",
+      "properties": {
+        "feedback_report_id": {
+          "type": "string",
+          "title": "unique id of feedback report"
+        }
+      }
+    },
     "fmCreateFeedbackRequest": {
       "type": "object",
       "properties": {
@@ -17916,6 +18077,57 @@
         }
       }
     },
+    "fmFeedbackReport": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "title": "unique id of feedback report"
+        },
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of report"
+        },
+        "reported_by": {
+          "type": "string",
+          "title": "id of employee who creates report"
+        },
+        "report_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of uploading report"
+        },
+        "uploaded_by": {
+          "type": "string",
+          "title": "id of employee who uploads report"
+        },
+        "uploaded_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "report uploaded date"
+        },
+        "attachment_path": {
+          "type": "string",
+          "title": "attachment path of the report"
+        },
+        "is_recurrence": {
+          "type": "boolean",
+          "title": "whether task is recurrence"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/fmRecurrenceDetails",
+          "title": "details of recurrence"
+        }
+      }
+    },
     "fmFeedbackResponse": {
       "type": "object",
       "properties": {
@@ -18989,6 +19201,22 @@
       },
       "title": "response for fetching list of employees"
     },
+    "fmListFeedbackReportResponse": {
+      "type": "object",
+      "properties": {
+        "reports": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmFeedbackReport"
+          },
+          "title": "List of templates"
+        },
+        "metadata": {
+          "$ref": "#/definitions/fmListResponseMetadata",
+          "title": "metadata about response"
+        }
+      }
+    },
     "fmListFeedbackResponse": {
       "type": "object",
       "properties": {
@@ -20047,7 +20275,8 @@
           "format": "date-time",
           "title": "updated_date"
         }
-      }
+      },
+      "title": "Recurrence Data for List/Details"
     },
     "fmRecurrenceTypeDetails": {
       "type": "object",
@@ -22996,7 +23225,8 @@
           "format": "date-time",
           "title": "Date until which recurrence is created"
         }
-      }
+      },
+      "title": "Recurrence Data for Insert/Upsert"
     },
     "fmUpsertRegionResponse": {
       "type": "object",
