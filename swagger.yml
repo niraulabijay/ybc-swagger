@@ -5780,6 +5780,39 @@
         ]
       }
     },
+    "/v1/feedback-report/attachment": {
+      "put": {
+        "summary": "Add attachment to report",
+        "operationId": "FeedbackService_AddFeedbackReportAttachment",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmAddFeedbackReportAttachmentResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmAddFeedbackReportAttachmentRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback-report/{feedback_report_id}": {
       "delete": {
         "summary": "Delete feedback report",
@@ -13274,6 +13307,32 @@
             "type": "string"
           },
           "title": "employee ids of additional attendees"
+        }
+      }
+    },
+    "fmAddFeedbackReportAttachmentRequest": {
+      "type": "object",
+      "properties": {
+        "feedback_report_id": {
+          "type": "string",
+          "title": "unique id of feedback report"
+        },
+        "attachment_path": {
+          "type": "string",
+          "title": "attachment path"
+        },
+        "uploaded_by": {
+          "type": "string",
+          "title": "id employee uploading the attachment"
+        }
+      }
+    },
+    "fmAddFeedbackReportAttachmentResponse": {
+      "type": "object",
+      "properties": {
+        "feedback_report_id": {
+          "type": "string",
+          "title": "unique id of feedback report"
         }
       }
     },
