@@ -5929,6 +5929,37 @@
         "tags": [
           "FeedbackService"
         ]
+      },
+      "put": {
+        "summary": "Update Feedback Template",
+        "operationId": "FeedbackService_UpdateFeedbackTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateFeedbackTemplateResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateFeedbackTemplateRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
       }
     },
     "/v1/feedback-template/tasks": {
@@ -5957,6 +5988,38 @@
             "schema": {
               "$ref": "#/definitions/fmUpsertTemplateCategoryTasksRequest"
             }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
+    "/v1/feedback-template/{feedback_template_id}": {
+      "delete": {
+        "summary": "Delete Feedback Template",
+        "operationId": "FeedbackService_DeleteFeedbackTemplate",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "feedback_template_id",
+            "description": "unique if of template id",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -13095,6 +13158,27 @@
         }
       },
       "title": "individual stage to be updated"
+    },
+    "UpdateFeedbackTemplateRequestUpdateTemplateCategory": {
+      "type": "object",
+      "properties": {
+        "category_id": {
+          "type": "string",
+          "title": "unique id of category (optional / if exists :  empty for new)"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of category"
+        },
+        "type": {
+          "type": "string",
+          "title": "type of category (optional) : only used for spec_are : HYGEINIC, NON-HYGEINIC"
+        },
+        "short_name": {
+          "type": "string",
+          "title": "short name (optional)"
+        }
+      }
     },
     "UpdateTaskByClientRequestUpdateTaskByClient": {
       "type": "object",
@@ -22062,6 +22146,35 @@
         "status": {
           "type": "boolean",
           "title": "acknowledgement status"
+        }
+      }
+    },
+    "fmUpdateFeedbackTemplateRequest": {
+      "type": "object",
+      "properties": {
+        "feedback_template_id": {
+          "type": "string",
+          "title": "unique if of template id"
+        },
+        "template_name": {
+          "type": "string",
+          "title": "name of template"
+        },
+        "category": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpdateFeedbackTemplateRequestUpdateTemplateCategory"
+          },
+          "title": "category of template: either services or areas"
+        }
+      }
+    },
+    "fmUpdateFeedbackTemplateResponse": {
+      "type": "object",
+      "properties": {
+        "feedback_template_id": {
+          "type": "string",
+          "title": "unique if of template id"
         }
       }
     },
