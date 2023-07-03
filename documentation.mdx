@@ -442,14 +442,26 @@
     - [EmployeeService](#fm-EmployeeService)
   
 - [feeback_service.proto](#feeback_service-proto)
+    - [AddFeedbackReportAttachmentRequest](#fm-AddFeedbackReportAttachmentRequest)
+    - [AddFeedbackReportAttachmentResponse](#fm-AddFeedbackReportAttachmentResponse)
+    - [CreateFeedbackReportRequest](#fm-CreateFeedbackReportRequest)
+    - [CreateFeedbackReportResponse](#fm-CreateFeedbackReportResponse)
     - [CreateFeedbackTemplateRequest](#fm-CreateFeedbackTemplateRequest)
     - [CreateFeedbackTemplateRequest.CreateTemplateCategory](#fm-CreateFeedbackTemplateRequest-CreateTemplateCategory)
     - [CreateFeedbackTemplateResponse](#fm-CreateFeedbackTemplateResponse)
+    - [DeleteFeedbackReportRequest](#fm-DeleteFeedbackReportRequest)
+    - [DeleteFeedbackTemplateRequest](#fm-DeleteFeedbackTemplateRequest)
+    - [FeedbackReport](#fm-FeedbackReport)
     - [FeedbackTemplate](#fm-FeedbackTemplate)
+    - [ListFeedbackReportRequest](#fm-ListFeedbackReportRequest)
+    - [ListFeedbackReportResponse](#fm-ListFeedbackReportResponse)
     - [ListFeedbackTemplateRequest](#fm-ListFeedbackTemplateRequest)
     - [ListFeedbackTemplateResponse](#fm-ListFeedbackTemplateResponse)
     - [TemplateCategory](#fm-TemplateCategory)
     - [TemplateCategoryTask](#fm-TemplateCategoryTask)
+    - [UpdateFeedbackTemplateRequest](#fm-UpdateFeedbackTemplateRequest)
+    - [UpdateFeedbackTemplateRequest.UpdateTemplateCategory](#fm-UpdateFeedbackTemplateRequest-UpdateTemplateCategory)
+    - [UpdateFeedbackTemplateResponse](#fm-UpdateFeedbackTemplateResponse)
     - [UpsertTemplateCategoryTasksRequest](#fm-UpsertTemplateCategoryTasksRequest)
     - [UpsertTemplateCategoryTasksRequest.TemplateCategoryTask](#fm-UpsertTemplateCategoryTasksRequest-TemplateCategoryTask)
     - [UpsertTemplateCategoryTasksResponse](#fm-UpsertTemplateCategoryTasksResponse)
@@ -686,6 +698,10 @@
     - [EmployeeBankAccountDetails](#fm-EmployeeBankAccountDetails)
     - [ListRequestFilter](#fm-ListRequestFilter)
     - [ListResponseMetadata](#fm-ListResponseMetadata)
+    - [RecurrenceDetails](#fm-RecurrenceDetails)
+    - [RecurrenceTypeDetails](#fm-RecurrenceTypeDetails)
+    - [RecurrenceTypeDetails.MonthlyWeekDetails](#fm-RecurrenceTypeDetails-MonthlyWeekDetails)
+    - [UpsertRecurrence](#fm-UpsertRecurrence)
   
 - [task_service.proto](#task_service-proto)
     - [AllTaskGroupRequest](#fm-AllTaskGroupRequest)
@@ -733,9 +749,6 @@
     - [ListTaskGroupByAllClientResponse](#fm-ListTaskGroupByAllClientResponse)
     - [ListTaskRequest](#fm-ListTaskRequest)
     - [ListTaskResponse](#fm-ListTaskResponse)
-    - [RecurrenceDetails](#fm-RecurrenceDetails)
-    - [RecurrenceTypeDetails](#fm-RecurrenceTypeDetails)
-    - [RecurrenceTypeDetails.MonthlyWeekDetails](#fm-RecurrenceTypeDetails-MonthlyWeekDetails)
     - [TaskByEmployeeResponse](#fm-TaskByEmployeeResponse)
     - [TaskDetailRequest](#fm-TaskDetailRequest)
     - [TaskDetailResponse](#fm-TaskDetailResponse)
@@ -773,7 +786,6 @@
     - [UpsertCorrectionsOfTasksRequest](#fm-UpsertCorrectionsOfTasksRequest)
     - [UpsertCorrectionsOfTasksRequest.AllTasks](#fm-UpsertCorrectionsOfTasksRequest-AllTasks)
     - [UpsertCorrectionsOfTasksResponse](#fm-UpsertCorrectionsOfTasksResponse)
-    - [UpsertRecurrence](#fm-UpsertRecurrence)
     - [UpsertTaskCorrectionRequest](#fm-UpsertTaskCorrectionRequest)
     - [UpsertTaskCorrectionResponse](#fm-UpsertTaskCorrectionResponse)
   
@@ -8210,6 +8222,74 @@ Response when updating an employee status
 
 
 
+<a name="fm-AddFeedbackReportAttachmentRequest"></a>
+
+### AddFeedbackReportAttachmentRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_report_id | [string](#string) |  | unique id of feedback report |
+| attachment_path | [string](#string) |  | attachment path |
+| uploaded_by | [string](#string) |  | id employee uploading the attachment |
+
+
+
+
+
+
+<a name="fm-AddFeedbackReportAttachmentResponse"></a>
+
+### AddFeedbackReportAttachmentResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_report_id | [string](#string) |  | unique id of feedback report |
+
+
+
+
+
+
+<a name="fm-CreateFeedbackReportRequest"></a>
+
+### CreateFeedbackReportRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| client_id | [string](#string) |  | unique id of client |
+| reported_by | [string](#string) |  | id of employee who creates report |
+| title | [string](#string) |  | title of report |
+| report_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of uploading report |
+| is_recurrence | [bool](#bool) |  | whether task is recurrence |
+| recurrence | [UpsertRecurrence](#fm-UpsertRecurrence) |  | details of recurrence |
+
+
+
+
+
+
+<a name="fm-CreateFeedbackReportResponse"></a>
+
+### CreateFeedbackReportResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_report_id | [string](#string) |  | unique id of feedback report |
+
+
+
+
+
+
 <a name="fm-CreateFeedbackTemplateRequest"></a>
 
 ### CreateFeedbackTemplateRequest
@@ -8260,6 +8340,61 @@ Response when updating an employee status
 
 
 
+<a name="fm-DeleteFeedbackReportRequest"></a>
+
+### DeleteFeedbackReportRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_report_id | [string](#string) |  | unique id of feedback report |
+
+
+
+
+
+
+<a name="fm-DeleteFeedbackTemplateRequest"></a>
+
+### DeleteFeedbackTemplateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_template_id | [string](#string) |  | unique if of template id |
+
+
+
+
+
+
+<a name="fm-FeedbackReport"></a>
+
+### FeedbackReport
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | unique id of feedback report |
+| organization_id | [string](#string) |  | unique id of organization |
+| client_id | [string](#string) |  | unique id of client |
+| title | [string](#string) |  | title of report |
+| reported_by | [string](#string) |  | id of employee who creates report |
+| report_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | date of uploading report |
+| uploaded_by | [string](#string) |  | id of employee who uploads report |
+| uploaded_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | report uploaded date |
+| attachment_path | [string](#string) |  | attachment path of the report |
+| is_recurrence | [bool](#bool) |  | whether task is recurrence |
+| recurrence | [RecurrenceDetails](#fm-RecurrenceDetails) |  | details of recurrence |
+
+
+
+
+
+
 <a name="fm-FeedbackTemplate"></a>
 
 ### FeedbackTemplate
@@ -8273,6 +8408,39 @@ Response when updating an employee status
 | template_type | [string](#string) |  | Template type : Value : CSR, YSR, EMAIL, CALL, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING QA_EMPLOYEE, QA_CLIENT |
 | template_name | [string](#string) |  | name of template |
 | categories | [TemplateCategory](#fm-TemplateCategory) | repeated | category of template: either services or areas |
+
+
+
+
+
+
+<a name="fm-ListFeedbackReportRequest"></a>
+
+### ListFeedbackReportRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| organization_id | [string](#string) |  | unique id of organization |
+| client_id | [string](#string) |  | unique id of client (optional) |
+| filter | [ListRequestFilter](#fm-ListRequestFilter) |  | filter options for report-list |
+
+
+
+
+
+
+<a name="fm-ListFeedbackReportResponse"></a>
+
+### ListFeedbackReportResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| reports | [FeedbackReport](#fm-FeedbackReport) | repeated | List of templates |
+| metadata | [ListResponseMetadata](#fm-ListResponseMetadata) |  | metadata about response |
 
 
 
@@ -8348,6 +8516,56 @@ Response when updating an employee status
 
 
 
+<a name="fm-UpdateFeedbackTemplateRequest"></a>
+
+### UpdateFeedbackTemplateRequest
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_template_id | [string](#string) |  | unique if of template id |
+| template_name | [string](#string) |  | name of template |
+| category | [UpdateFeedbackTemplateRequest.UpdateTemplateCategory](#fm-UpdateFeedbackTemplateRequest-UpdateTemplateCategory) | repeated | category of template: either services or areas |
+
+
+
+
+
+
+<a name="fm-UpdateFeedbackTemplateRequest-UpdateTemplateCategory"></a>
+
+### UpdateFeedbackTemplateRequest.UpdateTemplateCategory
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| category_id | [string](#string) |  | unique id of category (optional / if exists : empty for new) |
+| title | [string](#string) |  | title of category |
+| type | [string](#string) |  | type of category (optional) : only used for spec_are : HYGEINIC, NON-HYGEINIC |
+| short_name | [string](#string) |  | short name (optional) |
+
+
+
+
+
+
+<a name="fm-UpdateFeedbackTemplateResponse"></a>
+
+### UpdateFeedbackTemplateResponse
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| feedback_template_id | [string](#string) |  | unique if of template id |
+
+
+
+
+
+
 <a name="fm-UpsertTemplateCategoryTasksRequest"></a>
 
 ### UpsertTemplateCategoryTasksRequest
@@ -8412,6 +8630,12 @@ Response when updating an employee status
 | CreateFeedbackTemplate | [CreateFeedbackTemplateRequest](#fm-CreateFeedbackTemplateRequest) | [CreateFeedbackTemplateResponse](#fm-CreateFeedbackTemplateResponse) | Create Feedback Template |
 | UpsertTemplateCategoryTasks | [UpsertTemplateCategoryTasksRequest](#fm-UpsertTemplateCategoryTasksRequest) | [UpsertTemplateCategoryTasksResponse](#fm-UpsertTemplateCategoryTasksResponse) | Add Details to Feedback template i.e area lists |
 | ListFeedbackTemplates | [ListFeedbackTemplateRequest](#fm-ListFeedbackTemplateRequest) | [ListFeedbackTemplateResponse](#fm-ListFeedbackTemplateResponse) | List Feedback Templates |
+| DeleteFeedbackTemplate | [DeleteFeedbackTemplateRequest](#fm-DeleteFeedbackTemplateRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete Feedback Template |
+| UpdateFeedbackTemplate | [UpdateFeedbackTemplateRequest](#fm-UpdateFeedbackTemplateRequest) | [UpdateFeedbackTemplateResponse](#fm-UpdateFeedbackTemplateResponse) | Update Feedback Template |
+| CreateFeedbackReport | [CreateFeedbackReportRequest](#fm-CreateFeedbackReportRequest) | [CreateFeedbackReportResponse](#fm-CreateFeedbackReportResponse) | Create feedback report |
+| ListFeedbackReport | [ListFeedbackReportRequest](#fm-ListFeedbackReportRequest) | [ListFeedbackReportResponse](#fm-ListFeedbackReportResponse) | List feedback report |
+| AddFeedbackReportAttachment | [AddFeedbackReportAttachmentRequest](#fm-AddFeedbackReportAttachmentRequest) | [AddFeedbackReportAttachmentResponse](#fm-AddFeedbackReportAttachmentResponse) | Add attachment to report |
+| DeleteFeedbackReport | [DeleteFeedbackReportRequest](#fm-DeleteFeedbackReportRequest) | [.google.protobuf.Empty](#google-protobuf-Empty) | Delete feedback report |
 
  
 
@@ -12107,6 +12331,81 @@ Employee Bank accounts details collection
 
 
 
+
+<a name="fm-RecurrenceDetails"></a>
+
+### RecurrenceDetails
+Recurrence Data for List/Details
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| id | [string](#string) |  | id of task recurrence |
+| type | [string](#string) |  | type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK, YEARLY] |
+| type_details | [RecurrenceTypeDetails](#fm-RecurrenceTypeDetails) |  | type details; |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date from which recurrence starts |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date until which recurrence is created |
+| status | [bool](#bool) |  | status : by default set to true |
+| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created_date |
+| updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | updated_date |
+
+
+
+
+
+
+<a name="fm-RecurrenceTypeDetails"></a>
+
+### RecurrenceTypeDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| dates | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | repeated | multiple dates : For CUSTOM type |
+| week_days | [string](#string) | repeated | multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY |
+| day_of_month | [int32](#int32) |  | day of the month: for MONTHLY_DATE or YEARLY |
+| name_of_month | [string](#string) |  | string name of month : for YEARLY |
+| monthly_week_details | [RecurrenceTypeDetails.MonthlyWeekDetails](#fm-RecurrenceTypeDetails-MonthlyWeekDetails) | repeated | Monthly week details |
+
+
+
+
+
+
+<a name="fm-RecurrenceTypeDetails-MonthlyWeekDetails"></a>
+
+### RecurrenceTypeDetails.MonthlyWeekDetails
+
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| week_no | [string](#string) |  | week no : allowed FIRST, SECOND, THIRD, FOURTH, FIFTH, LAST |
+| week_days | [string](#string) | repeated | multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY |
+
+
+
+
+
+
+<a name="fm-UpsertRecurrence"></a>
+
+### UpsertRecurrence
+Recurrence Data for Insert/Upsert
+
+
+| Field | Type | Label | Description |
+| ----- | ---- | ----- | ----------- |
+| type | [string](#string) |  | type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK, YEARLY] |
+| type_details | [RecurrenceTypeDetails](#fm-RecurrenceTypeDetails) |  | type details; |
+| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date from which recurrence starts |
+| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date until which recurrence is created |
+
+
+
+
+
  
 
  
@@ -12911,63 +13210,6 @@ Response for list of task request
 
 
 
-<a name="fm-RecurrenceDetails"></a>
-
-### RecurrenceDetails
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| id | [string](#string) |  | id of task recurrence |
-| type | [string](#string) |  | type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK, YEARLY] |
-| type_details | [RecurrenceTypeDetails](#fm-RecurrenceTypeDetails) |  | type details; |
-| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date from which recurrence starts |
-| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date until which recurrence is created |
-| status | [bool](#bool) |  | status : by default set to true |
-| created_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | created_date |
-| updated_at | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | updated_date |
-
-
-
-
-
-
-<a name="fm-RecurrenceTypeDetails"></a>
-
-### RecurrenceTypeDetails
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| dates | [google.protobuf.Timestamp](#google-protobuf-Timestamp) | repeated | multiple dates : For CUSTOM type |
-| week_days | [string](#string) | repeated | multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY |
-| day_of_month | [int32](#int32) |  | day of the month: for MONTHLY_DATE or YEARLY |
-| name_of_month | [string](#string) |  | string name of month : for YEARLY |
-| monthly_week_details | [RecurrenceTypeDetails.MonthlyWeekDetails](#fm-RecurrenceTypeDetails-MonthlyWeekDetails) | repeated | Monthly week details |
-
-
-
-
-
-
-<a name="fm-RecurrenceTypeDetails-MonthlyWeekDetails"></a>
-
-### RecurrenceTypeDetails.MonthlyWeekDetails
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| week_no | [string](#string) |  | week no : allowed FIRST, SECOND, THIRD, FOURTH, FIFTH, LAST |
-| week_days | [string](#string) | repeated | multiple week_days name: allowed SUNDAY, MONDAY, ... SATURDAY |
-
-
-
-
-
-
 <a name="fm-TaskByEmployeeResponse"></a>
 
 ### TaskByEmployeeResponse
@@ -13632,24 +13874,6 @@ Response from update task
 | Field | Type | Label | Description |
 | ----- | ---- | ----- | ----------- |
 | status | [bool](#bool) |  | action response |
-
-
-
-
-
-
-<a name="fm-UpsertRecurrence"></a>
-
-### UpsertRecurrence
-
-
-
-| Field | Type | Label | Description |
-| ----- | ---- | ----- | ----------- |
-| type | [string](#string) |  | type of recurrence: Allowed [CUSTOM, DAILY, WEEKLY, MONTHLY_DAY, MONTHLY_WEEK, YEARLY] |
-| type_details | [RecurrenceTypeDetails](#fm-RecurrenceTypeDetails) |  | type details; |
-| start_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date from which recurrence starts |
-| end_date | [google.protobuf.Timestamp](#google-protobuf-Timestamp) |  | Date until which recurrence is created |
 
 
 
