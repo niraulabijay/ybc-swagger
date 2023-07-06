@@ -5898,6 +5898,76 @@
         ]
       }
     },
+    "/v1/feedback-spec/room-key": {
+      "get": {
+        "summary": "List Client's Spec Key to Room Type",
+        "operationId": "FeedbackService_ListClientSpecKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListClientSpecKeyResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "unique id of client.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      },
+      "post": {
+        "summary": "Upsert Client's Spec Key To Room Type",
+        "operationId": "FeedbackService_UpsertClientSpecKey",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertClientSpecKeyRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback-template": {
       "post": {
         "summary": "Create Feedback Template",
@@ -13034,6 +13104,19 @@
         }
       }
     },
+    "SpecPeriodDetailsPeriodTaskMonthDetails": {
+      "type": "object",
+      "properties": {
+        "month_name": {
+          "type": "string",
+          "title": "name of month"
+        },
+        "description": {
+          "type": "string",
+          "title": "description"
+        }
+      }
+    },
     "TaskGroupByClientResponseTaskEmployeeDetailedInformation": {
       "type": "object",
       "properties": {
@@ -13125,6 +13208,35 @@
         "status": {
           "type": "string",
           "title": "status of absence"
+        }
+      }
+    },
+    "TermAreaTaskDetailsTermAreaTasks": {
+      "type": "object",
+      "properties": {
+        "task_title": {
+          "type": "string",
+          "title": "title of task"
+        },
+        "task_combinations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TermAreaTasksTaskCombination"
+          },
+          "title": "combinations of tasks"
+        }
+      }
+    },
+    "TermAreaTasksTaskCombination": {
+      "type": "object",
+      "properties": {
+        "room_id": {
+          "type": "string",
+          "title": "unique id of room"
+        },
+        "frequency_id": {
+          "type": "string",
+          "title": "unique id of frequency"
         }
       }
     },
@@ -13223,6 +13335,40 @@
         "contracted_hours": {
           "type": "string",
           "title": "contracted hours of the employee with the client"
+        }
+      }
+    },
+    "UpsertClientSpecKeyRequestSpecFrequencyInfoUpsert": {
+      "type": "object",
+      "properties": {
+        "frequency_id": {
+          "type": "string",
+          "title": "unique identifier (optional, send if exists)"
+        },
+        "short_name": {
+          "type": "string",
+          "title": "short_name"
+        },
+        "name": {
+          "type": "string",
+          "title": "frequency title"
+        }
+      }
+    },
+    "UpsertClientSpecKeyRequestSpecKeyRoomInfoUpsert": {
+      "type": "object",
+      "properties": {
+        "room_id": {
+          "type": "string",
+          "title": "unique identifier (optional, send if exists)"
+        },
+        "room_key": {
+          "type": "string",
+          "title": "key of room"
+        },
+        "room_title": {
+          "type": "string",
+          "title": "title of room"
         }
       }
     },
@@ -19161,6 +19307,73 @@
         }
       }
     },
+    "fmListClientSpecKeyResponse": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "spec_key_rooms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmSpecKeyRoomInfo"
+          },
+          "title": "rooms info"
+        },
+        "spec_frequencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmSpecFrequencyInfo"
+          },
+          "title": "frequency info"
+        }
+      }
+    },
+    "fmListClientSpecPeriodResponse": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "spec_period_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmSpecPeriodDetails"
+          },
+          "title": "spec period details"
+        }
+      }
+    },
+    "fmListClientSpecTermResponse": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "spec_term_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmSpecTermDetails"
+          },
+          "title": "spec term details"
+        }
+      }
+    },
     "fmListCommentResponse": {
       "type": "object",
       "properties": {
@@ -20679,6 +20892,81 @@
         }
       }
     },
+    "fmSpecFrequencyInfo": {
+      "type": "object",
+      "properties": {
+        "frequency_id": {
+          "type": "string",
+          "title": "unqiue identifier"
+        },
+        "short_name": {
+          "type": "string",
+          "title": "short_name"
+        },
+        "name": {
+          "type": "string",
+          "title": "frequency title"
+        }
+      }
+    },
+    "fmSpecKeyRoomInfo": {
+      "type": "object",
+      "properties": {
+        "room_id": {
+          "type": "string",
+          "title": "unqiue identifier"
+        },
+        "room_key": {
+          "type": "string",
+          "title": "key of room"
+        },
+        "room_title": {
+          "type": "string",
+          "title": "title of room"
+        }
+      }
+    },
+    "fmSpecPeriodDetails": {
+      "type": "object",
+      "properties": {
+        "task_name": {
+          "type": "string",
+          "title": "name of task"
+        },
+        "task_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of task"
+        },
+        "task_month_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SpecPeriodDetailsPeriodTaskMonthDetails"
+          },
+          "title": "period task month details"
+        }
+      }
+    },
+    "fmSpecTermDetails": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "type of spec term : Values =\u003e HALF_TERM , TIME_TERM"
+        },
+        "category": {
+          "type": "string",
+          "title": "category of spec term : Values =\u003e HYGIENIC, NON_HYGIENIC"
+        },
+        "area_task_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmTermAreaTaskDetails"
+          },
+          "title": "area task details"
+        }
+      }
+    },
     "fmStageStatusChangeRequest": {
       "type": "object",
       "properties": {
@@ -21055,6 +21343,22 @@
         "frequency": {
           "type": "string",
           "title": "frequency (optional)"
+        }
+      }
+    },
+    "fmTermAreaTaskDetails": {
+      "type": "object",
+      "properties": {
+        "area_title": {
+          "type": "string",
+          "title": "title of area"
+        },
+        "term_area_tasks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TermAreaTaskDetailsTermAreaTasks"
+          },
+          "title": "term area tasks"
         }
       }
     },
@@ -23244,6 +23548,33 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmUpsertClientSpecKeyRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "spec_key_rooms": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpsertClientSpecKeyRequestSpecKeyRoomInfoUpsert"
+          },
+          "title": "rooms info"
+        },
+        "spec_frequencies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpsertClientSpecKeyRequestSpecFrequencyInfoUpsert"
+          },
+          "title": "frequency info"
         }
       }
     },
