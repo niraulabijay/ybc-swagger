@@ -5968,6 +5968,76 @@
         ]
       }
     },
+    "/v1/feedback-spec/term": {
+      "get": {
+        "summary": "List Client's Spec Term",
+        "operationId": "FeedbackService_ListClientSpecTerm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListClientSpecTermResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "unique id of client.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      },
+      "post": {
+        "summary": "Upsert Client's Spec Term",
+        "operationId": "FeedbackService_UpsertClientSpecTerm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertClientSpecTermRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback-template": {
       "post": {
         "summary": "Create Feedback Template",
@@ -16067,7 +16137,7 @@
         },
         "template_type": {
           "type": "string",
-          "title": "Template type : Values =\u003e CSR, YSR, EMAIL, CALL, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING QA_EMPLOYEE, QA_CLIENT"
+          "title": "Template type : Values =\u003e CSR, YSR, EMAIL, CALL, CLIENT_TEMPLATE, SPEC_AREA, SPEC_FREQ, SPEC_ROOM, QA_GENERAL, QA_BUILDING QA_EMPLOYEE, QA_CLIENT"
         },
         "template_name": {
           "type": "string",
@@ -23575,6 +23645,26 @@
             "$ref": "#/definitions/UpsertClientSpecKeyRequestSpecFrequencyInfoUpsert"
           },
           "title": "frequency info"
+        }
+      }
+    },
+    "fmUpsertClientSpecTermRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "spec_term_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmSpecTermDetails"
+          },
+          "title": "spec term details"
         }
       }
     },
