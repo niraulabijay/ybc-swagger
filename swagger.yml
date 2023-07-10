@@ -5898,6 +5898,76 @@
         ]
       }
     },
+    "/v1/feedback-spec/period": {
+      "get": {
+        "summary": "List Clients' Spec Period",
+        "operationId": "FeedbackService_ListClientSpecPeriod",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListClientSpecPeriodResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "unique id of client.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      },
+      "post": {
+        "summary": "Upsert Clients' Spec Period",
+        "operationId": "FeedbackService_UpsertClientSpecPeriod",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertClientSpecPeriodRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback-spec/room-key": {
       "get": {
         "summary": "List Client's Spec Key to Room Type",
@@ -23645,6 +23715,26 @@
             "$ref": "#/definitions/UpsertClientSpecKeyRequestSpecFrequencyInfoUpsert"
           },
           "title": "frequency info"
+        }
+      }
+    },
+    "fmUpsertClientSpecPeriodRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "spec_period_details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmSpecPeriodDetails"
+          },
+          "title": "spec period details"
         }
       }
     },
