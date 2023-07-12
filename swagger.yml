@@ -11355,19 +11355,6 @@
         }
       }
     },
-    "FeedbackServicesForInsertQaServicesForInsert": {
-      "type": "object",
-      "properties": {
-        "task_title": {
-          "type": "string",
-          "title": "task title"
-        },
-        "frequency": {
-          "type": "string",
-          "title": "frequency"
-        }
-      }
-    },
     "GetEmployeeIdsByClientIdResponseEmployeeListData": {
       "type": "object",
       "properties": {
@@ -13699,6 +13686,18 @@
             "$ref": "#/definitions/AddClientFeedbackRatingRequestServiceRatingForInsert"
           },
           "title": "rating for multiple services (for other type of Feedbacks)"
+        },
+        "customer_feedback": {
+          "$ref": "#/definitions/fmFeedbackUserDetail",
+          "title": "comment and details of customer"
+        },
+        "manager_feedback": {
+          "$ref": "#/definitions/fmFeedbackUserDetail",
+          "title": "comment and details of manager"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "employee id"
         }
       }
     },
@@ -14941,6 +14940,10 @@
           "type": "string",
           "title": "employee id : person who is doing the feedback reporting"
         },
+        "sub_type": {
+          "type": "string",
+          "title": "sub type: GENERAL, BUILDING, EMPLOYEE, CLIENT (optional, for type=QA only)"
+        },
         "feedback_date": {
           "type": "string",
           "format": "date-time",
@@ -14967,6 +14970,56 @@
             "type": "string"
           },
           "title": "cc employee ids"
+        }
+      }
+    },
+    "fmClientFeedbackForLisiting": {
+      "type": "object",
+      "properties": {
+        "client_feedback_id": {
+          "type": "string",
+          "title": "client feedback id"
+        },
+        "type": {
+          "type": "string",
+          "title": "type of feedback : CRS, YSR, CALL, EMAIL, QA"
+        },
+        "sub_type": {
+          "type": "string",
+          "title": "sub type: GENERAL, BUILDING, EMPLOYEE, CLIENT (optional, for QA)"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "employee id : person who is doing the feedback reporting"
+        },
+        "feedback_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "feedback date when it is supposed to be done"
+        },
+        "cc_employee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "cc employee ids"
+        },
+        "feedback_done_by": {
+          "type": "string",
+          "title": "employee id who did the feedback ratings"
+        },
+        "average_rating": {
+          "type": "number",
+          "format": "float",
+          "title": "average rating (if feedback is done)"
+        },
+        "customer_feedback": {
+          "$ref": "#/definitions/fmFeedbackUserDetail",
+          "title": "comment and details of customer"
+        },
+        "manager_feedback": {
+          "$ref": "#/definitions/fmFeedbackUserDetail",
+          "title": "comment and details of manager"
         }
       }
     },
@@ -18675,16 +18728,25 @@
           "type": "string",
           "title": "description of service (for qa : used for position)"
         },
-        "sub_type": {
-          "type": "string",
-          "title": "sub type: GENERAL, BUILDING, EMPLOYEE, CLIENT (optional, for QA)"
-        },
         "qa_services": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FeedbackServicesForInsertQaServicesForInsert"
+            "$ref": "#/definitions/fmFeedbackServicesForInsertQaServicesForInsert"
           },
           "title": "services detail for qa"
+        }
+      }
+    },
+    "fmFeedbackServicesForInsertQaServicesForInsert": {
+      "type": "object",
+      "properties": {
+        "task_title": {
+          "type": "string",
+          "title": "task title"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency"
         }
       }
     },
@@ -18713,6 +18775,31 @@
             "$ref": "#/definitions/fmTemplateCategory"
           },
           "title": "category of template: either services or areas"
+        }
+      }
+    },
+    "fmFeedbackUserDetail": {
+      "type": "object",
+      "properties": {
+        "comment": {
+          "type": "string",
+          "title": "comment of customer/manager"
+        },
+        "action_plan": {
+          "type": "string",
+          "title": "action plan of customer/manager"
+        },
+        "name": {
+          "type": "string",
+          "title": "name of customer/manager"
+        },
+        "signature": {
+          "type": "string",
+          "title": "signature of customer/manager"
+        },
+        "position": {
+          "type": "string",
+          "title": "position of customer/manager"
         }
       }
     },
@@ -19450,6 +19537,22 @@
           "items": {
             "$ref": "#/definitions/ListClientEmployeeResponseClientEmployeeResponse"
           }
+        }
+      }
+    },
+    "fmListClientFeedbacksResponse": {
+      "type": "object",
+      "properties": {
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "client_feedback_data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmClientFeedbackForLisiting"
+          },
+          "title": "multiple type of feedback data"
         }
       }
     },
