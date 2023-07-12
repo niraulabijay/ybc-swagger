@@ -615,97 +615,6 @@
         ]
       }
     },
-    "/v1/client-employee/feedback": {
-      "get": {
-        "summary": "List feedbacks.\nAuthorization scope of `fm.client-employee.feedback.list` is required.",
-        "operationId": "ClientEmployeeService_ListFeedback",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmListFeedbackResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "filter.limit",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "filter.page",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "organization_id",
-            "description": "organization id.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "client_id",
-            "description": "unique id of client who is providing feedback.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "employee_id",
-            "description": "unique id of employee.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      },
-      "post": {
-        "summary": "Create a new feedback.\nAuthorization scope of `fm.client-employee.feedback.create` is required.",
-        "operationId": "ClientEmployeeService_CreateFeedback",
-        "responses": {
-          "200": {
-            "description": "A successful response.",
-            "schema": {
-              "$ref": "#/definitions/fmCreateFeedbackResponse"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/runtimeError"
-            }
-          }
-        },
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/fmCreateFeedbackRequest"
-            }
-          }
-        ],
-        "tags": [
-          "ClientEmployeeService"
-        ]
-      }
-    },
     "/v1/client-employee/target-tasks": {
       "put": {
         "summary": "Assign target tasks for each day of the week in a fixed interval of time\nfor an employee for a client\nAuthorization scope of `fm.client-employee.assign-target-tasks` is\nrequired.",
@@ -6290,6 +6199,72 @@
         ]
       }
     },
+    "/v1/feedback/create": {
+      "post": {
+        "summary": "Create multiple client's feedback with recurrence",
+        "operationId": "FeedbackService_CreateMultipleClientFeedback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmCreateMultipleClientFeedbackRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
+    "/v1/feedback/rating": {
+      "post": {
+        "summary": "Add feedback ratings",
+        "operationId": "FeedbackService_AddClientFeedbackRating",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmAddClientFeedbackRatingResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmAddClientFeedbackRatingRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/inventory": {
       "get": {
         "summary": "Returns the list of inventory items in ascending order of name.\nAuthorization scope of `fm.inventory.list` is required.",
@@ -11148,6 +11123,24 @@
     }
   },
   "definitions": {
+    "AddClientFeedbackRatingRequestServiceRatingForInsert": {
+      "type": "object",
+      "properties": {
+        "feedback_service_id": {
+          "type": "string",
+          "title": "unique id of service"
+        },
+        "rating": {
+          "type": "integer",
+          "format": "int32",
+          "title": "rating of service (1-5)"
+        },
+        "comment": {
+          "type": "string",
+          "title": "comment of rating"
+        }
+      }
+    },
     "AddRoleToUsersRequestUserEmployee": {
       "type": "object",
       "properties": {
@@ -11359,6 +11352,19 @@
           "type": "string",
           "format": "date-time",
           "title": "created at timestamp"
+        }
+      }
+    },
+    "FeedbackServicesForInsertQaServicesForInsert": {
+      "type": "object",
+      "properties": {
+        "task_title": {
+          "type": "string",
+          "title": "task title"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency"
         }
       }
     },
@@ -13680,6 +13686,31 @@
         }
       }
     },
+    "fmAddClientFeedbackRatingRequest": {
+      "type": "object",
+      "properties": {
+        "client_feedback_id": {
+          "type": "string",
+          "title": "unique id of client-feedback"
+        },
+        "service_ratings": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AddClientFeedbackRatingRequestServiceRatingForInsert"
+          },
+          "title": "rating for multiple services (for other type of Feedbacks)"
+        }
+      }
+    },
+    "fmAddClientFeedbackRatingResponse": {
+      "type": "object",
+      "properties": {
+        "client_feedback_id": {
+          "type": "string",
+          "title": "unique id of client-feedback"
+        }
+      }
+    },
     "fmAddFeedbackReportAttachmentRequest": {
       "type": "object",
       "properties": {
@@ -14898,6 +14929,46 @@
         }
       },
       "title": "Response for client detail"
+    },
+    "fmClientFeedbackForInsert": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "title": "type of feedback : Allowed CRS, YSR, CALL, EMAIL, QA"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "employee id : person who is doing the feedback reporting"
+        },
+        "feedback_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "feedback date"
+        },
+        "feedback_services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmFeedbackServicesForInsert"
+          },
+          "title": "multiple services for feedback"
+        },
+        "is_recurrence": {
+          "type": "boolean",
+          "title": "recurrence or not"
+        },
+        "recurrence": {
+          "$ref": "#/definitions/fmUpsertRecurrence",
+          "title": "details of recurrence"
+        },
+        "cc_employee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "cc employee ids"
+        }
+      }
     },
     "fmClientListAttachmentResponse": {
       "type": "object",
@@ -16156,39 +16227,6 @@
         }
       }
     },
-    "fmCreateFeedbackRequest": {
-      "type": "object",
-      "properties": {
-        "employee_id": {
-          "type": "string",
-          "title": "unique id of employee"
-        },
-        "client_id": {
-          "type": "string",
-          "title": "unique id of client who is providing feedback"
-        },
-        "sector": {
-          "type": "string",
-          "title": "sector of employee"
-        },
-        "department_id": {
-          "type": "string",
-          "title": "unique id of department"
-        },
-        "rating": {
-          "type": "string",
-          "title": "provided rating"
-        },
-        "feedback_comments": {
-          "type": "string",
-          "title": "provided feedback comments"
-        },
-        "organization_id": {
-          "type": "string",
-          "title": "organization id"
-        }
-      }
-    },
     "fmCreateFeedbackResponse": {
       "type": "object",
       "properties": {
@@ -16542,6 +16580,33 @@
         "mobilization_template_id": {
           "type": "string",
           "title": "unique id of the created mobilization template"
+        }
+      }
+    },
+    "fmCreateMultipleClientFeedbackRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "ids of clients"
+        },
+        "created_by": {
+          "type": "string",
+          "title": "created by - unique employee id"
+        },
+        "client_feedback_data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmClientFeedbackForInsert"
+          },
+          "title": "multiple type of feedback data"
         }
       }
     },
@@ -18596,6 +18661,30 @@
           "type": "string",
           "format": "date-time",
           "title": "transfer data creation time"
+        }
+      }
+    },
+    "fmFeedbackServicesForInsert": {
+      "type": "object",
+      "properties": {
+        "title": {
+          "type": "string",
+          "title": "title of service"
+        },
+        "description": {
+          "type": "string",
+          "title": "description of service (for qa : used for position)"
+        },
+        "sub_type": {
+          "type": "string",
+          "title": "sub type: GENERAL, BUILDING, EMPLOYEE, CLIENT (optional, for QA)"
+        },
+        "qa_services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeedbackServicesForInsertQaServicesForInsert"
+          },
+          "title": "services detail for qa"
         }
       }
     },
