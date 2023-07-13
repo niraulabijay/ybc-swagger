@@ -5656,6 +5656,86 @@
         ]
       }
     },
+    "/v1/feedback-all": {
+      "get": {
+        "summary": "Monthly info of a all client's feedback data",
+        "operationId": "FeedbackService_ListAllClientFeedbacks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListAllClientFeedbacksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "year",
+            "description": "year.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "month",
+            "description": "month number.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
+    "/v1/feedback-detail/{client_feedback_id}": {
+      "get": {
+        "summary": "Detail of single client feedback",
+        "operationId": "FeedbackService_ClientFeedbackDetail",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmClientFeedbackDetailResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "client_feedback_id",
+            "description": "unique id of client feedback",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback-report": {
       "post": {
         "summary": "Create feedback report",
@@ -6232,6 +6312,75 @@
         ]
       }
     },
+    "/v1/feedback/list-by-client": {
+      "get": {
+        "summary": "Single Client's Feedback Data",
+        "operationId": "FeedbackService_ListClientFeedbacks",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmListClientFeedbacksResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "organization_id",
+            "description": "unique id of organization.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "client_id",
+            "description": "unique id of client.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "from",
+            "description": "start date (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "to",
+            "description": "end date (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "format": "date-time"
+          },
+          {
+            "name": "type",
+            "description": "type of feedback : CRS, YSR, CALL, EMAIL, QA (optional).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "sub_type",
+            "description": "sub type: GENERAL, BUILDING, EMPLOYEE, CLIENT (optional, for QA).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback/rating": {
       "post": {
         "summary": "Add feedback ratings",
@@ -6258,6 +6407,38 @@
             "schema": {
               "$ref": "#/definitions/fmAddClientFeedbackRatingRequest"
             }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
+    "/v1/feedback/{client_feedback_id}": {
+      "delete": {
+        "summary": "Delete single client feedback",
+        "operationId": "FeedbackService_DeleteClientFeedback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "client_feedback_id",
+            "description": "unique id of client feedback",
+            "in": "path",
+            "required": true,
+            "type": "string"
           }
         ],
         "tags": [
@@ -11355,6 +11536,45 @@
         }
       }
     },
+    "FeedbackServicesForInsertQaServicesForInsert": {
+      "type": "object",
+      "properties": {
+        "task_title": {
+          "type": "string",
+          "title": "task title"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency"
+        }
+      }
+    },
+    "FeedbackServicesForListingQaServicesForListing": {
+      "type": "object",
+      "properties": {
+        "qa_feedback_service_id": {
+          "type": "string",
+          "title": "unqiue id of qa_feedback_service"
+        },
+        "task_title": {
+          "type": "string",
+          "title": "task title"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency"
+        },
+        "rating": {
+          "type": "integer",
+          "format": "int32",
+          "title": "rating"
+        },
+        "comment": {
+          "type": "string",
+          "title": "comment"
+        }
+      }
+    },
     "GetEmployeeIdsByClientIdResponseEmployeeListData": {
       "type": "object",
       "properties": {
@@ -14929,6 +15149,72 @@
       },
       "title": "Response for client detail"
     },
+    "fmClientFeedbackDetailResponse": {
+      "type": "object",
+      "properties": {
+        "client_feedback_id": {
+          "type": "string",
+          "title": "client feedback id"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of client"
+        },
+        "type": {
+          "type": "string",
+          "title": "type of feedback : CRS, YSR, CALL, EMAIL, QA"
+        },
+        "sub_type": {
+          "type": "string",
+          "title": "sub type: GENERAL, BUILDING, EMPLOYEE, CLIENT (optional, for QA)"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "employee id : person who is doing the feedback reporting"
+        },
+        "feedback_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "feedback date when it is supposed to be done"
+        },
+        "cc_employee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "cc employee ids"
+        },
+        "feedback_done_by": {
+          "type": "string",
+          "title": "employee id who did the feedback ratings"
+        },
+        "average_rating": {
+          "type": "number",
+          "format": "float",
+          "title": "average rating (if feedback is done)"
+        },
+        "next_feedback_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "next date for feedback"
+        },
+        "customer_feedback": {
+          "$ref": "#/definitions/fmFeedbackUserDetail",
+          "title": "comment and details of customer"
+        },
+        "manager_feedback": {
+          "$ref": "#/definitions/fmFeedbackUserDetail",
+          "title": "comment and details of manager"
+        },
+        "feedback_services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmFeedbackServicesForListing"
+          },
+          "title": "feedback services"
+        }
+      }
+    },
     "fmClientFeedbackForInsert": {
       "type": "object",
       "properties": {
@@ -15013,6 +15299,11 @@
           "format": "float",
           "title": "average rating (if feedback is done)"
         },
+        "next_feedback_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "next date for feedback"
+        },
         "customer_feedback": {
           "$ref": "#/definitions/fmFeedbackUserDetail",
           "title": "comment and details of customer"
@@ -15020,6 +15311,10 @@
         "manager_feedback": {
           "$ref": "#/definitions/fmFeedbackUserDetail",
           "title": "comment and details of manager"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of client"
         }
       }
     },
@@ -18731,22 +19026,42 @@
         "qa_services": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/fmFeedbackServicesForInsertQaServicesForInsert"
+            "$ref": "#/definitions/FeedbackServicesForInsertQaServicesForInsert"
           },
           "title": "services detail for qa"
         }
       }
     },
-    "fmFeedbackServicesForInsertQaServicesForInsert": {
+    "fmFeedbackServicesForListing": {
       "type": "object",
       "properties": {
-        "task_title": {
+        "feedback_service_id": {
           "type": "string",
-          "title": "task title"
+          "title": "unqiue id of feedback_service"
         },
-        "frequency": {
+        "title": {
           "type": "string",
-          "title": "frequency"
+          "title": "title of service"
+        },
+        "description": {
+          "type": "string",
+          "title": "description of service (for qa : used for position)"
+        },
+        "rating": {
+          "type": "integer",
+          "format": "int32",
+          "title": "rating"
+        },
+        "comment": {
+          "type": "string",
+          "title": "comment"
+        },
+        "qa_services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeedbackServicesForListingQaServicesForListing"
+          },
+          "title": "services detail for qa"
         }
       }
     },
@@ -19394,6 +19709,22 @@
             "$ref": "#/definitions/ListAbsenceResponseAbsenceList"
           },
           "title": "list of employee absence"
+        }
+      }
+    },
+    "fmListAllClientFeedbacksResponse": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "client_feedback_data": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmClientFeedbackForLisiting"
+          },
+          "title": "multiple type of feedback data"
         }
       }
     },
