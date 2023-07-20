@@ -5802,6 +5802,39 @@
         ]
       }
     },
+    "/v1/feedback-report/update": {
+      "put": {
+        "summary": "Update feedback report",
+        "operationId": "FeedbackService_UpdateFeedbackReport",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateFeedbackReportResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateFeedbackReportRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback-report/{feedback_report_id}": {
       "delete": {
         "summary": "Delete feedback report",
@@ -6439,6 +6472,44 @@
             "in": "path",
             "required": true,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      },
+      "put": {
+        "summary": "Update singel client feedback",
+        "operationId": "FeedbackService_UpdateClientFeedback",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/fmUpdateClientFeedbackResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "client_feedback_id",
+            "description": "unique id of client feedback",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpdateClientFeedbackRequest"
+            }
           }
         ],
         "tags": [
@@ -11572,6 +11643,23 @@
         "comment": {
           "type": "string",
           "title": "comment"
+        }
+      }
+    },
+    "FeedbackServicesForUpdateQaServicesForUpdate": {
+      "type": "object",
+      "properties": {
+        "qa_service_id": {
+          "type": "string",
+          "title": "unique id of qa service (optional, for new create)"
+        },
+        "task_title": {
+          "type": "string",
+          "title": "task title"
+        },
+        "frequency": {
+          "type": "string",
+          "title": "frequency"
         }
       }
     },
@@ -19065,6 +19153,30 @@
         }
       }
     },
+    "fmFeedbackServicesForUpdate": {
+      "type": "object",
+      "properties": {
+        "feedback_service_id": {
+          "type": "string",
+          "title": "unique id of feedback services"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of service"
+        },
+        "description": {
+          "type": "string",
+          "title": "description of service (for qa : used for position)"
+        },
+        "qa_services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FeedbackServicesForUpdateQaServicesForUpdate"
+          },
+          "title": "services detail for qa"
+        }
+      }
+    },
     "fmFeedbackTemplate": {
       "type": "object",
       "properties": {
@@ -22585,6 +22697,51 @@
         }
       }
     },
+    "fmUpdateClientFeedbackRequest": {
+      "type": "object",
+      "properties": {
+        "client_feedback_id": {
+          "type": "string",
+          "title": "unique id of client feedback"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "employee id : person who is doing the feedback reporting"
+        },
+        "feedback_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "feedback date"
+        },
+        "feedback_services": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/fmFeedbackServicesForUpdate"
+          },
+          "title": "multiple services for feedback"
+        },
+        "cc_employee_ids": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "cc employee ids"
+        },
+        "updated_by": {
+          "type": "string",
+          "title": "id of employee performing update action"
+        }
+      }
+    },
+    "fmUpdateClientFeedbackResponse": {
+      "type": "object",
+      "properties": {
+        "client_feedback_id": {
+          "type": "string",
+          "title": "unique id of client feedback"
+        }
+      }
+    },
     "fmUpdateClientMobilizationRequest": {
       "type": "object",
       "properties": {
@@ -23113,6 +23270,37 @@
         "status": {
           "type": "boolean",
           "title": "acknowledgement status"
+        }
+      }
+    },
+    "fmUpdateFeedbackReportRequest": {
+      "type": "object",
+      "properties": {
+        "feedback_report_id": {
+          "type": "string",
+          "title": "unique id of feedback report"
+        },
+        "title": {
+          "type": "string",
+          "title": "title of report"
+        },
+        "reported_by": {
+          "type": "string",
+          "title": "id of employee who creates report"
+        },
+        "report_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of uploading report"
+        }
+      }
+    },
+    "fmUpdateFeedbackReportResponse": {
+      "type": "object",
+      "properties": {
+        "feedback_report_id": {
+          "type": "string",
+          "title": "unique id of feedback report"
         }
       }
     },
