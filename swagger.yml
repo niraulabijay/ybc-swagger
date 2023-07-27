@@ -5802,6 +5802,39 @@
         ]
       }
     },
+    "/v1/feedback-report/change-status": {
+      "patch": {
+        "summary": "Approve feedback report",
+        "operationId": "FeedbackService_ChangeFeedbackReportStatus",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmChangeFeedbackReportStatusRequest"
+            }
+          }
+        ],
+        "tags": [
+          "FeedbackService"
+        ]
+      }
+    },
     "/v1/feedback-report/update": {
       "put": {
         "summary": "Update feedback report",
@@ -7967,6 +8000,13 @@
           {
             "name": "organization_id",
             "description": "organization id.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "email_type",
+            "description": "type of email : CRM, FEEDBACK (optional, by default set to CRM).",
             "in": "query",
             "required": false,
             "type": "string"
@@ -12706,6 +12746,10 @@
             "$ref": "#/definitions/fmEmailCC"
           },
           "title": "cc of the email"
+        },
+        "email_type": {
+          "type": "string",
+          "title": "type of email : CRM, FEEDBACK (optional, by default set to CRM)"
         }
       },
       "title": "individual email response"
@@ -14843,6 +14887,19 @@
         }
       }
     },
+    "fmChangeFeedbackReportStatusRequest": {
+      "type": "object",
+      "properties": {
+        "feedback_report_id": {
+          "type": "string",
+          "title": "unique id of feedback report"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of report, allowed : APPROVED, PENDING"
+        }
+      }
+    },
     "fmChangeOrganizationAdminRequest": {
       "type": "object",
       "properties": {
@@ -16427,6 +16484,10 @@
           "type": "string",
           "title": "receiver's email"
         },
+        "email_type": {
+          "type": "string",
+          "title": "type of email : CRM, FEEDBACK (optional, by default set to CRM)"
+        },
         "cc": {
           "type": "array",
           "items": {
@@ -16643,6 +16704,10 @@
           "type": "string",
           "format": "date-time",
           "title": "date of uploading report"
+        },
+        "description": {
+          "type": "string",
+          "title": "description"
         },
         "is_recurrence": {
           "type": "boolean",
@@ -19055,6 +19120,14 @@
         "recurrence": {
           "$ref": "#/definitions/fmRecurrenceDetails",
           "title": "details of recurrence"
+        },
+        "description": {
+          "type": "string",
+          "title": "description"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of report : PENDING, APPROVED"
         }
       }
     },
@@ -20244,6 +20317,10 @@
             "$ref": "#/definitions/ListEmailResponseEmailResponse"
           },
           "title": "list of emails"
+        },
+        "metadata": {
+          "$ref": "#/definitions/fmListResponseMetadata",
+          "title": "metadata about response"
         }
       }
     },
@@ -23024,6 +23101,10 @@
             "$ref": "#/definitions/fmEmailCC"
           },
           "title": "cc of the email"
+        },
+        "email_type": {
+          "type": "string",
+          "title": "type of email : CRM, FEEDBACK (optional, by default set to CRM)"
         }
       }
     },
@@ -23287,6 +23368,10 @@
         "reported_by": {
           "type": "string",
           "title": "id of employee who creates report"
+        },
+        "description": {
+          "type": "string",
+          "title": "description"
         },
         "report_date": {
           "type": "string",
