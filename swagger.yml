@@ -12750,6 +12750,13 @@
         "email_type": {
           "type": "string",
           "title": "type of email : CRM, FEEDBACK (optional, by default set to CRM)"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "multiple attachment path"
         }
       },
       "title": "individual email response"
@@ -16494,6 +16501,13 @@
             "$ref": "#/definitions/fmEmailCC"
           },
           "title": "cc of the email"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "multiple attachment path"
         }
       }
     },
@@ -23105,6 +23119,13 @@
         "email_type": {
           "type": "string",
           "title": "type of email : CRM, FEEDBACK (optional, by default set to CRM)"
+        },
+        "attachments": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "multiple attachment path"
         }
       }
     },
