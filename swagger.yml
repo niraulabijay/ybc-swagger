@@ -3859,6 +3859,45 @@
         ]
       }
     },
+    "/v1/clients/{client_id}/lead": {
+      "delete": {
+        "summary": "Delete an existing lead client.",
+        "operationId": "ClientService_DeleteLead",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "client_id",
+            "description": "client Id of the client to update",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "organization_id",
+            "description": "organization of the clients.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "tags": [
+          "ClientService"
+        ]
+      }
+    },
     "/v1/comment": {
       "post": {
         "summary": "Store new comment",
@@ -9073,6 +9112,39 @@
         ]
       }
     },
+    "/v1/task-employee/leaver": {
+      "put": {
+        "summary": "Create employer leaver record from account in order to remove tasks\nAuthorization scope of `fm.account.forecast-hour.index` is required",
+        "operationId": "TaskService_UpsertEmployeeLeaver",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmUpsertEmployeeLeaverRequest"
+            }
+          }
+        ],
+        "tags": [
+          "TaskService"
+        ]
+      }
+    },
     "/v1/task/cancel": {
       "post": {
         "summary": "Cancels a task where check-in has not been done yet.\nAuthorization scope of `fm.task.cancel` is required.",
@@ -9874,6 +9946,13 @@
             "in": "query",
             "required": false,
             "type": "string"
+          },
+          {
+            "name": "organization_id",
+            "description": "organization id.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -10331,6 +10410,13 @@
           {
             "name": "task_type",
             "description": "type of task - eg: DOC, VARIATION, MOBILE, OTHERS, PERIODIC(REGULAR), PERIODIC(ONE OFF), PERIODIC(WINDOW), PERIODIC(ACCOMODATION).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "organization_id",
+            "description": "organization id.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -16635,6 +16721,20 @@
             "$ref": "#/definitions/fmEducationEmployeeInformation"
           },
           "title": "education Information about the employee"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "roles for this association"
+        },
+        "scopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "scopes for this association"
         }
       },
       "title": "request to create new employee"
@@ -21640,6 +21740,10 @@
         "password": {
           "type": "string",
           "title": "new password of user"
+        },
+        "confirm_password": {
+          "type": "string",
+          "title": "new password of user"
         }
       }
     },
@@ -23809,6 +23913,14 @@
         "client_id": {
           "type": "string",
           "title": "unique id of the client"
+        },
+        "note_type": {
+          "type": "string",
+          "title": "type of the note : CLIENT, EMPLOYEE, OFFICE, OTHER, NA"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "id of the employee if note_type is 'EMPLOYEE'"
         }
       },
       "title": "Update note request"
@@ -24635,6 +24747,28 @@
         "status": {
           "type": "boolean",
           "title": "action response"
+        }
+      }
+    },
+    "fmUpsertEmployeeLeaverRequest": {
+      "type": "object",
+      "properties": {
+        "organization_id": {
+          "type": "string",
+          "title": "unique id of organization"
+        },
+        "employee_id": {
+          "type": "string",
+          "title": "unique id of employee"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "unique id of client"
+        },
+        "leaving_date": {
+          "type": "string",
+          "format": "date-time",
+          "title": "date of employee leaving"
         }
       }
     },
