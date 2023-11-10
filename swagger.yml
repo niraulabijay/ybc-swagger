@@ -5574,8 +5574,7 @@
             "description": "unique client code.",
             "in": "query",
             "required": false,
-            "type": "string",
-            "format": "int64"
+            "type": "string"
           },
           {
             "name": "search.area",
@@ -8049,6 +8048,39 @@
             "in": "query",
             "required": false,
             "type": "string"
+          }
+        ],
+        "tags": [
+          "MeetingService"
+        ]
+      }
+    },
+    "/v1/meeting/email/send": {
+      "post": {
+        "summary": "Send an email. Changes status to \"SENT\"\nAuthorization scope of `fm.email.update` is required.",
+        "operationId": "MeetingService_SendEmailConfirm",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "properties": {}
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/runtimeError"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/fmSendEmailConfirmRequest"
+            }
           }
         ],
         "tags": [
@@ -12843,6 +12875,32 @@
             "type": "string"
           },
           "title": "multiple attachment path"
+        },
+        "created_by": {
+          "type": "string",
+          "title": "unique id of employee creating the email"
+        },
+        "updated_by": {
+          "type": "string",
+          "title": "unique id of employee updating the email"
+        },
+        "updated_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "timestamp update time"
+        },
+        "sent_by": {
+          "type": "string",
+          "title": "unique id of employee sending the email"
+        },
+        "sent_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "timestamp send time"
+        },
+        "status": {
+          "type": "string",
+          "title": "status of email : DRAFT/SENT"
         }
       },
       "title": "individual email response"
@@ -14990,6 +15048,10 @@
         "status": {
           "type": "string",
           "title": "status of report, allowed : APPROVED, PENDING"
+        },
+        "approved_by": {
+          "type": "string",
+          "title": "approved by user id"
         }
       }
     },
@@ -15557,6 +15619,10 @@
         "client_id": {
           "type": "string",
           "title": "id of client"
+        },
+        "latest_feedback_report": {
+          "$ref": "#/definitions/fmFeedbackReport",
+          "title": "latest feedback report of this month"
         }
       }
     },
@@ -16598,6 +16664,10 @@
             "type": "string"
           },
           "title": "multiple attachment path"
+        },
+        "created_by": {
+          "type": "string",
+          "title": "unique id of employee"
         }
       }
     },
@@ -16676,7 +16746,6 @@
         },
         "employee_code": {
           "type": "string",
-          "format": "int64",
           "title": "unique employee code for organization"
         },
         "employee_info": {
@@ -16826,6 +16895,10 @@
         "description": {
           "type": "string",
           "title": "description"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject"
         },
         "is_recurrence": {
           "type": "boolean",
@@ -19227,6 +19300,15 @@
           "format": "date-time",
           "title": "report uploaded date"
         },
+        "approved_by": {
+          "type": "string",
+          "title": "id of employee who approves report"
+        },
+        "approved_at": {
+          "type": "string",
+          "format": "date-time",
+          "title": "report approved date"
+        },
         "attachment_path": {
           "type": "string",
           "title": "attachment path of the report"
@@ -19242,6 +19324,10 @@
         "description": {
           "type": "string",
           "title": "description"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject"
         },
         "status": {
           "type": "string",
@@ -20497,7 +20583,6 @@
         },
         "employee_code": {
           "type": "string",
-          "format": "int64",
           "title": "unique client code"
         },
         "area": {
@@ -21260,7 +21345,6 @@
       "properties": {
         "employee_code": {
           "type": "string",
-          "format": "int64",
           "title": "Employee code within the organization"
         },
         "work_permit_expiry_date": {
@@ -21780,6 +21864,23 @@
         }
       }
     },
+    "fmSendEmailConfirmRequest": {
+      "type": "object",
+      "properties": {
+        "email_id": {
+          "type": "string",
+          "title": "id of the email to be sent"
+        },
+        "client_id": {
+          "type": "string",
+          "title": "id of the client"
+        },
+        "sent_by": {
+          "type": "string",
+          "title": "unqiue id of employee"
+        }
+      }
+    },
     "fmSendEmailResponse": {
       "type": "object",
       "properties": {
@@ -21926,7 +22027,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "title": "type of spec term : Values =\u003e HALF_TERM , TIME_TERM"
+          "title": "type of spec term : Values =\u003e HALF_TERM , TIME_TERM, PERIODIC"
         },
         "category": {
           "type": "string",
@@ -23234,6 +23335,10 @@
             "type": "string"
           },
           "title": "multiple attachment path"
+        },
+        "updated_by": {
+          "type": "string",
+          "title": "unique id of employee"
         }
       }
     },
@@ -23293,7 +23398,6 @@
         },
         "employee_code": {
           "type": "string",
-          "format": "int64",
           "title": "unique employee code for organization"
         },
         "contact_detail": {
@@ -23501,6 +23605,10 @@
         "description": {
           "type": "string",
           "title": "description"
+        },
+        "subject": {
+          "type": "string",
+          "title": "subject"
         },
         "report_date": {
           "type": "string",
